@@ -38,18 +38,26 @@ The authoritative description of the JSON "language" is **`spec/format.md`**, wi
 machine-checkable **`spec/schema.json`** (JSON Schema) and worked examples under
 **`examples/`**. If you change the language, update all three together.
 
-## Layout (planned package structure)
+## Package layout (implemented)
 
 ```
 src/playoff_diagrams/
-  model.py      # data models (parsed representation of the JSON)
-  parse.py      # JSON -> validated model
-  layout.py     # deterministic bracket geometry
+  __init__.py   # public API: load_bracket, parse_bracket, render_svg, models
+  __main__.py   # CLI: `playoff-diagrams in.json -o out.svg` / `python -m playoff_diagrams`
+  model.py      # data models + result logic (winner_side, aggregate, shootout, Resolver)
+  parse.py      # JSON -> validated model; validate_document() needs `jsonschema`
+  layout.py     # deterministic bracket geometry (columns, centering, connectors)
   render.py     # model -> SVG string
 tests/
-  test_render.py  # golden/snapshot SVG tests
-  golden/*.svg
+  test_model.py   # result-logic and parsing unit tests
+  test_render.py  # golden/snapshot SVG tests + well-formed-XML checks
+  golden/*.svg    # versioned reference SVGs
+examples/*.json   # worked brackets (also rendered into docs/)
+docs/*.png        # README preview images (committed; see below)
 ```
+
+The CLI is wired as a `[project.scripts]` entry point, so `pip install` exposes the
+`playoff-diagrams` command.
 
 ## Testing
 
@@ -57,7 +65,41 @@ The only executable code is the renderer plus **diagram-generation tests**, done
 **golden (snapshot) tests**: generate the SVG for each example and compare against a
 versioned reference SVG. This catches visual regressions without a browser.
 
-When SVG output legitimately changes, regenerate the golden files and review the diff.
+Run with `pytest`. When SVG output legitimately changes, regenerate goldens with
+`PD_REGEN=1 pytest tests/test_render.py` and review the diff before committing.
+
+## Maintaining examples and the README images
+
+When you change an example JSON (teams, scores) or anything that affects rendering,
+keep three things in sync:
+
+1. The example under `examples/`.
+2. Its golden under `tests/golden/` — `PD_REGEN=1 pytest tests/test_render.py`.
+3. Its README preview under `docs/` — regenerate the PNG (the README embeds these):
+   ```bash
+   PYTHONPATH=src python -m playoff_diagrams examples/<name>.json -o /tmp/x.svg
+   rsvg-convert -z 2 /tmp/x.svg -o docs/<name>.png
+   ```
+   `rsvg-convert` (librsvg) is the SVG→PNG converter available on this machine
+   (`inkscape` and ImageMagick `magick`/`convert` are also present).
+
+`.gitignore` ignores stray rendered `*.svg`/`*.png` but keeps `docs/*.png` and
+`tests/golden/*.svg`. A gitignored `/.local/` directory holds personal scratch notes
+(never committed).
+
+## Project state (published)
+
+- Public repo: **https://github.com/anibalpacheco/playoff-diagrams** (MIT).
+- GitHub CLI is authenticated as `anibalpacheco` over SSH; pushes and `gh` work here.
+- CI (`.github/workflows/ci.yml`) runs `pytest` on push/PR across Python 3.10–3.13.
+- The MVP is complete and working: spec, schema, renderer, CLI, tests, README with
+  preview images. Installable into other projects via
+  `pip install git+https://github.com/anibalpacheco/playoff-diagrams.git`.
+
+## Possible next steps (not started)
+
+Third-place playoff (a `loser_of` slot mirroring `winner_of`), group stage feeding the
+bracket, team crests/logos, an away-goals toggle in `render`/tournament options.
 
 ## Conventions
 

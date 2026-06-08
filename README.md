@@ -138,4 +138,6 @@ scope for now.
 
 ## Status
 
-Early. The language spec and examples exist; the Python renderer is in progress.
+Working MVP: the language spec, JSON Schema, Python renderer, CLI and tests are in
+place, and the package is installable from GitHub. Group stages, double elimination and
+the away-goals rule remain out of scope for now.
