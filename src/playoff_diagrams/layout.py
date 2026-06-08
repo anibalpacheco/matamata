@@ -137,8 +137,14 @@ def compute_layout(bracket: Bracket) -> Layout:
 
     width = MARGIN_X * 2 + len(bracket.rounds) * bw + (len(bracket.rounds) - 1) * H_GAP
     height = max((pm.y + BOX_H for pm in placed), default=TOP) + MARGIN_BOTTOM
-    return Layout(width=width, height=height, matches=placed, connectors=connectors,
-                  headers=headers, box_width=bw)
+    return Layout(
+        width=width,
+        height=height,
+        matches=placed,
+        connectors=connectors,
+        headers=headers,
+        box_width=bw,
+    )
 
 
 def _connectors(

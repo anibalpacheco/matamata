@@ -80,19 +80,25 @@ def render_layout(bracket: Bracket, layout: Layout) -> str:
         f'font-family="sans-serif">'
     )
     out.append(f"<style>{_STYLE}</style>")
-    out.append(f'<rect class="pd-bg" width="{layout.width:.0f}" '
-               f'height="{layout.height:.0f}"/>')
+    out.append(
+        f'<rect class="pd-bg" width="{layout.width:.0f}" '
+        f'height="{layout.height:.0f}"/>'
+    )
 
     title = escape(bracket.tournament)
     out.append(f'<text class="pd-title" x="20" y="28">{title}</text>')
     if bracket.season:
         x = 20 + round(len(bracket.tournament) * 10.5) + 14
-        out.append(f'<text class="pd-season" x="{x}" y="28">'
-                   f"{escape(bracket.season)}</text>")
+        out.append(
+            f'<text class="pd-season" x="{x}" y="28">'
+            f"{escape(bracket.season)}</text>"
+        )
 
     for header in layout.headers:
-        out.append(f'<text class="pd-header" x="{header.cx:.0f}" y="56">'
-                   f"{escape(header.name)}</text>")
+        out.append(
+            f'<text class="pd-header" x="{header.cx:.0f}" y="56">'
+            f"{escape(header.name)}</text>"
+        )
 
     for conn in layout.connectors:
         d = "M " + " L ".join(f"{x:.0f} {y:.0f}" for x, y in conn.points)

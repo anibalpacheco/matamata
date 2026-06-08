@@ -19,6 +19,7 @@ classifiers = [
 
 [project.optional-dependencies]
 dev = ["pytest", "jsonschema"]
+lint = ["black", "isort", "mypy", "pylint", "types-jsonschema"]
 
 [project.scripts]
 playoff-diagrams = "playoff_diagrams.__main__:main"
@@ -29,3 +30,9 @@ packages = ["src/playoff_diagrams"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
+
+[tool.black]
+target-version = ["py310", "py311", "py312", "py313"]
+
+[tool.isort]
+profile = "black"

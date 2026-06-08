@@ -41,9 +41,7 @@ def _parse_slot(data: dict, where: str) -> Slot:
         return Slot(team=data["team"], team_id=data.get("id"), seed=data.get("seed"))
     if data.get("tbd") is True:
         return Slot(tbd=True)
-    raise BracketError(
-        f"slot in {where} must have one of 'team', 'winner_of' or 'tbd'"
-    )
+    raise BracketError(f"slot in {where} must have one of 'team', 'winner_of' or 'tbd'")
 
 
 def _parse_leg(data: dict, where: str) -> Leg:

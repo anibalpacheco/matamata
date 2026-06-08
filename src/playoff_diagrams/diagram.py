@@ -49,14 +49,16 @@ class PlayoffDiagram:
     """
 
     def __init__(self, document: Any) -> None:
-        self._doc: dict = document if isinstance(document, dict) else json.loads(document)
+        self._doc: dict = (
+            document if isinstance(document, dict) else json.loads(document)
+        )
         # The document's display preferences, available to the hooks (e.g. get_match can
         # consult self.render_config.max_label_chars to decide whether to return short
         # names).
         self.render_config: RenderOptions = render_options(self._doc)
 
     # ----------------------------------------------------------------- hooks
-    def get_match(self, ref: Id) -> GameData:
+    def get_match(self, ref: Id) -> GameData:  # pylint: disable=unused-argument
         """Return the live data for a single real game, or ``None``.
 
         Called once per leg that carries a ``ref``. Return a positional pair
@@ -96,24 +98,24 @@ class PlayoffDiagram:
         for leg in match.legs:
             if leg.ref is None:
                 continue
-            data = self.get_match(leg.ref)
+            # get_match is an overridable hook; the base returns None, so pylint
+            # follows that literal return rather than the GameData annotation.
+            data = self.get_match(leg.ref)  # pylint: disable=assignment-from-none
             if not data:
                 continue
-            local: Side = data[0] or {}
-            visitor: Side = data[1] or {}
+            local: Side = data[0] or {}  # pylint: disable=unsubscriptable-object
+            visitor: Side = data[1] or {}  # pylint: disable=unsubscriptable-object
 
             # Orient this game onto the tie's home/away. get_match is local-first, but
             # the local of a second leg is the tie's away side, so match by team name
             # when we already know one side; otherwise take local -> home.
             reversed_ = (
-                (local.get("team") is not None
-                 and local.get("team") == match.away.team)
-                or (visitor.get("team") is not None
-                    and visitor.get("team") == match.home.team)
+                local.get("team") is not None and local.get("team") == match.away.team
+            ) or (
+                visitor.get("team") is not None
+                and visitor.get("team") == match.home.team
             )
-            home_side, away_side = (
-                (visitor, local) if reversed_ else (local, visitor)
-            )
+            home_side, away_side = (visitor, local) if reversed_ else (local, visitor)
 
             _fill_team(match.home, home_side)
             _fill_team(match.away, away_side)
