@@ -1,5 +1,8 @@
 # playoff-diagrams
 
+[![CI](https://github.com/anibalpacheco/playoff-diagrams/actions/workflows/ci.yml/badge.svg)](https://github.com/anibalpacheco/playoff-diagrams/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 Render a football (soccer) **playoff bracket** as an **SVG**, on the fly, from a
 **JSON source document**.
 
@@ -68,7 +71,7 @@ Minimal example:
 Requires Python ≥ 3.10. No runtime dependencies.
 
 ```bash
-git clone https://github.com/<you>/playoff-diagrams.git
+git clone https://github.com/anibalpacheco/playoff-diagrams.git
 cd playoff-diagrams
 python -m venv .venv && source .venv/bin/activate
 pip install -e .
