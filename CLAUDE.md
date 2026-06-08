@@ -109,8 +109,7 @@ keep three things in sync:
 
 ## Possible next steps
 
-Third-place playoff (a `loser_of` slot mirroring `winner_of`), team crests/logos. Group
-stages and the away-goals rule are out of scope by design — this is a play-off renderer.
+Third-place playoff (a `loser_of` slot mirroring `winner_of`), team crests/logos.
 
 ## Conventions
 
