@@ -8,11 +8,6 @@
   "properties": {
     "tournament": { "type": "string", "minLength": 1 },
     "season": { "type": "string" },
-    "format": {
-      "type": "string",
-      "enum": ["single-elimination"],
-      "default": "single-elimination"
-    },
     "render": { "$ref": "#/$defs/render" },
     "rounds": {
       "type": "array",
@@ -25,11 +20,6 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "scores": {
-          "type": "string",
-          "enum": ["aggregate", "legs"],
-          "default": "aggregate"
-        },
         "max_label_chars": {
           "type": "integer",
           "minimum": 1,
@@ -57,71 +47,68 @@
     },
     "match": {
       "type": "object",
-      "required": ["id", "home", "away"],
+      "required": ["id"],
       "additionalProperties": false,
+      "comment": "two sides, 1 = top, 2 = bottom; winnerof{n} wires the bracket, team{n} names a known side",
       "properties": {
         "id": { "type": "string", "minLength": 1 },
-        "home": { "$ref": "#/$defs/slot" },
-        "away": { "$ref": "#/$defs/slot" },
+        "winnerof1": { "type": "string", "minLength": 1 },
+        "winnerof2": { "type": "string", "minLength": 1 },
+        "team1": { "type": "string", "minLength": 1 },
+        "team2": { "type": "string", "minLength": 1 },
+        "seed1": { "type": "integer", "minimum": 1 },
+        "seed2": { "type": "integer", "minimum": 1 },
+        "id1": { "type": ["string", "integer"] },
+        "id2": { "type": ["string", "integer"] },
         "legs": {
           "type": "array",
           "items": { "$ref": "#/$defs/leg" }
         },
-        "winner": { "type": "string", "enum": ["home", "away"] }
-      }
-    },
-    "slot": {
-      "type": "object",
-      "oneOf": [
-        {
-          "required": ["team"],
-          "additionalProperties": false,
-          "properties": {
-            "team": { "type": "string", "minLength": 1 },
-            "id": { "type": ["string", "integer"] },
-            "seed": { "type": "integer", "minimum": 1 }
-          }
-        },
-        {
-          "required": ["winner_of"],
-          "additionalProperties": false,
-          "properties": {
-            "winner_of": { "type": "string", "minLength": 1 },
-            "team": { "type": "string", "minLength": 1 },
-            "id": { "type": ["string", "integer"] },
-            "seed": { "type": "integer", "minimum": 1 }
-          }
-        },
-        {
-          "required": ["tbd"],
-          "additionalProperties": false,
-          "properties": {
-            "tbd": { "const": true }
-          }
+        "winner": { "enum": [1, 2] }
+      },
+      "if": {
+        "required": ["legs"],
+        "properties": { "legs": { "minItems": 1 } }
+      },
+      "then": {
+        "comment": "with legs the teams come from the legs, so only the bracket wiring is allowed",
+        "not": {
+          "anyOf": [
+            { "required": ["team1"] },
+            { "required": ["team2"] },
+            { "required": ["seed1"] },
+            { "required": ["seed2"] },
+            { "required": ["id1"] },
+            { "required": ["id2"] }
+          ]
         }
-      ]
+      }
     },
     "leg": {
       "type": "object",
-      "anyOf": [
-        { "required": ["ref"] },
-        { "required": ["home", "away"] }
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "ref": { "type": ["string", "integer"] },
-        "home": { "type": "integer", "minimum": 0 },
-        "away": { "type": "integer", "minimum": 0 },
-        "pens": {
-          "type": "object",
-          "required": ["home", "away"],
+      "oneOf": [
+        {
           "additionalProperties": false,
+          "required": ["ref"],
           "properties": {
-            "home": { "type": "integer", "minimum": 0 },
-            "away": { "type": "integer", "minimum": 0 }
+            "ref": { "type": ["string", "integer"] }
+          }
+        },
+        {
+          "additionalProperties": false,
+          "required": ["team1", "goals1", "team2", "goals2"],
+          "properties": {
+            "team1": { "type": "string", "minLength": 1 },
+            "goals1": { "type": "integer", "minimum": 0 },
+            "id1": { "type": ["string", "integer"] },
+            "pen1": { "type": "integer", "minimum": 0 },
+            "team2": { "type": "string", "minLength": 1 },
+            "goals2": { "type": "integer", "minimum": 0 },
+            "id2": { "type": ["string", "integer"] },
+            "pen2": { "type": "integer", "minimum": 0 }
           }
         }
-      }
+      ]
     }
   }
 }

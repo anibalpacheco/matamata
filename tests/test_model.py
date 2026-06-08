@@ -69,12 +69,77 @@ def test_unknown_reference_is_rejected():
             {
                 "name": "Final",
                 "matches": [
-                    {"id": "f", "home": {"winner_of": "ghost"}, "away": {"tbd": True}},
+                    {"id": "f", "winnerof1": "ghost"},
                 ],
             },
         ],
     }
     with pytest.raises(BracketError):
+        parse_bracket(data)
+
+
+def test_ref_with_inline_game_is_rejected():
+    # A leg is either host-resolved (a 'ref') or self-contained (team1/goals1/...).
+    data = {
+        "tournament": "T",
+        "rounds": [
+            {
+                "name": "Final",
+                "matches": [
+                    {
+                        "id": "f",
+                        "legs": [
+                            {
+                                "ref": 7,
+                                "team1": "A",
+                                "goals1": 2,
+                                "team2": "B",
+                                "goals2": 1,
+                            }
+                        ],
+                    }
+                ],
+            }
+        ],
+    }
+    with pytest.raises(BracketError, match="ref"):
+        parse_bracket(data)
+
+
+def test_leg_without_ref_needs_all_game_fields():
+    data = {
+        "rounds": [
+            {
+                "name": "F",
+                "matches": [
+                    {"id": "f", "legs": [{"team1": "A", "goals1": 2}]},
+                ],
+            }
+        ]
+    }
+    with pytest.raises(BracketError):
+        parse_bracket(data)
+
+
+def test_match_with_legs_rejects_team_at_match_level():
+    # With legs the teams come from the legs, so the match must not name team1/team2.
+    data = {
+        "rounds": [
+            {
+                "name": "F",
+                "matches": [
+                    {
+                        "id": "f",
+                        "team1": "A",
+                        "legs": [
+                            {"team1": "A", "goals1": 1, "team2": "B", "goals2": 0}
+                        ],
+                    }
+                ],
+            }
+        ]
+    }
+    with pytest.raises(BracketError, match="team"):
         parse_bracket(data)
 
 
@@ -84,9 +149,7 @@ def test_tournament_is_optional():
             "rounds": [
                 {
                     "name": "Final",
-                    "matches": [
-                        {"id": "f", "home": {"team": "X"}, "away": {"team": "Y"}}
-                    ],
+                    "matches": [{"id": "f", "team1": "X", "team2": "Y"}],
                 }
             ]
         }
@@ -101,14 +164,11 @@ def test_render_option_defaults():
             "rounds": [
                 {
                     "name": "Final",
-                    "matches": [
-                        {"id": "f", "home": {"team": "X"}, "away": {"team": "Y"}}
-                    ],
+                    "matches": [{"id": "f", "team1": "X", "team2": "Y"}],
                 }
             ],
         }
     )
-    assert bracket.render.scores == "aggregate"
     assert bracket.render.max_label_chars == 22
     assert bracket.render.box_width == 190
 
@@ -120,7 +180,7 @@ def test_box_width_widens_the_layout():
         "rounds": [
             {
                 "name": "F",
-                "matches": [{"id": "f", "home": {"team": "A"}, "away": {"team": "B"}}],
+                "matches": [{"id": "f", "team1": "A", "team2": "B"}],
             }
         ]
     }
@@ -145,9 +205,7 @@ def test_render_config_exposed_on_diagram():
             "rounds": [
                 {
                     "name": "F",
-                    "matches": [
-                        {"id": "f", "home": {"team": "A"}, "away": {"team": "B"}}
-                    ],
+                    "matches": [{"id": "f", "team1": "A", "team2": "B"}],
                 }
             ],
         }
@@ -155,15 +213,17 @@ def test_render_config_exposed_on_diagram():
     assert diagram.render_config.max_label_chars == 12
 
 
-def test_score_text_modes():
+def test_score_text_shows_each_leg():
     from playoff_diagrams.layout import _score_text
 
-    m = Match(
+    single = Match(id="m", home=Slot(team="H"), away=Slot(team="A"), legs=[Leg(3, 0)])
+    assert _score_text(single, "home") == "3"
+
+    two = Match(
         id="m", home=Slot(team="H"), away=Slot(team="A"), legs=[Leg(2, 1), Leg(0, 0)]
     )
-    assert _score_text(m, "home", "aggregate") == "2"
-    assert _score_text(m, "home", "legs") == "2 0"
-    assert _score_text(m, "away", "legs") == "1 0"
+    assert _score_text(two, "home") == "2 0"
+    assert _score_text(two, "away") == "1 0"
 
     shoot = Match(
         id="m",
@@ -171,8 +231,8 @@ def test_score_text_modes():
         away=Slot(team="A"),
         legs=[Leg(1, 1), Leg(0, 0, Pens(4, 2))],
     )
-    assert _score_text(shoot, "home", "aggregate") == "1 (4)"
-    assert _score_text(shoot, "home", "legs") == "1 0 (4)"
+    assert _score_text(shoot, "home") == "1 0 (4)"
+    assert _score_text(shoot, "away") == "1 0 (2)"
 
 
 # --- PlayoffDiagram hooks ---------------------------------------------------
@@ -182,7 +242,7 @@ def test_get_match_fills_a_single_leg():
     class D(PlayoffDiagram):
         def get_match(self, ref):
             assert ref == 1001
-            return [{"team": "Peñarol", "goals": 2}, {"team": "Nacional", "goals": 1}]
+            return {"team1": "Peñarol", "goals1": 2, "team2": "Nacional", "goals2": 1}
 
     bracket = D(
         {
@@ -192,8 +252,6 @@ def test_get_match_fills_a_single_leg():
                     "matches": [
                         {
                             "id": "f",
-                            "home": {"tbd": True},
-                            "away": {"tbd": True},
                             "legs": [{"ref": 1001}],
                         }
                     ],
@@ -210,10 +268,14 @@ def test_get_match_fills_a_single_leg():
 def test_get_match_fills_pens():
     class D(PlayoffDiagram):
         def get_match(self, ref):
-            return [
-                {"team": "A", "goals": 0, "pens": 4},
-                {"team": "B", "goals": 0, "pens": 2},
-            ]
+            return {
+                "team1": "A",
+                "goals1": 0,
+                "pen1": 4,
+                "team2": "B",
+                "goals2": 0,
+                "pen2": 2,
+            }
 
     bracket = D(
         {
@@ -223,8 +285,6 @@ def test_get_match_fills_pens():
                     "matches": [
                         {
                             "id": "f",
-                            "home": {"tbd": True},
-                            "away": {"tbd": True},
                             "legs": [{"ref": 7}],
                         }
                     ],
@@ -241,11 +301,13 @@ def test_get_match_orients_second_leg_by_team():
     class D(PlayoffDiagram):
         def get_match(self, ref):
             if ref == 1:
-                return [
-                    {"team": "Peñarol", "goals": 2},
-                    {"team": "Nacional", "goals": 1},
-                ]
-            return [{"team": "Nacional", "goals": 0}, {"team": "Peñarol", "goals": 0}]
+                return {
+                    "team1": "Peñarol",
+                    "goals1": 2,
+                    "team2": "Nacional",
+                    "goals2": 1,
+                }
+            return {"team1": "Nacional", "goals1": 0, "team2": "Peñarol", "goals2": 0}
 
     bracket = D(
         {
@@ -255,8 +317,6 @@ def test_get_match_orients_second_leg_by_team():
                     "matches": [
                         {
                             "id": "f",
-                            "home": {"tbd": True},
-                            "away": {"tbd": True},
                             "legs": [{"ref": 1}, {"ref": 2}],
                         }
                     ],
@@ -283,8 +343,6 @@ def test_get_match_returning_none_leaves_the_leg():
                     "matches": [
                         {
                             "id": "f",
-                            "home": {"team": "A"},
-                            "away": {"team": "B"},
                             "legs": [{"ref": 1}],
                         }
                     ],
@@ -309,9 +367,7 @@ def test_tournament_and_season_overrides():
             "rounds": [
                 {
                     "name": "F",
-                    "matches": [
-                        {"id": "f", "home": {"team": "A"}, "away": {"team": "B"}}
-                    ],
+                    "matches": [{"id": "f", "team1": "A", "team2": "B"}],
                 }
             ],
         }
@@ -327,9 +383,7 @@ def test_diagram_accepts_a_json_string():
             "rounds": [
                 {
                     "name": "F",
-                    "matches": [
-                        {"id": "f", "home": {"team": "A"}, "away": {"team": "B"}}
-                    ],
+                    "matches": [{"id": "f", "team1": "A", "team2": "B"}],
                 }
             ],
         }
@@ -342,3 +396,10 @@ def test_examples_match_schema(name):
     pytest.importorskip("jsonschema")
     with open(os.path.join(EXAMPLES, name), encoding="utf-8") as fh:
         validate_document(json.load(fh))
+
+
+def test_example_host_resolves_ref_legs(libertadores_diagram):
+    qf1 = libertadores_diagram().build().matches_by_id()["qf1"]
+    # The two ref-only legs are filled from example_data.json, in tie orientation.
+    assert [(leg.home, leg.away) for leg in qf1.legs] == [(2, 1), (0, 0)]
+    assert qf1.home.team == "Flamengo" and qf1.away.team == "Boca Juniors"

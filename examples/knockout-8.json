@@ -1,36 +1,38 @@
 {
   "tournament": "Example Cup",
   "season": "2026",
-  "format": "single-elimination",
   "rounds": [
     {
       "name": "Quarterfinals",
       "matches": [
         {
           "id": "qf1",
-          "home": { "team": "Team A", "seed": 1 },
-          "away": { "team": "Team H", "seed": 8 },
-          "legs": [{ "home": 3, "away": 0 }],
-          "winner": "home"
+          "legs": [{ "team1": "Team A", "goals1": 3, "team2": "Team H", "goals2": 0 }],
+          "winner": 1
         },
         {
           "id": "qf2",
-          "home": { "team": "Team D", "seed": 4 },
-          "away": { "team": "Team E", "seed": 5 },
-          "legs": [{ "home": 1, "away": 2 }],
-          "winner": "away"
+          "legs": [{ "team1": "Team D", "goals1": 1, "team2": "Team E", "goals2": 2 }],
+          "winner": 2
         },
         {
           "id": "qf3",
-          "home": { "team": "Team B", "seed": 2 },
-          "away": { "team": "Team G", "seed": 7 },
-          "legs": [{ "home": 0, "away": 0, "pens": { "home": 5, "away": 4 } }],
-          "winner": "home"
+          "legs": [
+            {
+              "team1": "Team B",
+              "goals1": 0,
+              "team2": "Team G",
+              "goals2": 0,
+              "pen1": 5,
+              "pen2": 4
+            }
+          ],
+          "winner": 1
         },
         {
           "id": "qf4",
-          "home": { "team": "Team C", "seed": 3 },
-          "away": { "team": "Team F", "seed": 6 }
+          "team1": "Team C",
+          "team2": "Team F"
         }
       ]
     },
@@ -39,13 +41,16 @@
       "matches": [
         {
           "id": "sf1",
-          "home": { "winner_of": "qf1", "team": "Team A" },
-          "away": { "winner_of": "qf2", "team": "Team E" }
+          "winnerof1": "qf1",
+          "winnerof2": "qf2",
+          "team1": "Team A",
+          "team2": "Team E"
         },
         {
           "id": "sf2",
-          "home": { "winner_of": "qf3", "team": "Team B" },
-          "away": { "winner_of": "qf4" }
+          "winnerof1": "qf3",
+          "winnerof2": "qf4",
+          "team1": "Team B"
         }
       ]
     },
@@ -54,8 +59,8 @@
       "matches": [
         {
           "id": "final",
-          "home": { "winner_of": "sf1" },
-          "away": { "winner_of": "sf2" }
+          "winnerof1": "sf1",
+          "winnerof2": "sf2"
         }
       ]
     }

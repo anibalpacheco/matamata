@@ -12,20 +12,22 @@ means editing that JSON — no code changes, and no per-cup HTML templates to ma
 
 ## Examples
 
-Both diagrams below are rendered straight from the JSON files in
-[`examples/`](examples/), with no per-cup templates involved.
+Both diagrams below are rendered from the JSON files in [`examples/`](examples/), with
+no per-cup templates involved.
 
-Two-legged ties with `"scores": "legs"`
-([`libertadores-2026.json`](examples/libertadores-2026.json)) — each leg's goals are
-shown, shootouts appear in parentheses, the winner of each tie is emphasized, and the
-advancing team recorded on each `winner_of` slot carries through the rounds:
+Two-legged ties ([`libertadores-2026.json`](examples/libertadores-2026.json)) — each
+leg's goals are shown, shootouts appear in parentheses, and the winner of each tie is
+emphasized. The first quarterfinal is **host-resolved**: its legs carry only a `ref`, so
+its teams and scores come from `get_match` (see
+[`examples/libertadores_host.py`](examples/libertadores_host.py)) rather than from the
+document. Played ties take their team names from the legs; the final records its finalists
+with `team1`/`team2` while its `winnerof` links carry the bracket:
 
 ![Copa Libertadores 2026 bracket](docs/libertadores-2026.png)
 
-Single matches with the default `"scores": "aggregate"`
-([`knockout-8.json`](examples/knockout-8.json)) — one total per side, with shootouts in
-parentheses. Sides that have not been resolved yet fall back to placeholders such as
-"Winner SF2":
+Single matches ([`knockout-8.json`](examples/knockout-8.json)) — one goal figure per
+side, with shootouts in parentheses. Sides that have not been resolved yet fall back to
+placeholders such as "Winner SF2":
 
 ![Example Cup bracket](docs/knockout-8.png)
 
@@ -51,16 +53,16 @@ Minimal example:
 {
   "tournament": "Copa Libertadores",
   "season": "2026",
-  "format": "single-elimination",
   "rounds": [
     {
       "name": "Final",
       "matches": [
         {
           "id": "final",
-          "home": { "team": "Flamengo" },
-          "away": { "team": "Nacional" },
-          "legs": [{ "home": 2, "away": 1 }]
+          "legs": [
+            { "team1": "Flamengo", "goals1": 2, "team2": "Nacional", "goals2": 1 }
+          ],
+          "winner": 1
         }
       ]
     }
@@ -79,11 +81,11 @@ python -m venv .venv && source .venv/bin/activate
 pip install -e .
 ```
 
-Render one of the bundled examples to an SVG file:
+Render a self-contained example to an SVG file:
 
 ```bash
 # via the installed command
-playoff-diagrams examples/libertadores-2026.json -o libertadores.svg
+playoff-diagrams examples/knockout-8.json -o knockout.svg
 
 # or via the module, writing to stdout
 python -m playoff_diagrams examples/knockout-8.json > knockout.svg
@@ -92,12 +94,19 @@ python -m playoff_diagrams examples/knockout-8.json > knockout.svg
 Open the resulting `.svg` in a browser to view the bracket. To render your own cup,
 point the command at any JSON file that follows [`spec/format.md`](spec/format.md).
 
+The Copa Libertadores example has a host-resolved tie (its legs carry only a `ref`), so
+the CLI alone can't fill it; render it through its example host instead:
+
+```bash
+PYTHONPATH=src python examples/libertadores_host.py > libertadores.svg
+```
+
 Use it from Python:
 
 ```python
 from playoff_diagrams import load_bracket, render_svg
 
-svg = render_svg(load_bracket("examples/libertadores-2026.json"))
+svg = render_svg(load_bracket("examples/knockout-8.json"))
 ```
 
 ### Use it in another project (e.g. a Django app)
@@ -125,10 +134,10 @@ def bracket_svg(request, championship):
 #### Injecting live data and dynamic title (`PlayoffDiagram`)
 
 The renderer never computes results: the winner of a match is its explicit `winner`
-field, and an advancing team is whatever `team` the document records on a `winner_of`
-slot. To feed live data from your own database instead of (or on top of) the JSON,
-subclass `PlayoffDiagram`. Whenever a leg carries a `ref`, `get_match(ref)` is called
-with it; you return that one game as `[home_side, away_side]` (local first). The
+field, and an advancing team is whatever `team1`/`team2` the document records on a match.
+To feed live data from your own database instead of (or on top of) the JSON, subclass
+`PlayoffDiagram`. Whenever a leg carries a `ref`, `get_match(ref)` is called with it; you
+return that one game as a flat dict, local first (`team1`/`goals1`, `team2`/`goals2`). The
 tournament name and season can also be supplied dynamically:
 
 ```python
@@ -141,10 +150,10 @@ class ChampionshipDiagram(PlayoffDiagram):
 
     def get_match(self, ref):
         g = Match.objects.get(pk=ref)            # your own model
-        return [
-            {"team": g.home.name, "goals": g.home_goals, "pens": g.home_pens},
-            {"team": g.away.name, "goals": g.away_goals, "pens": g.away_pens},
-        ]
+        return {
+            "team1": g.home.name, "goals1": g.home_goals, "pen1": g.home_pens,
+            "team2": g.away.name, "goals2": g.away_goals, "pen2": g.away_pens,
+        }
 
     def get_tournament(self):
         return self._championship.name
@@ -157,10 +166,10 @@ def bracket_svg(request, championship):
     return HttpResponse(svg, content_type="image/svg+xml")
 ```
 
-`get_match` returns only what it has — any of `team`, `goals`, `pens` per side; a
-returned `None` leaves that leg as the document defines it. Where a `winner_of` slot has
-no team yet, the resolved name is filled in from the live game while the bracket
-connector is kept.
+`get_match` returns only what it has — any of `team1`/`goals1`/`pen1` and their `2`
+counterparts; a returned `None` leaves that leg as the document defines it. Where a side
+has no team yet, the resolved name is filled in from the live game while the bracket
+connector (`winnerof1`/`winnerof2`) is kept.
 
 The document's display preferences are available to the hooks as `self.render_config`,
 so `get_match` can, for instance, read `self.render_config.max_label_chars` and return

@@ -7,10 +7,10 @@ document and call :meth:`render`::
     class MyDiagram(PlayoffDiagram):
         def get_match(self, ref):
             game = my_db.fetch(ref)
-            return [
-                {"team": game.home_team, "goals": game.home_goals, "pens": game.home_pens},
-                {"team": game.away_team, "goals": game.away_goals, "pens": game.away_pens},
-            ]
+            return {
+                "team1": game.home_team, "goals1": game.home_goals, "pen1": game.home_pens,
+                "team2": game.away_team, "goals2": game.away_goals, "pen2": game.away_pens,
+            }
 
         def get_tournament(self):
             return championship.name
@@ -27,17 +27,16 @@ Resolution is automatic: whenever a leg in the document carries a ``ref``,
 from __future__ import annotations
 
 import json
-from typing import Any, Optional, Sequence
+from typing import Any, Optional
 
-from .model import Bracket, Id, Match, Pens, RenderOptions, Slot
-from .parse import parse_bracket, render_options
+from .model import Bracket, Id, Match, RenderOptions
+from .parse import apply_game, parse_bracket, render_options
 from .render import render_svg
 
-# What get_match returns: a positional pair [home_side, away_side]. By convention the
-# first element is the *home/local* of that game and the second the *away/visitor*.
-# Each side is a mapping that may carry "team", "goals" and "pens" (all optional).
-Side = dict[str, Any]
-GameData = Optional[Sequence[Optional[Side]]]
+# What get_match returns: one flat game dict, the same shape as an inline leg. "1" is the
+# game's local/home side, "2" the away/visitor; keys "team1"/"goals1"/"pen1"/"id1" and
+# their "2" counterparts are all optional. Return only what you have.
+GameData = Optional[dict[str, Any]]
 
 
 class PlayoffDiagram:
@@ -61,10 +60,10 @@ class PlayoffDiagram:
     def get_match(self, ref: Id) -> GameData:  # pylint: disable=unused-argument
         """Return the live data for a single real game, or ``None``.
 
-        Called once per leg that carries a ``ref``. Return a positional pair
-        ``[home_side, away_side]`` (first is the local/home of the game). Each side is a
-        dict that may contain ``team`` (str), ``goals`` (int) and ``pens`` (int) — return
-        only what you have. Returning ``None`` leaves the leg as the document defines it.
+        Called once per leg that carries a ``ref``. Return one flat game dict, local
+        first: ``team1``/``goals1``/``pen1``/``id1`` for the game's home side and the
+        ``2`` counterparts for the away side — all optional, so return only what you
+        have. Returning ``None`` leaves the leg as the document defines it.
         """
         return None
 
@@ -100,40 +99,8 @@ class PlayoffDiagram:
                 continue
             # get_match is an overridable hook; the base returns None, so pylint
             # follows that literal return rather than the GameData annotation.
-            data = self.get_match(leg.ref)  # pylint: disable=assignment-from-none
-            if not data:
+            game = self.get_match(leg.ref)  # pylint: disable=assignment-from-none
+            if not game:
                 continue
-            local: Side = data[0] or {}  # pylint: disable=unsubscriptable-object
-            visitor: Side = data[1] or {}  # pylint: disable=unsubscriptable-object
-
-            # Orient this game onto the tie's home/away. get_match is local-first, but
-            # the local of a second leg is the tie's away side, so match by team name
-            # when we already know one side; otherwise take local -> home.
-            reversed_ = (
-                local.get("team") is not None and local.get("team") == match.away.team
-            ) or (
-                visitor.get("team") is not None
-                and visitor.get("team") == match.home.team
-            )
-            home_side, away_side = (visitor, local) if reversed_ else (local, visitor)
-
-            _fill_team(match.home, home_side)
-            _fill_team(match.away, away_side)
-            if "goals" in home_side:
-                leg.home = home_side["goals"]
-            if "goals" in away_side:
-                leg.away = away_side["goals"]
-            home_pens, away_pens = home_side.get("pens"), away_side.get("pens")
-            if home_pens is not None or away_pens is not None:
-                leg.pens = Pens(home=home_pens or 0, away=away_pens or 0)
-
-
-def _fill_team(slot: Slot, side: Side) -> None:
-    """Set a slot's display team from live data, only when it isn't known yet.
-
-    A ``winner_of`` link is kept so the bracket connector still draws.
-    """
-    if slot.team is None and side.get("team") is not None:
-        slot.team = side["team"]
-    if slot.team_id is None and side.get("id") is not None:
-        slot.team_id = side["id"]
+            # Same orientation as an inline leg, shared with the parser.
+            apply_game(match, leg, game)

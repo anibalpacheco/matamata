@@ -18,8 +18,17 @@ from playoff_diagrams import load_bracket, render_svg
 EXAMPLES = os.path.join(os.path.dirname(__file__), "..", "examples")
 GOLDEN = os.path.join(os.path.dirname(__file__), "golden")
 
+# libertadores-2026.json is host-resolved (one tie carries refs), so it is rendered
+# through its example host (see the libertadores_diagram fixture) rather than the base
+# loader; example_data.json is that host's lookup table, not a bracket document.
+HOST_EXAMPLE = "libertadores-2026.json"
+NON_BRACKET = {HOST_EXAMPLE, "example_data.json"}
 EXAMPLE_FILES = sorted(
-    os.path.basename(p) for p in glob.glob(os.path.join(EXAMPLES, "*.json"))
+    name
+    for name in (
+        os.path.basename(p) for p in glob.glob(os.path.join(EXAMPLES, "*.json"))
+    )
+    if name not in NON_BRACKET
 )
 
 
@@ -27,11 +36,8 @@ def _golden_path(name: str) -> str:
     return os.path.join(GOLDEN, name.replace(".json", ".svg"))
 
 
-@pytest.mark.parametrize("name", EXAMPLE_FILES)
-def test_svg_matches_golden(name):
-    svg = render_svg(load_bracket(os.path.join(EXAMPLES, name)))
+def _assert_golden(svg: str, name: str) -> None:
     path = _golden_path(name)
-
     if os.environ.get("PD_REGEN"):
         os.makedirs(GOLDEN, exist_ok=True)
         with open(path, "w", encoding="utf-8") as fh:
@@ -43,11 +49,27 @@ def test_svg_matches_golden(name):
         assert svg == fh.read()
 
 
-@pytest.mark.parametrize("name", EXAMPLE_FILES)
-def test_svg_is_well_formed(name):
+def _assert_well_formed(svg: str) -> None:
     import xml.dom.minidom
 
-    svg = render_svg(load_bracket(os.path.join(EXAMPLES, name)))
     xml.dom.minidom.parseString(svg)  # raises on malformed XML
     assert svg.startswith("<svg")
     assert svg.rstrip().endswith("</svg>")
+
+
+@pytest.mark.parametrize("name", EXAMPLE_FILES)
+def test_svg_matches_golden(name):
+    _assert_golden(render_svg(load_bracket(os.path.join(EXAMPLES, name))), name)
+
+
+@pytest.mark.parametrize("name", EXAMPLE_FILES)
+def test_svg_is_well_formed(name):
+    _assert_well_formed(render_svg(load_bracket(os.path.join(EXAMPLES, name))))
+
+
+def test_host_example_matches_golden(libertadores_diagram):
+    _assert_golden(libertadores_diagram().render(), HOST_EXAMPLE)
+
+
+def test_host_example_is_well_formed(libertadores_diagram):
+    _assert_well_formed(libertadores_diagram().render())

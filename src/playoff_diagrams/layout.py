@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .model import Bracket, Match, Resolver, aggregate, pens_of
+from .model import Bracket, Match, Resolver, pens_of
 
 # Geometry constants (SVG user units).
 MARGIN_X = 20
@@ -66,34 +66,29 @@ class Layout:
     box_width: float = BOX_W
 
 
-def _score_text(match: Match, side: str, scores: str) -> str:
-    """Build the score string for one side under the given display mode.
+def _score_text(match: Match, side: str) -> str:
+    """Build the score string for one side: each played leg's goals, in order.
 
-    This only formats the goals that are present; it does not decide a winner.
+    A single-leg match shows one number; a two-legged tie shows both, e.g. ``2 0``. A
+    shootout is appended in parentheses. This only formats the goals that are present; it
+    does not decide a winner.
     """
-    agg = aggregate(match)
-    if agg is None:
+    played = [leg for leg in match.legs if leg.played]
+    if not played:
         return ""
+    goals = " ".join(str(leg.home if side == "home" else leg.away) for leg in played)
     pens = pens_of(match)
     pen_suffix = ""
     if pens is not None:
         pen_suffix = f" ({pens.home if side == 'home' else pens.away})"
-    if scores == "legs":
-        goals = " ".join(
-            str(leg.home if side == "home" else leg.away)
-            for leg in match.legs
-            if leg.played
-        )
-        return goals + pen_suffix
-    value = agg[0] if side == "home" else agg[1]
-    return f"{value}{pen_suffix}"
+    return goals + pen_suffix
 
 
-def _side_view(resolver: Resolver, match: Match, side: str, scores: str) -> SideView:
+def _side_view(resolver: Resolver, match: Match, side: str) -> SideView:
     slot = match.home if side == "home" else match.away
     return SideView(
         label=resolver.label(slot),
-        score=_score_text(match, side, scores),
+        score=_score_text(match, side),
         is_winner=match.winner == side,  # explicit only; never computed
     )
 
@@ -123,8 +118,8 @@ def compute_layout(bracket: Bracket) -> Layout:
                 match=match,
                 x=x,
                 y=cy - BOX_H / 2,
-                home=_side_view(resolver, match, "home", bracket.render.scores),
-                away=_side_view(resolver, match, "away", bracket.render.scores),
+                home=_side_view(resolver, match, "home"),
+                away=_side_view(resolver, match, "away"),
             )
             placed.append(pm)
             by_placed[match.id] = pm

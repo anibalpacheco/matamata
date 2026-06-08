@@ -32,9 +32,10 @@ class Leg:
     """A single played game within a match.
 
     ``home`` and ``away`` always refer to the match's home/away sides, regardless of
-    which venue the leg was played at. They are optional: a leg may carry only a
-    ``ref`` (a pointer to the real game in the host system) and have its scores filled
-    in later. ``None`` means "not played / not known yet".
+    which venue the leg was played at. A leg is either self-contained (``home``/``away``,
+    optional ``pens``) or host-resolved (only a ``ref``, a pointer to the real game whose
+    scores and teams are filled in later) — never both. ``None`` means "not played / not
+    known yet".
     """
 
     home: Optional[int] = None
@@ -92,10 +93,6 @@ class Round:
 class RenderOptions:
     """Document-level display preferences.
 
-    ``scores``: how a played match's result is shown on each side.
-      - ``"aggregate"`` (default): a single total, e.g. ``2`` (``4`` for a shootout).
-      - ``"legs"``: each leg's goals in order, e.g. ``2 0`` (with ``(4)`` for pens).
-
     ``max_label_chars``: the longest team label drawn before it is truncated with an
     ellipsis. It is the maximum label *width*, in characters, so longer-named cups can
     raise it (or a host's ``get_match`` can read it and return shorter names).
@@ -104,7 +101,6 @@ class RenderOptions:
     together with, raising ``max_label_chars``) to fit long names without truncation.
     """
 
-    scores: str = "aggregate"
     max_label_chars: int = 22
     box_width: int = 190
 
@@ -114,7 +110,6 @@ class Bracket:
     rounds: list[Round]
     tournament: str = ""
     season: Optional[str] = None
-    format: str = "single-elimination"
     render: RenderOptions = field(default_factory=RenderOptions)
 
     def matches_by_id(self) -> dict[str, Match]:

@@ -1,45 +1,56 @@
 {
   "tournament": "Copa Libertadores",
   "season": "2026",
-  "format": "single-elimination",
-  "render": { "scores": "legs", "box_width": 240 },
+  "render": { "box_width": 240 },
   "rounds": [
     {
       "name": "Quarterfinals",
       "matches": [
         {
           "id": "qf1",
-          "home": { "team": "Flamengo" },
-          "away": { "team": "Boca Juniors" },
-          "legs": [
-            { "ref": 84021, "home": 2, "away": 1 },
-            { "ref": 84022, "home": 0, "away": 0 }
-          ],
-          "winner": "home"
+          "legs": [{ "ref": 84021 }, { "ref": 84022 }],
+          "winner": 1
         },
         {
           "id": "qf2",
-          "home": { "team": "River Plate" },
-          "away": { "team": "Palmeiras" },
           "legs": [
-            { "home": 1, "away": 1 },
-            { "home": 0, "away": 0, "pens": { "home": 4, "away": 2 } }
+            { "team1": "River Plate", "goals1": 1, "team2": "Palmeiras", "goals2": 1 },
+            {
+              "team1": "Palmeiras",
+              "goals1": 0,
+              "pen1": 2,
+              "team2": "River Plate",
+              "goals2": 0,
+              "pen2": 4
+            }
           ],
-          "winner": "home"
+          "winner": 1
         },
         {
           "id": "qf3",
-          "home": { "team": "Montevideo City Torque" },
-          "away": { "team": "Atletico Mineiro" },
-          "legs": [{ "home": 1, "away": 0 }, { "home": 1, "away": 1 }],
-          "winner": "home"
+          "legs": [
+            {
+              "team1": "Montevideo City Torque",
+              "goals1": 1,
+              "team2": "Atletico Mineiro",
+              "goals2": 0
+            },
+            {
+              "team1": "Atletico Mineiro",
+              "goals1": 1,
+              "team2": "Montevideo City Torque",
+              "goals2": 1
+            }
+          ],
+          "winner": 1
         },
         {
           "id": "qf4",
-          "home": { "team": "Corinthians" },
-          "away": { "team": "Internacional" },
-          "legs": [{ "home": 3, "away": 0 }, { "home": 1, "away": 1 }],
-          "winner": "home"
+          "legs": [
+            { "team1": "Corinthians", "goals1": 3, "team2": "Internacional", "goals2": 0 },
+            { "team1": "Internacional", "goals1": 1, "team2": "Corinthians", "goals2": 1 }
+          ],
+          "winner": 1
         }
       ]
     },
@@ -48,17 +59,33 @@
       "matches": [
         {
           "id": "sf1",
-          "home": { "winner_of": "qf1", "team": "Flamengo" },
-          "away": { "winner_of": "qf2", "team": "River Plate" },
-          "legs": [{ "home": 0, "away": 0 }, { "home": 2, "away": 1 }],
-          "winner": "home"
+          "winnerof1": "qf1",
+          "winnerof2": "qf2",
+          "legs": [
+            { "team1": "Flamengo", "goals1": 0, "team2": "River Plate", "goals2": 0 },
+            { "team1": "River Plate", "goals1": 1, "team2": "Flamengo", "goals2": 2 }
+          ],
+          "winner": 1
         },
         {
           "id": "sf2",
-          "home": { "winner_of": "qf3", "team": "Montevideo City Torque" },
-          "away": { "winner_of": "qf4", "team": "Corinthians" },
-          "legs": [{ "home": 1, "away": 1 }, { "home": 2, "away": 0 }],
-          "winner": "home"
+          "winnerof1": "qf3",
+          "winnerof2": "qf4",
+          "legs": [
+            {
+              "team1": "Montevideo City Torque",
+              "goals1": 1,
+              "team2": "Corinthians",
+              "goals2": 1
+            },
+            {
+              "team1": "Corinthians",
+              "goals1": 0,
+              "team2": "Montevideo City Torque",
+              "goals2": 2
+            }
+          ],
+          "winner": 1
         }
       ]
     },
@@ -67,8 +94,10 @@
       "matches": [
         {
           "id": "final",
-          "home": { "winner_of": "sf1", "team": "Flamengo" },
-          "away": { "winner_of": "sf2", "team": "Montevideo City Torque" }
+          "winnerof1": "sf1",
+          "winnerof2": "sf2",
+          "team1": "Flamengo",
+          "team2": "Montevideo City Torque"
         }
       ]
     }
