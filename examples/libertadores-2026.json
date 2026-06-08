@@ -25,13 +25,13 @@
         },
         {
           "id": "qf3",
-          "home": { "team": "Nacional" },
+          "home": { "team": "Montevideo City Torque" },
           "away": { "team": "Atletico Mineiro" },
           "legs": [{ "home": 1, "away": 0 }, { "home": 1, "away": 2 }]
         },
         {
           "id": "qf4",
-          "home": { "team": "Penarol" },
+          "home": { "team": "Corinthians" },
           "away": { "team": "Internacional" },
           "legs": [{ "home": 3, "away": 0 }, { "home": 1, "away": 1 }]
         }

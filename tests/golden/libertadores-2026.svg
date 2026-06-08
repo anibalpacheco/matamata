@@ -45,7 +45,7 @@
 <rect class="pd-box" x="20" y="210" width="190" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="234" x2="210" y2="234"/>
 <g class="">
-<text class="pd-team" x="30" y="226">Nacional</text>
+<text class="pd-team" x="30" y="226">Montevideo City Torque</text>
 <text class="pd-score" x="202" y="226">1 1</text>
 </g>
 <g class="">
@@ -55,7 +55,7 @@
 <rect class="pd-box" x="20" y="280" width="190" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="304" x2="210" y2="304"/>
 <g class="pd-win">
-<text class="pd-team" x="30" y="296">Penarol</text>
+<text class="pd-team" x="30" y="296">Corinthians</text>
 <text class="pd-score" x="202" y="296">3 1</text>
 </g>
 <g class="">
@@ -79,7 +79,7 @@
 <text class="pd-score" x="462" y="261">1</text>
 </g>
 <g class="">
-<text class="pd-team" x="290" y="285">Penarol</text>
+<text class="pd-team" x="290" y="285">Corinthians</text>
 <text class="pd-score" x="462" y="285">1</text>
 </g>
 <rect class="pd-box" x="540" y="175" width="190" height="48" rx="3"/>
