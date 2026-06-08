@@ -180,12 +180,10 @@ review the diff.
 
 ## Scope
 
-MVP: **single-elimination**, with single matches and two-legged ties decided by
-penalty shootouts. Group stages, double elimination and the away-goals rule are out of
-scope for now.
+**Single-elimination**, with single matches and two-legged ties decided by penalty
+shootouts.
 
 ## Status
 
-Working MVP: the language spec, JSON Schema, Python renderer, CLI and tests are in
-place, and the package is installable from GitHub. Group stages, double elimination and
-the away-goals rule remain out of scope for now.
+Working: the language spec, JSON Schema, Python renderer, CLI and tests are in place,
+and the package is installable from GitHub.

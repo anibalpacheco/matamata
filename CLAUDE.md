@@ -39,8 +39,8 @@ maintained. The renderer turns the JSON into an SVG deterministically.
   (e.g. `{"scores": "aggregate" | "legs"}`), so presentation changes need no code
   change. Add new presentation knobs there.
 - **Key naming: `snake_case`** in the JSON, for affinity with the Python backend.
-- **Scope (MVP): single-elimination**, supporting single matches and two-legged ties
-  with penalty shootouts. NOT yet: group stages, double elimination, away-goals rule.
+- **Scope: single-elimination**, supporting single matches and two-legged ties
+  with penalty shootouts.
 
 ## Language / spec
 
@@ -107,10 +107,10 @@ keep three things in sync:
   preview images. Installable into other projects via
   `pip install git+https://github.com/anibalpacheco/playoff-diagrams.git`.
 
-## Possible next steps (not started)
+## Possible next steps
 
-Third-place playoff (a `loser_of` slot mirroring `winner_of`), group stage feeding the
-bracket, team crests/logos, an away-goals toggle in `render`/tournament options.
+Third-place playoff (a `loser_of` slot mirroring `winner_of`), team crests/logos. Group
+stages and the away-goals rule are out of scope by design — this is a play-off renderer.
 
 ## Conventions
 
