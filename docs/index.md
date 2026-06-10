@@ -296,13 +296,3 @@ pytest
 The suite includes golden (snapshot) SVG tests: each example bracket is rendered and
 compared against a versioned reference SVG under `tests/golden/`. This catches visual
 regressions without a browser.
-
-When the SVG output changes on purpose, regenerate the goldens and review the diff
-before committing:
-
-```bash
-PD_REGEN=1 pytest tests/test_render.py
-```
-
-CI (GitHub Actions) runs the suite on every push and pull request across Python
-3.10–3.13.
