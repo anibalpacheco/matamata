@@ -6,13 +6,13 @@
 Render a football (soccer) **playoff bracket** as an **SVG**, on the fly, from a
 **JSON source document**.
 
-The bracket is described by a small JSON "language" that is meant to live in a
-database field (e.g. Postgres `JSONB`) on a championship/cup entity. Updating results
-means editing that JSON — no code changes, and no per-cup HTML templates to maintain.
+The bracket is described by a small JSON "language". A host system can map documents
+representing championship playoffs onto its own business objects (e.g. a Championship
+or Cup entity) and persist them apart from any presentation concern — updating results
+means editing a document, never the code.
 
 Rendered on the fly from
-[`examples/libertadores-2026.json`](examples/libertadores-2026.json) — no per-cup
-templates involved:
+[`examples/libertadores-2026.json`](examples/libertadores-2026.json):
 
 ![Copa Libertadores 2026 bracket](docs/libertadores-2026.png)
 
@@ -75,7 +75,7 @@ placeholders such as "Winner SF2":
 
 ## The format
 
-The bracket is plain JSON: it is what a database field speaks natively, and the
+The bracket is plain JSON, so any system can store and exchange it natively, and the
 language is designed so a bracket node can evolve from a **placeholder** (e.g. "winner
 of QF1") into a **reference to a real match entity** — each leg can carry a `ref` to
 the real game, resolved dynamically by the host — without changing the language. A

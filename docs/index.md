@@ -1,13 +1,11 @@
 # Documentation
 
 **playoff-diagrams** is a tool in three parts: the definition of a small JSON language
-for describing a football playoff bracket, meant to live in a database field (written
-down in [the spec](format.md), with a machine-checkable
-[JSON Schema](schema.json)); a Python package that renders a document in that
-language into an SVG, deterministically and with no dependencies; and operation
-helpers on top — `PlayoffDiagram`, to resolve match references against the host's own
-database at render time, and `apply_results`, to write incoming results onto the
-stored document and settle their consequences.
+for describing a football playoff bracket (written down in [the spec](format.md), with
+a machine-checkable [JSON Schema](schema.json)); a Python package that renders a
+document in that language into an SVG, deterministically and with no dependencies; and
+the `PlayoffDiagram` class, which models the bracket itself — the object everything
+else is done through.
 
 This manual covers how to put it to work, from a one-off render to a host application
 that keeps its brackets up to date, and how to run the test suite. Worked examples
@@ -283,8 +281,8 @@ Three things changed in the document, all from that single call:
 
 ![after](apply-after.png)
 
-The host can now update its database field with the new version of the document — the
-value of `updated` — and every render from then on shows the new state.
+The host can now persist the new version of the document — the value of `updated` —
+and every render from then on shows the new state.
 
 ## Testing
 
