@@ -21,7 +21,7 @@ maintained. The renderer turns the JSON into an SVG deterministically.
 - **Implementation language: Python.**
 - **Flat 1/2 sides.** A match has no `home`/`away` objects: its two sides are numbered
   (`1` = top, `2` = bottom) and every side field follows the numbering — `team1`/`team2`,
-  `seed1`/`seed2`, `id1`/`id2`, the bracket links `winnerof1`/`winnerof2`, and `winner`
+  `id1`/`id2`, the bracket links `winnerof1`/`winnerof2`, and `winner`
   is `1` or `2`. Legs use the same scheme (`team1`/`goals1`/`team2`/`goals2`, plus
   `pen1`/`pen2`), with `1` = that game's local. Internally this still parses into two
   `Slot`s (`Match.home`/`away`, winner `"home"`/`"away"`), so `layout.py`/`render.py` are

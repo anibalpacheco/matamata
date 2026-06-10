@@ -56,8 +56,6 @@
         "winnerof2": { "type": "string", "minLength": 1 },
         "team1": { "type": "string", "minLength": 1 },
         "team2": { "type": "string", "minLength": 1 },
-        "seed1": { "type": "integer", "minimum": 1 },
-        "seed2": { "type": "integer", "minimum": 1 },
         "id1": { "type": ["string", "integer"] },
         "id2": { "type": ["string", "integer"] },
         "legs": {

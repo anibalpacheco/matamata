@@ -68,7 +68,7 @@ numbering. There are no `home`/`away` objects.
   "id": "sf1",            // required, unique within the document
   "winnerof1": "qf1",     // optional, side 1 is the winner of another match (bracket link)
   "winnerof2": "qf2",     // optional, same for side 2
-  "team1": "Flamengo",    // optional, a known/advancing team on side 1 (with seed1/id1)
+  "team1": "Flamengo",    // optional, a known/advancing team on side 1 (with id1)
   "team2": "River Plate", // optional, same for side 2
   "legs": [ /* Leg, ... */ ], // optional; absent => not played yet
   "winner": 1,            // optional; 1 (top) | 2 (bottom)
@@ -80,10 +80,10 @@ numbering. There are no `home`/`away` objects.
 - `winnerof1`/`winnerof2` — explicit bracket connections: each must reference the `id` of
   another match. References must not form a cycle. They draw the connector and, while
   unresolved, show a placeholder ("Winner QF1").
-- `team1`/`team2` (optional `seed1`/`seed2`, `id1`/`id2`) — a side's known team: a seeded
-  entrant, or the team that advanced (written here by whatever maintains the JSON; the
-  renderer never works it out). Legs may also name teams: they fill in whatever the
-  match level leaves unset, and where both name a side the match-level name wins.
+- `team1`/`team2` (optional `id1`/`id2`) — a side's known team: an entrant, or the team
+  that advanced (written here by whatever maintains the JSON; the renderer never works
+  it out). Legs may also name teams: they fill in whatever the match level leaves
+  unset, and where both name a side the match-level name wins.
 - A side with neither `team{n}` nor `winnerof{n}` renders as "TBD".
 - `winner` — which side won, `1` or `2`. This is the **only** source of the winner: the
   renderer never computes it from the scores. Absent means undecided.
@@ -102,7 +102,7 @@ the opposite order.
 ```jsonc
 // self-contained: the game lives in the document
 {
-  "team1": "River Plate", "goals1": 1,  // local team and its goals (seed/id via id1)
+  "team1": "River Plate", "goals1": 1,  // local team and its goals (id via id1)
   "team2": "Palmeiras",   "goals2": 1,  // visiting team and its goals
   "pen1": 4, "pen2": 2                  // optional, penalty shootout result
 }

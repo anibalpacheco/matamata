@@ -60,7 +60,6 @@ class Slot:
 
     team: Optional[str] = None
     team_id: Optional[Id] = None
-    seed: Optional[int] = None
     winner_of: Optional[str] = None
     tbd: bool = False
 
