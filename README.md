@@ -3,13 +3,13 @@
 [![CI](https://github.com/anibalpacheco/playoff-diagrams/actions/workflows/ci.yml/badge.svg)](https://github.com/anibalpacheco/playoff-diagrams/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Render a football (soccer) **playoff bracket** as an **SVG**, on the fly, from a
-**JSON source document**.
+Render a football (soccer) **playoff bracket** as an **SVG**, from a document in a
+small **JSON "language"**.
 
-The bracket is described by a small JSON "language". A host system can map documents
-representing championship playoffs onto its own business objects (e.g. a Championship
-or Cup entity) and persist them apart from any presentation concern — updating results
-means editing a document, never the code.
+**playoff-diagrams** also lets a host system map documents representing championship
+playoffs onto its own business objects (e.g. a Championship or Cup entity) and persist
+them apart from any presentation concern — updating results means editing a document,
+never the code.
 
 Rendered on the fly from
 [`examples/libertadores-2026.json`](examples/libertadores-2026.json):
@@ -116,11 +116,6 @@ Minimal example:
 (e.g. a Django view), feeding live data from your own database through
 `PlayoffDiagram`, updating the stored bracket with `apply_results` — including a
 before/after walkthrough of one call — and running the test suite.
-
-## Scope
-
-**Single-elimination**, with single matches and two-legged ties decided by penalty
-shootouts.
 
 ## Status
 
