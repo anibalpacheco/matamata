@@ -11,8 +11,8 @@
   .pd-win .pd-team, .pd-win .pd-score { font-weight: 700; fill: #065f46; }
   .pd-link { fill: none; stroke: #cbd5e1; stroke-width: 1.5; }</style>
 <rect class="pd-bg" width="750" height="352"/>
-<text class="pd-title" x="20" y="28">Example Cup</text>
-<text class="pd-season" x="150" y="28">2026</text>
+<text class="pd-title" x="20" y="28">World Cup</text>
+<text class="pd-season" x="128" y="28">2026</text>
 <text class="pd-header" x="115" y="56">Quarterfinals</text>
 <text class="pd-header" x="375" y="56">Semifinals</text>
 <text class="pd-header" x="635" y="56">Final</text>
@@ -25,53 +25,53 @@
 <rect class="pd-box" x="20" y="70" width="190" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="94" x2="210" y2="94"/>
 <g class="pd-win">
-<text class="pd-team" x="30" y="86">Team A</text>
+<text class="pd-team" x="30" y="86">France</text>
 <text class="pd-score" x="202" y="86">3</text>
 </g>
 <g class="">
-<text class="pd-team" x="30" y="110">Team H</text>
+<text class="pd-team" x="30" y="110">Portugal</text>
 <text class="pd-score" x="202" y="110">0</text>
 </g>
 <rect class="pd-box" x="20" y="140" width="190" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="164" x2="210" y2="164"/>
 <g class="">
-<text class="pd-team" x="30" y="156">Team D</text>
+<text class="pd-team" x="30" y="156">Germany</text>
 <text class="pd-score" x="202" y="156">1</text>
 </g>
 <g class="pd-win">
-<text class="pd-team" x="30" y="180">Team E</text>
+<text class="pd-team" x="30" y="180">Spain</text>
 <text class="pd-score" x="202" y="180">2</text>
 </g>
 <rect class="pd-box" x="20" y="210" width="190" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="234" x2="210" y2="234"/>
 <g class="pd-win">
-<text class="pd-team" x="30" y="226">Team B</text>
+<text class="pd-team" x="30" y="226">Argentina</text>
 <text class="pd-score" x="202" y="226">0 (5)</text>
 </g>
 <g class="">
-<text class="pd-team" x="30" y="250">Team G</text>
+<text class="pd-team" x="30" y="250">Netherlands</text>
 <text class="pd-score" x="202" y="250">0 (4)</text>
 </g>
 <rect class="pd-box" x="20" y="280" width="190" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="304" x2="210" y2="304"/>
 <g class="">
-<text class="pd-team" x="30" y="296">Team C</text>
+<text class="pd-team" x="30" y="296">Brazil</text>
 </g>
 <g class="">
-<text class="pd-team" x="30" y="320">Team F</text>
+<text class="pd-team" x="30" y="320">England</text>
 </g>
 <rect class="pd-box" x="280" y="105" width="190" height="48" rx="3"/>
 <line class="pd-divider" x1="280" y1="129" x2="470" y2="129"/>
 <g class="">
-<text class="pd-team" x="290" y="121">Team A</text>
+<text class="pd-team" x="290" y="121">France</text>
 </g>
 <g class="">
-<text class="pd-team" x="290" y="145">Team E</text>
+<text class="pd-team" x="290" y="145">Spain</text>
 </g>
 <rect class="pd-box" x="280" y="245" width="190" height="48" rx="3"/>
 <line class="pd-divider" x1="280" y1="269" x2="470" y2="269"/>
 <g class="">
-<text class="pd-team" x="290" y="261">Team B</text>
+<text class="pd-team" x="290" y="261">Argentina</text>
 </g>
 <g class="">
 <text class="pd-team" x="290" y="285">Winner QF4</text>

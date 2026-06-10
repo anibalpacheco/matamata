@@ -32,9 +32,10 @@ class Leg:
     """A single played game within a match.
 
     ``home`` and ``away`` always refer to the match's home/away sides, regardless of
-    which venue the leg was played at. A leg is either self-contained (``home``/``away``,
-    optional ``pens``) or host-resolved (only a ``ref``, a pointer to the real game whose
-    scores and teams are filled in later) — never both. ``None`` means "not played / not
+    which venue the leg was played at. A leg may be self-contained (``home``/``away``,
+    optional ``pens``), host-resolved (a ``ref``, a pointer to the real game whose scores
+    and teams are filled in at render time), or both — a ``ref`` plus a baked result,
+    where live host data wins over the baked values. ``None`` means "not played / not
     known yet".
     """
 
@@ -81,6 +82,9 @@ class Match:
     away: Slot
     legs: list[Leg] = field(default_factory=list)
     winner: Optional[str] = None  # explicit, from the document: "home" | "away"
+    # The document's "settle": false opts this match out of having its winner written
+    # by PlayoffDiagram.apply_results. Display is unaffected.
+    settle: bool = True
 
 
 @dataclass

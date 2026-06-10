@@ -78,51 +78,62 @@ def test_unknown_reference_is_rejected():
         parse_bracket(data)
 
 
-def test_ref_with_inline_game_is_rejected():
-    # A leg is either host-resolved (a 'ref') or self-contained (team1/goals1/...).
+def test_ref_leg_keeps_its_baked_result():
+    # A ref may coexist with a baked result; with no host data it is what gets shown.
     data = {
-        "tournament": "T",
         "rounds": [
             {
                 "name": "Final",
                 "matches": [
-                    {
-                        "id": "f",
-                        "legs": [
-                            {
-                                "ref": 7,
-                                "team1": "A",
-                                "goals1": 2,
-                                "team2": "B",
-                                "goals2": 1,
-                            }
-                        ],
-                    }
+                    {"id": "f", "legs": [{"ref": 7, "goals1": 2, "goals2": 1}]},
                 ],
             }
         ],
     }
-    with pytest.raises(BracketError, match="ref"):
-        parse_bracket(data)
+    leg = parse_bracket(data).matches_by_id()["f"].legs[0]
+    assert leg.ref == 7
+    assert (leg.home, leg.away) == (2, 1)
 
 
-def test_leg_without_ref_needs_all_game_fields():
+def test_get_match_wins_over_a_baked_result():
+    class D(PlayoffDiagram):
+        def get_match(self, ref):
+            return {"goals1": 3, "goals2": 0}
+
+    bracket = D(
+        {
+            "rounds": [
+                {
+                    "name": "F",
+                    "matches": [
+                        {"id": "f", "legs": [{"ref": 7, "goals1": 2, "goals2": 1}]},
+                    ],
+                }
+            ]
+        }
+    ).build()
+    leg = bracket.matches_by_id()["f"].legs[0]
+    assert (leg.home, leg.away) == (3, 0)
+
+
+def test_partial_leg_parses_as_unplayed():
     data = {
         "rounds": [
             {
                 "name": "F",
                 "matches": [
-                    {"id": "f", "legs": [{"team1": "A", "goals1": 2}]},
+                    {"id": "f", "legs": [{"team1": "A", "goals1": 2}, {}]},
                 ],
             }
         ]
     }
-    with pytest.raises(BracketError):
-        parse_bracket(data)
+    match = parse_bracket(data).matches_by_id()["f"]
+    assert [leg.played for leg in match.legs] == [False, False]
+    assert match.home.team == "A"
 
 
-def test_match_with_legs_rejects_team_at_match_level():
-    # With legs the teams come from the legs, so the match must not name team1/team2.
+def test_nameless_leg_is_tie_oriented():
+    # Without team names there is nothing to match, so goals1 is the top side's.
     data = {
         "rounds": [
             {
@@ -131,16 +142,51 @@ def test_match_with_legs_rejects_team_at_match_level():
                     {
                         "id": "f",
                         "team1": "A",
+                        "team2": "B",
+                        "legs": [{"goals1": 1, "goals2": 0}],
+                    }
+                ],
+            }
+        ]
+    }
+    match = parse_bracket(data).matches_by_id()["f"]
+    assert (match.home.team, match.away.team) == ("A", "B")
+    assert (match.legs[0].home, match.legs[0].away) == (1, 0)
+
+
+def test_named_leg_orients_against_match_level_teams():
+    data = {
+        "rounds": [
+            {
+                "name": "F",
+                "matches": [
+                    {
+                        "id": "f",
+                        "team1": "A",
+                        "team2": "B",
                         "legs": [
-                            {"team1": "A", "goals1": 1, "team2": "B", "goals2": 0}
+                            {"team1": "B", "goals1": 1, "team2": "A", "goals2": 0}
                         ],
                     }
                 ],
             }
         ]
     }
-    with pytest.raises(BracketError, match="team"):
-        parse_bracket(data)
+    leg = parse_bracket(data).matches_by_id()["f"].legs[0]
+    assert (leg.home, leg.away) == (0, 1)
+
+
+def test_settle_admits_only_false():
+    def doc(value):
+        return {
+            "rounds": [
+                {"name": "F", "matches": [{"id": "f", "settle": value}]},
+            ]
+        }
+
+    assert parse_bracket(doc(False)).matches_by_id()["f"].settle is False
+    with pytest.raises(BracketError, match="settle"):
+        parse_bracket(doc(True))
 
 
 def test_tournament_is_optional():

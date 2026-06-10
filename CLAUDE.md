@@ -35,7 +35,20 @@ maintained. The renderer turns the JSON into an SVG deterministically.
   match is exactly its explicit `winner` field; an unresolved `winnerof{n}` is a
   placeholder unless the side already carries a resolved `team{n}` (or one filled from the
   legs). Deciding ties and advancing teams is the job of whatever maintains the JSON, not
-  the renderer. No away-goals rule.
+  the renderer. No away-goals rule. The document-maintenance helper
+  `PlayoffDiagram.apply_results` *writes* `winner` into the JSON (settling) — rendering
+  still only reads the field.
+- **Document maintenance via `PlayoffDiagram.apply_results(results, settle=True)`.**
+  Takes one dict or a list, each the scores of one leg (`goals1`/`goals2`, optional
+  `pen1`/`pen2`, **tie-oriented**: 1 = the match's top side, never team names) plus
+  exactly one locator: `ref` (the leg pointing at that real game) xor `id` (a match id,
+  optional 1-based `leg`, default 1; missing legs are created). Present keys overwrite
+  unconditionally — no "already played" notion, so live games can be re-applied.
+  `settle` then recomputes each touched match's winner from what a render would show
+  (aggregate, then pens; undecided removes `winner`) and pushes the advancing
+  team/id into the consuming `winnerof` side; a match with `"settle": false` (the only
+  admitted value) is never settled. Mutates and returns the document, which the host
+  persists.
 - **Host integration via `PlayoffDiagram` (`diagram.py`).** Each `leg` may carry a
   `ref` (id of the real game). Subclass `PlayoffDiagram`, override `get_match(ref)`
   (returns a flat game dict `team1`/`goals1`/`team2`/`goals2`, local first, with optional
@@ -67,24 +80,27 @@ src/playoff_diagrams/
   parse.py      # JSON -> validated model; validate_document() needs `jsonschema`
   layout.py     # deterministic bracket geometry (columns, centering, connectors)
   render.py     # model -> SVG string
-  diagram.py    # PlayoffDiagram: subclassable host hooks (get_match/get_tournament/get_season)
+  diagram.py    # PlayoffDiagram: host hooks (get_match/get_tournament/get_season) + apply_results
 tests/
   test_model.py   # result-logic and parsing unit tests
+  test_apply.py   # apply_results: locating legs, writing, settling
   test_render.py  # golden/snapshot SVG tests + well-formed-XML checks
   golden/*.svg    # versioned reference SVGs
 examples/*.json   # worked brackets (also rendered into docs/)
 examples/libertadores_host.py  # demo PlayoffDiagram subclass: get_match reads
                   #   example_data.json (a ref->game lookup) for the host-resolved tie
 examples/example_data.json     # the host lookup table, NOT a bracket document
-docs/*.png        # README preview images (committed; see below)
+docs/usage.md     # usage manual (CLI, Python, PlayoffDiagram, apply_results walkthrough)
+docs/*.png        # README/usage preview images (committed; see below)
 ```
 
 `libertadores-2026.json` is **host-resolved**: its first tie's legs carry only a `ref`,
 so its teams and scores come from `get_match`. It is rendered through
-`examples/libertadores_host.py`, not the base loader. A leg uses **either** a `ref`
-**or** an inline game (`team1`/`goals1`/`team2`/`goals2`), never both; likewise a match
-with legs takes its team names from the legs, so it must not set `team1`/`team2` (only the
-`winnerof1`/`winnerof2` wiring) — the parser and schema reject the mix.
+`examples/libertadores_host.py`, not the base loader. Every leg field is optional: `{}`
+is a scheduled leg, a `ref` may coexist with a baked inline result (live `get_match`
+data wins at render), and a leg **without team names is tie-oriented** (its 1 = the
+match's top side — that's what `apply_results` writes); named legs stay game-local-first.
+Match-level `team{n}` coexists with legs (legs fill what's missing; match level wins).
 
 The CLI is wired as a `[project.scripts]` entry point, so `pip install` exposes the
 `playoff-diagrams` command.
@@ -114,6 +130,14 @@ keep three things in sync:
    (`inkscape` and ImageMagick `magick`/`convert` are also present).
    The host-resolved `libertadores-2026.json` can't go through the CLI; render it via its
    host instead: `PYTHONPATH=src python examples/libertadores_host.py > /tmp/x.svg`.
+
+`docs/usage.md` is the usage manual (the README only keeps the pitch, examples and
+quickstart, and links here). Its "Applying results" section ends in a before/after
+walkthrough with its own assets: `docs/apply-before.json` (hand-written),
+`docs/apply-after.json` (generated from it by `apply_results` — never edit by hand) and
+the two PNGs. The walkthrough's "Regenerating" subsection has the exact commands; rerun
+them when the library's output or the before document changes, and keep the inline JSON
+blocks in sync with the files.
 
 `.gitignore` ignores stray rendered `*.svg`/`*.png` but keeps `docs/*.png` and
 `tests/golden/*.svg`. A gitignored `/.local/` directory holds personal scratch notes

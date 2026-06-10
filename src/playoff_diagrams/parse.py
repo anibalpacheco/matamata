@@ -28,24 +28,21 @@ def _require(obj: dict, key: str, where: str) -> Any:
     return obj[key]
 
 
-def _parse_side(data: dict, n: str, where: str, has_legs: bool) -> Slot:
+def _parse_side(data: dict, n: str) -> Slot:
     """Build one side of a match from its flat fields (``n`` is "1" or "2").
 
     A side is described at match level: ``winnerof{n}`` wires the bracket, ``team{n}``
-    (with optional ``seed{n}``/``id{n}``) names a known/advancing team. When the match
-    has legs the team name comes from the legs, so the identity fields are rejected here;
-    only the wiring is allowed. A side with neither name nor wiring renders as "TBD".
+    (with optional ``seed{n}``/``id{n}``) names a known/advancing team. Legs fill in
+    whatever the match level leaves unset (see ``_fill_team``), so both may name the
+    teams; the match-level name wins. A side with neither name nor wiring renders as
+    "TBD".
     """
-    winner_of = data.get(f"winnerof{n}")
-    team = data.get(f"team{n}")
-    seed = data.get(f"seed{n}")
-    team_id = data.get(f"id{n}")
-    if has_legs and (team is not None or seed is not None or team_id is not None):
-        raise BracketError(
-            f"{where} has legs, so side {n} must not set 'team{n}'/'seed{n}'/'id{n}'; "
-            f"the team comes from the legs"
-        )
-    return Slot(team=team, team_id=team_id, seed=seed, winner_of=winner_of)
+    return Slot(
+        team=data.get(f"team{n}"),
+        team_id=data.get(f"id{n}"),
+        seed=data.get(f"seed{n}"),
+        winner_of=data.get(f"winnerof{n}"),
+    )
 
 
 def _parse_winner(value: Any, where: str) -> Optional[str]:
@@ -62,34 +59,22 @@ def _parse_winner(value: Any, where: str) -> Optional[str]:
 # The flat keys of a played game, as carried by an inline leg and returned by
 # PlayoffDiagram.get_match. "1" is that game's local (home) side, "2" the visitor.
 _GAME_KEYS = ("team1", "goals1", "id1", "pen1", "team2", "goals2", "id2", "pen2")
-_GAME_REQUIRED = ("team1", "goals1", "team2", "goals2")
 
 
-def _parse_leg(data: dict, where: str) -> tuple[Leg, Optional[dict]]:
-    """Return the leg plus its inline game data (``None`` for a host-resolved leg).
+def _parse_leg(data: dict) -> tuple[Leg, Optional[dict]]:
+    """Return the leg plus its inline game data (``None`` when it carries none).
 
-    A leg is either host-resolved (only a ``ref``) or self-contained (the flat game
-    ``team1``/``goals1``/``team2``/``goals2`` with optional ``pen1``/``pen2``). The
-    inline game is oriented onto the tie by :func:`apply_game`; a ``ref`` leg is left for
-    the host's ``get_match`` to fill.
+    Every field is optional: ``{}`` is a scheduled, not-yet-played leg. A ``ref``
+    (pointer to the real game, filled by the host's ``get_match`` at render time) may
+    coexist with an inline result — live host data wins over the baked values. The
+    inline game is oriented onto the tie by :func:`apply_game`; without team names there
+    is nothing to match against, so it is read as already tie-oriented (1 = top side).
     """
-    has_ref = "ref" in data
-    has_inline = any(key in data for key in _GAME_KEYS)
-    if has_ref and has_inline:
-        raise BracketError(
-            f"leg in {where} carries a 'ref' together with inline game data; with a "
-            f"'ref' the teams and scores come from the host's get_match, so "
-            f"'team1'/'goals1'/... must be omitted"
-        )
-    if has_ref:
-        return Leg(ref=data["ref"]), None
-    for key in _GAME_REQUIRED:
-        if key not in data:
-            raise BracketError(
-                f"leg in {where} must have 'team1', 'goals1', 'team2' and 'goals2' "
-                f"(or a 'ref')"
-            )
-    return Leg(), {key: data.get(key) for key in _GAME_KEYS}
+    leg = Leg(ref=data.get("ref"))
+    game = {key: data.get(key) for key in _GAME_KEYS}
+    if all(value is None for value in game.values()):
+        return leg, None
+    return leg, game
 
 
 def _fill_team(slot: Slot, team: Optional[str], team_id: Optional[Id]) -> None:
@@ -140,23 +125,24 @@ def render_options(data: dict) -> RenderOptions:
 def _parse_match(data: dict) -> Match:
     mid = _require(data, "id", "match")
     where = f"match '{mid}'"
-    raw_legs = data.get("legs", [])
-    has_legs = bool(raw_legs)
+    settle = data.get("settle")
+    if settle not in (None, False):
+        raise BracketError(f"{where} 'settle' admits only false")
     # Sides are described by flat match-level fields: 1 = top (home), 2 = bottom (away).
-    home = _parse_side(data, "1", where, has_legs)
-    away = _parse_side(data, "2", where, has_legs)
     match = Match(
         id=mid,
-        home=home,
-        away=away,
+        home=_parse_side(data, "1"),
+        away=_parse_side(data, "2"),
         legs=[],
         winner=_parse_winner(data.get("winner"), where),
+        settle=settle is not False,
     )
-    for raw in raw_legs:
-        leg, game = _parse_leg(raw, where)
+    for raw in data.get("legs", []):
+        leg, game = _parse_leg(raw)
         match.legs.append(leg)
         if game is not None:
-            # Inline legs are oriented now; ref legs wait for get_match (see diagram.py).
+            # Inline data is oriented now; ref legs are topped up by get_match later
+            # (see diagram.py).
             apply_game(match, leg, game)
     return match
 

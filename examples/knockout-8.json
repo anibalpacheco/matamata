@@ -1,5 +1,5 @@
 {
-  "tournament": "Example Cup",
+  "tournament": "World Cup",
   "season": "2026",
   "rounds": [
     {
@@ -7,21 +7,21 @@
       "matches": [
         {
           "id": "qf1",
-          "legs": [{ "team1": "Team A", "goals1": 3, "team2": "Team H", "goals2": 0 }],
+          "legs": [{ "team1": "France", "goals1": 3, "team2": "Portugal", "goals2": 0 }],
           "winner": 1
         },
         {
           "id": "qf2",
-          "legs": [{ "team1": "Team D", "goals1": 1, "team2": "Team E", "goals2": 2 }],
+          "legs": [{ "team1": "Germany", "goals1": 1, "team2": "Spain", "goals2": 2 }],
           "winner": 2
         },
         {
           "id": "qf3",
           "legs": [
             {
-              "team1": "Team B",
+              "team1": "Argentina",
               "goals1": 0,
-              "team2": "Team G",
+              "team2": "Netherlands",
               "goals2": 0,
               "pen1": 5,
               "pen2": 4
@@ -31,8 +31,8 @@
         },
         {
           "id": "qf4",
-          "team1": "Team C",
-          "team2": "Team F"
+          "team1": "Brazil",
+          "team2": "England"
         }
       ]
     },
@@ -43,14 +43,14 @@
           "id": "sf1",
           "winnerof1": "qf1",
           "winnerof2": "qf2",
-          "team1": "Team A",
-          "team2": "Team E"
+          "team1": "France",
+          "team2": "Spain"
         },
         {
           "id": "sf2",
           "winnerof1": "qf3",
           "winnerof2": "qf4",
-          "team1": "Team B"
+          "team1": "Argentina"
         }
       ]
     },
