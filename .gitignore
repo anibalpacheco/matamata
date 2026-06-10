@@ -40,5 +40,6 @@ htmlcov/
 # Local, unversioned scratch space (personal notes, drafts — never committed)
 /.local/
 
-# Agent guidance: machine- and workflow-specific, kept local only
+# Agent guidance and settings: machine- and workflow-specific, kept local only
 /CLAUDE.md
+/.claude/
