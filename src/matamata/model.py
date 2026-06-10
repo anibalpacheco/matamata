@@ -1,4 +1,4 @@
-"""Parsed, in-memory representation of a bracket document, plus display helpers.
+"""Parsed, in-memory representation of a knockout stage document, plus display helpers.
 
 The shapes here mirror the JSON language described in ``docs/format.md``. Keeping the
 models as plain dataclasses avoids any third-party dependency.
@@ -6,8 +6,8 @@ models as plain dataclasses avoids any third-party dependency.
 The renderer is intentionally a *pure renderer*: it never computes who advances. The
 winner of a match is whatever the document's explicit ``winner`` field says, and an
 unresolved ``winner_of`` slot is drawn as a placeholder unless the document (or live
-data injected through :class:`~playoff_diagrams.diagram.PlayoffDiagram`) already carries
-a resolved team name on it. Filling brackets forward is the job of whatever maintains
+data injected through :class:`~matamata.diagram.KnockoutStage`) already carries
+a resolved team name on it. Filling the knockout stage forward is the job of whatever maintains
 the JSON, not of this library.
 """
 
@@ -55,7 +55,7 @@ class Slot:
 
     A slot is a concrete ``team``, a ``winner_of`` link, or ``tbd``. A ``winner_of``
     slot may *also* carry a ``team`` once that team is known: the link still drives the
-    bracket connector while the name is shown instead of a placeholder.
+    advancement connector while the name is shown instead of a placeholder.
     """
 
     team: Optional[str] = None
@@ -74,7 +74,7 @@ class Slot:
 
 @dataclass
 class Match:
-    """One bracket node: two sides plus an optional, possibly multi-leg result."""
+    """One match node: two sides plus an optional, possibly multi-leg result."""
 
     id: str
     home: Slot
@@ -82,7 +82,7 @@ class Match:
     legs: list[Leg] = field(default_factory=list)
     winner: Optional[str] = None  # explicit, from the document: "home" | "away"
     # The document's "settle": false opts this match out of having its winner written
-    # by PlayoffDiagram.apply_results. Display is unaffected.
+    # by KnockoutStage.apply_results. Display is unaffected.
     settle: bool = True
 
 
@@ -109,7 +109,7 @@ class RenderOptions:
 
 
 @dataclass
-class Bracket:
+class Stage:
     rounds: list[Round]
     tournament: str = ""
     season: Optional[str] = None
@@ -144,11 +144,11 @@ class Resolver:
     """Turns a slot into the display label to draw.
 
     No computation happens here: a ``winner_of`` slot shows its resolved ``team`` if one
-    has been set, otherwise a placeholder. The renderer never walks the bracket to work
+    has been set, otherwise a placeholder. The renderer never walks the tree to work
     out who won.
     """
 
-    def __init__(self, bracket: Optional[Bracket] = None) -> None:  # bracket unused
+    def __init__(self, stage: Optional[Stage] = None) -> None:  # stage unused
         pass
 
     def label(self, slot: Slot) -> str:

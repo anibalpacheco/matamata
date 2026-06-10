@@ -1,14 +1,14 @@
 # Documentation
 
-**playoff-diagrams** is a tool in three parts: the definition of a small JSON language
-for describing a football playoff bracket (written down in [the spec](format.md), with
+**matamata** is a tool in three parts: the definition of a small JSON language
+for describing a tournament knockout stage (written down in [the spec](format.md), with
 a machine-checkable [JSON Schema](schema.json)); a Python package that renders a
 document in that language into an SVG, deterministically and with no dependencies; and
-the `PlayoffDiagram` class, which models the bracket itself — the object everything
+the `KnockoutStage` class, which models the knockout stage itself — the object everything
 else is done through.
 
 This manual covers how to put it to work, from a one-off render to a host application
-that keeps its brackets up to date, and how to run the test suite. Worked examples
+that keeps its knockout stages up to date, and how to run the test suite. Worked examples
 live in the repository's `examples/` directory; for a first taste, the README's
 quickstart.
 
@@ -20,58 +20,58 @@ A standard pip-installable package, requiring Python ≥ 3.10 and no runtime
 dependencies — install it into your project straight from GitHub:
 
 ```bash
-pip install git+https://github.com/anibalpacheco/playoff-diagrams.git
+pip install git+https://github.com/anibalpacheco/matamata.git
 ```
 
 To follow along with the worked examples below, use a source checkout instead:
 
 ```bash
-git clone https://github.com/anibalpacheco/playoff-diagrams.git
-cd playoff-diagrams
+git clone https://github.com/anibalpacheco/matamata.git
+cd matamata
 python -m venv .venv && source .venv/bin/activate
 pip install -e .
 ```
 
 ### Rendering from the command line
 
-The package installs a `playoff-diagrams` command (also runnable as
-`python -m playoff_diagrams`). Point it at a [bracket document](format.md) to render
+The package installs a `matamata` command (also runnable as
+`python -m matamata`). Point it at a [knockout stage document](format.md) to render
 the SVG, to a file with `-o` or to stdout. For example, to render one of the
-repository's worked brackets, each way:
+repository's worked examples, each way:
 
 ```bash
 # via the installed command
-playoff-diagrams examples/knockout-8.json -o knockout.svg
+matamata examples/knockout-8.json -o knockout.svg
 
 # or via the module, writing to stdout
-python -m playoff_diagrams examples/knockout-8.json > knockout.svg
+python -m matamata examples/knockout-8.json > knockout.svg
 ```
 
-Open the resulting `.svg` in a browser to view the bracket.
+Open the resulting `.svg` in a browser to view the schedule.
 
 ### Rendering from Python
 
 ```python
-from playoff_diagrams import load_bracket, render_svg
+from matamata import load_stage, render_svg
 
-svg = render_svg(load_bracket("examples/knockout-8.json"))
+svg = render_svg(load_stage("examples/knockout-8.json"))
 ```
 
-`parse_bracket` does the same from an already-loaded dict. In a web app the SVG is the
+`parse_stage` does the same from an already-loaded dict. In a web app the SVG is the
 response body — e.g. a Django view:
 
 ```python
 from django.http import HttpResponse
-from playoff_diagrams import parse_bracket, render_svg
+from matamata import parse_stage, render_svg
 
-def bracket_svg(request, championship):
-    svg = render_svg(parse_bracket(championship.bracket_json))
+def knockout_stage_svg(request, championship):
+    svg = render_svg(parse_stage(championship.knockout_stage_json))
     return HttpResponse(svg, content_type="image/svg+xml")
 ```
 
-## The `PlayoffDiagram` class
+## The `KnockoutStage` class
 
-The operation helpers live on one class, `PlayoffDiagram`: subclass it to resolve
+The operation helpers live on one class, `KnockoutStage`: subclass it to resolve
 match references against your own data, and call its `apply_results` to write incoming
 results onto the stored document.
 
@@ -80,16 +80,16 @@ results onto the stored document.
 The renderer never computes results: the winner of a match is its explicit `winner`
 field, and an advancing team is whatever `team1`/`team2` the document records on a match.
 To feed live data from your own database instead of (or on top of) the JSON, subclass
-`PlayoffDiagram`. Whenever a leg carries a `ref`, `get_match(ref)` is called with it; you
+`KnockoutStage`. Whenever a leg carries a `ref`, `get_match(ref)` is called with it; you
 return that one game as a flat dict, local first (`team1`/`goals1`, `team2`/`goals2`). The
 tournament name and season can also be supplied dynamically:
 
 ```python
-from playoff_diagrams import PlayoffDiagram
+from matamata import KnockoutStage
 
-class ChampionshipDiagram(PlayoffDiagram):
+class ChampionshipDiagram(KnockoutStage):
     def __init__(self, championship):
-        super().__init__(championship.bracket_json)
+        super().__init__(championship.knockout_stage_json)
         self._championship = championship
 
     def get_match(self, ref):
@@ -105,15 +105,15 @@ class ChampionshipDiagram(PlayoffDiagram):
     def get_season(self):
         return str(self._championship.year)
 
-def bracket_svg(request, championship):
+def knockout_stage_svg(request, championship):
     svg = ChampionshipDiagram(championship).render()
     return HttpResponse(svg, content_type="image/svg+xml")
 ```
 
 `get_match` returns only what it has — any of `team1`/`goals1`/`pen1` and their `2`
 counterparts; a returned `None` leaves that leg as the document defines it. Where a side
-has no team yet, the resolved name is filled in from the live game while the bracket
-connector (`winnerof1`/`winnerof2`) is kept.
+has no team yet, the resolved name is filled in from the live game while the
+advancement connector (`winnerof1`/`winnerof2`) is kept.
 
 The document's display preferences are available to the hooks as `self.render_config`,
 so `get_match` can, for instance, read `self.render_config.max_label_chars` and return
@@ -121,18 +121,18 @@ already-shortened names. Long-named cups can raise that limit (it defaults to `2
 the document's `render` object.
 
 For a runnable example of this integration, see `examples/libertadores_host.py` —
-it resolves the refs of the Copa Libertadores bracket against a JSON lookup table,
+it resolves the refs of the Copa Libertadores example against a JSON lookup table,
 and includes the instructions to run it and watch it work.
 
 ### The `apply_results` method
 
 When a game finishes (or while it is being played), write its result onto the document
-with `apply_results` and persist what it returns — the structure of the bracket never
+with `apply_results` and persist what it returns — the structure of the knockout stage never
 changes, only the JSON field does:
 
 ```python
-diagram = PlayoffDiagram(championship.bracket_json)
-championship.bracket_json = diagram.apply_results(
+diagram = KnockoutStage(championship.knockout_stage_json)
+championship.knockout_stage_json = diagram.apply_results(
     {"id": "sf1", "leg": 2, "goals1": 0, "goals2": 3}
 )
 championship.save()
@@ -216,9 +216,9 @@ wins 4–2. That is one result dict — scores are tie-oriented, so `goals1`/`pe
 to the match's top side (Real Madrid) no matter where the game was played:
 
 ```python
-from playoff_diagrams import PlayoffDiagram
+from matamata import KnockoutStage
 
-diagram = PlayoffDiagram(document)
+diagram = KnockoutStage(document)
 updated = diagram.apply_results(
     {"id": "sf1", "leg": 2, "goals1": 0, "goals2": 1, "pen1": 4, "pen2": 2}
 )
@@ -293,6 +293,6 @@ pip install -e ".[dev]"
 pytest
 ```
 
-The suite includes golden (snapshot) SVG tests: each example bracket is rendered and
+The suite includes golden (snapshot) SVG tests: each example document is rendered and
 compared against a versioned reference SVG under `tests/golden/`. This catches visual
 regressions without a browser.

@@ -1,9 +1,9 @@
-"""Command-line entry point: render a bracket JSON document to SVG.
+"""Command-line entry point: render a knockout stage JSON document to SVG.
 
 Usage::
 
-    playoff-diagrams examples/libertadores-2026.json -o out.svg
-    python -m playoff_diagrams examples/knockout-8.json > out.svg
+    matamata examples/libertadores-2026.json -o out.svg
+    python -m matamata examples/knockout-8.json > out.svg
 """
 
 from __future__ import annotations
@@ -11,16 +11,16 @@ from __future__ import annotations
 import argparse
 import sys
 
-from .parse import BracketError, load_bracket
+from .parse import StageError, load_stage
 from .render import render_svg
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        prog="playoff-diagrams",
-        description="Render a football playoff bracket JSON document to SVG.",
+        prog="matamata",
+        description="Render a tournament knockout stage JSON document to SVG.",
     )
-    parser.add_argument("input", help="path to a bracket JSON document")
+    parser.add_argument("input", help="path to a knockout stage JSON document")
     parser.add_argument(
         "-o",
         "--output",
@@ -29,8 +29,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     try:
-        svg = render_svg(load_bracket(args.input))
-    except (BracketError, OSError, ValueError) as exc:
+        svg = render_svg(load_stage(args.input))
+    except (StageError, OSError, ValueError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
 

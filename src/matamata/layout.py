@@ -1,4 +1,4 @@
-"""Deterministic geometry for a single-elimination bracket.
+"""Deterministic geometry for a single-elimination knockout stage.
 
 Rounds become columns laid out left to right. Each match is a fixed-size box with a
 home row and an away row. A match in a later round is centered vertically between the
@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .model import Bracket, Match, Resolver, pens_of
+from .model import Match, Resolver, Stage, pens_of
 
 # Geometry constants (SVG user units).
 MARGIN_X = 20
@@ -93,15 +93,15 @@ def _side_view(resolver: Resolver, match: Match, side: str) -> SideView:
     )
 
 
-def compute_layout(bracket: Bracket) -> Layout:
-    resolver = Resolver(bracket)
-    bw = bracket.render.box_width
+def compute_layout(stage: Stage) -> Layout:
+    resolver = Resolver(stage)
+    bw = stage.render.box_width
     column_pitch = bw + H_GAP
     centers: dict[str, float] = {}
     placed: list[PlacedMatch] = []
     by_placed: dict[str, PlacedMatch] = {}
 
-    for r_index, rnd in enumerate(bracket.rounds):
+    for r_index, rnd in enumerate(stage.rounds):
         x = MARGIN_X + r_index * column_pitch
         for m_index, match in enumerate(rnd.matches):
             parents = [
@@ -124,13 +124,13 @@ def compute_layout(bracket: Bracket) -> Layout:
             placed.append(pm)
             by_placed[match.id] = pm
 
-    connectors = _connectors(bracket, by_placed, bw)
+    connectors = _connectors(stage, by_placed, bw)
     headers = [
         Header(name=rnd.name, cx=MARGIN_X + i * column_pitch + bw / 2)
-        for i, rnd in enumerate(bracket.rounds)
+        for i, rnd in enumerate(stage.rounds)
     ]
 
-    width = MARGIN_X * 2 + len(bracket.rounds) * bw + (len(bracket.rounds) - 1) * H_GAP
+    width = MARGIN_X * 2 + len(stage.rounds) * bw + (len(stage.rounds) - 1) * H_GAP
     height = max((pm.y + BOX_H for pm in placed), default=TOP) + MARGIN_BOTTOM
     return Layout(
         width=width,
@@ -143,10 +143,10 @@ def compute_layout(bracket: Bracket) -> Layout:
 
 
 def _connectors(
-    bracket: Bracket, by_placed: dict[str, PlacedMatch], bw: float
+    stage: Stage, by_placed: dict[str, PlacedMatch], bw: float
 ) -> list[Connector]:
     connectors: list[Connector] = []
-    for rnd in bracket.rounds:
+    for rnd in stage.rounds:
         for match in rnd.matches:
             child = by_placed[match.id]
             for side, slot in (("home", match.home), ("away", match.away)):

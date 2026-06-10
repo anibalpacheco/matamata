@@ -1,8 +1,8 @@
-# Playoff bracket source format
+# Knockout stage source format
 
-This document specifies the JSON "language" used to describe a football playoff
-bracket. A document of this format is the single source of truth from which an SVG
-diagram is rendered.
+This document specifies the JSON "language" used to describe a tournament knockout
+stage. A document of this format is the single source of truth from which an SVG
+schedule is rendered.
 
 The canonical, machine-checkable definition is [`schema.json`](schema.json). This
 prose document explains intent and the rules a renderer must implement.
@@ -19,7 +19,7 @@ prose document explains intent and the rules a renderer must implement.
 ```
 
 `rounds` are ordered from the earliest round to the final. The order is significant:
-it determines the columns of the bracket, left to right.
+it determines the columns of the schedule, left to right.
 
 `tournament` and `season` are optional in the document because a host system may want
 to supply them dynamically at render time (e.g. from the championship entity) rather
@@ -59,14 +59,14 @@ Each side always shows the goals of every played leg in order, e.g. `2 0` for a 
 
 ## Match
 
-A match is one bracket node: two sides plus an optional result. The two sides are
+A match is one node in the knockout stage: two sides plus an optional result. The two sides are
 numbered — **`1` is the top side, `2` the bottom** — and every side field follows that
 numbering. There are no `home`/`away` objects.
 
 ```jsonc
 {
   "id": "sf1",            // required, unique within the document
-  "winnerof1": "qf1",     // optional, side 1 is the winner of another match (bracket link)
+  "winnerof1": "qf1",     // optional, side 1 is the winner of another match (advancement link)
   "winnerof2": "qf2",     // optional, same for side 2
   "team1": "Flamengo",    // optional, a known/advancing team on side 1 (with id1)
   "team2": "River Plate", // optional, same for side 2
@@ -77,7 +77,7 @@ numbering. There are no `home`/`away` objects.
 ```
 
 - `id` — internal identifier, referenced by `winnerof1`/`winnerof2`. Not a display value.
-- `winnerof1`/`winnerof2` — explicit bracket connections: each must reference the `id` of
+- `winnerof1`/`winnerof2` — explicit advancement links: each must reference the `id` of
   another match. References must not form a cycle. They draw the connector and, while
   unresolved, show a placeholder ("Winner QF1").
 - `team1`/`team2` (optional `id1`/`id2`) — a side's known team: an entrant, or the team
@@ -141,7 +141,7 @@ result-application helper below.
 ## Host integration (non-normative)
 
 A leg's `ref` lets a host system inject live data. When using the Python renderer's
-`PlayoffDiagram` class, override `get_match(ref)` to return that one game as a flat dict
+`KnockoutStage` class, override `get_match(ref)` to return that one game as a flat dict
 in the same shape as a self-contained leg — `team1`/`goals1`/`team2`/`goals2` (local
 first), with optional `pen1`/`pen2` and `id1`/`id2`. Return only what you have; the
 renderer fills the leg's scores and, where a side has no team yet, its name — keeping any
@@ -150,9 +150,9 @@ dynamically.
 
 ## Applying results (non-normative)
 
-`PlayoffDiagram.apply_results(results, settle=True)` is the document-maintenance
+`KnockoutStage.apply_results(results, settle=True)` is the document-maintenance
 helper: it writes played results onto the JSON in place, so a host updates the stored
-bracket without touching its structure. `results` is one dict or a list of dicts, each
+document without touching its structure. `results` is one dict or a list of dicts, each
 carrying the scores of one leg — `goals1`/`goals2`, optional `pen1`/`pen2`,
 **tie-oriented** (`1` = the match's top side) — plus exactly one way to find that leg:
 
@@ -175,7 +175,7 @@ match carrying `"settle": false` is never settled, whatever the call says.
 
 ## Rendering notes (non-normative)
 
-- Layout is deterministic: rounds map to columns left-to-right; within the bracket,
+- Layout is deterministic: rounds map to columns left-to-right; within the tree,
   a match in round *n+1* is drawn vertically centered between the two matches it
   consumes (resolved via `winnerof1`/`winnerof2`).
 - An unresolved side displays the team that advanced when known, otherwise the

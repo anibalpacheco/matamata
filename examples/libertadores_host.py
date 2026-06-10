@@ -1,4 +1,4 @@
-"""Example host integration for the Copa Libertadores bracket.
+"""Example host integration for the Copa Libertadores knockout stage.
 
 In ``libertadores-2026.json`` the first tie's legs carry only a ``ref`` (the id of the
 real game) instead of inline scores. This module plays the part of the host system that
@@ -7,7 +7,7 @@ resolves those refs: :class:`LibertadoresDiagram` reads the games from a sibling
 flat game dict (``team1``/``goals1``/``team2``/``goals2``, local first). In a real
 deployment that lookup would be a database query.
 
-Run it to render the host-resolved bracket to SVG on stdout::
+Run it to render the host-resolved knockout stage to SVG on stdout::
 
     PYTHONPATH=src python examples/libertadores_host.py > libertadores.svg
 """
@@ -18,9 +18,9 @@ import json
 import os
 from typing import Optional
 
-from playoff_diagrams import PlayoffDiagram
-from playoff_diagrams.diagram import GameData
-from playoff_diagrams.model import Id
+from matamata import KnockoutStage
+from matamata.diagram import GameData
+from matamata.model import Id
 
 _HERE = os.path.dirname(__file__)
 DOCUMENT = os.path.join(_HERE, "libertadores-2026.json")
@@ -32,7 +32,7 @@ def _load_json(path: str) -> dict:
         return json.load(fh)
 
 
-class LibertadoresDiagram(PlayoffDiagram):
+class LibertadoresDiagram(KnockoutStage):
     """Resolves each leg's ``ref`` against ``example_data.json``."""
 
     def __init__(self, document: Optional[dict] = None) -> None:

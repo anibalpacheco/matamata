@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/playoff-diagrams/docs/schema.json",
-  "title": "Playoff bracket source document",
+  "$id": "https://github.com/matamata/docs/schema.json",
+  "title": "Knockout stage source document",
   "type": "object",
   "required": ["rounds"],
   "additionalProperties": false,
@@ -49,7 +49,7 @@
       "type": "object",
       "required": ["id"],
       "additionalProperties": false,
-      "comment": "two sides, 1 = top, 2 = bottom; winnerof{n} wires the bracket, team{n} names a known side",
+      "comment": "two sides, 1 = top, 2 = bottom; winnerof{n} wires advancement, team{n} names a known side",
       "properties": {
         "id": { "type": "string", "minLength": 1 },
         "winnerof1": { "type": "string", "minLength": 1 },
@@ -65,7 +65,7 @@
         "winner": { "enum": [1, 2] },
         "settle": {
           "const": false,
-          "comment": "opts this match out of PlayoffDiagram.apply_results' settling"
+          "comment": "opts this match out of KnockoutStage.apply_results' settling"
         }
       }
     },

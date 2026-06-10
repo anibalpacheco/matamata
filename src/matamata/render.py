@@ -1,4 +1,4 @@
-"""Turn a bracket into an SVG string using the deterministic layout.
+"""Turn a knockout stage into an SVG string using the deterministic layout.
 
 The output is a self-contained ``<svg>`` document. Styling is driven by CSS classes so
 the diagram can be themed by the host page; sensible defaults are embedded.
@@ -9,7 +9,7 @@ from __future__ import annotations
 from xml.sax.saxutils import escape
 
 from .layout import BOX_H, ROW_H, Layout, PlacedMatch, SideView, compute_layout
-from .model import Bracket
+from .model import Stage
 
 _LABEL_PAD = 10
 _SCORE_PAD = 8
@@ -71,7 +71,7 @@ def _match(out: list[str], pm: PlacedMatch, max_chars: int, box_w: float) -> Non
     _row(out, pm, pm.away, mid, max_chars, box_w)
 
 
-def render_layout(bracket: Bracket, layout: Layout) -> str:
+def render_layout(stage: Stage, layout: Layout) -> str:
     out: list[str] = []
     out.append(
         f'<svg xmlns="http://www.w3.org/2000/svg" '
@@ -85,13 +85,12 @@ def render_layout(bracket: Bracket, layout: Layout) -> str:
         f'height="{layout.height:.0f}"/>'
     )
 
-    title = escape(bracket.tournament)
+    title = escape(stage.tournament)
     out.append(f'<text class="pd-title" x="20" y="28">{title}</text>')
-    if bracket.season:
-        x = 20 + round(len(bracket.tournament) * 10.5) + 14
+    if stage.season:
+        x = 20 + round(len(stage.tournament) * 10.5) + 14
         out.append(
-            f'<text class="pd-season" x="{x}" y="28">'
-            f"{escape(bracket.season)}</text>"
+            f'<text class="pd-season" x="{x}" y="28">' f"{escape(stage.season)}</text>"
         )
 
     for header in layout.headers:
@@ -105,12 +104,12 @@ def render_layout(bracket: Bracket, layout: Layout) -> str:
         out.append(f'<path class="pd-link" d="{d}"/>')
 
     for pm in layout.matches:
-        _match(out, pm, bracket.render.max_label_chars, layout.box_width)
+        _match(out, pm, stage.render.max_label_chars, layout.box_width)
 
     out.append("</svg>")
     return "\n".join(out)
 
 
-def render_svg(bracket: Bracket) -> str:
-    """Render ``bracket`` to a self-contained SVG document string."""
-    return render_layout(bracket, compute_layout(bracket))
+def render_svg(stage: Stage) -> str:
+    """Render the knockout stage to a self-contained SVG document string."""
+    return render_layout(stage, compute_layout(stage))

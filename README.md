@@ -1,28 +1,28 @@
-# playoff-diagrams
+# matamata
 
-[![CI](https://github.com/anibalpacheco/playoff-diagrams/actions/workflows/ci.yml/badge.svg)](https://github.com/anibalpacheco/playoff-diagrams/actions/workflows/ci.yml)
+[![CI](https://github.com/anibalpacheco/matamata/actions/workflows/ci.yml/badge.svg)](https://github.com/anibalpacheco/matamata/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Render a football (soccer) **playoff bracket** as an **SVG**, from a document in a
+Render a football (soccer) **knockout stage** as an **SVG**, from a document in a
 small **JSON "language"**.
 
-**playoff-diagrams** also lets a host system map documents representing championship
-playoffs onto its own business objects (e.g. a Championship or Cup entity) and persist
+**matamata** also lets a host system map documents representing championship
+knockout stages onto its own business objects (e.g. a Championship or Cup entity) and persist
 them apart from any presentation concern — updating results means editing a document,
 never the code.
 
 Example rendered from
 [`examples/libertadores-2026.json`](examples/libertadores-2026.json):
 
-![Copa Libertadores 2026 bracket](docs/libertadores-2026.png)
+![Copa Libertadores 2026 knockout stage](docs/libertadores-2026.png)
 
 ## Quickstart
 
 Requires Python ≥ 3.10. No runtime dependencies.
 
 ```bash
-git clone https://github.com/anibalpacheco/playoff-diagrams.git
-cd playoff-diagrams
+git clone https://github.com/anibalpacheco/matamata.git
+cd matamata
 python -m venv .venv && source .venv/bin/activate
 pip install -e .
 ```
@@ -31,55 +31,55 @@ Render a self-contained example to an SVG file:
 
 ```bash
 # via the installed command
-playoff-diagrams examples/knockout-8.json -o knockout.svg
+matamata examples/knockout-8.json -o knockout.svg
 
 # or via the module, writing to stdout
-python -m playoff_diagrams examples/knockout-8.json > knockout.svg
+python -m matamata examples/knockout-8.json > knockout.svg
 ```
 
-Open the resulting `.svg` in a browser to view the bracket. To render your own cup,
+Open the resulting `.svg` in a browser to view the schedule. To render your own cup,
 point the command at any JSON file that follows [`docs/format.md`](docs/format.md).
 
 Use it from Python:
 
 ```python
-from playoff_diagrams import load_bracket, render_svg
+from matamata import load_stage, render_svg
 
-svg = render_svg(load_bracket("examples/knockout-8.json"))
+svg = render_svg(load_stage("examples/knockout-8.json"))
 ```
 
 To use it in your own project instead, install straight from GitHub:
 
 ```bash
-pip install git+https://github.com/anibalpacheco/playoff-diagrams.git
+pip install git+https://github.com/anibalpacheco/matamata.git
 ```
 
 ## Examples
 
-Both example brackets are rendered from the JSON files in [`examples/`](examples/).
+Both examples are rendered from the JSON files in [`examples/`](examples/).
 
-The Copa Libertadores bracket above shows two-legged ties — each leg's goals are
+The Copa Libertadores example above shows two-legged ties — each leg's goals are
 shown, shootouts appear in parentheses, and the winner of each tie is emphasized. The
 first quarterfinal is **host-resolved**: its legs carry only a `ref`, so its teams and
 scores come from `get_match` (see
 [`examples/libertadores_host.py`](examples/libertadores_host.py)) rather than from the
 document. Played ties take their team names from the legs; the final is a single match —
-one leg, so just one goal figure per side — with its `winnerof` links carrying the
-bracket.
+one leg, so just one goal figure per side — with its `winnerof` links wiring the
+advancement tree.
 
 Single matches ([`knockout-8.json`](examples/knockout-8.json)) — one goal figure per
 side, with shootouts in parentheses. Sides that have not been resolved yet fall back to
 placeholders such as "Winner SF2":
 
-![World Cup bracket](docs/knockout-8.png)
+![World Cup knockout stage](docs/knockout-8.png)
 
 ## The format
 
-The bracket is plain JSON, so any system can store and exchange it natively, and the
-language is designed so a bracket node can evolve from a **placeholder** (e.g. "winner
+The document is plain JSON, so any system can store and exchange it natively, and the
+language is designed so a match can evolve from a **placeholder** (e.g. "winner
 of QF1") into a **reference to a real match entity** — each leg can carry a `ref` to
-the real game, resolved dynamically by the host — without changing the language. A
-bracket is essentially a tree, so its layout is **deterministic**: coordinates are
+the real game, resolved dynamically by the host — without changing the language. The
+advancement tree is laid out **deterministically**: coordinates are
 computed directly and the SVG is emitted as a string, with no layout engine and no
 heavy dependencies.
 
@@ -114,7 +114,7 @@ Minimal example:
 
 [docs/index.md](docs/index.md) is the manual: rendering from the CLI and from Python
 (e.g. a Django view), feeding live data from your own database through
-`PlayoffDiagram`, updating the stored bracket with `apply_results` — including a
+`KnockoutStage`, updating the stored document with `apply_results` — including a
 before/after walkthrough of one call — and running the test suite.
 
 ## Status

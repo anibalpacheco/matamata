@@ -1,13 +1,13 @@
-"""Unit tests for parsing, display helpers and the PlayoffDiagram hooks."""
+"""Unit tests for parsing, display helpers and the KnockoutStage hooks."""
 
 import json
 import os
 
 import pytest
 
-from playoff_diagrams import PlayoffDiagram, parse_bracket
-from playoff_diagrams.model import Leg, Match, Pens, Resolver, Slot, aggregate
-from playoff_diagrams.parse import BracketError, validate_document
+from matamata import KnockoutStage, parse_stage
+from matamata.model import Leg, Match, Pens, Resolver, Slot, aggregate
+from matamata.parse import StageError, validate_document
 
 EXAMPLES = os.path.join(os.path.dirname(__file__), "..", "examples")
 
@@ -74,8 +74,8 @@ def test_unknown_reference_is_rejected():
             },
         ],
     }
-    with pytest.raises(BracketError):
-        parse_bracket(data)
+    with pytest.raises(StageError):
+        parse_stage(data)
 
 
 def test_ref_leg_keeps_its_baked_result():
@@ -90,17 +90,17 @@ def test_ref_leg_keeps_its_baked_result():
             }
         ],
     }
-    leg = parse_bracket(data).matches_by_id()["f"].legs[0]
+    leg = parse_stage(data).matches_by_id()["f"].legs[0]
     assert leg.ref == 7
     assert (leg.home, leg.away) == (2, 1)
 
 
 def test_get_match_wins_over_a_baked_result():
-    class D(PlayoffDiagram):
+    class D(KnockoutStage):
         def get_match(self, ref):
             return {"goals1": 3, "goals2": 0}
 
-    bracket = D(
+    stage = D(
         {
             "rounds": [
                 {
@@ -112,7 +112,7 @@ def test_get_match_wins_over_a_baked_result():
             ]
         }
     ).build()
-    leg = bracket.matches_by_id()["f"].legs[0]
+    leg = stage.matches_by_id()["f"].legs[0]
     assert (leg.home, leg.away) == (3, 0)
 
 
@@ -127,7 +127,7 @@ def test_partial_leg_parses_as_unplayed():
             }
         ]
     }
-    match = parse_bracket(data).matches_by_id()["f"]
+    match = parse_stage(data).matches_by_id()["f"]
     assert [leg.played for leg in match.legs] == [False, False]
     assert match.home.team == "A"
 
@@ -149,7 +149,7 @@ def test_nameless_leg_is_tie_oriented():
             }
         ]
     }
-    match = parse_bracket(data).matches_by_id()["f"]
+    match = parse_stage(data).matches_by_id()["f"]
     assert (match.home.team, match.away.team) == ("A", "B")
     assert (match.legs[0].home, match.legs[0].away) == (1, 0)
 
@@ -172,7 +172,7 @@ def test_named_leg_orients_against_match_level_teams():
             }
         ]
     }
-    leg = parse_bracket(data).matches_by_id()["f"].legs[0]
+    leg = parse_stage(data).matches_by_id()["f"].legs[0]
     assert (leg.home, leg.away) == (0, 1)
 
 
@@ -184,13 +184,13 @@ def test_settle_admits_only_false():
             ]
         }
 
-    assert parse_bracket(doc(False)).matches_by_id()["f"].settle is False
-    with pytest.raises(BracketError, match="settle"):
-        parse_bracket(doc(True))
+    assert parse_stage(doc(False)).matches_by_id()["f"].settle is False
+    with pytest.raises(StageError, match="settle"):
+        parse_stage(doc(True))
 
 
 def test_tournament_is_optional():
-    bracket = parse_bracket(
+    stage = parse_stage(
         {
             "rounds": [
                 {
@@ -200,11 +200,11 @@ def test_tournament_is_optional():
             ]
         }
     )
-    assert bracket.tournament == ""
+    assert stage.tournament == ""
 
 
 def test_render_option_defaults():
-    bracket = parse_bracket(
+    stage = parse_stage(
         {
             "tournament": "T",
             "rounds": [
@@ -215,12 +215,12 @@ def test_render_option_defaults():
             ],
         }
     )
-    assert bracket.render.max_label_chars == 22
-    assert bracket.render.box_width == 190
+    assert stage.render.max_label_chars == 22
+    assert stage.render.box_width == 190
 
 
 def test_box_width_widens_the_layout():
-    from playoff_diagrams.layout import compute_layout
+    from matamata.layout import compute_layout
 
     doc = {
         "rounds": [
@@ -230,22 +230,22 @@ def test_box_width_widens_the_layout():
             }
         ]
     }
-    narrow = compute_layout(parse_bracket(doc))
+    narrow = compute_layout(parse_stage(doc))
     doc["render"] = {"box_width": 300}
-    wide = compute_layout(parse_bracket(doc))
+    wide = compute_layout(parse_stage(doc))
     assert wide.box_width == 300
     assert wide.width > narrow.width
 
 
 def test_max_label_chars_truncates():
-    from playoff_diagrams.render import _truncate
+    from matamata.render import _truncate
 
     assert _truncate("Montevideo City Torque", 22) == "Montevideo City Torque"
     assert _truncate("Montevideo City Torque", 18) == "Montevideo City T…"
 
 
 def test_render_config_exposed_on_diagram():
-    diagram = PlayoffDiagram(
+    diagram = KnockoutStage(
         {
             "render": {"max_label_chars": 12},
             "rounds": [
@@ -260,7 +260,7 @@ def test_render_config_exposed_on_diagram():
 
 
 def test_score_text_shows_each_leg():
-    from playoff_diagrams.layout import _score_text
+    from matamata.layout import _score_text
 
     single = Match(id="m", home=Slot(team="H"), away=Slot(team="A"), legs=[Leg(3, 0)])
     assert _score_text(single, "home") == "3"
@@ -281,16 +281,16 @@ def test_score_text_shows_each_leg():
     assert _score_text(shoot, "away") == "1 0 (2)"
 
 
-# --- PlayoffDiagram hooks ---------------------------------------------------
+# --- KnockoutStage hooks ---------------------------------------------------
 
 
 def test_get_match_fills_a_single_leg():
-    class D(PlayoffDiagram):
+    class D(KnockoutStage):
         def get_match(self, ref):
             assert ref == 1001
             return {"team1": "Peñarol", "goals1": 2, "team2": "Nacional", "goals2": 1}
 
-    bracket = D(
+    stage = D(
         {
             "rounds": [
                 {
@@ -305,14 +305,14 @@ def test_get_match_fills_a_single_leg():
             ]
         }
     ).build()
-    final = bracket.matches_by_id()["f"]
+    final = stage.matches_by_id()["f"]
     assert final.home.team == "Peñarol"
     assert final.away.team == "Nacional"
     assert (final.legs[0].home, final.legs[0].away) == (2, 1)
 
 
 def test_get_match_fills_pens():
-    class D(PlayoffDiagram):
+    class D(KnockoutStage):
         def get_match(self, ref):
             return {
                 "team1": "A",
@@ -323,7 +323,7 @@ def test_get_match_fills_pens():
                 "pen2": 2,
             }
 
-    bracket = D(
+    stage = D(
         {
             "rounds": [
                 {
@@ -338,13 +338,13 @@ def test_get_match_fills_pens():
             ]
         }
     ).build()
-    leg = bracket.matches_by_id()["f"].legs[0]
+    leg = stage.matches_by_id()["f"].legs[0]
     assert leg.pens.home == 4 and leg.pens.away == 2
 
 
 def test_get_match_orients_second_leg_by_team():
     # Leg 2 is played at the visitor's venue: its local is the tie's away side.
-    class D(PlayoffDiagram):
+    class D(KnockoutStage):
         def get_match(self, ref):
             if ref == 1:
                 return {
@@ -355,7 +355,7 @@ def test_get_match_orients_second_leg_by_team():
                 }
             return {"team1": "Nacional", "goals1": 0, "team2": "Peñarol", "goals2": 0}
 
-    bracket = D(
+    stage = D(
         {
             "rounds": [
                 {
@@ -370,18 +370,18 @@ def test_get_match_orients_second_leg_by_team():
             ]
         }
     ).build()
-    m = bracket.matches_by_id()["f"]
+    m = stage.matches_by_id()["f"]
     assert m.home.team == "Peñarol" and m.away.team == "Nacional"
     # Both legs are stored in tie orientation: Peñarol then Nacional.
     assert [(leg.home, leg.away) for leg in m.legs] == [(2, 1), (0, 0)]
 
 
 def test_get_match_returning_none_leaves_the_leg():
-    class D(PlayoffDiagram):
+    class D(KnockoutStage):
         def get_match(self, ref):
             return None
 
-    bracket = D(
+    stage = D(
         {
             "rounds": [
                 {
@@ -396,18 +396,18 @@ def test_get_match_returning_none_leaves_the_leg():
             ]
         }
     ).build()
-    assert bracket.matches_by_id()["f"].legs[0].played is False
+    assert stage.matches_by_id()["f"].legs[0].played is False
 
 
 def test_tournament_and_season_overrides():
-    class D(PlayoffDiagram):
+    class D(KnockoutStage):
         def get_tournament(self):
             return "Copa Dinámica"
 
         def get_season(self):
             return "2027"
 
-    bracket = D(
+    stage = D(
         {
             "tournament": "Ignored",
             "rounds": [
@@ -418,8 +418,8 @@ def test_tournament_and_season_overrides():
             ],
         }
     ).build()
-    assert bracket.tournament == "Copa Dinámica"
-    assert bracket.season == "2027"
+    assert stage.tournament == "Copa Dinámica"
+    assert stage.season == "2027"
 
 
 def test_diagram_accepts_a_json_string():
@@ -434,7 +434,7 @@ def test_diagram_accepts_a_json_string():
             ],
         }
     )
-    assert PlayoffDiagram(doc).render().startswith("<svg")
+    assert KnockoutStage(doc).render().startswith("<svg")
 
 
 @pytest.mark.parametrize("name", ["libertadores-2026.json", "knockout-8.json"])

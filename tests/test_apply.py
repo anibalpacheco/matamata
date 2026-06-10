@@ -1,9 +1,9 @@
-"""Unit tests for PlayoffDiagram.apply_results: locating legs, writing, settling."""
+"""Unit tests for KnockoutStage.apply_results: locating legs, writing, settling."""
 
 import pytest
 
-from playoff_diagrams import PlayoffDiagram
-from playoff_diagrams.parse import BracketError, validate_document
+from matamata import KnockoutStage
+from matamata.parse import StageError, validate_document
 
 
 def doc():
@@ -39,14 +39,14 @@ def match_of(document, match_id):
 
 
 def test_apply_by_match_id_writes_leg_one():
-    out = PlayoffDiagram(doc()).apply_results(
+    out = KnockoutStage(doc()).apply_results(
         {"id": "s1", "goals1": 2, "goals2": 1}, settle=False
     )
     assert match_of(out, "s1")["legs"] == [{"goals1": 2, "goals2": 1}]
 
 
 def test_apply_by_ref_keeps_the_ref():
-    out = PlayoffDiagram(doc()).apply_results(
+    out = KnockoutStage(doc()).apply_results(
         {"ref": 901, "goals1": 1, "goals2": 1, "pen1": 4, "pen2": 2}, settle=False
     )
     assert match_of(out, "s2")["legs"][0] == {
@@ -59,14 +59,14 @@ def test_apply_by_ref_keeps_the_ref():
 
 
 def test_apply_creates_missing_legs():
-    out = PlayoffDiagram(doc()).apply_results(
+    out = KnockoutStage(doc()).apply_results(
         {"id": "s1", "leg": 2, "goals1": 0, "goals2": 3}, settle=False
     )
     assert match_of(out, "s1")["legs"] == [{}, {"goals1": 0, "goals2": 3}]
 
 
 def test_apply_overwrites_only_the_present_keys():
-    diagram = PlayoffDiagram(doc())
+    diagram = KnockoutStage(doc())
     diagram.apply_results(
         {"id": "s1", "goals1": 0, "goals2": 0, "pen1": 4, "pen2": 2}, settle=False
     )
@@ -80,7 +80,7 @@ def test_apply_overwrites_only_the_present_keys():
 
 
 def test_apply_accepts_a_list_mixing_both_forms():
-    out = PlayoffDiagram(doc()).apply_results(
+    out = KnockoutStage(doc()).apply_results(
         [
             {"id": "s1", "goals1": 2, "goals2": 1},
             {"ref": 902, "goals1": 0, "goals2": 0},
@@ -114,7 +114,7 @@ def test_writing_through_a_reversed_named_leg_flips_the_keys():
             }
         ]
     }
-    out = PlayoffDiagram(document).apply_results(
+    out = KnockoutStage(document).apply_results(
         {"id": "f", "leg": 2, "goals1": 0, "goals2": 3}, settle=False
     )
     assert match_of(out, "f")["legs"][1] == {
@@ -126,7 +126,7 @@ def test_writing_through_a_reversed_named_leg_flips_the_keys():
 
 
 def test_applied_document_still_renders():
-    diagram = PlayoffDiagram(doc())
+    diagram = KnockoutStage(doc())
     diagram.apply_results({"id": "s1", "goals1": 2, "goals2": 1})
     assert diagram.render().startswith("<svg")
 
@@ -147,29 +147,29 @@ def test_applied_document_still_renders():
     ],
 )
 def test_bad_results_are_rejected(bad):
-    with pytest.raises(BracketError):
-        PlayoffDiagram(doc()).apply_results(bad)
+    with pytest.raises(StageError):
+        KnockoutStage(doc()).apply_results(bad)
 
 
 def test_duplicated_ref_is_ambiguous():
     document = doc()
     match_of(document, "s2")["legs"][1]["ref"] = 901
-    with pytest.raises(BracketError, match="more than one"):
-        PlayoffDiagram(document).apply_results({"ref": 901, "goals1": 1, "goals2": 0})
+    with pytest.raises(StageError, match="more than one"):
+        KnockoutStage(document).apply_results({"ref": 901, "goals1": 1, "goals2": 0})
 
 
 # --- settling -----------------------------------------------------------------
 
 
 def test_settle_writes_winner_and_advances_the_team():
-    out = PlayoffDiagram(doc()).apply_results({"id": "s1", "goals1": 2, "goals2": 1})
+    out = KnockoutStage(doc()).apply_results({"id": "s1", "goals1": 2, "goals2": 1})
     assert match_of(out, "s1")["winner"] == 1
     final = match_of(out, "f")
     assert final["team1"] == "Peñarol" and final["id1"] == 10
 
 
 def test_settle_decides_a_tie_by_penalties():
-    out = PlayoffDiagram(doc()).apply_results(
+    out = KnockoutStage(doc()).apply_results(
         {"id": "s1", "goals1": 0, "goals2": 0, "pen1": 2, "pen2": 4}
     )
     assert match_of(out, "s1")["winner"] == 2
@@ -177,7 +177,7 @@ def test_settle_decides_a_tie_by_penalties():
 
 
 def test_settle_aggregates_every_leg():
-    out = PlayoffDiagram(doc()).apply_results(
+    out = KnockoutStage(doc()).apply_results(
         [
             {"id": "s1", "goals1": 0, "goals2": 2},
             {"id": "s1", "leg": 2, "goals1": 3, "goals2": 0},
@@ -192,13 +192,13 @@ def test_settle_clears_a_no_longer_decided_match():
     final = match_of(document, "f")
     final["team1"] = "Peñarol"
     final["id1"] = 10
-    out = PlayoffDiagram(document).apply_results({"id": "s1", "goals1": 1, "goals2": 1})
+    out = KnockoutStage(document).apply_results({"id": "s1", "goals1": 1, "goals2": 1})
     assert "winner" not in match_of(out, "s1")
     assert "team1" not in match_of(out, "f") and "id1" not in match_of(out, "f")
 
 
 def test_reapplying_flips_winner_and_consumer():
-    diagram = PlayoffDiagram(doc())
+    diagram = KnockoutStage(doc())
     diagram.apply_results({"id": "s1", "goals1": 2, "goals2": 1})
     out = diagram.apply_results({"id": "s1", "goals1": 0})
     assert match_of(out, "s1")["winner"] == 2
@@ -207,7 +207,7 @@ def test_reapplying_flips_winner_and_consumer():
 
 
 def test_settle_false_call_leaves_winner_alone():
-    out = PlayoffDiagram(doc()).apply_results(
+    out = KnockoutStage(doc()).apply_results(
         {"id": "s1", "goals1": 2, "goals2": 1}, settle=False
     )
     assert "winner" not in match_of(out, "s1")
@@ -216,12 +216,12 @@ def test_settle_false_call_leaves_winner_alone():
 def test_settle_false_in_the_document_opts_the_match_out():
     document = doc()
     match_of(document, "s1")["settle"] = False
-    out = PlayoffDiagram(document).apply_results({"id": "s1", "goals1": 2, "goals2": 1})
+    out = KnockoutStage(document).apply_results({"id": "s1", "goals1": 2, "goals2": 1})
     assert "winner" not in match_of(out, "s1")
 
 
 def test_settle_sees_what_get_match_would_show():
-    class D(PlayoffDiagram):
+    class D(KnockoutStage):
         def get_match(self, ref):
             return (
                 {"goals1": 5, "goals2": 0} if ref == 901 else {"goals1": 0, "goals2": 0}
@@ -238,7 +238,7 @@ def test_settle_sees_what_get_match_would_show():
 
 def test_schema_accepts_the_maintained_document_shapes():
     pytest.importorskip("jsonschema")
-    document = PlayoffDiagram(doc()).apply_results(
+    document = KnockoutStage(doc()).apply_results(
         [
             {"id": "s1", "leg": 2, "goals1": 1, "goals2": 0},
             {"ref": 901, "goals1": 1, "goals2": 1, "pen1": 4, "pen2": 2},

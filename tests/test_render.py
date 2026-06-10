@@ -13,22 +13,22 @@ import os
 
 import pytest
 
-from playoff_diagrams import load_bracket, render_svg
+from matamata import load_stage, render_svg
 
 EXAMPLES = os.path.join(os.path.dirname(__file__), "..", "examples")
 GOLDEN = os.path.join(os.path.dirname(__file__), "golden")
 
 # libertadores-2026.json is host-resolved (one tie carries refs), so it is rendered
 # through its example host (see the libertadores_diagram fixture) rather than the base
-# loader; example_data.json is that host's lookup table, not a bracket document.
+# loader; example_data.json is that host's lookup table, not a knockout stage document.
 HOST_EXAMPLE = "libertadores-2026.json"
-NON_BRACKET = {HOST_EXAMPLE, "example_data.json"}
+NON_STAGE = {HOST_EXAMPLE, "example_data.json"}
 EXAMPLE_FILES = sorted(
     name
     for name in (
         os.path.basename(p) for p in glob.glob(os.path.join(EXAMPLES, "*.json"))
     )
-    if name not in NON_BRACKET
+    if name not in NON_STAGE
 )
 
 
@@ -59,12 +59,12 @@ def _assert_well_formed(svg: str) -> None:
 
 @pytest.mark.parametrize("name", EXAMPLE_FILES)
 def test_svg_matches_golden(name):
-    _assert_golden(render_svg(load_bracket(os.path.join(EXAMPLES, name))), name)
+    _assert_golden(render_svg(load_stage(os.path.join(EXAMPLES, name))), name)
 
 
 @pytest.mark.parametrize("name", EXAMPLE_FILES)
 def test_svg_is_well_formed(name):
-    _assert_well_formed(render_svg(load_bracket(os.path.join(EXAMPLES, name))))
+    _assert_well_formed(render_svg(load_stage(os.path.join(EXAMPLES, name))))
 
 
 def test_host_example_matches_golden(libertadores_diagram):
