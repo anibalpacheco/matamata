@@ -1,4 +1,5 @@
-"""Render a tournament knockout stage as an SVG from a JSON source document."""
+"""Model tournament knockout stages in JSON format and render the schedule in SVG
+or html table format."""
 
 from .diagram import KnockoutStage
 from .model import Leg, Match, Pens, Round, Slot, Stage

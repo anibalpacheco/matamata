@@ -3,7 +3,8 @@
 **matamata** is a tool in three parts: the definition of a small JSON language
 for describing a tournament knockout stage (written down in [the spec](format.md), with
 a machine-checkable [JSON Schema](schema.json)); a Python package that renders a
-document in that language into an SVG, deterministically and with no dependencies; and
+document in that language into the schedule — SVG or HTML table format —
+deterministically and with no dependencies; and
 the `KnockoutStage` class, which models the knockout stage itself — the object everything
 else is done through.
 

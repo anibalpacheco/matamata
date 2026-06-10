@@ -1,4 +1,7 @@
 site_name: matamata
+site_description: >-
+  Model tournament knockout stages in JSON format and render the schedule in
+  SVG or html table format
 repo_url: https://github.com/anibalpacheco/matamata
 edit_uri: blob/main/docs/
 

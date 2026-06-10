@@ -1,8 +1,8 @@
 # Knockout stage source format
 
 This document specifies the JSON "language" used to describe a tournament knockout
-stage. A document of this format is the single source of truth from which an SVG
-schedule is rendered.
+stage. A document of this format is the single source of truth from which the
+schedule is rendered (in SVG or HTML table format).
 
 The canonical, machine-checkable definition is [`schema.json`](schema.json). This
 prose document explains intent and the rules a renderer must implement.

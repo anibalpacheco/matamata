@@ -3,8 +3,8 @@
 [![CI](https://github.com/anibalpacheco/matamata/actions/workflows/ci.yml/badge.svg)](https://github.com/anibalpacheco/matamata/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Render a football (soccer) **knockout stage** as an **SVG**, from a document in a
-small **JSON "language"**.
+Model a **tournament knockout stage** in a small **JSON "language"** and render
+the schedule in **SVG** or **HTML table** format.
 
 **matamata** also lets a host system map documents representing championship
 knockout stages onto its own business objects (e.g. a Championship or Cup entity) and persist
