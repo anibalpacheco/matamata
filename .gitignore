@@ -34,5 +34,8 @@ htmlcov/
 !docs/*.png
 !tests/golden/*.svg
 
+# MkDocs build output (`mkdocs serve` / `mkdocs build`)
+/site/
+
 # Local, unversioned scratch space (personal notes, drafts — never committed)
 /.local/

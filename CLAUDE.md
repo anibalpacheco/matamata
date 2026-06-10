@@ -17,7 +17,7 @@ maintained. The renderer turns the JSON into an SVG deterministically.
 - **Source format: JSON** (e.g. Postgres `JSONB`). Chosen over a custom DSL and over
   Graphviz `.dot` because of native database support and because a bracket node can
   evolve from a *placeholder* into a *reference to a business match entity* without
-  changing the language. See `spec/format.md`.
+  changing the language. See `docs/format.md`.
 - **Implementation language: Python.**
 - **Flat 1/2 sides.** A match has no `home`/`away` objects: its two sides are numbered
   (`1` = top, `2` = bottom) and every side field follows the numbering — `team1`/`team2`,
@@ -66,9 +66,11 @@ maintained. The renderer turns the JSON into an SVG deterministically.
 
 ## Language / spec
 
-The authoritative description of the JSON "language" is **`spec/format.md`**, with a
-machine-checkable **`spec/schema.json`** (JSON Schema) and worked examples under
-**`examples/`**. If you change the language, update all three together.
+The authoritative description of the JSON "language" is **`docs/format.md`**, with a
+machine-checkable **`docs/schema.json`** (JSON Schema) and worked examples under
+**`examples/`**. If you change the language, update all three together. Both live in
+`docs/` so mkdocs serves them (the spec has its own nav entry; the schema is copied
+verbatim as a static file).
 
 ## Package layout (implemented)
 
@@ -90,8 +92,13 @@ examples/*.json   # worked brackets (also rendered into docs/)
 examples/libertadores_host.py  # demo PlayoffDiagram subclass: get_match reads
                   #   example_data.json (a ref->game lookup) for the host-resolved tie
 examples/example_data.json     # the host lookup table, NOT a bracket document
-docs/usage.md     # usage manual (CLI, Python, PlayoffDiagram, apply_results walkthrough)
+docs/index.md     # the manual, one file, grouped as Usage (install, CLI, Python) +
+                  #   The PlayoffDiagram class (live data, apply_results walkthrough) +
+                  #   Testing (split into files when it grows)
+docs/format.md    # the language spec (authoritative; see "Language / spec")
+docs/schema.json  # the JSON Schema (loaded by parse.validate_document)
 docs/*.png        # README/usage preview images (committed; see below)
+mkdocs.yml        # local docs preview: `mkdocs serve` (mkdocs is in the dev extra)
 ```
 
 `libertadores-2026.json` is **host-resolved**: its first tie's legs carry only a `ref`,
@@ -131,13 +138,37 @@ keep three things in sync:
    The host-resolved `libertadores-2026.json` can't go through the CLI; render it via its
    host instead: `PYTHONPATH=src python examples/libertadores_host.py > /tmp/x.svg`.
 
-`docs/usage.md` is the usage manual (the README only keeps the pitch, examples and
-quickstart, and links here). Its "Applying results" section ends in a before/after
-walkthrough with its own assets: `docs/apply-before.json` (hand-written),
-`docs/apply-after.json` (generated from it by `apply_results` — never edit by hand) and
-the two PNGs. The walkthrough's "Regenerating" subsection has the exact commands; rerun
-them when the library's output or the before document changes, and keep the inline JSON
-blocks in sync with the files.
+The manual is a single `docs/index.md` (the README only keeps the pitch, quickstart and
+examples, and links to it); split it into chapters only when there is enough material.
+The spec `docs/format.md` is a separate page with its own nav entry. Preview locally
+with `mkdocs serve`; every doc link must resolve there (`mkdocs build --strict` checks
+this), so don't link out of `docs/` — mention repo paths like `examples/` as plain
+code spans instead. `site/` is gitignored.
+The manual's `apply_results` section ends in a before/after walkthrough with its own
+assets: `docs/apply-before.json` (hand-written), `docs/apply-after.json` (generated
+from it by `apply_results` — never edit by hand) and the two PNGs. When the library's
+output or the before document changes, regenerate them with the commands below and
+keep the manual's inline JSON blocks in sync with the files:
+
+```bash
+PYTHONPATH=src python - <<'EOF'
+import json
+from playoff_diagrams import PlayoffDiagram
+
+with open("docs/apply-before.json", encoding="utf-8") as fh:
+    doc = json.load(fh)
+out = PlayoffDiagram(doc).apply_results(
+    {"id": "sf1", "leg": 2, "goals1": 0, "goals2": 1, "pen1": 4, "pen2": 2}
+)
+with open("docs/apply-after.json", "w", encoding="utf-8") as fh:
+    json.dump(out, fh, indent=2, ensure_ascii=False)
+    fh.write("\n")
+EOF
+PYTHONPATH=src python -m playoff_diagrams docs/apply-before.json -o /tmp/apply-before.svg
+PYTHONPATH=src python -m playoff_diagrams docs/apply-after.json -o /tmp/apply-after.svg
+rsvg-convert -z 2 /tmp/apply-before.svg -o docs/apply-before.png
+rsvg-convert -z 2 /tmp/apply-after.svg -o docs/apply-after.png
+```
 
 `.gitignore` ignores stray rendered `*.svg`/`*.png` but keeps `docs/*.png` and
 `tests/golden/*.svg`. A gitignored `/.local/` directory holds personal scratch notes

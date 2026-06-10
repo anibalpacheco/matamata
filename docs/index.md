@@ -1,18 +1,45 @@
-# Usage
+# Documentation
 
-How to put the library to work, from a one-off render to a host application that keeps
-its brackets up to date. For the JSON language itself see
-[the spec](../spec/format.md); for a first taste, the README's quickstart.
+**playoff-diagrams** is a tool in three parts: the definition of a small JSON language
+for describing a football playoff bracket, meant to live in a database field (written
+down in [the spec](format.md), with a machine-checkable
+[JSON Schema](schema.json)); a Python package that renders a document in that
+language into an SVG, deterministically and with no dependencies; and operation
+helpers on top — `PlayoffDiagram`, to resolve match references against the host's own
+database at render time, and `apply_results`, to write incoming results onto the
+stored document and settle their consequences.
 
-- [Rendering from the command line](#rendering-from-the-command-line)
-- [Rendering from Python](#rendering-from-python)
-- [Live data and dynamic titles: `PlayoffDiagram`](#live-data-and-dynamic-titles-playoffdiagram)
-- [Applying results: `apply_results`](#applying-results-apply_results)
+This manual covers how to put it to work, from a one-off render to a host application
+that keeps its brackets up to date, and how to run the test suite. Worked examples
+live in the repository's `examples/` directory; for a first taste, the README's
+quickstart.
 
-## Rendering from the command line
+## Usage
+
+### Installation
+
+A standard pip-installable package, requiring Python ≥ 3.10 and no runtime
+dependencies — install it into your project straight from GitHub:
+
+```bash
+pip install git+https://github.com/anibalpacheco/playoff-diagrams.git
+```
+
+To follow along with the worked examples below, use a source checkout instead:
+
+```bash
+git clone https://github.com/anibalpacheco/playoff-diagrams.git
+cd playoff-diagrams
+python -m venv .venv && source .venv/bin/activate
+pip install -e .
+```
+
+### Rendering from the command line
 
 The package installs a `playoff-diagrams` command (also runnable as
-`python -m playoff_diagrams`):
+`python -m playoff_diagrams`). Point it at a [bracket document](format.md) to render
+the SVG, to a file with `-o` or to stdout. For example, to render one of the
+repository's worked brackets, each way:
 
 ```bash
 # via the installed command
@@ -22,18 +49,9 @@ playoff-diagrams examples/knockout-8.json -o knockout.svg
 python -m playoff_diagrams examples/knockout-8.json > knockout.svg
 ```
 
-Open the resulting `.svg` in a browser to view the bracket. To render your own cup,
-point the command at any JSON file that follows [the spec](../spec/format.md).
+Open the resulting `.svg` in a browser to view the bracket.
 
-The CLI renders self-contained documents. A document with host-resolved legs (a `ref`
-with no host attached) shows those legs as not played; the Copa Libertadores example is
-like that, so it is rendered through its example host instead:
-
-```bash
-PYTHONPATH=src python examples/libertadores_host.py > libertadores.svg
-```
-
-## Rendering from Python
+### Rendering from Python
 
 ```python
 from playoff_diagrams import load_bracket, render_svg
@@ -53,19 +71,13 @@ def bracket_svg(request, championship):
     return HttpResponse(svg, content_type="image/svg+xml")
 ```
 
-### Installing into your project
+## The `PlayoffDiagram` class
 
-A standard pip-installable package with no runtime dependencies — install it straight
-from GitHub:
+The operation helpers live on one class, `PlayoffDiagram`: subclass it to resolve
+match references against your own data, and call its `apply_results` to write incoming
+results onto the stored document.
 
-```bash
-pip install git+https://github.com/anibalpacheco/playoff-diagrams.git
-```
-
-Pin a specific release or commit with `...playoff-diagrams.git@<tag-or-sha>`, or add
-that same line to your `requirements.txt`.
-
-## Live data and dynamic titles: `PlayoffDiagram`
+### Dynamic and live data integration
 
 The renderer never computes results: the winner of a match is its explicit `winner`
 field, and an advancing team is whatever `team1`/`team2` the document records on a match.
@@ -110,7 +122,11 @@ so `get_match` can, for instance, read `self.render_config.max_label_chars` and 
 already-shortened names. Long-named cups can raise that limit (it defaults to `22`) in
 the document's `render` object.
 
-## Applying results: `apply_results`
+For a runnable example of this integration, see `examples/libertadores_host.py` —
+it resolves the refs of the Copa Libertadores bracket against a JSON lookup table,
+and includes the instructions to run it and watch it work.
+
+### The `apply_results` method
 
 When a game finishes (or while it is being played), write its result onto the document
 with `apply_results` and persist what it returns — the structure of the bracket never
@@ -136,14 +152,14 @@ is pushed into the match that consumes it via `winnerof`. Pass `settle=False` to
 that, or put `"settle": false` on a match to keep it out permanently — the renderer
 itself still never computes anything.
 
-### Before and after, end to end
+#### Before and after, end to end
 
 One call, walked through. The two documents below are real assets, kept in sync by the
 library itself: [`apply-before.json`](apply-before.json) is hand-written, and
-[`apply-after.json`](apply-after.json) is exactly what `apply_results` returns for it
-(see "Regenerating" below).
+[`apply-after.json`](apply-after.json) is exactly what `apply_results` returns for it,
+generated by the library — never edited by hand.
 
-#### Before
+##### Before
 
 A semifinal stage mid-series. `sf1` has its first leg played (1–0) and the second one
 scheduled (`{}`); `sf2` is already settled, so the final knows its bottom side while the
@@ -195,7 +211,7 @@ top one still shows the "Winner SF1" placeholder:
 
 ![before](apply-before.png)
 
-#### The call
+##### The call
 
 The second leg finishes 1–0 for Barcelona, taking the tie to penalties, which Real Madrid
 wins 4–2. That is one result dict — scores are tie-oriented, so `goals1`/`pen1` belong
@@ -210,7 +226,7 @@ updated = diagram.apply_results(
 )
 ```
 
-#### After
+##### After
 
 Three things changed in the document, all from that single call:
 
@@ -267,31 +283,28 @@ Three things changed in the document, all from that single call:
 
 ![after](apply-after.png)
 
-The host persists `updated` (it is the same mutated document) back into its database
-field, and every render from then on shows the new state.
+The host can now update its database field with the new version of the document — the
+value of `updated` — and every render from then on shows the new state.
 
-#### Regenerating
+## Testing
 
-After a change to the library or to `apply-before.json`:
+Install the development extras and run the suite:
 
 ```bash
-PYTHONPATH=src python - <<'EOF'
-import json
-from playoff_diagrams import PlayoffDiagram
-
-with open("docs/apply-before.json", encoding="utf-8") as fh:
-    doc = json.load(fh)
-out = PlayoffDiagram(doc).apply_results(
-    {"id": "sf1", "leg": 2, "goals1": 0, "goals2": 1, "pen1": 4, "pen2": 2}
-)
-with open("docs/apply-after.json", "w", encoding="utf-8") as fh:
-    json.dump(out, fh, indent=2, ensure_ascii=False)
-    fh.write("\n")
-EOF
-PYTHONPATH=src python -m playoff_diagrams docs/apply-before.json -o /tmp/apply-before.svg
-PYTHONPATH=src python -m playoff_diagrams docs/apply-after.json -o /tmp/apply-after.svg
-rsvg-convert -z 2 /tmp/apply-before.svg -o docs/apply-before.png
-rsvg-convert -z 2 /tmp/apply-after.svg -o docs/apply-after.png
+pip install -e ".[dev]"
+pytest
 ```
 
-(Then update the inline JSON blocks above if the documents changed.)
+The suite includes golden (snapshot) SVG tests: each example bracket is rendered and
+compared against a versioned reference SVG under `tests/golden/`. This catches visual
+regressions without a browser.
+
+When the SVG output changes on purpose, regenerate the goldens and review the diff
+before committing:
+
+```bash
+PD_REGEN=1 pytest tests/test_render.py
+```
+
+CI (GitHub Actions) runs the suite on every push and pull request across Python
+3.10–3.13.

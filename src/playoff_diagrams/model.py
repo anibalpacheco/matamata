@@ -1,6 +1,6 @@
 """Parsed, in-memory representation of a bracket document, plus display helpers.
 
-The shapes here mirror the JSON language described in ``spec/format.md``. Keeping the
+The shapes here mirror the JSON language described in ``docs/format.md``. Keeping the
 models as plain dataclasses avoids any third-party dependency.
 
 The renderer is intentionally a *pure renderer*: it never computes who advances. The

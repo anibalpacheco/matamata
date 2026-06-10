@@ -1,6 +1,6 @@
 """Load a bracket document (dict / JSON) into the dataclass model.
 
-Structural validation against ``spec/schema.json`` is available via
+Structural validation against ``docs/schema.json`` is available via
 :func:`validate_document` when the optional ``jsonschema`` package is installed; the
 parser itself depends only on the standard library and raises clear errors.
 """
@@ -14,7 +14,7 @@ from typing import Any, Optional
 from .model import Bracket, Id, Leg, Match, Pens, RenderOptions, Round, Slot
 
 _SCHEMA_PATH = os.path.join(
-    os.path.dirname(__file__), "..", "..", "spec", "schema.json"
+    os.path.dirname(__file__), "..", "..", "docs", "schema.json"
 )
 
 
@@ -189,7 +189,7 @@ def load_bracket(path: str) -> Bracket:
 
 
 def validate_document(data: dict) -> None:
-    """Validate ``data`` against ``spec/schema.json`` (requires ``jsonschema``)."""
+    """Validate ``data`` against ``docs/schema.json`` (requires ``jsonschema``)."""
     from jsonschema import Draft202012Validator  # optional dependency
 
     with open(_SCHEMA_PATH, encoding="utf-8") as fh:
