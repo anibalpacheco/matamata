@@ -144,6 +144,24 @@ def pens_of(match: Match) -> Optional[Pens]:
     return None
 
 
+def score_text(match: Match, side: str) -> str:
+    """Build the display score string for one side: each played leg's goals, in order.
+
+    A single-leg match shows one number; a two-legged tie shows both, e.g. ``2 0``. A
+    shootout is appended in parentheses. This only formats the goals that are present; it
+    does not decide a winner.
+    """
+    played = [leg for leg in match.legs if leg.played]
+    if not played:
+        return ""
+    goals = " ".join(str(leg.home if side == "home" else leg.away) for leg in played)
+    pens = pens_of(match)
+    pen_suffix = ""
+    if pens is not None:
+        pen_suffix = f" ({pens.home if side == 'home' else pens.away})"
+    return goals + pen_suffix
+
+
 class Resolver:
     """Turns a slot into the display label to draw.
 

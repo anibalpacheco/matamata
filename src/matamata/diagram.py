@@ -38,6 +38,7 @@ from typing import Any, Iterator, Optional, Union
 from .model import Id, Match, Pens, RenderOptions, Stage, aggregate, pens_of
 from .parse import StageError, _parse_match, apply_game, parse_stage, render_options
 from .render import render_svg
+from .render_html import render_html
 
 # What get_match returns: one flat game dict, the same shape as an inline leg. "1" is the
 # game's local/home side, "2" the away/visitor; keys "team1"/"goals1"/"pen1"/"id1" and
@@ -133,9 +134,16 @@ class KnockoutStage:
         stage.season = self.get_season()
         return stage
 
-    def render(self) -> str:
-        """Render the knockout stage to a self-contained SVG document string."""
-        return render_svg(self.build())
+    def render(self, fmt: str = "svg") -> str:
+        """Render the knockout stage to a self-contained string.
+
+        ``fmt`` is ``"svg"`` (the default, the diagram) or ``"html"`` (the table
+        layout for small screens).
+        """
+        renderers = {"svg": render_svg, "html": render_html}
+        if fmt not in renderers:
+            raise StageError(f"unknown render format {fmt!r}")
+        return renderers[fmt](self.build())
 
     # --------------------------------------------------------------- results
     def apply_results(

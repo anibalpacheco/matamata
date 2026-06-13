@@ -291,7 +291,7 @@ def test_render_config_exposed_on_diagram():
 
 
 def test_score_text_shows_each_leg():
-    from matamata.layout import _score_text
+    from matamata.model import score_text as _score_text
 
     single = Match(id="m", home=Slot(team="H"), away=Slot(team="A"), legs=[Leg(3, 0)])
     assert _score_text(single, "home") == "3"

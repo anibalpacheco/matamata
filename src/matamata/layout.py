@@ -11,7 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional
 
-from .model import Match, Resolver, Stage, pens_of
+from .model import Match, Resolver, Stage, score_text
 
 # Geometry constants (SVG user units).
 MARGIN_X = 20
@@ -68,29 +68,11 @@ class Layout:
     box_width: float = BOX_W
 
 
-def _score_text(match: Match, side: str) -> str:
-    """Build the score string for one side: each played leg's goals, in order.
-
-    A single-leg match shows one number; a two-legged tie shows both, e.g. ``2 0``. A
-    shootout is appended in parentheses. This only formats the goals that are present; it
-    does not decide a winner.
-    """
-    played = [leg for leg in match.legs if leg.played]
-    if not played:
-        return ""
-    goals = " ".join(str(leg.home if side == "home" else leg.away) for leg in played)
-    pens = pens_of(match)
-    pen_suffix = ""
-    if pens is not None:
-        pen_suffix = f" ({pens.home if side == 'home' else pens.away})"
-    return goals + pen_suffix
-
-
 def _side_view(resolver: Resolver, match: Match, side: str) -> SideView:
     slot = match.home if side == "home" else match.away
     return SideView(
         label=resolver.label(slot),
-        score=_score_text(match, side),
+        score=score_text(match, side),
         is_winner=match.winner == side,  # explicit only; never computed
         crest=slot.crest,
     )

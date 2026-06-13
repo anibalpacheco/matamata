@@ -35,9 +35,12 @@ matamata examples/knockout-8.json -o knockout.svg
 
 # or via the module, writing to stdout
 python -m matamata examples/knockout-8.json > knockout.svg
+
+# or as an HTML table, the layout for small screens
+matamata examples/knockout-8.json -o knockout.html
 ```
 
-Open the resulting `.svg` in a browser to view the schedule. To render your own cup,
+Open the resulting file in a browser to view the schedule. To render your own cup,
 point the command at any JSON file that follows [`docs/format.md`](docs/format.md).
 
 Use it from Python:

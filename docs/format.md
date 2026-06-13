@@ -189,3 +189,6 @@ match carrying `"settle": false` is never settled, whatever the call says.
 - An unresolved side displays the team that advanced when known, otherwise the
   placeholder label (e.g. "Winner QF1") for a `winnerof` link, or "TBD".
 - The winning side of a match is emphasized only when the `winner` field says so.
+- Besides the SVG diagram there is an HTML table rendering for small screens: rounds
+  stack vertically, each match is two table rows, and no connectors are drawn —
+  advancement is read top-down. Both renderings show the same resolved data.

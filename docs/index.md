@@ -37,8 +37,10 @@ pip install -e .
 
 The package installs a `matamata` command (also runnable as
 `python -m matamata`). Point it at a [knockout stage document](format.md) to render
-the SVG, to a file with `-o` or to stdout. For example, to render one of the
-repository's worked examples, each way:
+the schedule, to a file with `-o` or to stdout. The format is `-f svg` (the default,
+the diagram) or `-f html` (the [table layout](#the-html-table-layout)); an `-o` ending
+in `.html`/`.htm` implies `-f html`. For example, to render one of the repository's
+worked examples, each way:
 
 ```bash
 # via the installed command
@@ -46,16 +48,20 @@ matamata examples/knockout-8.json -o knockout.svg
 
 # or via the module, writing to stdout
 python -m matamata examples/knockout-8.json > knockout.svg
+
+# the HTML table layout (inferred from the extension)
+matamata examples/knockout-8.json -o knockout.html
 ```
 
-Open the resulting `.svg` in a browser to view the schedule.
+Open the resulting file in a browser to view the schedule.
 
 ### Rendering from Python
 
 ```python
-from matamata import load_stage, render_svg
+from matamata import load_stage, render_html, render_svg
 
 svg = render_svg(load_stage("examples/knockout-8.json"))
+html = render_html(load_stage("examples/knockout-8.json"))
 ```
 
 `parse_stage` does the same from an already-loaded dict. In a web app the SVG is the
@@ -69,6 +75,22 @@ def knockout_stage_svg(request, championship):
     svg = render_svg(parse_stage(championship.knockout_stage_json))
     return HttpResponse(svg, content_type="image/svg+xml")
 ```
+
+### The HTML table layout
+
+On a phone the wide, tree-shaped SVG diagram needs panning; the HTML table layout is
+the alternative for small screens. Rounds stack vertically as one table each, every
+match is a group of two rows (top side, then bottom side), and advancement is read
+top-down — no connector lines. Everything shown follows the same rules as the SVG:
+explicit `winner` emphasis, per-leg scores with the shootout in parentheses,
+placeholders for unresolved sides.
+
+![World Cup knockout stage as an HTML table](knockout-8-table.png)
+
+The output is a self-contained `<div>` fragment, ready to drop into a page. Styling
+is driven by `pd-*` CSS classes with embedded defaults, so the host page can theme it.
+The document's `render` options are SVG geometry knobs (`box_width`,
+`max_label_chars`) and are ignored here — HTML handles long names natively.
 
 ## The `KnockoutStage` class
 
@@ -110,6 +132,9 @@ def knockout_stage_svg(request, championship):
     svg = ChampionshipDiagram(championship).render()
     return HttpResponse(svg, content_type="image/svg+xml")
 ```
+
+`render()` returns the SVG diagram; `render("html")` the
+[HTML table layout](#the-html-table-layout), hydrated from the same hooks.
 
 `get_match` returns only what it has — any of `team1`/`goals1`/`pen1` and their `2`
 counterparts; a returned `None` leaves that leg as the document defines it. Where a side

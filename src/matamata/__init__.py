@@ -5,6 +5,7 @@ from .diagram import KnockoutStage
 from .model import Leg, Match, Pens, Round, Slot, Stage
 from .parse import load_stage, parse_stage
 from .render import render_svg
+from .render_html import render_html
 
 __all__ = [
     "Stage",
@@ -17,4 +18,5 @@ __all__ = [
     "load_stage",
     "parse_stage",
     "render_svg",
+    "render_html",
 ]
