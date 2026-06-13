@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "matamata"
-version = "0.0.2"
+version = "0.0.3"
 description = "Model tournament knockout stages in JSON format and render the schedule in SVG or html table format"
 readme = "README.md"
 requires-python = ">=3.10"
