@@ -35,7 +35,7 @@ from __future__ import annotations
 import json
 from typing import Any, Iterator, Optional, Union
 
-from .model import Id, Match, Pens, RenderOptions, Stage, aggregate, pens_of
+from .model import Id, Labels, Match, Pens, RenderOptions, Stage, aggregate, pens_of
 from .parse import StageError, _parse_match, apply_game, parse_stage, render_options
 from .render import render_svg
 from .render_html import render_html
@@ -113,9 +113,30 @@ class KnockoutStage:
         """Return the season label. Defaults to the document's ``season``."""
         return self._doc.get("season")
 
+    def get_labels(  # pylint: disable=unused-argument
+        self, language: Optional[str]
+    ) -> Optional[dict[str, str]]:
+        """Return overrides for the labels the renderer *generates*, or ``None``.
+
+        For i18n. ``language`` is the language requested at render time (``render`` /
+        ``build`` take it and pass it here, so the same document can be rendered in
+        several languages); switch on it to return the matching strings. Keys:
+        ``"winner"`` (the placeholder for an unresolved ``winnerof`` side — ``{id}`` is
+        replaced with the referenced match id) and ``"tbd"`` (the placeholder for a side
+        with neither a team nor a link); supply either or both. Team and round names come
+        from the document, so they are not handled here. The base returns ``None``:
+        English defaults, nothing changes for existing hosts or for documents rendered
+        without the class.
+        """
+        return None
+
     # ----------------------------------------------------------------- build
-    def build(self) -> Stage:
-        """Parse the document, hydrate it from the hooks and return the model."""
+    def build(self, language: Optional[str] = None) -> Stage:
+        """Parse the document, hydrate it from the hooks and return the model.
+
+        ``language`` is forwarded to :meth:`get_labels` to localize the generated
+        labels; ``None`` (the default) leaves them in English.
+        """
         stage = parse_stage(self._doc)
         for rnd in stage.rounds:
             for match in rnd.matches:
@@ -132,18 +153,26 @@ class KnockoutStage:
         if tournament is not None:
             stage.tournament = tournament
         stage.season = self.get_season()
+        # get_labels is an overridable hook; the base returns None (English defaults).
+        labels = self.get_labels(language)  # pylint: disable=assignment-from-none
+        if labels:
+            stage.labels = Labels(
+                winner=labels.get("winner", stage.labels.winner),
+                tbd=labels.get("tbd", stage.labels.tbd),
+            )
         return stage
 
-    def render(self, fmt: str = "svg") -> str:
+    def render(self, fmt: str = "svg", language: Optional[str] = None) -> str:
         """Render the knockout stage to a self-contained string.
 
         ``fmt`` is ``"svg"`` (the default, the diagram) or ``"html"`` (the table
-        layout for small screens).
+        layout for small screens). ``language`` is forwarded to :meth:`get_labels` to
+        localize the generated labels (``None`` leaves them in English).
         """
         renderers = {"svg": render_svg, "html": render_html}
         if fmt not in renderers:
             raise StageError(f"unknown render format {fmt!r}")
-        return renderers[fmt](self.build())
+        return renderers[fmt](self.build(language))
 
     # --------------------------------------------------------------- results
     def apply_results(

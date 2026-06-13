@@ -196,6 +196,43 @@ short forms), so an id is the stable key.
 
 Documents rendered without the class (the CLI, `render_svg`) simply show no crests.
 
+### Translating the generated labels
+
+Almost every label in the schedule comes straight from the document — team names, round
+names, the tournament — so translating those is just a matter of storing them already
+translated. The exception is the handful of labels the renderer *generates* for sides
+that have no team yet: `Winner SF1` (an unresolved `winnerof` link) and `TBD` (a side
+with neither a team nor a link). Those are what this covers.
+
+Like crests above, it is a hook with no JSON surface: override `get_labels`, which
+receives the `language` requested at render time and returns the strings to use (or
+`None` to keep the English defaults). The same document can be rendered in several
+languages — the language flows from `render` / `build` straight to the hook:
+
+```python
+from matamata import KnockoutStage
+
+TRANSLATIONS = {
+    "es": {"winner": "Ganador {id}", "tbd": "A definir"},
+    "pt": {"winner": "Vencedor {id}", "tbd": "A definir"},
+}
+
+class ChampionshipDiagram(KnockoutStage):
+    def get_labels(self, language):
+        return TRANSLATIONS.get(language)
+
+svg = ChampionshipDiagram(document).render(language="es")
+```
+
+`get_labels` returns a dict with either or both of `"winner"` (where `{id}` is replaced
+by the referenced match id) and `"tbd"`; a key left out falls back to its English
+default, and an unknown `language` — or none — leaves everything in English. Team and
+round names are not handled here: they are already whatever the document says.
+
+The host owns the translations, so you can resolve them however suits your app — a literal
+dict as above, your existing message catalogs, or `gettext`. Documents rendered without
+the class (the CLI, `render_svg`) show the English labels.
+
 ### The `apply_results` method
 
 When a game finishes (or while it is being played), write its result onto the document

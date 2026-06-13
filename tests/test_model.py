@@ -497,6 +497,41 @@ def test_tournament_and_season_overrides():
     assert stage.season == "2027"
 
 
+def test_get_labels_translates_generated_labels():
+    doc = {
+        "rounds": [
+            {"name": "SF", "matches": [{"id": "sf1", "team1": "A", "team2": "B"}]},
+            {"name": "F", "matches": [{"id": "f", "winnerof1": "sf1"}]},
+        ]
+    }
+    translations = {
+        "es": {"winner": "Ganador {id}", "tbd": "A definir"},
+        "pt": {"winner": "Vencedor {id}"},  # partial: tbd falls back to English
+    }
+
+    class D(KnockoutStage):
+        def get_labels(self, language):
+            return translations.get(language)
+
+    # The requested language flows through build/render to the hook.
+    es = D(doc).build("es")
+    ef = es.matches_by_id()["f"]
+    assert Resolver(es).label(ef.home) == "Ganador SF1"  # unresolved winnerof
+    assert Resolver(es).label(ef.away) == "A definir"  # no team, no link
+
+    # A partial translation keeps the English default for the key left out.
+    pt = D(doc).build("pt")
+    pf = pt.matches_by_id()["f"]
+    assert Resolver(pt).label(pf.home) == "Vencedor SF1"
+    assert Resolver(pt).label(pf.away) == "TBD"
+
+    # No language (or an unknown one) leaves the labels in English.
+    en = D(doc).build()
+    enf = en.matches_by_id()["f"]
+    assert Resolver(en).label(enf.home) == "Winner SF1"
+    assert Resolver(en).label(enf.away) == "TBD"
+
+
 def test_diagram_accepts_a_json_string():
     doc = json.dumps(
         {

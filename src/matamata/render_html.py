@@ -33,11 +33,11 @@ _STYLE = """
 """.rstrip()
 
 
-def _side_row(out: list[str], match: Match, side: str) -> None:
+def _side_row(out: list[str], match: Match, side: str, resolver: Resolver) -> None:
     slot = match.home if side == "home" else match.away
     cls = "pd-side pd-win" if match.winner == side else "pd-side"
     out.append(f'<tr class="{cls}">')
-    out.append(f'<td class="pd-team">{escape(Resolver().label(slot))}</td>')
+    out.append(f'<td class="pd-team">{escape(resolver.label(slot))}</td>')
     out.append(f'<td class="pd-score">{escape(score_text(match, side))}</td>')
     out.append("</tr>")
 
@@ -45,6 +45,7 @@ def _side_row(out: list[str], match: Match, side: str) -> None:
 def render_html(stage: Stage) -> str:
     """Render the knockout stage to a self-contained HTML table fragment string."""
     out: list[str] = []
+    resolver = Resolver(stage)
     out.append('<div class="pd-stage">')
     out.append(f"<style>{_STYLE}</style>")
     if stage.tournament:
@@ -61,8 +62,8 @@ def render_html(stage: Stage) -> str:
         for match in rnd.matches:
             out.append('<table class="pd-match">')
             out.append("<tbody>")
-            _side_row(out, match, "home")
-            _side_row(out, match, "away")
+            _side_row(out, match, "home", resolver)
+            _side_row(out, match, "away", resolver)
             out.append("</tbody>")
             out.append("</table>")
         out.append("</div>")

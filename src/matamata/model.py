@@ -113,11 +113,28 @@ class RenderOptions:
 
 
 @dataclass
+class Labels:
+    """Text for the labels the renderer *generates* (not the team/round names, which
+    come from the document). Supplied through ``KnockoutStage.get_labels`` for i18n —
+    host-only, with no JSON surface, so the defaults are English and a document rendered
+    without the class (CLI, ``render_svg``) stays in English.
+
+    ``winner``: the placeholder for an unresolved ``winnerof`` side; ``{id}`` is replaced
+    with the referenced match id (uppercased). ``tbd``: the placeholder for a side with
+    neither a team nor an advancement link.
+    """
+
+    winner: str = "Winner {id}"
+    tbd: str = "TBD"
+
+
+@dataclass
 class Stage:
     rounds: list[Round]
     tournament: str = ""
     season: Optional[str] = None
     render: RenderOptions = field(default_factory=RenderOptions)
+    labels: Labels = field(default_factory=Labels)
 
     def matches_by_id(self) -> dict[str, Match]:
         return {m.id: m for r in self.rounds for m in r.matches}
@@ -170,12 +187,12 @@ class Resolver:
     out who won.
     """
 
-    def __init__(self, stage: Optional[Stage] = None) -> None:  # stage unused
-        pass
+    def __init__(self, stage: Optional[Stage] = None) -> None:
+        self._labels = stage.labels if stage is not None else Labels()
 
     def label(self, slot: Slot) -> str:
         if slot.team is not None:
             return slot.team
         if slot.winner_of is not None:
-            return f"Winner {slot.winner_of.upper()}"
-        return "TBD"
+            return self._labels.winner.replace("{id}", slot.winner_of.upper())
+        return self._labels.tbd
