@@ -1,0 +1,63 @@
+{
+  "tournament": "Copa Río de la Plata",
+  "season": "2026",
+  "render": { "box_width": 210 },
+  "rounds": [
+    {
+      "name": "Semifinals",
+      "matches": [
+        {
+          "id": "sf1",
+          "legs": [
+            {
+              "team1": "Estudiantes",
+              "id1": 17,
+              "goals1": 2,
+              "team2": "Athletic Club",
+              "id2": 90,
+              "goals2": 1
+            }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "sf2",
+          "legs": [
+            {
+              "team1": "Platense",
+              "id1": 42,
+              "goals1": 1,
+              "team2": "Internacional",
+              "id2": 88,
+              "goals2": 0
+            }
+          ],
+          "winner": 1
+        }
+      ]
+    },
+    {
+      "name": "Final",
+      "matches": [
+        {
+          "id": "final",
+          "winnerof1": "sf1",
+          "winnerof2": "sf2",
+          "legs": [
+            {
+              "team1": "Estudiantes",
+              "id1": 17,
+              "goals1": 1,
+              "pen1": 4,
+              "team2": "Platense",
+              "id2": 42,
+              "goals2": 1,
+              "pen2": 3
+            }
+          ],
+          "winner": 1
+        }
+      ]
+    }
+  ]
+}

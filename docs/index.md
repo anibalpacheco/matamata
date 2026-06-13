@@ -152,10 +152,19 @@ image — and rows without one (here, the unresolved placeholders) keep their la
 
 ![A schedule with flags](flags.png)
 
-That preview resolves each national team's flag from Wikimedia Commons; club crests
-work exactly the same. When resolving images from a public source, prefer the
-`team_id` over the display name — names in the document may differ from the source's
-titling (accents, short forms).
+That preview resolves each national team's flag from Wikimedia Commons. Club crests
+work exactly the same — here a short invitational, where each side carries an integer
+`id{n}` that `get_crest` turns into a crest image:
+
+![A schedule with club crests](copa-rio-de-la-plata.png)
+
+The runnable example behind it lives under `examples/`: `copa_rio_host.py` is a
+`KnockoutStage` whose `get_crest` looks each side's `id{n}` up in a sibling
+`crest_data.json` (a team-id → crest-file table), the same way `libertadores_host.py`
+resolves a leg's `ref` through `get_match`. In a real deployment that lookup is a
+database query and the value a URL. Resolving by `team_id` rather than the display name
+is deliberate: names in the document may differ from the source's titling (accents,
+short forms), so an id is the stable key.
 
 Documents rendered without the class (the CLI, `render_svg`) simply show no crests.
 
