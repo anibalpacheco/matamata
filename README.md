@@ -1,5 +1,7 @@
 # matamata
 
+[![PyPI](https://img.shields.io/pypi/v/matamata.svg)](https://pypi.org/project/matamata/)
+[![Python versions](https://img.shields.io/pypi/pyversions/matamata.svg)](https://pypi.org/project/matamata/)
 [![CI](https://github.com/anibalpacheco/matamata/actions/workflows/ci.yml/badge.svg)](https://github.com/anibalpacheco/matamata/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
