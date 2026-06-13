@@ -148,9 +148,14 @@ class ChampionshipDiagram(KnockoutStage):
 Return a URL, a path or a data URI, or `None` for no image (the base implementation
 always returns `None`, so nothing changes for existing hosts). The renderer emits it
 as an SVG `<image>` element before the team name — it never fetches or processes the
-image — and rows without a crest keep their layout:
+image — and rows without one (here, the unresolved placeholders) keep their layout:
 
-![A schedule with crests](crests.png)
+![A schedule with flags](flags.png)
+
+That preview resolves each national team's flag from Wikimedia Commons; club crests
+work exactly the same. When resolving images from a public source, prefer the
+`team_id` over the display name — names in the document may differ from the source's
+titling (accents, short forms).
 
 Documents rendered without the class (the CLI, `render_svg`) simply show no crests.
 
