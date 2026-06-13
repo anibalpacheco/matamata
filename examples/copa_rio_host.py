@@ -11,10 +11,11 @@ would typically be a URL.
 
 The crests under ``crests/`` are public-domain logos from Wikimedia Commons (each tagged
 ``{{PD-textlogo}}`` — simple shapes/text, below the threshold of originality). The paths
-are relative, so render the SVG from inside ``examples/`` for an image viewer (or
-``rsvg-convert``) to resolve them::
+are relative, so render from inside ``examples/`` for an image viewer (or ``rsvg-convert``
+/ a browser) to resolve them::
 
-    PYTHONPATH=../src python copa_rio_host.py > copa-rio.svg
+    PYTHONPATH=../src python copa_rio_host.py > copa-rio.svg          # the diagram
+    PYTHONPATH=../src python copa_rio_host.py html > copa-rio.html    # the table
 
 Resolving by ``id`` rather than the display name is deliberate: it is what the manual
 recommends, and it sidesteps name-vs-source mismatches (accents, short forms).
@@ -58,4 +59,5 @@ class CopaRioDiagram(KnockoutStage):
 if __name__ == "__main__":
     import sys
 
-    sys.stdout.write(CopaRioDiagram().render())
+    fmt = sys.argv[1] if len(sys.argv) > 1 else "svg"
+    sys.stdout.write(CopaRioDiagram().render(fmt))

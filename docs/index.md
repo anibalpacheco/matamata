@@ -177,25 +177,46 @@ class ChampionshipDiagram(KnockoutStage):
 `get_crest` is called once per side that has an identity — `team_id` is the side's
 `id{n}` when the document (or `get_match`) supplies one, `team_name` its team name.
 Return a URL, a path or a data URI, or `None` for no image (the base implementation
-always returns `None`, so nothing changes for existing hosts). The renderer emits it
-as an SVG `<image>` element before the team name — it never fetches or processes the
-image — and rows without one (here, the unresolved placeholders) keep their layout:
+always returns `None`, so nothing changes for existing hosts). The image appears before
+the team name in both outputs — an `<image>` element in the SVG diagram, an `<img>` in
+the [HTML table layout](#the-html-table-layout) — and the renderer never fetches or
+processes it; rows without one (the unresolved placeholders) keep their layout.
+
+The World Cup example resolves each national team's flag, shown here in both the diagram
+and the table:
 
 ![A schedule with flags](flags.png)
 
-That preview resolves each national team's flag from Wikimedia Commons. Club crests
-work exactly the same — here a short invitational, where each side carries an integer
-`id{n}` that `get_crest` turns into a crest image:
+![The same schedule as an HTML table, with flags](flags-table.png)
+
+<small>Flags: public-domain national flags from [Wikimedia
+Commons](https://commons.wikimedia.org/), referenced by relative path under
+`examples/flags/`.</small>
+
+The runnable host behind it is `examples/world_cup_flags_host.py`: a `KnockoutStage`
+whose `get_crest` looks each side's `team_name` up in a sibling `flag_data.json` (a
+name → flag-file table). `knockout-8.json` carries no ids, so this one resolves by name
+(`PYTHONPATH=../src python world_cup_flags_host.py html` from inside `examples/` prints
+the table above).
+
+Club crests work exactly the same — here a short invitational, where each side instead
+carries an integer `id{n}` that `get_crest` turns into a crest image:
 
 ![A schedule with club crests](copa-rio-de-la-plata.png)
 
-The runnable example behind it lives under `examples/`: `copa_rio_host.py` is a
-`KnockoutStage` whose `get_crest` looks each side's `id{n}` up in a sibling
+![The same schedule as an HTML table, with crests](copa-rio-de-la-plata-table.png)
+
+<small>Crests: public-domain club logos (simple text/shapes) from [Wikimedia
+Commons](https://commons.wikimedia.org/), referenced by relative path under
+`examples/crests/`.</small>
+
+Its host is `examples/copa_rio_host.py`, looking each side's `id{n}` up in a sibling
 `crest_data.json` (a team-id → crest-file table), the same way `libertadores_host.py`
 resolves a leg's `ref` through `get_match`. In a real deployment that lookup is a
 database query and the value a URL. Resolving by `team_id` rather than the display name
 is deliberate: names in the document may differ from the source's titling (accents,
-short forms), so an id is the stable key.
+short forms), so an id is the stable key — which is why the id-less flags example above
+has to fall back to the name.
 
 Documents rendered without the class (the CLI, `render_svg`) simply show no crests.
 

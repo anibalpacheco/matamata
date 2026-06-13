@@ -447,8 +447,14 @@ def test_get_crest_emits_images():
     assert svg.count("<image") == 2
     assert 'href="https://img.example/Flamengo.png"' in svg
 
-    # The base class resolves nothing: no <image> elements, nothing changes.
+    # The table layout emits the same crests, as <img> elements.
+    html = D(doc).render("html")
+    assert html.count("<img") == 2
+    assert 'src="https://img.example/Flamengo.png"' in html
+
+    # The base class resolves nothing: no images in either format, nothing changes.
     assert "<image" not in KnockoutStage(doc).render()
+    assert "<img" not in KnockoutStage(doc).render("html")
 
 
 def test_get_crest_receives_the_side_identity():

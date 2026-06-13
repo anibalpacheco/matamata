@@ -6,9 +6,11 @@ advancement is implied by reading order, so no connectors are drawn. The output 
 self-contained fragment; styling is driven by CSS classes so it can be themed by the
 host page, with sensible defaults embedded.
 
-Like the SVG renderer this computes nothing about the tournament: labels, scores and
-the emphasized winner come straight from the model. The ``render`` options are SVG
-geometry knobs and are ignored here — HTML handles long names natively.
+Like the SVG renderer this computes nothing about the tournament: labels, scores, the
+emphasized winner and each side's crest/flag come straight from the model. Crests are
+only ever filled by the KnockoutStage path (the ``get_crest`` hook); a document rendered
+without it carries none. The ``render`` options are SVG geometry knobs and are ignored
+here — HTML handles long names natively.
 """
 
 from __future__ import annotations
@@ -16,6 +18,8 @@ from __future__ import annotations
 from xml.sax.saxutils import escape
 
 from .model import Match, Resolver, Stage, score_text
+
+_ATTR = {'"': "&quot;"}  # extra escape for attribute values
 
 _STYLE = """
   .pd-stage { font-family: sans-serif; color: #1f2937; background: #ffffff; }
@@ -27,6 +31,7 @@ _STYLE = """
               overflow: hidden; margin: 0 0 15px; }
   .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
   .pd-team { font-size: 13px; padding: 5px 10px; }
+  .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
   .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
               white-space: nowrap; }
   .pd-win td { font-weight: 700; color: #065f46; }
@@ -36,8 +41,13 @@ _STYLE = """
 def _side_row(out: list[str], match: Match, side: str, resolver: Resolver) -> None:
     slot = match.home if side == "home" else match.away
     cls = "pd-side pd-win" if match.winner == side else "pd-side"
+    crest = (
+        f'<img class="pd-crest" src="{escape(slot.crest, _ATTR)}" alt=""/>'
+        if slot.crest
+        else ""
+    )
     out.append(f'<tr class="{cls}">')
-    out.append(f'<td class="pd-team">{escape(resolver.label(slot))}</td>')
+    out.append(f'<td class="pd-team">{crest}{escape(resolver.label(slot))}</td>')
     out.append(f'<td class="pd-score">{escape(score_text(match, side))}</td>')
     out.append("</tr>")
 

@@ -24,15 +24,18 @@ GOLDEN = os.path.join(os.path.dirname(__file__), "golden")
 # loader; example_data.json is that host's lookup table, not a knockout stage document.
 HOST_EXAMPLE = "libertadores-2026.json"
 # copa-rio-de-la-plata-2026.json is a documentation example for the get_crest hook (it is
-# rendered with crests through examples/copa_rio_host.py for docs/copa-rio-de-la-plata.png,
-# the way knockout-8.json is rendered with flags for docs/flags.png). Like the flags
-# preview, the crest render is illustrative, not snapshot-tested; crest_data.json is its
-# host's lookup table. Both are skipped by the base-loader tests below.
+# rendered with crests through examples/copa_rio_host.py for docs/copa-rio-de-la-plata.png
+# and its table variant). knockout-8.json *is* a base-loader stage (no images, snapshot-
+# tested below), but it is also rendered with flags through examples/world_cup_flags_host.py
+# for docs/flags.png and its table variant; that crest render is illustrative, not
+# snapshot-tested. crest_data.json and flag_data.json are the hosts' lookup tables, not
+# stage documents, so they are skipped by the base-loader tests below.
 NON_STAGE = {
     HOST_EXAMPLE,
     "example_data.json",
     "copa-rio-de-la-plata-2026.json",
     "crest_data.json",
+    "flag_data.json",
 }
 EXAMPLE_FILES = sorted(
     name

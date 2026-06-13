@@ -28,13 +28,15 @@ htmlcov/
 .DS_Store
 
 # Generated diagrams: ignore stray renders, but keep the curated docs images
-# (used by the README), the versioned test goldens, and the example crest assets.
+# (used by the README), the versioned test goldens, and the example crest/flag assets.
 *.svg
 *.png
 !docs/*.png
 !tests/golden/*.svg
 !examples/crests/*.svg
 !examples/crests/*.png
+!examples/flags/*.svg
+!examples/flags/*.png
 
 # MkDocs build output (`mkdocs serve` / `mkdocs build`)
 /site/
