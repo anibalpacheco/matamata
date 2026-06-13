@@ -15,9 +15,9 @@ them apart from any presentation concern — updating results means editing a do
 never the code.
 
 Example rendered from
-[`examples/libertadores-2026.json`](examples/libertadores-2026.json):
+[`examples/libertadores-2026.json`](https://github.com/anibalpacheco/matamata/blob/main/examples/libertadores-2026.json):
 
-![Copa Libertadores 2026 knockout stage](docs/libertadores-2026.png)
+![Copa Libertadores 2026 knockout stage](https://raw.githubusercontent.com/anibalpacheco/matamata/main/docs/libertadores-2026.png)
 
 ## Quickstart
 
@@ -44,7 +44,7 @@ matamata examples/knockout-8.json -o knockout.html
 ```
 
 Open the resulting file in a browser to view the schedule. To render your own cup,
-point the command at any JSON file that follows [`docs/format.md`](docs/format.md).
+point the command at any JSON file that follows [`docs/format.md`](https://github.com/anibalpacheco/matamata/blob/main/docs/format.md).
 
 Use it from Python:
 
@@ -65,22 +65,22 @@ unreleased commit).
 
 ## Examples
 
-Both examples are rendered from the JSON files in [`examples/`](examples/).
+Both examples are rendered from the JSON files in [`examples/`](https://github.com/anibalpacheco/matamata/tree/main/examples).
 
 The Copa Libertadores example above shows two-legged ties — each leg's goals are
 shown, shootouts appear in parentheses, and the winner of each tie is emphasized. The
 first quarterfinal is **host-resolved**: its legs carry only a `ref`, so its teams and
 scores come from `get_match` (see
-[`examples/libertadores_host.py`](examples/libertadores_host.py)) rather than from the
+[`examples/libertadores_host.py`](https://github.com/anibalpacheco/matamata/blob/main/examples/libertadores_host.py)) rather than from the
 document. Played ties take their team names from the legs; the final is a single match —
 one leg, so just one goal figure per side — with its `winnerof` links wiring the
 advancement tree.
 
-Single matches ([`knockout-8.json`](examples/knockout-8.json)) — one goal figure per
+Single matches ([`knockout-8.json`](https://github.com/anibalpacheco/matamata/blob/main/examples/knockout-8.json)) — one goal figure per
 side, with shootouts in parentheses. Sides that have not been resolved yet fall back to
 placeholders such as "Winner SF2":
 
-![World Cup knockout stage](docs/knockout-8.png)
+![World Cup knockout stage](https://raw.githubusercontent.com/anibalpacheco/matamata/main/docs/knockout-8.png)
 
 ## The format
 
@@ -92,9 +92,9 @@ advancement tree is laid out **deterministically**: coordinates are
 computed directly and the SVG is emitted as a string, with no layout engine and no
 heavy dependencies.
 
-See [`docs/format.md`](docs/format.md) for the full specification and
-[`docs/schema.json`](docs/schema.json) for the JSON Schema. Worked examples live in
-[`examples/`](examples/).
+See [`docs/format.md`](https://github.com/anibalpacheco/matamata/blob/main/docs/format.md) for the full specification and
+[`docs/schema.json`](https://github.com/anibalpacheco/matamata/blob/main/docs/schema.json) for the JSON Schema. Worked examples live in
+[`examples/`](https://github.com/anibalpacheco/matamata/tree/main/examples).
 
 Minimal example:
 
@@ -121,7 +121,7 @@ Minimal example:
 
 ## Documentation
 
-[docs/index.md](docs/index.md) is the manual: rendering from the CLI and from Python
+[docs/index.md](https://github.com/anibalpacheco/matamata/blob/main/docs/index.md) is the manual: rendering from the CLI and from Python
 (e.g. a Django view), feeding live data from your own database through
 `KnockoutStage`, updating the stored document with `apply_results` — including a
 before/after walkthrough of one call — and running the test suite.
