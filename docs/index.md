@@ -18,11 +18,14 @@ quickstart.
 ### Installation
 
 A standard pip-installable package, requiring Python ≥ 3.10 and no runtime
-dependencies — install it into your project straight from GitHub:
+dependencies — install it into your project from PyPI:
 
 ```bash
-pip install git+https://github.com/anibalpacheco/matamata.git
+pip install matamata
 ```
+
+For the latest unreleased commit, install straight from GitHub instead with
+`pip install git+https://github.com/anibalpacheco/matamata.git`.
 
 To follow along with the worked examples below, use a source checkout instead:
 

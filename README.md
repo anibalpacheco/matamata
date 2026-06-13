@@ -54,11 +54,14 @@ from matamata import load_stage, render_svg
 svg = render_svg(load_stage("examples/knockout-8.json"))
 ```
 
-To use it in your own project instead, install straight from GitHub:
+To use it in your own project instead, install from PyPI:
 
 ```bash
-pip install git+https://github.com/anibalpacheco/matamata.git
+pip install matamata
 ```
+
+(or `pip install git+https://github.com/anibalpacheco/matamata.git` for the latest
+unreleased commit).
 
 ## Examples
 
