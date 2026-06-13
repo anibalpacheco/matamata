@@ -21,47 +21,40 @@ Example rendered from
 
 ## Quickstart
 
-Requires Python ≥ 3.10. No runtime dependencies.
-
-```bash
-git clone https://github.com/anibalpacheco/matamata.git
-cd matamata
-python -m venv .venv && source .venv/bin/activate
-pip install -e .
-```
-
-Render a self-contained example to an SVG file:
-
-```bash
-# via the installed command
-matamata examples/knockout-8.json -o knockout.svg
-
-# or via the module, writing to stdout
-python -m matamata examples/knockout-8.json > knockout.svg
-
-# or as an HTML table, the layout for small screens
-matamata examples/knockout-8.json -o knockout.html
-```
-
-Open the resulting file in a browser to view the schedule. To render your own cup,
-point the command at any JSON file that follows [`docs/format.md`](https://github.com/anibalpacheco/matamata/blob/main/docs/format.md).
-
-Use it from Python:
-
-```python
-from matamata import load_stage, render_svg
-
-svg = render_svg(load_stage("examples/knockout-8.json"))
-```
-
-To use it in your own project instead, install from PyPI:
+Requires Python ≥ 3.10. No runtime dependencies. Install from PyPI:
 
 ```bash
 pip install matamata
 ```
 
-(or `pip install git+https://github.com/anibalpacheco/matamata.git` for the latest
-unreleased commit).
+Render a knockout stage document — plain JSON following
+[the format](https://anibalpacheco.github.io/matamata/format/) — to an
+SVG file, or to an HTML table for small screens:
+
+```bash
+# the installed command
+matamata stage.json -o schedule.svg
+
+# or via the module, writing to stdout
+python -m matamata stage.json > schedule.svg
+
+# or as an HTML table
+matamata stage.json -o schedule.html
+```
+
+Open the result in a browser to view the schedule. From Python:
+
+```python
+from matamata import load_stage, render_svg
+
+svg = render_svg(load_stage("stage.json"))
+```
+
+Ready-to-render worked examples live in
+[`examples/`](https://github.com/anibalpacheco/matamata/tree/main/examples). For the
+latest unreleased commit use
+`pip install git+https://github.com/anibalpacheco/matamata.git`; to work on matamata
+itself, clone the repo and `pip install -e .`.
 
 ## Examples
 
@@ -92,8 +85,8 @@ advancement tree is laid out **deterministically**: coordinates are
 computed directly and the SVG is emitted as a string, with no layout engine and no
 heavy dependencies.
 
-See [`docs/format.md`](https://github.com/anibalpacheco/matamata/blob/main/docs/format.md) for the full specification and
-[`docs/schema.json`](https://github.com/anibalpacheco/matamata/blob/main/docs/schema.json) for the JSON Schema. Worked examples live in
+See [the format specification](https://anibalpacheco.github.io/matamata/format/) and its
+[JSON Schema](https://anibalpacheco.github.io/matamata/schema.json). Worked examples live in
 [`examples/`](https://github.com/anibalpacheco/matamata/tree/main/examples).
 
 Minimal example:
@@ -121,7 +114,7 @@ Minimal example:
 
 ## Documentation
 
-[docs/index.md](https://github.com/anibalpacheco/matamata/blob/main/docs/index.md) is the manual: rendering from the CLI and from Python
+[The manual](https://anibalpacheco.github.io/matamata/) covers rendering from the CLI and from Python
 (e.g. a Django view), feeding live data from your own database through
 `KnockoutStage`, updating the stored document with `apply_results` — including a
 before/after walkthrough of one call — and running the test suite.
