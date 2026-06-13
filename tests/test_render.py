@@ -91,6 +91,18 @@ def test_html_is_well_formed(name):
     _assert_well_formed(render_html(load_stage(os.path.join(EXAMPLES, name))), "div")
 
 
+def test_dark_mode_rules_are_embedded():
+    # Dark mode is automatic via a prefers-color-scheme media query baked into the
+    # default <style>; both renderers carry it, re-coloring the pd-* classes.
+    stage = load_stage(os.path.join(EXAMPLES, "knockout-8.json"))
+    svg = render_svg(stage)
+    assert "@media (prefers-color-scheme: dark)" in svg
+    assert ".pd-bg { fill: #0f172a; }" in svg
+    html = render_html(stage)
+    assert "@media (prefers-color-scheme: dark)" in html
+    assert ".pd-stage { color: #e5e7eb; background: #0f172a; }" in html
+
+
 def test_host_example_matches_golden(libertadores_diagram):
     _assert_golden(libertadores_diagram().render(), HOST_EXAMPLE, ".svg")
 

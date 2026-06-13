@@ -98,6 +98,22 @@ is driven by `pd-*` CSS classes with embedded defaults, so the host page can the
 The document's `render` options are SVG geometry knobs (`box_width`,
 `max_label_chars`) and are ignored here — HTML handles long names natively.
 
+### Light and dark mode
+
+Both outputs adapt to the reader's color scheme automatically. The embedded default
+styles carry a `@media (prefers-color-scheme: dark)` block, so the same SVG diagram and
+HTML table switch to a dark palette wherever the renderer follows the OS/browser setting
+— no flag, no API, nothing to pass:
+
+![The HTML table in dark mode](knockout-8-table-dark.png)
+
+There is nothing to opt into: dark colors apply when the viewing context is dark and the
+light palette otherwise (the [HTML table](#the-html-table-layout) above is the same
+schedule in light mode). The switch happens in a browser rendering context; a static
+rasterizer such as `rsvg-convert` — which produces the other PNG previews in this manual
+— ignores the media query and always renders light, so force-rendering a fixed scheme
+for static output may come later, alongside full style overrides.
+
 ## The `KnockoutStage` class
 
 The operation helpers live on one class, `KnockoutStage`: subclass it to resolve
