@@ -24,8 +24,11 @@ dependencies — install it into your project from PyPI:
 pip install matamata
 ```
 
-For the latest unreleased commit, install straight from GitHub instead with
-`pip install git+https://github.com/anibalpacheco/matamata.git`.
+For the latest unreleased commit, install straight from GitHub instead:
+
+```bash
+pip install git+https://github.com/anibalpacheco/matamata.git
+```
 
 To follow along with the worked examples below, use a source checkout instead:
 
