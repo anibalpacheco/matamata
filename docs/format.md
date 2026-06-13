@@ -79,7 +79,9 @@ numbering. There are no `home`/`away` objects.
 - `id` — internal identifier, referenced by `winnerof1`/`winnerof2`. Not a display value.
 - `winnerof1`/`winnerof2` — explicit advancement links: each must reference the `id` of
   another match. References must not form a cycle. They draw the connector and, while
-  unresolved, show a placeholder ("Winner QF1").
+  unresolved, show a placeholder ("Winner QF1"). When the pairing does not exist yet —
+  e.g. the next round is redrawn from the winners — omit the link: the side renders
+  "TBD" and no connector is drawn until the draw is written into the document.
 - `team1`/`team2` (optional `id1`/`id2`) — a side's known team: an entrant, or the team
   that advanced (written here by whatever maintains the JSON; the renderer never works
   it out). Legs may also name teams: they fill in whatever the match level leaves
@@ -177,7 +179,9 @@ match carrying `"settle": false` is never settled, whatever the call says.
 
 - Layout is deterministic: rounds map to columns left-to-right; within the tree,
   a match in round *n+1* is drawn vertically centered between the two matches it
-  consumes (resolved via `winnerof1`/`winnerof2`).
+  consumes (resolved via `winnerof1`/`winnerof2`). Connectors exist only where a
+  `winnerof` link does; a match with no links (a pairing pending a draw) is stacked
+  from the top of its column like a first-round match.
 - An unresolved side displays the team that advanced when known, otherwise the
   placeholder label (e.g. "Winner QF1") for a `winnerof` link, or "TBD".
 - The winning side of a match is emphasized only when the `winner` field says so.

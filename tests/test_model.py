@@ -62,6 +62,37 @@ def test_tbd_label():
     assert Resolver().label(Slot(tbd=True)) == "TBD"
 
 
+def test_pending_draw_side_renders_tbd_without_a_connector():
+    # When the next round is redrawn from the winners, no advancement path exists
+    # beforehand: the hold is simply omitting winnerof{n}. The side shows TBD and
+    # no connector is drawn until the draw is written into the document.
+    from matamata.layout import compute_layout
+
+    doc = {
+        "rounds": [
+            {
+                "name": "SF",
+                "matches": [
+                    {"id": "sf1", "team1": "A", "team2": "B"},
+                    {"id": "sf2", "team1": "C", "team2": "D"},
+                ],
+            },
+            {"name": "F", "matches": [{"id": "f", "winnerof1": "sf1"}]},
+        ]
+    }
+    layout = compute_layout(parse_stage(doc))
+    assert len(layout.connectors) == 1  # only the linked side connects
+    final = layout.matches[-1]
+    assert final.home.label == "Winner SF1"
+    assert final.away.label == "TBD"
+
+    del doc["rounds"][1]["matches"][0]["winnerof1"]
+    layout = compute_layout(parse_stage(doc))
+    assert not layout.connectors
+    final = layout.matches[-1]
+    assert final.home.label == "TBD"
+
+
 def test_unknown_reference_is_rejected():
     data = {
         "tournament": "T",
