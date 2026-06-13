@@ -22,8 +22,9 @@ _STYLE = """
   .pd-title { font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 12px; }
   .pd-season { font-size: 13px; font-weight: 400; color: #6b7280; margin-left: 8px; }
   .pd-header { font-size: 12px; font-weight: 600; color: #374151; margin: 16px 0 8px; }
-  .pd-match { border-collapse: collapse; width: 100%; max-width: 24em;
-              border: 1px solid #d1d5db; margin: 0 0 15px; }
+  .pd-match { border-collapse: separate; border-spacing: 0; width: 100%;
+              max-width: 24em; border: 1px solid #d1d5db; border-radius: 3px;
+              overflow: hidden; margin: 0 0 15px; }
   .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
   .pd-team { font-size: 13px; padding: 5px 10px; }
   .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
