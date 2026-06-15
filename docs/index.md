@@ -92,13 +92,15 @@ placeholders for unresolved sides.
 
 There are two layouts, selected with the `layout` argument:
 
-- **`"flat"`** (the default) — the whole stage is one table, each match a single row
-  (`name1 score1 x score2 name2`) and each round name a full-width header row. The names
-  are aligned outward and any crests/flags hug the central `x`, so every column lines up
-  vertically across all rounds. The `x` is always shown, reading as "vs" before a result
-  exists.
+- **`"flat"`** (the default) — the whole stage is one table, each round name a full-width
+  header row. A single match is one row (`name1 score1 x score2 name2`); a two-legged tie
+  is **two rows**, one per leg with that leg's single score, the [id](#match-metadata)
+  repeated in a leading cell. Each leg row honors its **localía** — the local side (the
+  leg's `team1`) goes on the left — so the second leg flips relative to the first. The
+  names are aligned outward and any crests/flags hug the central `x`. The `x` is always
+  shown, reading as "vs" before a result exists.
 - **`"stacked"`** — each match is its own little box of two rows (top side, then bottom
-  side), like the SVG's match boxes.
+  side), like the SVG's match boxes, with the metadata line above it.
 
 ![World Cup knockout stage as an HTML table](knockout-8-table.png)
 
@@ -110,6 +112,29 @@ The output is a self-contained `<div>` fragment, ready to drop into a page. Styl
 is driven by `pd-*` CSS classes with embedded defaults, so the host page can theme it.
 The document's `render` options are SVG geometry knobs (`box_width`,
 `max_label_chars`) and are ignored here — HTML handles long names natively.
+
+### Match metadata
+
+Above each match (in the SVG and the stacked table; as the leading cell in the flat
+table) the renderer draws a metadata line. It always starts with the match **id** — so a
+match with no game yet still shows its id (e.g. `QF4`) — followed by each leg's date and
+venue when present: `ID · dt venue` for one leg, `ID · dt venue / dt venue` for two. Put
+`dt`/`venue` on each leg (or, when a match has no legs, at match level); a host's
+`get_match` can supply them too.
+
+```json
+{ "id": "sf1", "legs": [
+  { "team1": "Flamengo", "goals1": 0, "team2": "River Plate", "goals2": 0,
+    "dt": "2026-09-23 23:30", "venue": "Maracanã" },
+  { "team1": "River Plate", "goals1": 1, "team2": "Flamengo", "goals2": 2,
+    "dt": "2026-09-30 23:30", "venue": "Estadio Monumental" } ] }
+```
+
+`dt` is assumed to be **GMT** in `%Y-%m-%d %H:%M`. Set `render.dt_format` (a `strftime`
+string) to reformat it, and pass a `timezone` to the render call
+(`render_svg`/`render_html`/`KnockoutStage.render`, or the CLI's `--timezone`) to convert
+it first; a value that does not parse — or no `dt_format` at all — is shown verbatim.
+Suppress the whole line with `render.show_metadata: false`.
 
 ### Light and dark mode
 
@@ -155,6 +180,7 @@ class ChampionshipDiagram(KnockoutStage):
         return {
             "team1": g.home.name, "goals1": g.home_goals, "pen1": g.home_pens,
             "team2": g.away.name, "goals2": g.away_goals, "pen2": g.away_pens,
+            "dt": g.kickoff_gmt, "venue": g.venue,   # optional metadata
         }
 
     def get_tournament(self):
@@ -172,9 +198,10 @@ def knockout_stage_svg(request, championship):
 [HTML table layout](#the-html-table-layout), hydrated from the same hooks.
 
 `get_match` returns only what it has — any of `team1`/`goals1`/`pen1` and their `2`
-counterparts; a returned `None` leaves that leg as the document defines it. Where a side
-has no team yet, the resolved name is filled in from the live game while the
-advancement connector (`winnerof1`/`winnerof2`) is kept.
+counterparts, plus the leg's `dt`/`venue` [metadata](#match-metadata); a returned `None`
+leaves that leg as the document defines it. Where a side has no team yet, the resolved
+name is filled in from the live game while the advancement connector
+(`winnerof1`/`winnerof2`) is kept.
 
 The document's display preferences are available to the hooks as `self.render_config`,
 so `get_match` can, for instance, read `self.render_config.max_label_chars` and return

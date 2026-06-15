@@ -34,6 +34,16 @@
           "type": "string",
           "enum": ["square", "flag"],
           "default": "square"
+        },
+        "show_metadata": {
+          "type": "boolean",
+          "default": true,
+          "comment": "draw the per-match metadata line (id, then each leg's dt/venue)"
+        },
+        "dt_format": {
+          "type": "string",
+          "minLength": 1,
+          "comment": "strftime format for rendering each leg's dt (parsed as GMT y-m-d HH:MM); absent => shown verbatim"
         }
       }
     },
@@ -52,9 +62,8 @@
     },
     "match": {
       "type": "object",
-      "required": ["id"],
       "additionalProperties": false,
-      "comment": "two sides, 1 = top, 2 = bottom; winnerof{n} wires advancement, team{n} names a known side",
+      "comment": "two sides, 1 = top, 2 = bottom; winnerof{n} wires advancement, team{n} names a known side. id is optional (omit it on a match nothing references, e.g. the final). dt/venue here are a fallback used only when there are no legs to carry them",
       "properties": {
         "id": { "type": "string", "minLength": 1 },
         "winnerof1": { "type": "string", "minLength": 1 },
@@ -67,6 +76,8 @@
           "type": "array",
           "items": { "$ref": "#/$defs/leg" }
         },
+        "dt": { "type": "string", "minLength": 1 },
+        "venue": { "type": "string", "minLength": 1 },
         "winner": { "enum": [1, 2] },
         "settle": {
           "const": false,
@@ -87,7 +98,9 @@
         "team2": { "type": "string", "minLength": 1 },
         "goals2": { "type": "integer", "minimum": 0 },
         "id2": { "type": ["string", "integer"] },
-        "pen2": { "type": "integer", "minimum": 0 }
+        "pen2": { "type": "integer", "minimum": 0 },
+        "dt": { "type": "string", "minLength": 1 },
+        "venue": { "type": "string", "minLength": 1 }
       }
     }
   }

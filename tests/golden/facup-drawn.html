@@ -4,6 +4,7 @@
   .pd-title { font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 12px; }
   .pd-season { font-size: 13px; font-weight: 400; color: #6b7280; margin-left: 8px; }
   .pd-header { font-size: 12px; font-weight: 600; color: #374151; margin: 16px 0 8px; }
+  .pd-meta { font-size: 11px; color: #6b7280; margin: 0 0 3px; }
   .pd-match { border-collapse: separate; border-spacing: 0; width: 100%;
               max-width: 24em; border: 1px solid #d1d5db; border-radius: 3px;
               overflow: hidden; margin: 0 0 15px; }
@@ -27,12 +28,14 @@
   .pd-grid .pd-round-head { font-size: 12px; font-weight: 600; color: #374151;
                             text-align: left; padding: 26px 6px 6px; }
   .pd-grid tr:first-child .pd-round-head { padding-top: 4px; }
+  .pd-grid .pd-meta { font-size: 11px; color: #6b7280; text-align: left; }
   .pd-grid .pd-win { font-weight: 700; color: #065f46; }
   @media (prefers-color-scheme: dark) {
     .pd-stage { color: #e5e7eb; background: #0f172a; }
     .pd-title { color: #f8fafc; }
     .pd-season { color: #94a3b8; }
     .pd-header { color: #cbd5e1; }
+    .pd-meta, .pd-grid .pd-meta { color: #94a3b8; }
     .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
     .pd-flags .pd-crest { border-color: #334155; }
     .pd-match { background: #1e293b; border-color: #334155; }
@@ -45,9 +48,10 @@
 <table class="pd-grid">
 <tbody>
 <tr class="pd-round-row">
-<td class="pd-round-head" colspan="7">Quarterfinals</td>
+<td class="pd-round-head" colspan="8">Quarterfinals</td>
 </tr>
 <tr class="pd-match-row">
+<td class="pd-meta">QF1</td>
 <td class="pd-team pd-team1 pd-win">Manchester City</td>
 <td class="pd-crest1 pd-win"></td>
 <td class="pd-score pd-score1 pd-win">2</td>
@@ -57,6 +61,7 @@
 <td class="pd-team pd-team2">Newcastle</td>
 </tr>
 <tr class="pd-match-row">
+<td class="pd-meta">QF2</td>
 <td class="pd-team pd-team1">Chelsea</td>
 <td class="pd-crest1"></td>
 <td class="pd-score pd-score1">1 (3)</td>
@@ -66,6 +71,7 @@
 <td class="pd-team pd-team2 pd-win">Arsenal</td>
 </tr>
 <tr class="pd-match-row">
+<td class="pd-meta">QF3</td>
 <td class="pd-team pd-team1 pd-win">Liverpool</td>
 <td class="pd-crest1 pd-win"></td>
 <td class="pd-score pd-score1 pd-win">3</td>
@@ -75,6 +81,7 @@
 <td class="pd-team pd-team2">Aston Villa</td>
 </tr>
 <tr class="pd-match-row">
+<td class="pd-meta">QF4</td>
 <td class="pd-team pd-team1 pd-win">Manchester United</td>
 <td class="pd-crest1 pd-win"></td>
 <td class="pd-score pd-score1 pd-win">2</td>
@@ -84,9 +91,10 @@
 <td class="pd-team pd-team2">Tottenham</td>
 </tr>
 <tr class="pd-round-row">
-<td class="pd-round-head" colspan="7">Semifinals</td>
+<td class="pd-round-head" colspan="8">Semifinals</td>
 </tr>
 <tr class="pd-match-row">
+<td class="pd-meta">SF1</td>
 <td class="pd-team pd-team1">Arsenal</td>
 <td class="pd-crest1"></td>
 <td class="pd-score pd-score1"></td>
@@ -96,6 +104,7 @@
 <td class="pd-team pd-team2">Manchester United</td>
 </tr>
 <tr class="pd-match-row">
+<td class="pd-meta">SF2</td>
 <td class="pd-team pd-team1">Manchester City</td>
 <td class="pd-crest1"></td>
 <td class="pd-score pd-score1"></td>
@@ -105,9 +114,10 @@
 <td class="pd-team pd-team2">Liverpool</td>
 </tr>
 <tr class="pd-round-row">
-<td class="pd-round-head" colspan="7">Final</td>
+<td class="pd-round-head" colspan="8">Final</td>
 </tr>
 <tr class="pd-match-row">
+<td class="pd-meta"></td>
 <td class="pd-team pd-team1">Winner SF1</td>
 <td class="pd-crest1"></td>
 <td class="pd-score pd-score1"></td>

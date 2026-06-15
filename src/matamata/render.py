@@ -6,10 +6,11 @@ the diagram can be themed by the host page; sensible defaults are embedded.
 
 from __future__ import annotations
 
+from typing import Optional
 from xml.sax.saxutils import escape
 
 from .layout import BOX_H, ROW_H, Layout, PlacedMatch, SideView, compute_layout
-from .model import Stage
+from .model import Stage, meta_text
 
 _LABEL_PAD = 10
 _SCORE_PAD = 8
@@ -23,6 +24,7 @@ _STYLE = """
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
   .pd-season { font: 400 13px sans-serif; fill: #6b7280; }
   .pd-header { font: 600 12px sans-serif; fill: #374151; text-anchor: middle; }
+  .pd-meta { font: 400 11px sans-serif; fill: #6b7280; }
   .pd-box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
   .pd-divider { stroke: #e5e7eb; stroke-width: 1; }
   .pd-team { font: 400 13px sans-serif; fill: #1f2937; }
@@ -35,6 +37,7 @@ _STYLE = """
     .pd-title { fill: #f8fafc; }
     .pd-season { fill: #94a3b8; }
     .pd-header { fill: #cbd5e1; }
+    .pd-meta { fill: #94a3b8; }
     .pd-box { fill: #1e293b; stroke: #334155; }
     .pd-divider { stroke: #334155; }
     .pd-team { fill: #e5e7eb; }
@@ -95,8 +98,18 @@ def _row(
 
 
 def _match(
-    out: list[str], pm: PlacedMatch, max_chars: int, box_w: float, flag: bool = False
+    out: list[str],
+    pm: PlacedMatch,
+    max_chars: int,
+    box_w: float,
+    flag: bool = False,
+    meta: Optional[str] = None,
 ) -> None:
+    if meta:
+        out.append(
+            f'<text class="pd-meta" x="{pm.x:.0f}" y="{pm.y - 6:.0f}">'
+            f"{escape(meta)}</text>"
+        )
     out.append(
         f'<rect class="pd-box" x="{pm.x:.0f}" y="{pm.y:.0f}" '
         f'width="{box_w:.0f}" height="{BOX_H}" rx="3"/>'
@@ -110,7 +123,7 @@ def _match(
     _row(out, pm, pm.away, mid, max_chars, box_w, flag)
 
 
-def render_layout(stage: Stage, layout: Layout) -> str:
+def render_layout(stage: Stage, layout: Layout, timezone: Optional[str] = None) -> str:
     out: list[str] = []
     out.append(
         f'<svg xmlns="http://www.w3.org/2000/svg" '
@@ -143,13 +156,21 @@ def render_layout(stage: Stage, layout: Layout) -> str:
         out.append(f'<path class="pd-link" d="{d}"/>')
 
     flag = stage.render.crest_shape == "flag"
+    show_meta = stage.render.show_metadata
     for pm in layout.matches:
-        _match(out, pm, stage.render.max_label_chars, layout.box_width, flag)
+        meta = (
+            meta_text(pm.match, stage.render.dt_format, timezone) if show_meta else None
+        )
+        _match(out, pm, stage.render.max_label_chars, layout.box_width, flag, meta)
 
     out.append("</svg>")
     return "\n".join(out)
 
 
-def render_svg(stage: Stage) -> str:
-    """Render the knockout stage to a self-contained SVG document string."""
-    return render_layout(stage, compute_layout(stage))
+def render_svg(stage: Stage, timezone: Optional[str] = None) -> str:
+    """Render the knockout stage to a self-contained SVG document string.
+
+    ``timezone`` is an optional zone name (e.g. ``"America/Montevideo"``) the metadata
+    datetimes (assumed GMT) are converted to before rendering.
+    """
+    return render_layout(stage, compute_layout(stage), timezone)

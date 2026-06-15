@@ -59,7 +59,7 @@
     },
     {
       "name": "Final",
-      "matches": [{ "id": "final", "winnerof1": "sf1", "winnerof2": "sf2" }]
+      "matches": [{ "winnerof1": "sf1", "winnerof2": "sf2" }]
     }
   ]
 }

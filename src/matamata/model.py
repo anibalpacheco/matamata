@@ -14,9 +14,15 @@ the JSON, not of this library.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from typing import Optional, Union
+from zoneinfo import ZoneInfo
 
 Id = Union[str, int]
+
+# Datetime metadata in the document is assumed to be GMT in this format; anything else is
+# shown verbatim (see render_dt).
+_DT_INPUT = "%Y-%m-%d %H:%M"
 
 
 @dataclass
@@ -43,6 +49,15 @@ class Leg:
     away: Optional[int] = None
     pens: Optional[Pens] = None
     ref: Optional[Id] = None  # id of the real game in the host system
+    # Which tie side ("home"/"away") played this leg as local. The scores above are kept
+    # in tie orientation, so this preserves the leg's own localía (its JSON ``team1``) for
+    # renderings that show it per leg, e.g. the flat table. ``None`` when not known (a
+    # result-only leg has no localía); the flat table then falls back to tie order.
+    local: Optional[str] = None
+    # Scheduling metadata, shown (not computed with) by the renderer. ``dt`` is a
+    # datetime string, assumed GMT in the _DT_INPUT format; ``venue`` is free text.
+    dt: Optional[str] = None
+    venue: Optional[str] = None
 
     @property
     def played(self) -> bool:
@@ -77,10 +92,14 @@ class Slot:
 
 
 @dataclass
-class Match:
-    """One match node: two sides plus an optional, possibly multi-leg result."""
+class Match:  # pylint: disable=too-many-instance-attributes
+    """One match node: two sides plus an optional, possibly multi-leg result.
 
-    id: str
+    ``id`` is optional: a match nothing references (typically the final) may omit it, and
+    then carries no metadata id label.
+    """
+
+    id: Optional[str]
     home: Slot
     away: Slot
     legs: list[Leg] = field(default_factory=list)
@@ -88,6 +107,10 @@ class Match:
     # The document's "settle": false opts this match out of having its winner written
     # by KnockoutStage.apply_results. Display is unaffected.
     settle: bool = True
+    # Scheduling metadata at match level — only consulted when the match has no legs to
+    # carry it (see meta_text); otherwise the legs' own dt/venue are shown.
+    dt: Optional[str] = None
+    venue: Optional[str] = None
 
 
 @dataclass
@@ -112,11 +135,21 @@ class RenderOptions:
     rectangular box (3:2) with the image fitted inside without distortion and a thin
     border, so national flags look like flags instead of squashed squares. Only the
     *shape* is a document preference — the image itself is still host-only (``get_crest``).
+
+    ``show_metadata``: whether the per-match metadata line (id, then each leg's date and
+    venue) is drawn. Defaults to ``True``; set it ``False`` to suppress the line.
+
+    ``dt_format``: an optional ``strftime`` format for rendering each leg's ``dt``. When
+    set, ``dt`` is parsed as GMT (``_DT_INPUT``) and reformatted (and converted to the
+    render's timezone, if one is given); when unset — or when the value does not parse —
+    the raw string is shown (see ``render_dt``).
     """
 
     max_label_chars: int = 22
     box_width: int = 190
     crest_shape: str = "square"
+    show_metadata: bool = True
+    dt_format: Optional[str] = None
 
 
 @dataclass
@@ -143,7 +176,7 @@ class Stage:
     render: RenderOptions = field(default_factory=RenderOptions)
     labels: Labels = field(default_factory=Labels)
 
-    def matches_by_id(self) -> dict[str, Match]:
+    def matches_by_id(self) -> dict[Optional[str], Match]:
         return {m.id: m for r in self.rounds for m in r.matches}
 
 
@@ -184,6 +217,70 @@ def score_text(match: Match, side: str) -> str:
     if pens is not None:
         pen_suffix = f" ({pens.home if side == 'home' else pens.away})"
     return goals + pen_suffix
+
+
+def leg_score_text(leg: Leg, side: str) -> str:
+    """Display score for a single leg and side (the per-leg analogue of ``score_text``).
+
+    Used by the flat table, which gives each leg its own row. Empty when the leg is not
+    played; the leg's own shootout is appended in parentheses.
+    """
+    if not leg.played:
+        return ""
+    goals = str(leg.home if side == "home" else leg.away)
+    if leg.pens is not None:
+        goals += f" ({leg.pens.home if side == 'home' else leg.pens.away})"
+    return goals
+
+
+def render_dt(raw: str, dt_format: Optional[str], tz: Optional[str]) -> str:
+    """Render a metadata datetime string, formatting/converting only when asked to.
+
+    The document's ``dt`` is assumed to be GMT in the ``_DT_INPUT`` format. With no
+    ``dt_format`` the raw string is returned unchanged (no parsing). With a ``dt_format``
+    the value is parsed, optionally converted to ``tz`` (a zone name like
+    ``"America/Montevideo"``), and reformatted. Anything that fails to parse — a value
+    that violates the input format, or an unknown zone — falls back to the raw string.
+    """
+    if not dt_format:
+        return raw
+    try:
+        moment = datetime.strptime(raw, _DT_INPUT).replace(tzinfo=timezone.utc)
+    except (ValueError, TypeError):
+        return raw
+    if tz:
+        try:
+            moment = moment.astimezone(ZoneInfo(tz))
+        except Exception:  # unknown zone: keep GMT rather than dropping the value
+            pass
+    return moment.strftime(dt_format)
+
+
+def meta_text(
+    match: Match, dt_format: Optional[str] = None, tz: Optional[str] = None
+) -> str:
+    """The match's metadata line: the id, then each leg's ``dt``/``venue`` when present.
+
+    Starts with the uppercased id (mirroring the "Winner {id}" placeholder), so a match
+    with no scheduling data still shows its id. A match with **no** id (e.g. the final,
+    which nothing references and whose round title already names it) shows no id label.
+    Each leg contributes a ``dt venue`` part (either may be missing), the parts joined with
+    " / "; when the match has no legs its own match-level ``dt``/``venue`` are used
+    instead. ``dt_format``/``tz`` drive datetime rendering (see ``render_dt``). Returns ""
+    when nothing is left to show.
+    """
+    label = match.id.upper() if match.id else ""
+    sources: list = list(match.legs) if match.legs else [match]
+    parts: list[str] = []
+    for src in sources:
+        when = render_dt(src.dt, dt_format, tz) if src.dt else None
+        piece = " ".join(p for p in (when, src.venue) if p)
+        if piece:
+            parts.append(piece)
+    detail = " / ".join(parts)
+    if label and detail:
+        return f"{label} · {detail}"
+    return label or detail
 
 
 class Resolver:

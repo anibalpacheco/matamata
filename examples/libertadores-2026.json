@@ -1,7 +1,7 @@
 {
   "tournament": "Copa Libertadores",
   "season": "2026",
-  "render": { "box_width": 240 },
+  "render": { "box_width": 240, "dt_format": "%d/%m %H:%M" },
   "rounds": [
     {
       "name": "Quarterfinals",
@@ -14,14 +14,23 @@
         {
           "id": "qf2",
           "legs": [
-            { "team1": "River Plate", "goals1": 1, "team2": "Palmeiras", "goals2": 1 },
+            {
+              "team1": "River Plate",
+              "goals1": 1,
+              "team2": "Palmeiras",
+              "goals2": 1,
+              "dt": "2026-08-12 23:30",
+              "venue": "Estadio Monumental"
+            },
             {
               "team1": "Palmeiras",
               "goals1": 0,
               "pen1": 2,
               "team2": "River Plate",
               "goals2": 0,
-              "pen2": 4
+              "pen2": 4,
+              "dt": "2026-08-19 23:30",
+              "venue": "Allianz Parque"
             }
           ],
           "winner": 1
@@ -33,13 +42,17 @@
               "team1": "Montevideo City Torque",
               "goals1": 1,
               "team2": "Atletico Mineiro",
-              "goals2": 0
+              "goals2": 0,
+              "dt": "2026-08-13 23:00",
+              "venue": "Parque Viera"
             },
             {
               "team1": "Atletico Mineiro",
               "goals1": 1,
               "team2": "Montevideo City Torque",
-              "goals2": 1
+              "goals2": 1,
+              "dt": "2026-08-20 23:00",
+              "venue": "Arena MRV"
             }
           ],
           "winner": 1
@@ -47,8 +60,22 @@
         {
           "id": "qf4",
           "legs": [
-            { "team1": "Corinthians", "goals1": 3, "team2": "Internacional", "goals2": 0 },
-            { "team1": "Internacional", "goals1": 1, "team2": "Corinthians", "goals2": 1 }
+            {
+              "team1": "Corinthians",
+              "goals1": 3,
+              "team2": "Internacional",
+              "goals2": 0,
+              "dt": "2026-08-12 21:00",
+              "venue": "Neo Química Arena"
+            },
+            {
+              "team1": "Internacional",
+              "goals1": 1,
+              "team2": "Corinthians",
+              "goals2": 1,
+              "dt": "2026-08-19 21:00",
+              "venue": "Beira-Rio"
+            }
           ],
           "winner": 1
         }
@@ -62,8 +89,22 @@
           "winnerof1": "qf1",
           "winnerof2": "qf2",
           "legs": [
-            { "team1": "Flamengo", "goals1": 0, "team2": "River Plate", "goals2": 0 },
-            { "team1": "River Plate", "goals1": 1, "team2": "Flamengo", "goals2": 2 }
+            {
+              "team1": "Flamengo",
+              "goals1": 0,
+              "team2": "River Plate",
+              "goals2": 0,
+              "dt": "2026-09-23 23:30",
+              "venue": "Maracanã"
+            },
+            {
+              "team1": "River Plate",
+              "goals1": 1,
+              "team2": "Flamengo",
+              "goals2": 2,
+              "dt": "2026-09-30 23:30",
+              "venue": "Estadio Monumental"
+            }
           ],
           "winner": 1
         },
@@ -76,13 +117,17 @@
               "team1": "Montevideo City Torque",
               "goals1": 1,
               "team2": "Corinthians",
-              "goals2": 1
+              "goals2": 1,
+              "dt": "2026-09-24 23:30",
+              "venue": "Parque Viera"
             },
             {
               "team1": "Corinthians",
               "goals1": 0,
               "team2": "Montevideo City Torque",
-              "goals2": 2
+              "goals2": 2,
+              "dt": "2026-10-01 23:30",
+              "venue": "Neo Química Arena"
             }
           ],
           "winner": 1
@@ -93,7 +138,6 @@
       "name": "Final",
       "matches": [
         {
-          "id": "final",
           "winnerof1": "sf1",
           "winnerof2": "sf2",
           "legs": [
@@ -101,7 +145,9 @@
               "team1": "Flamengo",
               "goals1": 2,
               "team2": "Montevideo City Torque",
-              "goals2": 1
+              "goals2": 1,
+              "dt": "2026-11-21 20:00",
+              "venue": "Estadio Centenario"
             }
           ],
           "winner": 1

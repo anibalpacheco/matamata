@@ -6,7 +6,17 @@ import os
 import pytest
 
 from matamata import KnockoutStage, parse_stage
-from matamata.model import Leg, Match, Pens, Resolver, Slot, aggregate
+from matamata.model import (
+    Leg,
+    Match,
+    Pens,
+    Resolver,
+    Slot,
+    aggregate,
+    leg_score_text,
+    meta_text,
+    render_dt,
+)
 from matamata.parse import StageError, validate_document
 
 EXAMPLES = os.path.join(os.path.dirname(__file__), "..", "examples")
@@ -565,3 +575,141 @@ def test_example_host_resolves_ref_legs(libertadores_diagram):
     # The two ref-only legs are filled from example_data.json, in tie orientation.
     assert [(leg.home, leg.away) for leg in qf1.legs] == [(2, 1), (0, 0)]
     assert qf1.home.team == "Flamengo" and qf1.away.team == "Boca Juniors"
+    # get_match also supplies each leg's dt/venue (same "present wins" rule as scores).
+    assert [(leg.dt, leg.venue) for leg in qf1.legs] == [
+        ("2026-08-11 23:00", "Maracanã"),
+        ("2026-08-18 23:00", "La Bombonera"),
+    ]
+
+
+# --- match metadata ---------------------------------------------------------
+
+
+def test_meta_text_is_just_the_id_without_scheduling_data():
+    m = Match(id="qf4", home=Slot(team="A"), away=Slot(team="B"))
+    assert meta_text(m) == "QF4"
+
+
+def test_meta_text_one_leg_appends_dt_and_venue():
+    m = Match(
+        id="f",
+        home=Slot(),
+        away=Slot(),
+        legs=[Leg(1, 0, dt="2026-05-01 18:00", venue="Centenario")],
+    )
+    assert meta_text(m) == "F · 2026-05-01 18:00 Centenario"
+
+
+def test_meta_text_two_legs_join_with_a_slash_and_skip_empty_parts():
+    m = Match(
+        id="sf1",
+        home=Slot(),
+        away=Slot(),
+        legs=[
+            Leg(0, 0, dt="2026-05-01 18:00", venue="Maracanã"),
+            Leg(1, 2, venue="Monumental"),
+        ],
+    )
+    assert meta_text(m) == "SF1 · 2026-05-01 18:00 Maracanã / Monumental"
+
+
+def test_meta_text_formats_and_converts_the_datetime():
+    m = Match(id="f", home=Slot(), away=Slot(), legs=[Leg(dt="2026-05-01 18:00")])
+    assert meta_text(m, "%d/%m %H:%M") == "F · 01/05 18:00"
+    # 18:00 GMT is 15:00 in Montevideo (UTC-3).
+    assert meta_text(m, "%d/%m %H:%M", "America/Montevideo") == "F · 01/05 15:00"
+
+
+def test_meta_text_uses_match_level_dt_venue_only_without_legs():
+    m = Match(id="f", home=Slot(), away=Slot(), dt="2026-05-01 18:00", venue="X")
+    assert meta_text(m) == "F · 2026-05-01 18:00 X"
+
+
+def test_meta_text_omits_the_id_label_for_an_id_less_match():
+    # The final omits its id (nothing references it; the round header already names it).
+    scheduled = Match(
+        id=None, home=Slot(), away=Slot(), legs=[Leg(2, 1, venue="Centenario")]
+    )
+    assert meta_text(scheduled) == "Centenario"  # detail only, no id label
+    assert meta_text(Match(id=None, home=Slot(), away=Slot())) == ""  # nothing to show
+
+
+def test_id_is_optional_when_nothing_references_the_match():
+    data = {
+        "rounds": [
+            {"name": "SF", "matches": [{"id": "sf1", "team1": "A", "team2": "B"}]},
+            {"name": "Final", "matches": [{"winnerof1": "sf1"}]},  # the final has no id
+        ]
+    }
+    stage = parse_stage(data)
+    final = stage.rounds[-1].matches[0]
+    assert final.id is None
+    assert meta_text(final) == ""
+
+
+def test_render_dt_passes_through_without_a_format_or_on_a_bad_value():
+    assert render_dt("2026-05-01 18:00", None, None) == "2026-05-01 18:00"
+    assert render_dt("whenever", "%d/%m", None) == "whenever"  # unparseable -> raw
+
+
+def test_leg_score_text_is_one_figure_with_optional_pens():
+    assert leg_score_text(Leg(2, 1), "home") == "2"
+    assert leg_score_text(Leg(0, 0, Pens(4, 2)), "away") == "0 (2)"
+    assert leg_score_text(Leg(), "home") == ""
+
+
+def test_dt_and_venue_parse_onto_the_leg_and_the_match():
+    data = {
+        "rounds": [
+            {
+                "name": "F",
+                "matches": [
+                    {
+                        "id": "f",
+                        "dt": "2026-05-01 18:00",
+                        "venue": "Match level",
+                        "legs": [
+                            {
+                                "goals1": 1,
+                                "goals2": 0,
+                                "dt": "2026-05-01 20:00",
+                                "venue": "Leg level",
+                            }
+                        ],
+                    }
+                ],
+            }
+        ]
+    }
+    match = parse_stage(data).matches_by_id()["f"]
+    assert (match.dt, match.venue) == ("2026-05-01 18:00", "Match level")
+    assert (match.legs[0].dt, match.legs[0].venue) == ("2026-05-01 20:00", "Leg level")
+
+
+def test_schema_accepts_metadata_fields():
+    pytest.importorskip("jsonschema")
+    validate_document(
+        {
+            "render": {"show_metadata": False, "dt_format": "%d/%m %H:%M"},
+            "rounds": [
+                {
+                    "name": "F",
+                    "matches": [
+                        {
+                            "id": "f",
+                            "dt": "2026-05-01 18:00",
+                            "venue": "X",
+                            "legs": [
+                                {
+                                    "goals1": 1,
+                                    "goals2": 0,
+                                    "dt": "2026-05-01 18:00",
+                                    "venue": "Y",
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ],
+        }
+    )

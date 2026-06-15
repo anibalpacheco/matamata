@@ -33,9 +33,11 @@ changes.
 
 ```jsonc
 {
-  "max_label_chars": 22,    // optional, longest team label before it is truncated
-  "box_width": 190,         // optional, width of every match box in SVG units
-  "crest_shape": "square"   // optional, "square" (default) or "flag"
+  "max_label_chars": 22,        // optional, longest team label before it is truncated
+  "box_width": 190,             // optional, width of every match box in SVG units
+  "crest_shape": "square",      // optional, "square" (default) or "flag"
+  "show_metadata": true,        // optional, draw the per-match metadata line (default true)
+  "dt_format": "%d/%m %H:%M"    // optional, strftime format for each leg's dt
 }
 ```
 
@@ -49,6 +51,12 @@ changes.
   fitted inside without distortion and a thin border, so national flags look like flags
   instead of squashed squares. Only the *shape* is declared here — the image itself is
   still supplied by the host's `get_crest`, never by the document.
+- `"show_metadata"` (default `true`) — whether the per-match metadata line (the id, then
+  each leg's date and venue) is drawn. Set it `false` to suppress the line entirely.
+- `"dt_format"` (default unset) — a `strftime` format applied to each leg's `dt`. When
+  set, `dt` is parsed as **GMT** in `%Y-%m-%d %H:%M` and reformatted (and converted to the
+  render's timezone, if one is given — see "Host integration"); when unset, or when a
+  value does not parse, the raw string is shown unchanged.
 
 Each side always shows the goals of every played leg in order, e.g. `2 0` for a tie or
 `2` for a single match; a shootout is appended in parentheses on the relevant side, e.g.
@@ -71,7 +79,7 @@ numbering. There are no `home`/`away` objects.
 
 ```jsonc
 {
-  "id": "sf1",            // required, unique within the document
+  "id": "sf1",            // optional, unique within the document (omit it on the final)
   "winnerof1": "qf1",     // optional, side 1 is the winner of another match (advancement link)
   "winnerof2": "qf2",     // optional, same for side 2
   "team1": "Flamengo",    // optional, a known/advancing team on side 1 (with id1)
@@ -82,7 +90,10 @@ numbering. There are no `home`/`away` objects.
 }
 ```
 
-- `id` — internal identifier, referenced by `winnerof1`/`winnerof2`. Not a display value.
+- `id` — identifier referenced by `winnerof1`/`winnerof2`, and shown (uppercased) as the
+  first part of the match's [metadata line](#rendering-notes-non-normative). It is
+  **optional**: a match that nothing references — typically the final, whose round title
+  already names it — may omit it, and then shows no metadata id.
 - `winnerof1`/`winnerof2` — explicit advancement links: each must reference the `id` of
   another match. References must not form a cycle. They draw the connector and, while
   unresolved, show a placeholder ("Winner QF1"). They declare a **preestablished**
@@ -136,6 +147,12 @@ the opposite order.
   scores are filled in dynamically at render time — see "Host integration". A `ref` may
   coexist with an inline result (a baked snapshot); when the host supplies live data it
   wins over the baked values.
+- `dt` and `venue` are optional scheduling metadata for the leg, shown on the match's
+  metadata line (see "Match metadata"). `dt` is a datetime string (assumed GMT, formatted
+  per `render.dt_format`); `venue` is free text. Unlike the score/team fields they are not
+  game-oriented — they describe the leg itself, so they are never flipped. A host's
+  `get_match` may also supply them, and present values win over baked ones. When a match
+  has **no legs**, a `dt`/`venue` written at *match* level is used as a fallback.
 - The renderer reads the first named leg to place the two sides (its `team1` → the tie's
   top, `team2` → the tie's bottom) and orients later legs by matching team names.
 - A match with no legs is "not played yet".
@@ -153,12 +170,18 @@ result-application helper below.
 A leg's `ref` lets a host system inject live data. When using the Python renderer's
 `KnockoutStage` class, override `get_match(ref)` to return that one game as a flat dict
 in the same shape as a self-contained leg — `team1`/`goals1`/`team2`/`goals2` (local
-first), with optional `pen1`/`pen2` and `id1`/`id2`. Return only what you have; the
-renderer fills the leg's scores and, where a side has no team yet, its name — keeping any
-`winnerof` link. `get_tournament()` and `get_season()` can likewise be supplied
-dynamically, and `get_crest(team_id, team_name)` can resolve each side's crest/flag
-image from the side's identity. The document itself never carries images: crests have
-no JSON surface, by design.
+first), with optional `pen1`/`pen2`, `id1`/`id2` and the leg's `dt`/`venue`. Return only
+what you have; the renderer fills the leg's scores, metadata and, where a side has no team
+yet, its name — keeping any `winnerof` link, and letting present values win over baked
+ones. `get_tournament()` and `get_season()` can likewise be supplied dynamically, and
+`get_crest(team_id, team_name)` can resolve each side's crest/flag image from the side's
+identity. The document itself never carries images: crests have no JSON surface, by
+design.
+
+The metadata datetimes are assumed to be **GMT**. The render entry points
+(`render_svg`, `render_html`, `KnockoutStage.render`, and the CLI's `--timezone`) take an
+optional `timezone` (a zone name like `"America/Montevideo"`) the datetimes are converted
+to before being formatted with `render.dt_format`.
 
 ## Applying results (non-normative)
 
@@ -195,6 +218,17 @@ match carrying `"settle": false` is never settled, whatever the call says.
 - An unresolved side displays the team that advanced when known, otherwise the
   placeholder label (e.g. "Winner QF1") for a `winnerof` link, or "TBD".
 - The winning side of a match is emphasized only when the `winner` field says so.
+- **Match metadata.** Above each match the renderer draws a line that starts with the
+  match **id** (uppercased; a match with no scheduling data still shows its id, while a
+  match with no `id` at all — e.g. the final — shows none) followed by each leg's `dt` and
+  `venue` when present: `ID · dt venue` for one leg, `ID · dt venue / dt venue` for two.
+  Suppress the whole line with `render.show_metadata: false`. (SVG and the stacked HTML
+  table draw this line; the flat table carries the id as a leading cell — see below.)
 - Besides the SVG diagram there is an HTML table rendering for small screens: rounds
-  stack vertically, each match is two table rows, and no connectors are drawn —
-  advancement is read top-down. Both renderings show the same resolved data.
+  stack vertically and no connectors are drawn — advancement is read top-down. The
+  **stacked** layout draws each match as a two-row box (aggregate scores); the **flat**
+  layout is one grid where a two-legged tie becomes **two rows**, one per leg, each
+  carrying that leg's single score and repeating the id. Each flat row honors that leg's
+  **localía**: the leg's local side (its `team1`) sits in the home (left) column, so the
+  second leg's row is flipped relative to the first. Both renderings show the same
+  resolved data.

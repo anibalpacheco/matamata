@@ -42,7 +42,8 @@ from .render_html import render_html
 
 # What get_match returns: one flat game dict, the same shape as an inline leg. "1" is the
 # game's local/home side, "2" the away/visitor; keys "team1"/"goals1"/"pen1"/"id1" and
-# their "2" counterparts are all optional. Return only what you have.
+# their "2" counterparts are all optional, plus optional "dt"/"venue" scheduling metadata.
+# Return only what you have; present values win over baked ones.
 GameData = Optional[dict[str, Any]]
 
 # What apply_results accepts: the scores of one leg plus exactly one way to find it —
@@ -87,8 +88,9 @@ class KnockoutStage:
 
         Called once per leg that carries a ``ref``. Return one flat game dict, local
         first: ``team1``/``goals1``/``pen1``/``id1`` for the game's home side and the
-        ``2`` counterparts for the away side — all optional, so return only what you
-        have. Returning ``None`` leaves the leg as the document defines it.
+        ``2`` counterparts for the away side, plus optional ``dt``/``venue`` scheduling
+        metadata — all optional, so return only what you have. Present values win over a
+        baked inline result. Returning ``None`` leaves the leg as the document defines it.
         """
         return None
 
@@ -163,7 +165,11 @@ class KnockoutStage:
         return stage
 
     def render(
-        self, fmt: str = "svg", language: Optional[str] = None, layout: str = "flat"
+        self,
+        fmt: str = "svg",
+        language: Optional[str] = None,
+        layout: str = "flat",
+        timezone: Optional[str] = None,
     ) -> str:
         """Render the knockout stage to a self-contained string.
 
@@ -171,14 +177,15 @@ class KnockoutStage:
         layout for small screens). ``layout`` selects the HTML table arrangement
         (``"flat"`` or ``"stacked"``) and is ignored for svg. ``language`` is forwarded
         to :meth:`get_labels` to localize the generated labels (``None`` leaves them in
-        English).
+        English). ``timezone`` is a zone name (e.g. ``"America/Montevideo"``) the
+        metadata datetimes (assumed GMT) are converted to before rendering.
         """
         if fmt not in ("svg", "html"):
             raise StageError(f"unknown render format {fmt!r}")
         stage = self.build(language)
         if fmt == "html":
-            return render_html(stage, layout=layout)
-        return render_svg(stage)
+            return render_html(stage, layout=layout, timezone=timezone)
+        return render_svg(stage, timezone=timezone)
 
     # --------------------------------------------------------------- results
     def apply_results(

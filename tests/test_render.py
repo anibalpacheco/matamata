@@ -213,6 +213,146 @@ def test_html_emphasizes_only_the_explicit_winner():
     assert 'pd-win"' not in render_html(parse_stage(doc), layout="flat")
 
 
+def test_metadata_line_is_rendered_in_svg_and_stacked():
+    from matamata import parse_stage
+
+    doc = {
+        "render": {"dt_format": "%d/%m %H:%M"},
+        "rounds": [
+            {
+                "name": "Final",
+                "matches": [
+                    {
+                        "id": "f",
+                        "winner": 1,
+                        "legs": [
+                            {
+                                "team1": "A",
+                                "goals1": 1,
+                                "team2": "B",
+                                "goals2": 0,
+                                "dt": "2026-05-01 18:00",
+                                "venue": "Centenario",
+                            }
+                        ],
+                    }
+                ],
+            }
+        ],
+    }
+    stage = parse_stage(doc)
+    svg = render_svg(stage)
+    assert '<text class="pd-meta"' in svg
+    assert "F · 01/05 18:00 Centenario" in svg
+    stacked = render_html(stage, layout="stacked")
+    assert '<div class="pd-meta">F · 01/05 18:00 Centenario</div>' in stacked
+
+
+def test_flat_splits_a_two_leg_tie_into_two_id_rows():
+    from matamata import parse_stage
+
+    doc = {
+        "rounds": [
+            {
+                "name": "SF",
+                "matches": [
+                    {
+                        "id": "sf1",
+                        "winner": 1,  # the top side (Boca)
+                        "legs": [
+                            {
+                                "team1": "Boca",
+                                "goals1": 0,
+                                "team2": "River",
+                                "goals2": 0,
+                            },
+                            {
+                                "team1": "River",
+                                "goals1": 1,
+                                "team2": "Boca",
+                                "goals2": 2,
+                            },
+                        ],
+                    }
+                ],
+            }
+        ]
+    }
+    import re
+
+    flat = render_html(parse_stage(doc), layout="flat")
+    assert flat.count('<tr class="pd-match-row">') == 2  # one row per leg
+    assert flat.count('<td class="pd-meta">SF1</td>') == 2  # id repeated
+    # The winning (Boca) side's three cells carry pd-win, on each of the two rows.
+    assert flat.count('pd-win"') == 6
+    # Each row honors that leg's localía: the local team (JSON team1) sits on the left.
+    rows = [
+        re.findall(r"pd-team\d[^>]*>([^<]+)<", r)
+        for r in flat.split("</tr>")
+        if "pd-match-row" in r
+    ]
+    assert rows == [["Boca", "River"], ["River", "Boca"]]
+
+
+def test_id_less_match_shows_no_id_label():
+    from matamata import parse_stage
+
+    doc = {
+        "rounds": [
+            {
+                "name": "Final",
+                "matches": [
+                    {  # no id: nothing references the final
+                        "legs": [
+                            {"team1": "A", "goals1": 1, "team2": "B", "goals2": 0}
+                        ],
+                    }
+                ],
+            }
+        ]
+    }
+    stage = parse_stage(doc)
+    svg = render_svg(stage)
+    assert '<text class="pd-meta"' not in svg  # no metadata text for the id-less final
+    flat = render_html(stage, layout="flat")
+    assert '<td class="pd-meta"></td>' in flat  # empty cell kept for alignment
+    stacked = render_html(stage, layout="stacked")
+    assert '<div class="pd-meta">' not in stacked  # nothing to show -> no div
+
+
+def test_show_metadata_false_drops_the_line_and_the_flat_column():
+    from matamata import parse_stage
+
+    doc = {
+        "render": {"show_metadata": False},
+        "rounds": [
+            {
+                "name": "F",
+                "matches": [
+                    {
+                        "id": "f",
+                        "legs": [
+                            {
+                                "team1": "A",
+                                "goals1": 1,
+                                "team2": "B",
+                                "goals2": 0,
+                                "dt": "2026-05-01 18:00",
+                            }
+                        ],
+                    }
+                ],
+            }
+        ],
+    }
+    stage = parse_stage(doc)
+    assert '<text class="pd-meta"' not in render_svg(stage)
+    flat = render_html(stage, layout="flat")
+    assert '<td class="pd-meta">' not in flat
+    assert 'colspan="7"' in flat  # back to seven columns
+    assert '<div class="pd-meta">' not in render_html(stage, layout="stacked")
+
+
 def test_cli_infers_html_from_the_output_extension(tmp_path):
     from matamata.__main__ import main
 

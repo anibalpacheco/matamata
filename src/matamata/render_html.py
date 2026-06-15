@@ -24,9 +24,10 @@ options are SVG geometry knobs and are ignored here — HTML handles long names 
 
 from __future__ import annotations
 
+from typing import Optional
 from xml.sax.saxutils import escape
 
-from .model import Match, Resolver, Stage, score_text
+from .model import Leg, Match, Resolver, Stage, leg_score_text, meta_text, score_text
 
 _ATTR = {'"': "&quot;"}  # extra escape for attribute values
 
@@ -35,6 +36,7 @@ _STYLE = """
   .pd-title { font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 12px; }
   .pd-season { font-size: 13px; font-weight: 400; color: #6b7280; margin-left: 8px; }
   .pd-header { font-size: 12px; font-weight: 600; color: #374151; margin: 16px 0 8px; }
+  .pd-meta { font-size: 11px; color: #6b7280; margin: 0 0 3px; }
   .pd-match { border-collapse: separate; border-spacing: 0; width: 100%;
               max-width: 24em; border: 1px solid #d1d5db; border-radius: 3px;
               overflow: hidden; margin: 0 0 15px; }
@@ -58,12 +60,14 @@ _STYLE = """
   .pd-grid .pd-round-head { font-size: 12px; font-weight: 600; color: #374151;
                             text-align: left; padding: 26px 6px 6px; }
   .pd-grid tr:first-child .pd-round-head { padding-top: 4px; }
+  .pd-grid .pd-meta { font-size: 11px; color: #6b7280; text-align: left; }
   .pd-grid .pd-win { font-weight: 700; color: #065f46; }
   @media (prefers-color-scheme: dark) {
     .pd-stage { color: #e5e7eb; background: #0f172a; }
     .pd-title { color: #f8fafc; }
     .pd-season { color: #94a3b8; }
     .pd-header { color: #cbd5e1; }
+    .pd-meta, .pd-grid .pd-meta { color: #94a3b8; }
     .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
     .pd-flags .pd-crest { border-color: #334155; }
     .pd-match { background: #1e293b; border-color: #334155; }
@@ -94,36 +98,66 @@ def _side_row(out: list[str], match: Match, side: str, resolver: Resolver) -> No
     out.append("</tr>")
 
 
-def _flat_row(out: list[str], match: Match, resolver: Resolver) -> None:
-    """One match as a single ``<tr>`` of the round's grid: name-crest-score x score-crest-name."""
-    home_win = " pd-win" if match.winner == "home" else ""
-    away_win = " pd-win" if match.winner == "away" else ""
+def _flat_rows(
+    out: list[str], match: Match, resolver: Resolver, show_meta: bool
+) -> None:
+    """A match as one ``<tr>`` per leg of the round's grid.
+
+    A two-legged tie becomes two rows — one per leg, each carrying that leg's single
+    score — so the columns stay one figure wide; a match with no legs is a single
+    scoreless row. Each row honors the leg's localía: its local side (the JSON ``team1``)
+    goes in the home/left column, so the second leg flips relative to the first. The
+    winner emphasis follows the team into whichever column it lands in, and the leading
+    metadata cell repeats the id when metadata is shown.
+    """
     home, away = match.home, match.away
-    out.append('<tr class="pd-match-row">')
-    out.append(
-        f'<td class="pd-team pd-team1{home_win}">{escape(resolver.label(home))}</td>'
-    )
-    out.append(f'<td class="pd-crest1{home_win}">{_crest_img(home)}</td>')
-    out.append(
-        f'<td class="pd-score pd-score1{home_win}">{escape(score_text(match, "home"))}</td>'
-    )
-    out.append('<td class="pd-vs">x</td>')
-    out.append(
-        f'<td class="pd-score pd-score2{away_win}">{escape(score_text(match, "away"))}</td>'
-    )
-    out.append(f'<td class="pd-crest2{away_win}">{_crest_img(away)}</td>')
-    out.append(
-        f'<td class="pd-team pd-team2{away_win}">{escape(resolver.label(away))}</td>'
-    )
-    out.append("</tr>")
+    id_cell = escape(match.id.upper()) if match.id else ""
+    legs: list[Optional[Leg]] = list(match.legs) if match.legs else [None]
+    for leg in legs:
+        # The local side fills the home (left) column; tie order is the fallback.
+        local = leg.local if leg is not None and leg.local is not None else "home"
+        left, right = ("away", "home") if local == "away" else ("home", "away")
+        left_slot = home if left == "home" else away
+        right_slot = home if right == "home" else away
+        left_win = " pd-win" if match.winner == left else ""
+        right_win = " pd-win" if match.winner == right else ""
+        score1 = leg_score_text(leg, left) if leg is not None else ""
+        score2 = leg_score_text(leg, right) if leg is not None else ""
+        out.append('<tr class="pd-match-row">')
+        if show_meta:
+            out.append(f'<td class="pd-meta">{id_cell}</td>')
+        out.append(
+            f'<td class="pd-team pd-team1{left_win}">'
+            f"{escape(resolver.label(left_slot))}</td>"
+        )
+        out.append(f'<td class="pd-crest1{left_win}">{_crest_img(left_slot)}</td>')
+        out.append(f'<td class="pd-score pd-score1{left_win}">{escape(score1)}</td>')
+        out.append('<td class="pd-vs">x</td>')
+        out.append(f'<td class="pd-score pd-score2{right_win}">{escape(score2)}</td>')
+        out.append(f'<td class="pd-crest2{right_win}">{_crest_img(right_slot)}</td>')
+        out.append(
+            f'<td class="pd-team pd-team2{right_win}">'
+            f"{escape(resolver.label(right_slot))}</td>"
+        )
+        out.append("</tr>")
 
 
-def _render_stacked(out: list[str], rounds, resolver: Resolver) -> None:
-    """Each round as a labeled block of two-row match boxes."""
+def _render_stacked(
+    out: list[str],
+    rounds,
+    resolver: Resolver,
+    show_meta: bool,
+    dt_format: Optional[str],
+    tz: Optional[str],
+) -> None:
+    """Each round as a labeled block of two-row match boxes, each with a metadata line."""
     for rnd in rounds:
         out.append('<div class="pd-round">')
         out.append(f'<h3 class="pd-header">{escape(rnd.name)}</h3>')
         for match in rnd.matches:
+            meta = meta_text(match, dt_format, tz) if show_meta else ""
+            if meta:
+                out.append(f'<div class="pd-meta">{escape(meta)}</div>')
             out.append('<table class="pd-match">')
             out.append("<tbody>")
             _side_row(out, match, "home", resolver)
@@ -133,32 +167,38 @@ def _render_stacked(out: list[str], rounds, resolver: Resolver) -> None:
         out.append("</div>")
 
 
-def _render_flat(out: list[str], rounds, resolver: Resolver) -> None:
-    """The whole stage as one grid table: a header row per round, then a row per match."""
+def _render_flat(out: list[str], rounds, resolver: Resolver, show_meta: bool) -> None:
+    """The whole stage as one grid table: a header row per round, then a row per leg."""
     out.append('<table class="pd-grid">')
     out.append("<tbody>")
+    colspan = 8 if show_meta else 7
     for rnd in rounds:
         out.append('<tr class="pd-round-row">')
-        out.append(f'<td class="pd-round-head" colspan="7">{escape(rnd.name)}</td>')
+        out.append(
+            f'<td class="pd-round-head" colspan="{colspan}">{escape(rnd.name)}</td>'
+        )
         out.append("</tr>")
         for match in rnd.matches:
-            _flat_row(out, match, resolver)
+            _flat_rows(out, match, resolver, show_meta)
     out.append("</tbody>")
     out.append("</table>")
 
 
-def render_html(stage: Stage, layout: str = "flat") -> str:
+def render_html(
+    stage: Stage, layout: str = "flat", timezone: Optional[str] = None
+) -> str:
     """Render the knockout stage to a self-contained HTML table fragment string.
 
     ``layout`` is ``"flat"`` (the default — the whole stage in one grid table, one row
-    per match with names aligned outward around a central ``x``) or ``"stacked"`` (each
-    match its own two-row box).
+    per leg with names aligned outward around a central ``x``) or ``"stacked"`` (each
+    match its own two-row box). ``timezone`` is an optional zone name the metadata
+    datetimes (assumed GMT) are converted to before rendering.
     """
-    render_rounds = {"flat": _render_flat, "stacked": _render_stacked}.get(layout)
-    if render_rounds is None:
+    if layout not in ("flat", "stacked"):
         raise ValueError(f"unknown layout {layout!r}")
     out: list[str] = []
     resolver = Resolver(stage)
+    show_meta = stage.render.show_metadata
     stage_cls = (
         "pd-stage pd-flags" if stage.render.crest_shape == "flag" else "pd-stage"
     )
@@ -172,6 +212,11 @@ def render_html(stage: Stage, layout: str = "flat") -> str:
             else ""
         )
         out.append(f'<h2 class="pd-title">{title}{season}</h2>')
-    render_rounds(out, stage.rounds, resolver)
+    if layout == "flat":
+        _render_flat(out, stage.rounds, resolver, show_meta)
+    else:
+        _render_stacked(
+            out, stage.rounds, resolver, show_meta, stage.render.dt_format, timezone
+        )
     out.append("</div>")
     return "\n".join(out)

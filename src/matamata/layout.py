@@ -22,6 +22,7 @@ BOX_H = 2 * ROW_H
 H_GAP = 70
 V_GAP = 22
 MARGIN_BOTTOM = 24
+META_H = 18  # vertical room reserved above each box for the metadata line
 
 ROW_PITCH = BOX_H + V_GAP
 
@@ -82,9 +83,15 @@ def compute_layout(stage: Stage) -> Layout:
     resolver = Resolver(stage)
     bw = stage.render.box_width
     column_pitch = bw + H_GAP
-    centers: dict[str, float] = {}
+    # The metadata line sits above each box; reserve room for it in the top offset and the
+    # row pitch so stacked boxes never overlap their captions. Zero when it is suppressed.
+    meta_h = META_H if stage.render.show_metadata else 0
+    row_pitch = ROW_PITCH + meta_h
+    # Keys are match ids; an id-less match (e.g. the final) keys on None — harmless since
+    # only a referenced match is ever looked up, and such matches always carry an id.
+    centers: dict[Optional[str], float] = {}
     placed: list[PlacedMatch] = []
-    by_placed: dict[str, PlacedMatch] = {}
+    by_placed: dict[Optional[str], PlacedMatch] = {}
 
     for r_index, rnd in enumerate(stage.rounds):
         x = MARGIN_X + r_index * column_pitch
@@ -97,7 +104,7 @@ def compute_layout(stage: Stage) -> Layout:
             if parents:
                 cy = sum(parents) / len(parents)
             else:
-                cy = TOP + BOX_H / 2 + m_index * ROW_PITCH
+                cy = TOP + meta_h + BOX_H / 2 + m_index * row_pitch
             centers[match.id] = cy
             pm = PlacedMatch(
                 match=match,
@@ -128,7 +135,7 @@ def compute_layout(stage: Stage) -> Layout:
 
 
 def _connectors(
-    stage: Stage, by_placed: dict[str, PlacedMatch], bw: float
+    stage: Stage, by_placed: dict[Optional[str], PlacedMatch], bw: float
 ) -> list[Connector]:
     connectors: list[Connector] = []
     for rnd in stage.rounds:

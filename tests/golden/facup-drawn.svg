@@ -1,9 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 352" width="750" height="352" font-family="sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 424" width="750" height="424" font-family="sans-serif">
 <style>
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
   .pd-season { font: 400 13px sans-serif; fill: #6b7280; }
   .pd-header { font: 600 12px sans-serif; fill: #374151; text-anchor: middle; }
+  .pd-meta { font: 400 11px sans-serif; fill: #6b7280; }
   .pd-box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
   .pd-divider { stroke: #e5e7eb; stroke-width: 1; }
   .pd-team { font: 400 13px sans-serif; fill: #1f2937; }
@@ -16,6 +17,7 @@
     .pd-title { fill: #f8fafc; }
     .pd-season { fill: #94a3b8; }
     .pd-header { fill: #cbd5e1; }
+    .pd-meta { fill: #94a3b8; }
     .pd-box { fill: #1e293b; stroke: #334155; }
     .pd-divider { stroke: #334155; }
     .pd-team { fill: #e5e7eb; }
@@ -24,76 +26,82 @@
     .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }</style>
-<rect class="pd-bg" width="750" height="352"/>
+<rect class="pd-bg" width="750" height="424"/>
 <text class="pd-title" x="20" y="28">FA Cup</text>
 <text class="pd-season" x="97" y="28">2025-26</text>
 <text class="pd-header" x="115" y="56">Quarterfinals</text>
 <text class="pd-header" x="375" y="56">Semifinals</text>
 <text class="pd-header" x="635" y="56">Final</text>
-<path class="pd-link" d="M 470 94 L 505 94 L 505 117 L 540 117"/>
-<path class="pd-link" d="M 470 164 L 505 164 L 505 141 L 540 141"/>
-<rect class="pd-box" x="20" y="70" width="190" height="48" rx="3"/>
-<line class="pd-divider" x1="20" y1="94" x2="210" y2="94"/>
+<path class="pd-link" d="M 470 112 L 505 112 L 505 144 L 540 144"/>
+<path class="pd-link" d="M 470 200 L 505 200 L 505 168 L 540 168"/>
+<text class="pd-meta" x="20" y="82">QF1</text>
+<rect class="pd-box" x="20" y="88" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="20" y1="112" x2="210" y2="112"/>
 <g class="pd-win">
-<text class="pd-team" x="30" y="86">Manchester City</text>
-<text class="pd-score" x="202" y="86">2</text>
+<text class="pd-team" x="30" y="104">Manchester City</text>
+<text class="pd-score" x="202" y="104">2</text>
 </g>
 <g class="">
-<text class="pd-team" x="30" y="110">Newcastle</text>
-<text class="pd-score" x="202" y="110">1</text>
+<text class="pd-team" x="30" y="128">Newcastle</text>
+<text class="pd-score" x="202" y="128">1</text>
 </g>
-<rect class="pd-box" x="20" y="140" width="190" height="48" rx="3"/>
-<line class="pd-divider" x1="20" y1="164" x2="210" y2="164"/>
+<text class="pd-meta" x="20" y="170">QF2</text>
+<rect class="pd-box" x="20" y="176" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="20" y1="200" x2="210" y2="200"/>
 <g class="">
-<text class="pd-team" x="30" y="156">Chelsea</text>
-<text class="pd-score" x="202" y="156">1 (3)</text>
+<text class="pd-team" x="30" y="192">Chelsea</text>
+<text class="pd-score" x="202" y="192">1 (3)</text>
 </g>
 <g class="pd-win">
-<text class="pd-team" x="30" y="180">Arsenal</text>
-<text class="pd-score" x="202" y="180">1 (4)</text>
+<text class="pd-team" x="30" y="216">Arsenal</text>
+<text class="pd-score" x="202" y="216">1 (4)</text>
 </g>
-<rect class="pd-box" x="20" y="210" width="190" height="48" rx="3"/>
-<line class="pd-divider" x1="20" y1="234" x2="210" y2="234"/>
+<text class="pd-meta" x="20" y="258">QF3</text>
+<rect class="pd-box" x="20" y="264" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="20" y1="288" x2="210" y2="288"/>
 <g class="pd-win">
-<text class="pd-team" x="30" y="226">Liverpool</text>
-<text class="pd-score" x="202" y="226">3</text>
+<text class="pd-team" x="30" y="280">Liverpool</text>
+<text class="pd-score" x="202" y="280">3</text>
 </g>
 <g class="">
-<text class="pd-team" x="30" y="250">Aston Villa</text>
-<text class="pd-score" x="202" y="250">0</text>
+<text class="pd-team" x="30" y="304">Aston Villa</text>
+<text class="pd-score" x="202" y="304">0</text>
 </g>
-<rect class="pd-box" x="20" y="280" width="190" height="48" rx="3"/>
-<line class="pd-divider" x1="20" y1="304" x2="210" y2="304"/>
+<text class="pd-meta" x="20" y="346">QF4</text>
+<rect class="pd-box" x="20" y="352" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="20" y1="376" x2="210" y2="376"/>
 <g class="pd-win">
-<text class="pd-team" x="30" y="296">Manchester United</text>
-<text class="pd-score" x="202" y="296">2</text>
+<text class="pd-team" x="30" y="368">Manchester United</text>
+<text class="pd-score" x="202" y="368">2</text>
 </g>
 <g class="">
-<text class="pd-team" x="30" y="320">Tottenham</text>
-<text class="pd-score" x="202" y="320">1</text>
+<text class="pd-team" x="30" y="392">Tottenham</text>
+<text class="pd-score" x="202" y="392">1</text>
 </g>
-<rect class="pd-box" x="280" y="70" width="190" height="48" rx="3"/>
-<line class="pd-divider" x1="280" y1="94" x2="470" y2="94"/>
+<text class="pd-meta" x="280" y="82">SF1</text>
+<rect class="pd-box" x="280" y="88" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="280" y1="112" x2="470" y2="112"/>
 <g class="">
-<text class="pd-team" x="290" y="86">Arsenal</text>
-</g>
-<g class="">
-<text class="pd-team" x="290" y="110">Manchester United</text>
-</g>
-<rect class="pd-box" x="280" y="140" width="190" height="48" rx="3"/>
-<line class="pd-divider" x1="280" y1="164" x2="470" y2="164"/>
-<g class="">
-<text class="pd-team" x="290" y="156">Manchester City</text>
+<text class="pd-team" x="290" y="104">Arsenal</text>
 </g>
 <g class="">
-<text class="pd-team" x="290" y="180">Liverpool</text>
+<text class="pd-team" x="290" y="128">Manchester United</text>
 </g>
-<rect class="pd-box" x="540" y="105" width="190" height="48" rx="3"/>
-<line class="pd-divider" x1="540" y1="129" x2="730" y2="129"/>
+<text class="pd-meta" x="280" y="170">SF2</text>
+<rect class="pd-box" x="280" y="176" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="280" y1="200" x2="470" y2="200"/>
 <g class="">
-<text class="pd-team" x="550" y="121">Winner SF1</text>
+<text class="pd-team" x="290" y="192">Manchester City</text>
 </g>
 <g class="">
-<text class="pd-team" x="550" y="145">Winner SF2</text>
+<text class="pd-team" x="290" y="216">Liverpool</text>
+</g>
+<rect class="pd-box" x="540" y="132" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="540" y1="156" x2="730" y2="156"/>
+<g class="">
+<text class="pd-team" x="550" y="148">Winner SF1</text>
+</g>
+<g class="">
+<text class="pd-team" x="550" y="172">Winner SF2</text>
 </g>
 </svg>

@@ -1,7 +1,7 @@
 {
   "tournament": "Copa Río de la Plata",
   "season": "2026",
-  "render": { "box_width": 210 },
+  "render": { "box_width": 210, "dt_format": "%d/%m %H:%M" },
   "rounds": [
     {
       "name": "Semifinals",
@@ -15,7 +15,9 @@
               "goals1": 2,
               "team2": "Athletic Club",
               "id2": 90,
-              "goals2": 1
+              "goals2": 1,
+              "dt": "2026-09-16 22:00",
+              "venue": "Estadio UNO"
             }
           ],
           "winner": 1
@@ -29,7 +31,9 @@
               "goals1": 1,
               "team2": "Internacional",
               "id2": 88,
-              "goals2": 0
+              "goals2": 0,
+              "dt": "2026-09-17 22:00",
+              "venue": "Estadio Ciudad de Vicente López"
             }
           ],
           "winner": 1
@@ -40,7 +44,6 @@
       "name": "Final",
       "matches": [
         {
-          "id": "final",
           "winnerof1": "sf1",
           "winnerof2": "sf2",
           "legs": [
@@ -52,7 +55,9 @@
               "team2": "Platense",
               "id2": 42,
               "goals2": 1,
-              "pen2": 3
+              "pen2": 3,
+              "dt": "2026-10-01 22:00",
+              "venue": "Estadio Más Monumental"
             }
           ],
           "winner": 1

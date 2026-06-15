@@ -69,7 +69,7 @@ def _parse_leg(data: dict) -> tuple[Leg, Optional[dict]]:
     inline game is oriented onto the tie by :func:`apply_game`; without team names there
     is nothing to match against, so it is read as already tie-oriented (1 = top side).
     """
-    leg = Leg(ref=data.get("ref"))
+    leg = Leg(ref=data.get("ref"), dt=data.get("dt"), venue=data.get("venue"))
     game = {key: data.get(key) for key in _GAME_KEYS}
     if all(value is None for value in game.values()):
         return leg, None
@@ -102,6 +102,12 @@ def apply_game(match: Match, leg: Leg, game: dict) -> None:
     )
     home_side, away_side = (visitor, local) if reversed_ else (local, visitor)
 
+    # Remember which tie side was this leg's local (its JSON team1), but only when the leg
+    # actually names a side — a result-only leg carries no localía. Renderings that show
+    # legs individually (the flat table) put the local side in the home column.
+    if local[0] is not None or visitor[0] is not None:
+        leg.local = "away" if reversed_ else "home"
+
     _fill_team(match.home, home_side[0], home_side[3])
     _fill_team(match.away, away_side[0], away_side[3])
     if home_side[1] is not None:
@@ -110,6 +116,12 @@ def apply_game(match: Match, leg: Leg, game: dict) -> None:
         leg.away = away_side[1]
     if home_side[2] is not None or away_side[2] is not None:
         leg.pens = Pens(home=home_side[2] or 0, away=away_side[2] or 0)
+    # dt/venue are not game-oriented (they describe the leg, not a side), so they are not
+    # flipped. Present values win, so live host data overrides a baked inline value.
+    if game.get("dt") is not None:
+        leg.dt = game["dt"]
+    if game.get("venue") is not None:
+        leg.venue = game["venue"]
 
 
 def render_options(data: dict) -> RenderOptions:
@@ -119,12 +131,15 @@ def render_options(data: dict) -> RenderOptions:
         max_label_chars=r.get("max_label_chars", 22),
         box_width=r.get("box_width", 190),
         crest_shape=r.get("crest_shape", "square"),
+        show_metadata=r.get("show_metadata", True),
+        dt_format=r.get("dt_format"),
     )
 
 
 def _parse_match(data: dict) -> Match:
-    mid = _require(data, "id", "match")
-    where = f"match '{mid}'"
+    # id is optional: a match nothing references (e.g. the final) may omit it.
+    mid = data.get("id")
+    where = f"match '{mid}'" if mid else "an id-less match"
     settle = data.get("settle")
     if settle not in (None, False):
         raise StageError(f"{where} 'settle' admits only false")
@@ -136,6 +151,8 @@ def _parse_match(data: dict) -> Match:
         legs=[],
         winner=_parse_winner(data.get("winner"), where),
         settle=settle is not False,
+        dt=data.get("dt"),
+        venue=data.get("venue"),
     )
     for raw in data.get("legs", []):
         leg, game = _parse_leg(raw)

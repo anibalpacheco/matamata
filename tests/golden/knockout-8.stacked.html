@@ -4,6 +4,7 @@
   .pd-title { font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 12px; }
   .pd-season { font-size: 13px; font-weight: 400; color: #6b7280; margin-left: 8px; }
   .pd-header { font-size: 12px; font-weight: 600; color: #374151; margin: 16px 0 8px; }
+  .pd-meta { font-size: 11px; color: #6b7280; margin: 0 0 3px; }
   .pd-match { border-collapse: separate; border-spacing: 0; width: 100%;
               max-width: 24em; border: 1px solid #d1d5db; border-radius: 3px;
               overflow: hidden; margin: 0 0 15px; }
@@ -27,12 +28,14 @@
   .pd-grid .pd-round-head { font-size: 12px; font-weight: 600; color: #374151;
                             text-align: left; padding: 26px 6px 6px; }
   .pd-grid tr:first-child .pd-round-head { padding-top: 4px; }
+  .pd-grid .pd-meta { font-size: 11px; color: #6b7280; text-align: left; }
   .pd-grid .pd-win { font-weight: 700; color: #065f46; }
   @media (prefers-color-scheme: dark) {
     .pd-stage { color: #e5e7eb; background: #0f172a; }
     .pd-title { color: #f8fafc; }
     .pd-season { color: #94a3b8; }
     .pd-header { color: #cbd5e1; }
+    .pd-meta, .pd-grid .pd-meta { color: #94a3b8; }
     .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
     .pd-flags .pd-crest { border-color: #334155; }
     .pd-match { background: #1e293b; border-color: #334155; }
@@ -44,6 +47,7 @@
 <h2 class="pd-title">World Cup <span class="pd-season">2026</span></h2>
 <div class="pd-round">
 <h3 class="pd-header">Quarterfinals</h3>
+<div class="pd-meta">QF1</div>
 <table class="pd-match">
 <tbody>
 <tr class="pd-side pd-win">
@@ -56,6 +60,7 @@
 </tr>
 </tbody>
 </table>
+<div class="pd-meta">QF2</div>
 <table class="pd-match">
 <tbody>
 <tr class="pd-side">
@@ -68,6 +73,7 @@
 </tr>
 </tbody>
 </table>
+<div class="pd-meta">QF3</div>
 <table class="pd-match">
 <tbody>
 <tr class="pd-side pd-win">
@@ -80,6 +86,7 @@
 </tr>
 </tbody>
 </table>
+<div class="pd-meta">QF4</div>
 <table class="pd-match">
 <tbody>
 <tr class="pd-side">
@@ -95,6 +102,7 @@
 </div>
 <div class="pd-round">
 <h3 class="pd-header">Semifinals</h3>
+<div class="pd-meta">SF1</div>
 <table class="pd-match">
 <tbody>
 <tr class="pd-side">
@@ -107,6 +115,7 @@
 </tr>
 </tbody>
 </table>
+<div class="pd-meta">SF2</div>
 <table class="pd-match">
 <tbody>
 <tr class="pd-side">
