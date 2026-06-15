@@ -242,10 +242,13 @@ def test_metadata_line_is_rendered_in_svg_and_stacked():
     }
     stage = parse_stage(doc)
     svg = render_svg(stage)
-    assert '<text class="pd-meta"' in svg
-    assert "F · 01/05 18:00 Centenario" in svg
+    # The id is wrapped in a bold tspan; the date/venue follow in normal weight.
+    assert '<tspan class="pd-meta-id">F</tspan> · 01/05 18:00 Centenario' in svg
     stacked = render_html(stage, layout="stacked")
-    assert '<div class="pd-meta">F · 01/05 18:00 Centenario</div>' in stacked
+    assert (
+        '<div class="pd-meta"><span class="pd-meta-id">F</span>'
+        " · 01/05 18:00 Centenario</div>" in stacked
+    )
 
 
 def test_flat_splits_a_two_leg_tie_into_two_id_rows():
@@ -282,7 +285,7 @@ def test_flat_splits_a_two_leg_tie_into_two_id_rows():
 
     flat = render_html(parse_stage(doc), layout="flat")
     assert flat.count('<tr class="pd-match-row">') == 2  # one row per leg
-    assert flat.count('<td class="pd-meta">SF1</td>') == 2  # id repeated
+    assert flat.count('<span class="pd-meta-id">SF1</span>') == 2  # bold id repeated
     # The winning (Boca) side's three cells carry pd-win, on each of the two rows.
     assert flat.count('pd-win"') == 6
     # Each row honors that leg's localía: the local team (JSON team1) sits on the left.

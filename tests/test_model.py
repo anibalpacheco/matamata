@@ -103,6 +103,30 @@ def test_pending_draw_side_renders_tbd_without_a_connector():
     assert final.home.label == "TBD"
 
 
+def test_metadata_sits_below_a_box_whose_connector_bends_up():
+    # The metadata line dodges the outgoing connector: a top feeder's connector bends
+    # down (room above is free -> metadata above), a bottom feeder's bends up (-> below),
+    # and a box with no outgoing connector (the final) keeps it above.
+    from matamata.layout import compute_layout
+
+    doc = {
+        "rounds": [
+            {
+                "name": "SF",
+                "matches": [
+                    {"id": "sf1", "team1": "A", "team2": "B"},
+                    {"id": "sf2", "team1": "C", "team2": "D"},
+                ],
+            },
+            {"name": "Final", "matches": [{"winnerof1": "sf1", "winnerof2": "sf2"}]},
+        ]
+    }
+    placed = {pm.match.id: pm for pm in compute_layout(parse_stage(doc)).matches}
+    assert placed["sf1"].meta_below is False  # top feeder -> above
+    assert placed["sf2"].meta_below is True  # bottom feeder -> below
+    assert placed[None].meta_below is False  # the final has no outgoing connector
+
+
 def test_unknown_reference_is_rejected():
     data = {
         "tournament": "T",

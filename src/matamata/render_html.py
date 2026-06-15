@@ -27,7 +27,7 @@ from __future__ import annotations
 from typing import Optional
 from xml.sax.saxutils import escape
 
-from .model import Leg, Match, Resolver, Stage, leg_score_text, meta_text, score_text
+from .model import Leg, Match, Resolver, Stage, leg_score_text, meta_parts, score_text
 
 _ATTR = {'"': "&quot;"}  # extra escape for attribute values
 
@@ -37,6 +37,7 @@ _STYLE = """
   .pd-season { font-size: 13px; font-weight: 400; color: #6b7280; margin-left: 8px; }
   .pd-header { font-size: 12px; font-weight: 600; color: #374151; margin: 16px 0 8px; }
   .pd-meta { font-size: 11px; color: #6b7280; margin: 0 0 3px; }
+  .pd-meta-id { font-weight: 700; }
   .pd-match { border-collapse: separate; border-spacing: 0; width: 100%;
               max-width: 24em; border: 1px solid #d1d5db; border-radius: 3px;
               overflow: hidden; margin: 0 0 15px; }
@@ -86,6 +87,17 @@ def _crest_img(slot) -> str:
     return f'<img class="pd-crest" src="{escape(slot.crest, _ATTR)}" alt=""/>'
 
 
+def _meta_html(match: Match, dt_format, tz) -> str:
+    """The metadata line's inner HTML, with the id wrapped in a bold span. "" when empty."""
+    label, detail = meta_parts(match, dt_format, tz)
+    if not label:
+        return escape(detail)
+    inner = f'<span class="pd-meta-id">{escape(label)}</span>'
+    if detail:
+        inner += escape(f" · {detail}")
+    return inner
+
+
 def _side_row(out: list[str], match: Match, side: str, resolver: Resolver) -> None:
     """One match side as a ``<tr>`` of the stacked two-row box."""
     slot = match.home if side == "home" else match.away
@@ -111,7 +123,11 @@ def _flat_rows(
     metadata cell repeats the id when metadata is shown.
     """
     home, away = match.home, match.away
-    id_cell = escape(match.id.upper()) if match.id else ""
+    id_cell = (
+        f'<span class="pd-meta-id">{escape(match.id.upper())}</span>'
+        if match.id
+        else ""
+    )
     legs: list[Optional[Leg]] = list(match.legs) if match.legs else [None]
     for leg in legs:
         # The local side fills the home (left) column; tie order is the fallback.
@@ -155,9 +171,9 @@ def _render_stacked(
         out.append('<div class="pd-round">')
         out.append(f'<h3 class="pd-header">{escape(rnd.name)}</h3>')
         for match in rnd.matches:
-            meta = meta_text(match, dt_format, tz) if show_meta else ""
+            meta = _meta_html(match, dt_format, tz) if show_meta else ""
             if meta:
-                out.append(f'<div class="pd-meta">{escape(meta)}</div>')
+                out.append(f'<div class="pd-meta">{meta}</div>')
             out.append('<table class="pd-match">')
             out.append("<tbody>")
             _side_row(out, match, "home", resolver)

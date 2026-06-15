@@ -22,7 +22,7 @@ BOX_H = 2 * ROW_H
 H_GAP = 70
 V_GAP = 22
 MARGIN_BOTTOM = 24
-META_H = 18  # vertical room reserved above each box for the metadata line
+META_H = 34  # vertical room reserved by each box's metadata line (above or below it)
 
 ROW_PITCH = BOX_H + V_GAP
 
@@ -42,6 +42,10 @@ class PlacedMatch:
     y: float
     home: SideView
     away: SideView
+    # Where the metadata line is drawn: below the box when its outgoing connector bends
+    # up (the room above is taken by the connector), above it otherwise — including when
+    # there is no outgoing connector. Set while wiring connectors.
+    meta_below: bool = False
 
     @property
     def cy(self) -> float:
@@ -123,7 +127,14 @@ def compute_layout(stage: Stage) -> Layout:
     ]
 
     width = MARGIN_X * 2 + len(stage.rounds) * bw + (len(stage.rounds) - 1) * H_GAP
-    height = max((pm.y + BOX_H for pm in placed), default=TOP) + MARGIN_BOTTOM
+    # A box whose metadata sits below it extends META_H further down.
+    height = (
+        max(
+            (pm.y + BOX_H + (meta_h if pm.meta_below else 0) for pm in placed),
+            default=TOP,
+        )
+        + MARGIN_BOTTOM
+    )
     return Layout(
         width=width,
         height=height,
@@ -147,6 +158,9 @@ def _connectors(
                 parent = by_placed[slot.winner_of]
                 start = (parent.x + bw, parent.cy)
                 conn_y = child.y + (ROW_H / 2 if side == "home" else ROW_H + ROW_H / 2)
+                # This connector leaves the parent toward its child: bending up means the
+                # space above the parent is taken, so its metadata goes below.
+                parent.meta_below = conn_y < parent.cy
                 mid_x = (parent.x + bw + child.x) / 2
                 connectors.append(
                     Connector(

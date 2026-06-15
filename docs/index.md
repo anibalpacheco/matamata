@@ -115,12 +115,13 @@ The document's `render` options are SVG geometry knobs (`box_width`,
 
 ### Match metadata
 
-Above each match (in the SVG and the stacked table; as the leading cell in the flat
+Next to each match (in the SVG and the stacked table; as the leading cell in the flat
 table) the renderer draws a metadata line. It always starts with the match **id** — so a
 match with no game yet still shows its id (e.g. `QF4`) — followed by each leg's date and
-venue when present: `ID · dt venue` for one leg, `ID · dt venue / dt venue` for two. Put
-`dt`/`venue` on each leg (or, when a match has no legs, at match level); a host's
-`get_match` can supply them too.
+venue when present: `ID · dt venue` for one leg, `ID · dt venue / dt venue` for two. In
+the SVG the line sits above the box, or below it when that box's connector bends up, so it
+never overlaps the connector. Put `dt`/`venue` on each leg (or, when a match has no legs,
+at match level); a host's `get_match` can supply them too.
 
 ```json
 { "id": "sf1", "legs": [

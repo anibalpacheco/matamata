@@ -10,7 +10,7 @@ from typing import Optional
 from xml.sax.saxutils import escape
 
 from .layout import BOX_H, ROW_H, Layout, PlacedMatch, SideView, compute_layout
-from .model import Stage, meta_text
+from .model import Stage, meta_parts
 
 _LABEL_PAD = 10
 _SCORE_PAD = 8
@@ -25,6 +25,7 @@ _STYLE = """
   .pd-season { font: 400 13px sans-serif; fill: #6b7280; }
   .pd-header { font: 600 12px sans-serif; fill: #374151; text-anchor: middle; }
   .pd-meta { font: 400 11px sans-serif; fill: #6b7280; }
+  .pd-meta-id { font-weight: 700; }
   .pd-box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
   .pd-divider { stroke: #e5e7eb; stroke-width: 1; }
   .pd-team { font: 400 13px sans-serif; fill: #1f2937; }
@@ -106,9 +107,11 @@ def _match(
     meta: Optional[str] = None,
 ) -> None:
     if meta:
+        # Below the box when its connector bends up (room above is taken), else above it.
+        meta_y = pm.y + BOX_H + 13 if pm.meta_below else pm.y - 6
+        # ``meta`` is pre-built inner markup (the id wrapped in a bold tspan), not text.
         out.append(
-            f'<text class="pd-meta" x="{pm.x:.0f}" y="{pm.y - 6:.0f}">'
-            f"{escape(meta)}</text>"
+            f'<text class="pd-meta" x="{pm.x:.0f}" y="{meta_y:.0f}">{meta}</text>'
         )
     out.append(
         f'<rect class="pd-box" x="{pm.x:.0f}" y="{pm.y:.0f}" '
@@ -121,6 +124,17 @@ def _match(
     )
     _row(out, pm, pm.home, pm.y, max_chars, box_w, flag)
     _row(out, pm, pm.away, mid, max_chars, box_w, flag)
+
+
+def _meta_inner(match, dt_format: Optional[str], tz: Optional[str]) -> str:
+    """The metadata line's inner SVG markup, with the id wrapped in a bold tspan."""
+    label, detail = meta_parts(match, dt_format, tz)
+    if not label:
+        return escape(detail)
+    inner = f'<tspan class="pd-meta-id">{escape(label)}</tspan>'
+    if detail:
+        inner += escape(f" · {detail}")
+    return inner
 
 
 def render_layout(stage: Stage, layout: Layout, timezone: Optional[str] = None) -> str:
@@ -159,7 +173,7 @@ def render_layout(stage: Stage, layout: Layout, timezone: Optional[str] = None) 
     show_meta = stage.render.show_metadata
     for pm in layout.matches:
         meta = (
-            meta_text(pm.match, stage.render.dt_format, timezone) if show_meta else None
+            _meta_inner(pm.match, stage.render.dt_format, timezone) if show_meta else ""
         )
         _match(out, pm, stage.render.max_label_chars, layout.box_width, flag, meta)
 

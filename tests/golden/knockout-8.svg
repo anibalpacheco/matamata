@@ -1,10 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 424" width="750" height="424" font-family="sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 522" width="750" height="522" font-family="sans-serif">
 <style>
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
   .pd-season { font: 400 13px sans-serif; fill: #6b7280; }
   .pd-header { font: 600 12px sans-serif; fill: #374151; text-anchor: middle; }
   .pd-meta { font: 400 11px sans-serif; fill: #6b7280; }
+  .pd-meta-id { font-weight: 700; }
   .pd-box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
   .pd-divider { stroke: #e5e7eb; stroke-width: 1; }
   .pd-team { font: 400 13px sans-serif; fill: #1f2937; }
@@ -26,84 +27,84 @@
     .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }</style>
-<rect class="pd-bg" width="750" height="424"/>
+<rect class="pd-bg" width="750" height="522"/>
 <text class="pd-title" x="20" y="28">World Cup</text>
 <text class="pd-season" x="128" y="28">2026</text>
 <text class="pd-header" x="115" y="56">Quarterfinals</text>
 <text class="pd-header" x="375" y="56">Semifinals</text>
 <text class="pd-header" x="635" y="56">Final</text>
-<path class="pd-link" d="M 210 112 L 245 112 L 245 144 L 280 144"/>
-<path class="pd-link" d="M 210 200 L 245 200 L 245 168 L 280 168"/>
-<path class="pd-link" d="M 210 288 L 245 288 L 245 320 L 280 320"/>
-<path class="pd-link" d="M 210 376 L 245 376 L 245 344 L 280 344"/>
-<path class="pd-link" d="M 470 156 L 505 156 L 505 232 L 540 232"/>
-<path class="pd-link" d="M 470 332 L 505 332 L 505 256 L 540 256"/>
-<text class="pd-meta" x="20" y="82">QF1</text>
-<rect class="pd-box" x="20" y="88" width="190" height="48" rx="3"/>
-<line class="pd-divider" x1="20" y1="112" x2="210" y2="112"/>
+<path class="pd-link" d="M 210 128 L 245 128 L 245 168 L 280 168"/>
+<path class="pd-link" d="M 210 232 L 245 232 L 245 192 L 280 192"/>
+<path class="pd-link" d="M 210 336 L 245 336 L 245 376 L 280 376"/>
+<path class="pd-link" d="M 210 440 L 245 440 L 245 400 L 280 400"/>
+<path class="pd-link" d="M 470 180 L 505 180 L 505 272 L 540 272"/>
+<path class="pd-link" d="M 470 388 L 505 388 L 505 296 L 540 296"/>
+<text class="pd-meta" x="20" y="98"><tspan class="pd-meta-id">QF1</tspan></text>
+<rect class="pd-box" x="20" y="104" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="20" y1="128" x2="210" y2="128"/>
 <g class="pd-win">
-<text class="pd-team" x="30" y="104">France</text>
-<text class="pd-score" x="202" y="104">3</text>
+<text class="pd-team" x="30" y="120">France</text>
+<text class="pd-score" x="202" y="120">3</text>
 </g>
 <g class="">
-<text class="pd-team" x="30" y="128">Portugal</text>
-<text class="pd-score" x="202" y="128">0</text>
+<text class="pd-team" x="30" y="144">Portugal</text>
+<text class="pd-score" x="202" y="144">0</text>
 </g>
-<text class="pd-meta" x="20" y="170">QF2</text>
-<rect class="pd-box" x="20" y="176" width="190" height="48" rx="3"/>
-<line class="pd-divider" x1="20" y1="200" x2="210" y2="200"/>
+<text class="pd-meta" x="20" y="269"><tspan class="pd-meta-id">QF2</tspan></text>
+<rect class="pd-box" x="20" y="208" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="20" y1="232" x2="210" y2="232"/>
 <g class="">
-<text class="pd-team" x="30" y="192">Germany</text>
-<text class="pd-score" x="202" y="192">1</text>
+<text class="pd-team" x="30" y="224">Germany</text>
+<text class="pd-score" x="202" y="224">1</text>
 </g>
 <g class="pd-win">
-<text class="pd-team" x="30" y="216">Spain</text>
-<text class="pd-score" x="202" y="216">2</text>
+<text class="pd-team" x="30" y="248">Spain</text>
+<text class="pd-score" x="202" y="248">2</text>
 </g>
-<text class="pd-meta" x="20" y="258">QF3</text>
-<rect class="pd-box" x="20" y="264" width="190" height="48" rx="3"/>
-<line class="pd-divider" x1="20" y1="288" x2="210" y2="288"/>
+<text class="pd-meta" x="20" y="306"><tspan class="pd-meta-id">QF3</tspan></text>
+<rect class="pd-box" x="20" y="312" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="20" y1="336" x2="210" y2="336"/>
 <g class="pd-win">
-<text class="pd-team" x="30" y="280">Argentina</text>
-<text class="pd-score" x="202" y="280">0 (5)</text>
+<text class="pd-team" x="30" y="328">Argentina</text>
+<text class="pd-score" x="202" y="328">0 (5)</text>
 </g>
 <g class="">
-<text class="pd-team" x="30" y="304">Netherlands</text>
-<text class="pd-score" x="202" y="304">0 (4)</text>
+<text class="pd-team" x="30" y="352">Netherlands</text>
+<text class="pd-score" x="202" y="352">0 (4)</text>
 </g>
-<text class="pd-meta" x="20" y="346">QF4</text>
-<rect class="pd-box" x="20" y="352" width="190" height="48" rx="3"/>
-<line class="pd-divider" x1="20" y1="376" x2="210" y2="376"/>
+<text class="pd-meta" x="20" y="477"><tspan class="pd-meta-id">QF4</tspan></text>
+<rect class="pd-box" x="20" y="416" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="20" y1="440" x2="210" y2="440"/>
 <g class="">
-<text class="pd-team" x="30" y="368">Brazil</text>
-</g>
-<g class="">
-<text class="pd-team" x="30" y="392">England</text>
-</g>
-<text class="pd-meta" x="280" y="126">SF1</text>
-<rect class="pd-box" x="280" y="132" width="190" height="48" rx="3"/>
-<line class="pd-divider" x1="280" y1="156" x2="470" y2="156"/>
-<g class="">
-<text class="pd-team" x="290" y="148">France</text>
+<text class="pd-team" x="30" y="432">Brazil</text>
 </g>
 <g class="">
-<text class="pd-team" x="290" y="172">Spain</text>
+<text class="pd-team" x="30" y="456">England</text>
 </g>
-<text class="pd-meta" x="280" y="302">SF2</text>
-<rect class="pd-box" x="280" y="308" width="190" height="48" rx="3"/>
-<line class="pd-divider" x1="280" y1="332" x2="470" y2="332"/>
+<text class="pd-meta" x="280" y="150"><tspan class="pd-meta-id">SF1</tspan></text>
+<rect class="pd-box" x="280" y="156" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="280" y1="180" x2="470" y2="180"/>
 <g class="">
-<text class="pd-team" x="290" y="324">Argentina</text>
-</g>
-<g class="">
-<text class="pd-team" x="290" y="348">Winner QF4</text>
-</g>
-<rect class="pd-box" x="540" y="220" width="190" height="48" rx="3"/>
-<line class="pd-divider" x1="540" y1="244" x2="730" y2="244"/>
-<g class="">
-<text class="pd-team" x="550" y="236">Winner SF1</text>
+<text class="pd-team" x="290" y="172">France</text>
 </g>
 <g class="">
-<text class="pd-team" x="550" y="260">Winner SF2</text>
+<text class="pd-team" x="290" y="196">Spain</text>
+</g>
+<text class="pd-meta" x="280" y="425"><tspan class="pd-meta-id">SF2</tspan></text>
+<rect class="pd-box" x="280" y="364" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="280" y1="388" x2="470" y2="388"/>
+<g class="">
+<text class="pd-team" x="290" y="380">Argentina</text>
+</g>
+<g class="">
+<text class="pd-team" x="290" y="404">Winner QF4</text>
+</g>
+<rect class="pd-box" x="540" y="260" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="540" y1="284" x2="730" y2="284"/>
+<g class="">
+<text class="pd-team" x="550" y="276">Winner SF1</text>
+</g>
+<g class="">
+<text class="pd-team" x="550" y="300">Winner SF2</text>
 </g>
 </svg>

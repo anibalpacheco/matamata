@@ -218,12 +218,14 @@ match carrying `"settle": false` is never settled, whatever the call says.
 - An unresolved side displays the team that advanced when known, otherwise the
   placeholder label (e.g. "Winner QF1") for a `winnerof` link, or "TBD".
 - The winning side of a match is emphasized only when the `winner` field says so.
-- **Match metadata.** Above each match the renderer draws a line that starts with the
+- **Match metadata.** Next to each match the renderer draws a line that starts with the
   match **id** (uppercased; a match with no scheduling data still shows its id, while a
   match with no `id` at all — e.g. the final — shows none) followed by each leg's `dt` and
   `venue` when present: `ID · dt venue` for one leg, `ID · dt venue / dt venue` for two.
-  Suppress the whole line with `render.show_metadata: false`. (SVG and the stacked HTML
-  table draw this line; the flat table carries the id as a leading cell — see below.)
+  In the SVG it sits above the box, or below it when the box's outgoing connector bends up
+  (so the line stays clear of the connector). Suppress the whole line with
+  `render.show_metadata: false`. (SVG and the stacked HTML table draw this line; the flat
+  table carries the id as a leading cell — see below.)
 - Besides the SVG diagram there is an HTML table rendering for small screens: rounds
   stack vertically and no connectors are drawn — advancement is read top-down. The
   **stacked** layout draws each match as a two-row box (aggregate scores); the **flat**

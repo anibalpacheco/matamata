@@ -256,18 +256,15 @@ def render_dt(raw: str, dt_format: Optional[str], tz: Optional[str]) -> str:
     return moment.strftime(dt_format)
 
 
-def meta_text(
+def meta_parts(
     match: Match, dt_format: Optional[str] = None, tz: Optional[str] = None
-) -> str:
-    """The match's metadata line: the id, then each leg's ``dt``/``venue`` when present.
+) -> tuple[str, str]:
+    """The metadata line split into ``(id_label, detail)`` for renderers that style them.
 
-    Starts with the uppercased id (mirroring the "Winner {id}" placeholder), so a match
-    with no scheduling data still shows its id. A match with **no** id (e.g. the final,
-    which nothing references and whose round title already names it) shows no id label.
-    Each leg contributes a ``dt venue`` part (either may be missing), the parts joined with
-    " / "; when the match has no legs its own match-level ``dt``/``venue`` are used
-    instead. ``dt_format``/``tz`` drive datetime rendering (see ``render_dt``). Returns ""
-    when nothing is left to show.
+    ``id_label`` is the uppercased id (empty for an id-less match, e.g. the final).
+    ``detail`` joins each leg's ``dt venue`` with " / " (the match-level ``dt``/``venue``
+    are used when the match has no legs); either may be "". ``dt_format``/``tz`` drive
+    datetime rendering (see ``render_dt``).
     """
     label = match.id.upper() if match.id else ""
     sources: list = list(match.legs) if match.legs else [match]
@@ -277,7 +274,20 @@ def meta_text(
         piece = " ".join(p for p in (when, src.venue) if p)
         if piece:
             parts.append(piece)
-    detail = " / ".join(parts)
+    return label, " / ".join(parts)
+
+
+def meta_text(
+    match: Match, dt_format: Optional[str] = None, tz: Optional[str] = None
+) -> str:
+    """The match's metadata line as one string: the id, then each leg's ``dt``/``venue``.
+
+    Starts with the uppercased id (mirroring the "Winner {id}" placeholder), so a match
+    with no scheduling data still shows its id; a match with **no** id (the final) shows
+    none. Returns "" when nothing is left to show. See :func:`meta_parts` for the split
+    form used by renderers that bold the id.
+    """
+    label, detail = meta_parts(match, dt_format, tz)
     if label and detail:
         return f"{label} · {detail}"
     return label or detail
