@@ -69,10 +69,11 @@ _STYLE = """
   .pd-crest1 .pd-crest { margin: 0 0 0 6px; }
   .pd-crest2 .pd-crest { margin: 0 6px 0 0; }
   .pd-vs { color: #9ca3af; padding: 4px 8px; }
-  .pd-grid .pd-round-head { font-size: 12px; font-weight: 600; color: #374151;
+  .pd-grid .pd-round-head { font-size: 15px; font-weight: 600; color: #374151;
                             text-align: left; padding: 26px 6px 6px; }
   .pd-grid tr:first-child .pd-round-head { padding-top: 4px; }
-  .pd-grid .pd-meta { font-size: 11px; color: #6b7280; text-align: left; }
+  .pd-grid .pd-meta { font-size: 11px; color: #6b7280; text-align: left;
+                      padding: 8px 6px 0; }
   .pd-grid .pd-win { font-weight: 700; color: #065f46; }
   @media (prefers-color-scheme: dark) {
     .pd-stage { color: #e5e7eb; background: #0f172a; }
@@ -121,12 +122,12 @@ def _side_row(out: list[str], match: Match, side: str, resolver: Resolver) -> No
     out.append("</tr>")
 
 
-def _flat_meta_cell(id_cell: str, detail: str) -> str:
-    """The flat row's leading metadata cell: the bold id then this leg's ``dt venue``."""
+def _flat_meta_inner(id_cell: str, detail: str) -> str:
+    """The metadata line's inner HTML: the bold id then this leg's ``dt venue``. "" if empty."""
     inner = id_cell
     if detail:
         inner = f"{inner} · {escape(detail)}" if inner else escape(detail)
-    return f'<td class="pd-meta">{inner}</td>'
+    return inner
 
 
 def _flat_rows(
@@ -143,10 +144,10 @@ def _flat_rows(
     score — so the columns stay one figure wide; a match with no legs is a single
     scoreless row. Each row honors the leg's localía: its local side (the JSON ``team1``)
     goes in the home/left column, so the second leg flips relative to the first. The
-    winner emphasis follows the team into whichever column it lands in. The leading
-    metadata cell repeats the id and shows *that leg's* own ``dt``/``venue`` (the flat
-    table's one-row-per-leg layout places each leg's schedule beside its scores, instead
-    of joining both legs onto one line as the SVG/stacked single box does).
+    winner emphasis follows the team into whichever column it lands in. When metadata is
+    on, each leg's score row is preceded by a full-width metadata row carrying the id and
+    *that leg's* own ``dt``/``venue`` (the one-row-per-leg layout gives each leg its own
+    schedule line, instead of joining both legs as the SVG/stacked single box does).
     """
     home, away = match.home, match.away
     id_cell = (
@@ -165,10 +166,14 @@ def _flat_rows(
         right_win = " pd-win" if match.winner == right else ""
         score1 = leg_score_text(leg, left) if leg is not None else ""
         score2 = leg_score_text(leg, right) if leg is not None else ""
-        out.append('<tr class="pd-match-row">')
         if show_meta:
             detail = leg_meta_text(leg if leg is not None else match, dt_format, tz)
-            out.append(_flat_meta_cell(id_cell, detail))
+            inner = _flat_meta_inner(id_cell, detail)
+            if inner:
+                out.append('<tr class="pd-meta-row">')
+                out.append(f'<td class="pd-meta" colspan="7">{inner}</td>')
+                out.append("</tr>")
+        out.append('<tr class="pd-match-row">')
         out.append(
             f'<td class="pd-team pd-team1{left_win}">'
             f"{escape(resolver.label(left_slot))}</td>"
@@ -221,12 +226,9 @@ def _render_flat(
     """The whole stage as one grid table: a header row per round, then a row per leg."""
     out.append('<table class="pd-grid">')
     out.append("<tbody>")
-    colspan = 8 if show_meta else 7
     for rnd in rounds:
         out.append('<tr class="pd-round-row">')
-        out.append(
-            f'<td class="pd-round-head" colspan="{colspan}">{escape(rnd.name)}</td>'
-        )
+        out.append(f'<td class="pd-round-head" colspan="7">{escape(rnd.name)}</td>')
         out.append("</tr>")
         for match in rnd.matches:
             _flat_rows(out, match, resolver, show_meta, dt_format, tz)

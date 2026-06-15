@@ -285,6 +285,9 @@ def test_flat_splits_a_two_leg_tie_into_two_id_rows():
 
     flat = render_html(parse_stage(doc), layout="flat")
     assert flat.count('<tr class="pd-match-row">') == 2  # one row per leg
+    # A full-width metadata row sits above each leg row, repeating the bold id.
+    assert flat.count('<tr class="pd-meta-row">') == 2
+    assert flat.count('<td class="pd-meta" colspan="7">') == 2
     assert flat.count('<span class="pd-meta-id">SF1</span>') == 2  # bold id repeated
     # The winning (Boca) side's three cells carry pd-win, on each of the two rows.
     assert flat.count('pd-win"') == 6
@@ -318,7 +321,7 @@ def test_id_less_match_shows_no_id_label():
     svg = render_svg(stage)
     assert '<text class="pd-meta"' not in svg  # no metadata text for the id-less final
     flat = render_html(stage, layout="flat")
-    assert '<td class="pd-meta"></td>' in flat  # empty cell kept for alignment
+    assert '<tr class="pd-meta-row">' not in flat  # nothing to show -> no metadata row
     stacked = render_html(stage, layout="stacked")
     assert '<div class="pd-meta">' not in stacked  # nothing to show -> no div
 
@@ -351,8 +354,8 @@ def test_show_metadata_false_drops_the_line_and_the_flat_column():
     stage = parse_stage(doc)
     assert '<text class="pd-meta"' not in render_svg(stage)
     flat = render_html(stage, layout="flat")
-    assert '<td class="pd-meta">' not in flat
-    assert 'colspan="7"' in flat  # back to seven columns
+    assert '<tr class="pd-meta-row">' not in flat  # no metadata rows
+    assert '<td class="pd-meta"' not in flat
     assert '<div class="pd-meta">' not in render_html(stage, layout="stacked")
 
 
