@@ -1,19 +1,37 @@
 {
   "tournament": "World Cup",
   "season": "2026",
-  "render": { "crest_shape": "flag" },
+  "render": { "crest_shape": "flag", "dt_format": "%d/%m %H:%M" },
   "rounds": [
     {
       "name": "Quarterfinals",
       "matches": [
         {
           "id": "qf1",
-          "legs": [{ "team1": "France", "goals1": 3, "team2": "Portugal", "goals2": 0 }],
+          "legs": [
+            {
+              "team1": "France",
+              "goals1": 3,
+              "team2": "Portugal",
+              "goals2": 0,
+              "dt": "2026-07-09 19:00",
+              "venue": "Gillette Stadium"
+            }
+          ],
           "winner": 1
         },
         {
           "id": "qf2",
-          "legs": [{ "team1": "Germany", "goals1": 1, "team2": "Spain", "goals2": 2 }],
+          "legs": [
+            {
+              "team1": "Germany",
+              "goals1": 1,
+              "team2": "Spain",
+              "goals2": 2,
+              "dt": "2026-07-10 23:00",
+              "venue": "SoFi Stadium"
+            }
+          ],
           "winner": 2
         },
         {
@@ -25,7 +43,9 @@
               "team2": "Netherlands",
               "goals2": 0,
               "pen1": 5,
-              "pen2": 4
+              "pen2": 4,
+              "dt": "2026-07-11 19:00",
+              "venue": "Arrowhead Stadium"
             }
           ],
           "winner": 1
@@ -33,7 +53,9 @@
         {
           "id": "qf4",
           "team1": "Brazil",
-          "team2": "England"
+          "team2": "England",
+          "dt": "2026-07-11 23:00",
+          "venue": "Hard Rock Stadium"
         }
       ]
     },
@@ -45,13 +67,17 @@
           "winnerof1": "qf1",
           "winnerof2": "qf2",
           "team1": "France",
-          "team2": "Spain"
+          "team2": "Spain",
+          "dt": "2026-07-14 23:00",
+          "venue": "AT&T Stadium"
         },
         {
           "id": "sf2",
           "winnerof1": "qf3",
           "winnerof2": "qf4",
-          "team1": "Argentina"
+          "team1": "Argentina",
+          "dt": "2026-07-15 23:00",
+          "venue": "Mercedes-Benz Stadium"
         }
       ]
     },
@@ -60,7 +86,9 @@
       "matches": [
         {
           "winnerof1": "sf1",
-          "winnerof2": "sf2"
+          "winnerof2": "sf2",
+          "dt": "2026-07-19 19:00",
+          "venue": "MetLife Stadium"
         }
       ]
     }

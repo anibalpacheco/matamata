@@ -250,8 +250,9 @@ forcing them into a square squashes them; set `"crest_shape": "flag"` in the doc
 fitted without distortion. It is a display preference (only the *shape*; the image is
 still the host's), honored by both the diagram and the table.
 
-The World Cup example does exactly that, resolving each national team's flag and
-declaring `"render": { "crest_shape": "flag" }`, shown here in both outputs:
+The World Cup example does exactly that, resolving each national team's flag and setting
+`"crest_shape": "flag"` in its `render` object (it also carries per-match dates and venues
+— see [Match metadata](#match-metadata)), shown here in both outputs:
 
 ![A schedule with flags](flags.png)
 

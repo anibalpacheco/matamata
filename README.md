@@ -15,9 +15,11 @@ them apart from any presentation concern — updating results means editing a do
 never the code.
 
 Example rendered from
-[`examples/libertadores-2026.json`](https://github.com/anibalpacheco/matamata/blob/main/examples/libertadores-2026.json):
+[`examples/knockout-8.json`](https://github.com/anibalpacheco/matamata/blob/main/examples/knockout-8.json),
+with each match's date and venue from the document and national flags supplied by a host
+([`examples/world_cup_flags_host.py`](https://github.com/anibalpacheco/matamata/blob/main/examples/world_cup_flags_host.py)):
 
-![Copa Libertadores 2026 knockout stage](https://raw.githubusercontent.com/anibalpacheco/matamata/main/docs/libertadores-2026.png)
+![World Cup 2026 knockout stage](https://raw.githubusercontent.com/anibalpacheco/matamata/main/docs/flags.png)
 
 ## Quickstart
 
@@ -60,20 +62,24 @@ itself, clone the repo and `pip install -e .`.
 
 Both examples are rendered from the JSON files in [`examples/`](https://github.com/anibalpacheco/matamata/tree/main/examples).
 
-The Copa Libertadores example above shows two-legged ties — each leg's goals are
-shown, shootouts appear in parentheses, and the winner of each tie is emphasized. The
-first quarterfinal is **host-resolved**: its legs carry only a `ref`, so its teams and
-scores come from `get_match` (see
+The World Cup example above shows single matches — one goal figure per side, with
+shootouts in parentheses (Argentina won its quarterfinal on penalties). Each match draws a
+metadata line with its date and venue, and sides not resolved yet fall back to
+placeholders such as "Winner SF2". The flags come from a host: `knockout-8.json` carries no
+ids, so [`examples/world_cup_flags_host.py`](https://github.com/anibalpacheco/matamata/blob/main/examples/world_cup_flags_host.py)
+resolves each national team's flag from its name, while the dates and venues live in the
+document itself.
+
+The Copa Libertadores example shows two-legged ties — each leg's goals are shown,
+shootouts appear in parentheses, and the winner of each tie is emphasized. Its first
+quarterfinal is **host-resolved**: its legs carry only a `ref`, so its teams and scores
+come from `get_match` (see
 [`examples/libertadores_host.py`](https://github.com/anibalpacheco/matamata/blob/main/examples/libertadores_host.py)) rather than from the
 document. Played ties take their team names from the legs; the final is a single match —
 one leg, so just one goal figure per side — with its `winnerof` links wiring the
-advancement tree.
+advancement tree:
 
-Single matches ([`knockout-8.json`](https://github.com/anibalpacheco/matamata/blob/main/examples/knockout-8.json)) — one goal figure per
-side, with shootouts in parentheses. Sides that have not been resolved yet fall back to
-placeholders such as "Winner SF2":
-
-![World Cup knockout stage](https://raw.githubusercontent.com/anibalpacheco/matamata/main/docs/knockout-8.png)
+![Copa Libertadores 2026 knockout stage](https://raw.githubusercontent.com/anibalpacheco/matamata/main/docs/libertadores-2026.png)
 
 ## The format
 
@@ -102,7 +108,7 @@ Minimal example:
         {
           "id": "final",
           "legs": [
-            { "team1": "Flamengo", "goals1": 1, "team2": "Nacional", "goals2": 2 }
+            { "team1": "Flamengo", "goals1": 1, "team2": "River Plate", "goals2": 2 }
           ],
           "winner": 2
         }
