@@ -256,6 +256,20 @@ def render_dt(raw: str, dt_format: Optional[str], tz: Optional[str]) -> str:
     return moment.strftime(dt_format)
 
 
+def leg_meta_text(
+    src, dt_format: Optional[str] = None, tz: Optional[str] = None
+) -> str:
+    """The ``dt venue`` detail for a single scheduling source (a ``Leg`` or a ``Match``).
+
+    Joins the rendered ``dt`` (see ``render_dt``) and the free-text ``venue`` with a
+    space, omitting whichever is absent; "" when the source carries neither. This is the
+    per-leg analogue of ``meta_parts``' detail, used by the flat table — which gives each
+    leg its own row — to place each leg's date/venue next to that leg's scores.
+    """
+    when = render_dt(src.dt, dt_format, tz) if src.dt else None
+    return " ".join(p for p in (when, src.venue) if p)
+
+
 def meta_parts(
     match: Match, dt_format: Optional[str] = None, tz: Optional[str] = None
 ) -> tuple[str, str]:
@@ -268,12 +282,7 @@ def meta_parts(
     """
     label = match.id.upper() if match.id else ""
     sources: list = list(match.legs) if match.legs else [match]
-    parts: list[str] = []
-    for src in sources:
-        when = render_dt(src.dt, dt_format, tz) if src.dt else None
-        piece = " ".join(p for p in (when, src.venue) if p)
-        if piece:
-            parts.append(piece)
+    parts = [text for src in sources if (text := leg_meta_text(src, dt_format, tz))]
     return label, " / ".join(parts)
 
 

@@ -94,8 +94,8 @@ There are two layouts, selected with the `layout` argument:
 
 - **`"flat"`** (the default) — the whole stage is one table, each round name a full-width
   header row. A single match is one row (`name1 score1 x score2 name2`); a two-legged tie
-  is **two rows**, one per leg with that leg's single score, the [id](#match-metadata)
-  repeated in a leading cell. Each leg row honors its **localía** — the local side (the
+  is **two rows**, one per leg with that leg's single score, each leading with the
+  [id](#match-metadata) and that leg's own date/venue. Each leg row honors its **localía** — the local side (the
   leg's `team1`) goes on the left — so the second leg flips relative to the first. The
   names are aligned outward and any crests/flags hug the central `x`. The `x` is always
   shown, reading as "vs" before a result exists.
@@ -115,13 +115,15 @@ The document's `render` options are SVG geometry knobs (`box_width`,
 
 ### Match metadata
 
-Next to each match (in the SVG and the stacked table; as the leading cell in the flat
+Next to each match (in the SVG and the stacked table; as a leading cell in the flat
 table) the renderer draws a metadata line. It always starts with the match **id** — so a
 match with no game yet still shows its id (e.g. `QF4`) — followed by each leg's date and
 venue when present: `ID · dt venue` for one leg, `ID · dt venue / dt venue` for two. In
 the SVG the line sits above the box, or below it when that box's connector bends up, so it
-never overlaps the connector. Put `dt`/`venue` on each leg (or, when a match has no legs,
-at match level); a host's `get_match` can supply them too.
+never overlaps the connector. The flat table, which already gives each leg its own row,
+shows that one row's date/venue beside its id, so a two-legged tie's two schedules land on
+their respective rows instead of sharing a line. Put `dt`/`venue` on each leg (or, when a
+match has no legs, at match level); a host's `get_match` can supply them too.
 
 ```json
 { "id": "sf1", "legs": [

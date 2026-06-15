@@ -224,13 +224,15 @@ match carrying `"settle": false` is never settled, whatever the call says.
   `venue` when present: `ID · dt venue` for one leg, `ID · dt venue / dt venue` for two.
   In the SVG it sits above the box, or below it when the box's outgoing connector bends up
   (so the line stays clear of the connector). Suppress the whole line with
-  `render.show_metadata: false`. (SVG and the stacked HTML table draw this line; the flat
-  table carries the id as a leading cell — see below.)
+  `render.show_metadata: false`. (SVG and the stacked HTML table draw the whole line; the
+  flat table, having one row per leg, leads each row with the id and *that leg's* own
+  `dt`/`venue` — see below.)
 - Besides the SVG diagram there is an HTML table rendering for small screens: rounds
   stack vertically and no connectors are drawn — advancement is read top-down. The
   **stacked** layout draws each match as a two-row box (aggregate scores); the **flat**
   layout is one grid where a two-legged tie becomes **two rows**, one per leg, each
-  carrying that leg's single score and repeating the id. Each flat row honors that leg's
+  carrying that leg's single score and leading with the id plus that leg's date/venue.
+  Each flat row honors that leg's
   **localía**: the leg's local side (its `team1`) sits in the home (left) column, so the
   second leg's row is flipped relative to the first. Both renderings show the same
   resolved data.

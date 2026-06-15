@@ -4,10 +4,12 @@ The alternative to the SVG diagram: rounds stack vertically and advancement is i
 by reading order, so no connectors are drawn. Two layouts are offered:
 
 - ``"flat"`` (the default): the whole stage is one ``<table>`` — each match is a
-  ``<tr>`` — ``name1 [crest1] score1  x  score2 [crest2] name2`` — and each round name is
-  a full-width header row. Sharing one table keeps every column aligned vertically across
-  all rounds. The names are aligned outward and the crests hug the central ``x``; the
-  ``x`` is always shown, reading as "vs" when a match has no result yet.
+  ``<tr>`` per leg — ``[meta] name1 [crest1] score1  x  score2 [crest2] name2`` — and each
+  round name is a full-width header row. Sharing one table keeps every column aligned
+  vertically across all rounds. The names are aligned outward and the crests hug the
+  central ``x``; the ``x`` is always shown, reading as "vs" when a match has no result
+  yet. When metadata is on, each row leads with the bold id and that leg's own
+  ``dt``/``venue`` (one row per leg, so each leg's schedule sits beside its scores).
 - ``"stacked"``: each match is its own two-row ``<table>`` — a separate little box, like
   the SVG's match boxes.
 
@@ -27,7 +29,16 @@ from __future__ import annotations
 from typing import Optional
 from xml.sax.saxutils import escape
 
-from .model import Leg, Match, Resolver, Stage, leg_score_text, meta_parts, score_text
+from .model import (
+    Leg,
+    Match,
+    Resolver,
+    Stage,
+    leg_meta_text,
+    leg_score_text,
+    meta_parts,
+    score_text,
+)
 
 _ATTR = {'"': "&quot;"}  # extra escape for attribute values
 
@@ -110,8 +121,21 @@ def _side_row(out: list[str], match: Match, side: str, resolver: Resolver) -> No
     out.append("</tr>")
 
 
+def _flat_meta_cell(id_cell: str, detail: str) -> str:
+    """The flat row's leading metadata cell: the bold id then this leg's ``dt venue``."""
+    inner = id_cell
+    if detail:
+        inner = f"{inner} · {escape(detail)}" if inner else escape(detail)
+    return f'<td class="pd-meta">{inner}</td>'
+
+
 def _flat_rows(
-    out: list[str], match: Match, resolver: Resolver, show_meta: bool
+    out: list[str],
+    match: Match,
+    resolver: Resolver,
+    show_meta: bool,
+    dt_format: Optional[str],
+    tz: Optional[str],
 ) -> None:
     """A match as one ``<tr>`` per leg of the round's grid.
 
@@ -119,8 +143,10 @@ def _flat_rows(
     score — so the columns stay one figure wide; a match with no legs is a single
     scoreless row. Each row honors the leg's localía: its local side (the JSON ``team1``)
     goes in the home/left column, so the second leg flips relative to the first. The
-    winner emphasis follows the team into whichever column it lands in, and the leading
-    metadata cell repeats the id when metadata is shown.
+    winner emphasis follows the team into whichever column it lands in. The leading
+    metadata cell repeats the id and shows *that leg's* own ``dt``/``venue`` (the flat
+    table's one-row-per-leg layout places each leg's schedule beside its scores, instead
+    of joining both legs onto one line as the SVG/stacked single box does).
     """
     home, away = match.home, match.away
     id_cell = (
@@ -141,7 +167,8 @@ def _flat_rows(
         score2 = leg_score_text(leg, right) if leg is not None else ""
         out.append('<tr class="pd-match-row">')
         if show_meta:
-            out.append(f'<td class="pd-meta">{id_cell}</td>')
+            detail = leg_meta_text(leg if leg is not None else match, dt_format, tz)
+            out.append(_flat_meta_cell(id_cell, detail))
         out.append(
             f'<td class="pd-team pd-team1{left_win}">'
             f"{escape(resolver.label(left_slot))}</td>"
@@ -183,7 +210,14 @@ def _render_stacked(
         out.append("</div>")
 
 
-def _render_flat(out: list[str], rounds, resolver: Resolver, show_meta: bool) -> None:
+def _render_flat(
+    out: list[str],
+    rounds,
+    resolver: Resolver,
+    show_meta: bool,
+    dt_format: Optional[str],
+    tz: Optional[str],
+) -> None:
     """The whole stage as one grid table: a header row per round, then a row per leg."""
     out.append('<table class="pd-grid">')
     out.append("<tbody>")
@@ -195,7 +229,7 @@ def _render_flat(out: list[str], rounds, resolver: Resolver, show_meta: bool) ->
         )
         out.append("</tr>")
         for match in rnd.matches:
-            _flat_rows(out, match, resolver, show_meta)
+            _flat_rows(out, match, resolver, show_meta, dt_format, tz)
     out.append("</tbody>")
     out.append("</table>")
 
@@ -229,7 +263,9 @@ def render_html(
         )
         out.append(f'<h2 class="pd-title">{title}{season}</h2>')
     if layout == "flat":
-        _render_flat(out, stage.rounds, resolver, show_meta)
+        _render_flat(
+            out, stage.rounds, resolver, show_meta, stage.render.dt_format, timezone
+        )
     else:
         _render_stacked(
             out, stage.rounds, resolver, show_meta, stage.render.dt_format, timezone
