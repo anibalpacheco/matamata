@@ -39,7 +39,7 @@
 <path class="pd-link" d="M 260 440 L 295 440 L 295 400 L 330 400"/>
 <path class="pd-link" d="M 570 180 L 605 180 L 605 272 L 640 272"/>
 <path class="pd-link" d="M 570 388 L 605 388 L 605 296 L 640 296"/>
-<text class="pd-meta" x="20" y="98"><tspan class="pd-meta-id">QF1</tspan> · 11/08 23:00 Maracanã / 18/08 23:00 La Bombonera</text>
+<text class="pd-meta" x="20" y="98"><tspan class="pd-meta-id">QF1</tspan> · 11/08 20:00 Maracanã / 18/08 20:00 La Bombonera</text>
 <rect class="pd-box" x="20" y="104" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="128" x2="260" y2="128"/>
 <g class="pd-win">
@@ -50,7 +50,7 @@
 <text class="pd-team" x="30" y="144">Boca Juniors</text>
 <text class="pd-score" x="252" y="144">1 0</text>
 </g>
-<text class="pd-meta" x="20" y="269"><tspan class="pd-meta-id">QF2</tspan> · 12/08 23:30 Estadio Monumental / 19/08 23:30 Allianz Parque</text>
+<text class="pd-meta" x="20" y="269"><tspan class="pd-meta-id">QF2</tspan> · 12/08 20:30 Estadio Monumental / 19/08 20:30 Allianz Parque</text>
 <rect class="pd-box" x="20" y="208" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="232" x2="260" y2="232"/>
 <g class="pd-win">
@@ -61,7 +61,7 @@
 <text class="pd-team" x="30" y="248">Palmeiras</text>
 <text class="pd-score" x="252" y="248">1 0 (2)</text>
 </g>
-<text class="pd-meta" x="20" y="306"><tspan class="pd-meta-id">QF3</tspan> · 13/08 23:00 Parque Viera / 20/08 23:00 Arena MRV</text>
+<text class="pd-meta" x="20" y="306"><tspan class="pd-meta-id">QF3</tspan> · 13/08 20:00 Parque Viera / 20/08 20:00 Arena MRV</text>
 <rect class="pd-box" x="20" y="312" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="336" x2="260" y2="336"/>
 <g class="pd-win">
@@ -72,7 +72,7 @@
 <text class="pd-team" x="30" y="352">Atletico Mineiro</text>
 <text class="pd-score" x="252" y="352">0 1</text>
 </g>
-<text class="pd-meta" x="20" y="477"><tspan class="pd-meta-id">QF4</tspan> · 12/08 21:00 Neo Química Arena / 19/08 21:00 Beira-Rio</text>
+<text class="pd-meta" x="20" y="477"><tspan class="pd-meta-id">QF4</tspan> · 12/08 18:00 Neo Química Arena / 19/08 18:00 Beira-Rio</text>
 <rect class="pd-box" x="20" y="416" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="440" x2="260" y2="440"/>
 <g class="pd-win">
@@ -83,7 +83,7 @@
 <text class="pd-team" x="30" y="456">Internacional</text>
 <text class="pd-score" x="252" y="456">0 1</text>
 </g>
-<text class="pd-meta" x="330" y="150"><tspan class="pd-meta-id">SF1</tspan> · 23/09 23:30 Maracanã / 30/09 23:30 Estadio Monumental</text>
+<text class="pd-meta" x="330" y="150"><tspan class="pd-meta-id">SF1</tspan> · 23/09 20:30 Maracanã / 30/09 20:30 Estadio Monumental</text>
 <rect class="pd-box" x="330" y="156" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="330" y1="180" x2="570" y2="180"/>
 <g class="pd-win">
@@ -94,7 +94,7 @@
 <text class="pd-team" x="340" y="196">River Plate</text>
 <text class="pd-score" x="562" y="196">0 1</text>
 </g>
-<text class="pd-meta" x="330" y="425"><tspan class="pd-meta-id">SF2</tspan> · 24/09 23:30 Parque Viera / 01/10 23:30 Neo Química Arena</text>
+<text class="pd-meta" x="330" y="425"><tspan class="pd-meta-id">SF2</tspan> · 24/09 20:30 Parque Viera / 01/10 20:30 Neo Química Arena</text>
 <rect class="pd-box" x="330" y="364" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="330" y1="388" x2="570" y2="388"/>
 <g class="pd-win">
@@ -105,7 +105,7 @@
 <text class="pd-team" x="340" y="404">Corinthians</text>
 <text class="pd-score" x="562" y="404">1 0</text>
 </g>
-<text class="pd-meta" x="640" y="254">21/11 20:00 Estadio Centenario</text>
+<text class="pd-meta" x="640" y="254">21/11 17:00 Estadio Centenario</text>
 <rect class="pd-box" x="640" y="260" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="640" y1="284" x2="880" y2="284"/>
 <g class="pd-win">

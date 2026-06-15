@@ -77,7 +77,8 @@ come from `get_match` (see
 [`examples/libertadores_host.py`](https://github.com/anibalpacheco/matamata/blob/main/examples/libertadores_host.py)) rather than from the
 document. Played ties take their team names from the legs; the final is a single match —
 one leg, so just one goal figure per side — with its `winnerof` links wiring the
-advancement tree:
+advancement tree. Its host also renders the GMT kickoff times in local
+(`America/Montevideo`) time, showing the `timezone` conversion:
 
 ![Copa Libertadores 2026 knockout stage](https://raw.githubusercontent.com/anibalpacheco/matamata/main/docs/libertadores-2026.png)
 

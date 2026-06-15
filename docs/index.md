@@ -140,7 +140,10 @@ Put `dt`/`venue` on each leg (or, when a match has no legs, at match level); a h
 string) to reformat it, and pass a `timezone` to the render call
 (`render_svg`/`render_html`/`KnockoutStage.render`, or the CLI's `--timezone`) to convert
 it first; a value that does not parse — or no `dt_format` at all — is shown verbatim.
-Suppress the whole line with `render.show_metadata: false`.
+Suppress the whole line with `render.show_metadata: false`. The Copa Libertadores example
+host (`examples/libertadores_host.py`) shows this conversion: it stores GMT datetimes and
+renders them in `America/Montevideo` (its venues are all at GMT-3), so the times you see
+are three hours behind the document's.
 
 ### Light and dark mode
 
