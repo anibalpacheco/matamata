@@ -23,7 +23,7 @@ _STYLE = """
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
   .pd-season { font: 400 13px sans-serif; fill: #6b7280; }
-  .pd-header { font: 600 12px sans-serif; fill: #374151; text-anchor: middle; }
+  .pd-header { font: 600 15px sans-serif; fill: #374151; text-anchor: middle; }
   .pd-meta { font: 400 11px sans-serif; fill: #6b7280; }
   .pd-meta-id { font-weight: 700; }
   .pd-box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
