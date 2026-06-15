@@ -29,6 +29,11 @@
           "type": "integer",
           "minimum": 60,
           "default": 190
+        },
+        "crest_shape": {
+          "type": "string",
+          "enum": ["square", "flag"],
+          "default": "square"
         }
       }
     },

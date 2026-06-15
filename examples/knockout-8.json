@@ -1,6 +1,7 @@
 {
   "tournament": "World Cup",
   "season": "2026",
+  "render": { "crest_shape": "flag" },
   "rounds": [
     {
       "name": "Quarterfinals",

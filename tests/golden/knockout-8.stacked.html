@@ -1,4 +1,4 @@
-<div class="pd-stage">
+<div class="pd-stage pd-flags">
 <style>
   .pd-stage { font-family: sans-serif; color: #1f2937; background: #ffffff; }
   .pd-title { font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 12px; }
@@ -10,6 +10,8 @@
   .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
   .pd-team { font-size: 13px; padding: 5px 10px; }
   .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
   .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
               white-space: nowrap; }
   .pd-win td { font-weight: 700; color: #065f46; }
@@ -32,6 +34,7 @@
     .pd-season { color: #94a3b8; }
     .pd-header { color: #cbd5e1; }
     .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
     .pd-match { background: #1e293b; border-color: #334155; }
     .pd-side + .pd-side td { border-top-color: #334155; }
     .pd-win td, .pd-grid .pd-win { color: #34d399; }

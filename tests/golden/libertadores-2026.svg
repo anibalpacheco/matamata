@@ -9,6 +9,7 @@
   .pd-team { font: 400 13px sans-serif; fill: #1f2937; }
   .pd-score { font: 400 13px sans-serif; fill: #1f2937; text-anchor: end; }
   .pd-win .pd-team, .pd-win .pd-score { font-weight: 700; fill: #065f46; }
+  .pd-crest-frame { fill: none; stroke: #d1d5db; stroke-width: 1; }
   .pd-link { fill: none; stroke: #cbd5e1; stroke-width: 1.5; }
   @media (prefers-color-scheme: dark) {
     .pd-bg { fill: #0f172a; }
@@ -20,6 +21,7 @@
     .pd-team { fill: #e5e7eb; }
     .pd-score { fill: #e5e7eb; }
     .pd-win .pd-team, .pd-win .pd-score { fill: #34d399; }
+    .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }</style>
 <rect class="pd-bg" width="900" height="352"/>

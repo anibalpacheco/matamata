@@ -118,6 +118,7 @@ def render_options(data: dict) -> RenderOptions:
     return RenderOptions(
         max_label_chars=r.get("max_label_chars", 22),
         box_width=r.get("box_width", 190),
+        crest_shape=r.get("crest_shape", "square"),
     )
 
 

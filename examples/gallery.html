@@ -61,6 +61,7 @@
   .pd-team { font: 400 13px sans-serif; fill: #1f2937; }
   .pd-score { font: 400 13px sans-serif; fill: #1f2937; text-anchor: end; }
   .pd-win .pd-team, .pd-win .pd-score { font-weight: 700; fill: #065f46; }
+  .pd-crest-frame { fill: none; stroke: #d1d5db; stroke-width: 1; }
   .pd-link { fill: none; stroke: #cbd5e1; stroke-width: 1.5; }
   @media (prefers-color-scheme: dark) {
     .pd-bg { fill: #0f172a; }
@@ -72,6 +73,7 @@
     .pd-team { fill: #e5e7eb; }
     .pd-score { fill: #e5e7eb; }
     .pd-win .pd-team, .pd-win .pd-score { fill: #34d399; }
+    .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }&lt;/style&gt;
 &lt;rect class=&quot;pd-bg&quot; width=&quot;750&quot; height=&quot;352&quot;/&gt;
@@ -89,64 +91,75 @@
 &lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;70&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;94&quot; x2=&quot;210&quot; y2=&quot;94&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/france.svg&quot; x=&quot;30&quot; y=&quot;74&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;52&quot; y=&quot;86&quot;&gt;France&lt;/text&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/france.svg&quot; x=&quot;30&quot; y=&quot;74&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;74&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;86&quot;&gt;France&lt;/text&gt;
 &lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;86&quot;&gt;3&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/portugal.svg&quot; x=&quot;30&quot; y=&quot;98&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;52&quot; y=&quot;110&quot;&gt;Portugal&lt;/text&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/portugal.svg&quot; x=&quot;30&quot; y=&quot;98&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;98&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;110&quot;&gt;Portugal&lt;/text&gt;
 &lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;110&quot;&gt;0&lt;/text&gt;
 &lt;/g&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;140&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;164&quot; x2=&quot;210&quot; y2=&quot;164&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/germany.svg&quot; x=&quot;30&quot; y=&quot;144&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;52&quot; y=&quot;156&quot;&gt;Germany&lt;/text&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/germany.svg&quot; x=&quot;30&quot; y=&quot;144&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;144&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;156&quot;&gt;Germany&lt;/text&gt;
 &lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;156&quot;&gt;1&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/spain.svg&quot; x=&quot;30&quot; y=&quot;168&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;52&quot; y=&quot;180&quot;&gt;Spain&lt;/text&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/spain.svg&quot; x=&quot;30&quot; y=&quot;168&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;168&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;180&quot;&gt;Spain&lt;/text&gt;
 &lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;180&quot;&gt;2&lt;/text&gt;
 &lt;/g&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;210&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;234&quot; x2=&quot;210&quot; y2=&quot;234&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/argentina.svg&quot; x=&quot;30&quot; y=&quot;214&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;52&quot; y=&quot;226&quot;&gt;Argentina&lt;/text&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/argentina.svg&quot; x=&quot;30&quot; y=&quot;214&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;214&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;226&quot;&gt;Argentina&lt;/text&gt;
 &lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;226&quot;&gt;0 (5)&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/netherlands.svg&quot; x=&quot;30&quot; y=&quot;238&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;52&quot; y=&quot;250&quot;&gt;Netherlands&lt;/text&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/netherlands.svg&quot; x=&quot;30&quot; y=&quot;238&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;238&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;250&quot;&gt;Netherlands&lt;/text&gt;
 &lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;250&quot;&gt;0 (4)&lt;/text&gt;
 &lt;/g&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;280&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;304&quot; x2=&quot;210&quot; y2=&quot;304&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/brazil.svg&quot; x=&quot;30&quot; y=&quot;284&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;52&quot; y=&quot;296&quot;&gt;Brazil&lt;/text&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/brazil.svg&quot; x=&quot;30&quot; y=&quot;284&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;284&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;296&quot;&gt;Brazil&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/england.svg&quot; x=&quot;30&quot; y=&quot;308&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;52&quot; y=&quot;320&quot;&gt;England&lt;/text&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/england.svg&quot; x=&quot;30&quot; y=&quot;308&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;308&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;320&quot;&gt;England&lt;/text&gt;
 &lt;/g&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;105&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;129&quot; x2=&quot;470&quot; y2=&quot;129&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/france.svg&quot; x=&quot;290&quot; y=&quot;109&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;312&quot; y=&quot;121&quot;&gt;France&lt;/text&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/france.svg&quot; x=&quot;290&quot; y=&quot;109&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;290&quot; y=&quot;109&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;320&quot; y=&quot;121&quot;&gt;France&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/spain.svg&quot; x=&quot;290&quot; y=&quot;133&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;312&quot; y=&quot;145&quot;&gt;Spain&lt;/text&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/spain.svg&quot; x=&quot;290&quot; y=&quot;133&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;290&quot; y=&quot;133&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;320&quot; y=&quot;145&quot;&gt;Spain&lt;/text&gt;
 &lt;/g&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;245&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;269&quot; x2=&quot;470&quot; y2=&quot;269&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/argentina.svg&quot; x=&quot;290&quot; y=&quot;249&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;312&quot; y=&quot;261&quot;&gt;Argentina&lt;/text&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/argentina.svg&quot; x=&quot;290&quot; y=&quot;249&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;290&quot; y=&quot;249&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;320&quot; y=&quot;261&quot;&gt;Argentina&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
 &lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;285&quot;&gt;Winner QF4&lt;/text&gt;
@@ -160,7 +173,7 @@
 &lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;215&quot;&gt;Winner SF2&lt;/text&gt;
 &lt;/g&gt;
 &lt;/svg&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
-<div class="pane"><h3>HTML table — flat</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage&quot;&gt;
+<div class="pane"><h3>HTML table — flat</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage pd-flags&quot;&gt;
 &lt;style&gt;
   .pd-stage { font-family: sans-serif; color: #1f2937; background: #ffffff; }
   .pd-title { font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 12px; }
@@ -172,6 +185,8 @@
   .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
   .pd-team { font-size: 13px; padding: 5px 10px; }
   .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
   .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
               white-space: nowrap; }
   .pd-win td { font-weight: 700; color: #065f46; }
@@ -194,6 +209,7 @@
     .pd-season { color: #94a3b8; }
     .pd-header { color: #cbd5e1; }
     .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
     .pd-match { background: #1e293b; border-color: #334155; }
     .pd-side + .pd-side td { border-top-color: #334155; }
     .pd-win td, .pd-grid .pd-win { color: #34d399; }
@@ -278,7 +294,7 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
-<div class="pane"><h3>HTML table — stacked</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage&quot;&gt;
+<div class="pane"><h3>HTML table — stacked</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage pd-flags&quot;&gt;
 &lt;style&gt;
   .pd-stage { font-family: sans-serif; color: #1f2937; background: #ffffff; }
   .pd-title { font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 12px; }
@@ -290,6 +306,8 @@
   .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
   .pd-team { font-size: 13px; padding: 5px 10px; }
   .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
   .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
               white-space: nowrap; }
   .pd-win td { font-weight: 700; color: #065f46; }
@@ -312,6 +330,7 @@
     .pd-season { color: #94a3b8; }
     .pd-header { color: #cbd5e1; }
     .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
     .pd-match { background: #1e293b; border-color: #334155; }
     .pd-side + .pd-side td { border-top-color: #334155; }
     .pd-win td, .pd-grid .pd-win { color: #34d399; }
@@ -430,6 +449,7 @@
   .pd-team { font: 400 13px sans-serif; fill: #1f2937; }
   .pd-score { font: 400 13px sans-serif; fill: #1f2937; text-anchor: end; }
   .pd-win .pd-team, .pd-win .pd-score { font-weight: 700; fill: #065f46; }
+  .pd-crest-frame { fill: none; stroke: #d1d5db; stroke-width: 1; }
   .pd-link { fill: none; stroke: #cbd5e1; stroke-width: 1.5; }
   @media (prefers-color-scheme: dark) {
     .pd-bg { fill: #0f172a; }
@@ -441,6 +461,7 @@
     .pd-team { fill: #e5e7eb; }
     .pd-score { fill: #e5e7eb; }
     .pd-win .pd-team, .pd-win .pd-score { fill: #34d399; }
+    .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }&lt;/style&gt;
 &lt;rect class=&quot;pd-bg&quot; width=&quot;530&quot; height=&quot;212&quot;/&gt;
@@ -499,6 +520,8 @@
   .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
   .pd-team { font-size: 13px; padding: 5px 10px; }
   .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
   .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
               white-space: nowrap; }
   .pd-win td { font-weight: 700; color: #065f46; }
@@ -521,6 +544,7 @@
     .pd-season { color: #94a3b8; }
     .pd-header { color: #cbd5e1; }
     .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
     .pd-match { background: #1e293b; border-color: #334155; }
     .pd-side + .pd-side td { border-top-color: #334155; }
     .pd-win td, .pd-grid .pd-win { color: #34d399; }
@@ -578,6 +602,8 @@
   .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
   .pd-team { font-size: 13px; padding: 5px 10px; }
   .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
   .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
               white-space: nowrap; }
   .pd-win td { font-weight: 700; color: #065f46; }
@@ -600,6 +626,7 @@
     .pd-season { color: #94a3b8; }
     .pd-header { color: #cbd5e1; }
     .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
     .pd-match { background: #1e293b; border-color: #334155; }
     .pd-side + .pd-side td { border-top-color: #334155; }
     .pd-win td, .pd-grid .pd-win { color: #34d399; }
@@ -667,6 +694,7 @@
   .pd-team { font: 400 13px sans-serif; fill: #1f2937; }
   .pd-score { font: 400 13px sans-serif; fill: #1f2937; text-anchor: end; }
   .pd-win .pd-team, .pd-win .pd-score { font-weight: 700; fill: #065f46; }
+  .pd-crest-frame { fill: none; stroke: #d1d5db; stroke-width: 1; }
   .pd-link { fill: none; stroke: #cbd5e1; stroke-width: 1.5; }
   @media (prefers-color-scheme: dark) {
     .pd-bg { fill: #0f172a; }
@@ -678,6 +706,7 @@
     .pd-team { fill: #e5e7eb; }
     .pd-score { fill: #e5e7eb; }
     .pd-win .pd-team, .pd-win .pd-score { fill: #34d399; }
+    .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }&lt;/style&gt;
 &lt;rect class=&quot;pd-bg&quot; width=&quot;900&quot; height=&quot;352&quot;/&gt;
@@ -775,6 +804,8 @@
   .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
   .pd-team { font-size: 13px; padding: 5px 10px; }
   .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
   .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
               white-space: nowrap; }
   .pd-win td { font-weight: 700; color: #065f46; }
@@ -797,6 +828,7 @@
     .pd-season { color: #94a3b8; }
     .pd-header { color: #cbd5e1; }
     .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
     .pd-match { background: #1e293b; border-color: #334155; }
     .pd-side + .pd-side td { border-top-color: #334155; }
     .pd-win td, .pd-grid .pd-win { color: #34d399; }
@@ -893,6 +925,8 @@
   .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
   .pd-team { font-size: 13px; padding: 5px 10px; }
   .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
   .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
               white-space: nowrap; }
   .pd-win td { font-weight: 700; color: #065f46; }
@@ -915,6 +949,7 @@
     .pd-season { color: #94a3b8; }
     .pd-header { color: #cbd5e1; }
     .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
     .pd-match { background: #1e293b; border-color: #334155; }
     .pd-side + .pd-side td { border-top-color: #334155; }
     .pd-win td, .pd-grid .pd-win { color: #34d399; }
@@ -1033,6 +1068,7 @@
   .pd-team { font: 400 13px sans-serif; fill: #1f2937; }
   .pd-score { font: 400 13px sans-serif; fill: #1f2937; text-anchor: end; }
   .pd-win .pd-team, .pd-win .pd-score { font-weight: 700; fill: #065f46; }
+  .pd-crest-frame { fill: none; stroke: #d1d5db; stroke-width: 1; }
   .pd-link { fill: none; stroke: #cbd5e1; stroke-width: 1.5; }
   @media (prefers-color-scheme: dark) {
     .pd-bg { fill: #0f172a; }
@@ -1044,6 +1080,7 @@
     .pd-team { fill: #e5e7eb; }
     .pd-score { fill: #e5e7eb; }
     .pd-win .pd-team, .pd-win .pd-score { fill: #34d399; }
+    .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }&lt;/style&gt;
 &lt;rect class=&quot;pd-bg&quot; width=&quot;750&quot; height=&quot;352&quot;/&gt;
@@ -1129,6 +1166,8 @@
   .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
   .pd-team { font-size: 13px; padding: 5px 10px; }
   .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
   .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
               white-space: nowrap; }
   .pd-win td { font-weight: 700; color: #065f46; }
@@ -1151,6 +1190,7 @@
     .pd-season { color: #94a3b8; }
     .pd-header { color: #cbd5e1; }
     .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
     .pd-match { background: #1e293b; border-color: #334155; }
     .pd-side + .pd-side td { border-top-color: #334155; }
     .pd-win td, .pd-grid .pd-win { color: #34d399; }
@@ -1247,6 +1287,8 @@
   .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
   .pd-team { font-size: 13px; padding: 5px 10px; }
   .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
   .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
               white-space: nowrap; }
   .pd-win td { font-weight: 700; color: #065f46; }
@@ -1269,6 +1311,7 @@
     .pd-season { color: #94a3b8; }
     .pd-header { color: #cbd5e1; }
     .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
     .pd-match { background: #1e293b; border-color: #334155; }
     .pd-side + .pd-side td { border-top-color: #334155; }
     .pd-win td, .pd-grid .pd-win { color: #34d399; }
@@ -1387,6 +1430,7 @@
   .pd-team { font: 400 13px sans-serif; fill: #1f2937; }
   .pd-score { font: 400 13px sans-serif; fill: #1f2937; text-anchor: end; }
   .pd-win .pd-team, .pd-win .pd-score { font-weight: 700; fill: #065f46; }
+  .pd-crest-frame { fill: none; stroke: #d1d5db; stroke-width: 1; }
   .pd-link { fill: none; stroke: #cbd5e1; stroke-width: 1.5; }
   @media (prefers-color-scheme: dark) {
     .pd-bg { fill: #0f172a; }
@@ -1398,6 +1442,7 @@
     .pd-team { fill: #e5e7eb; }
     .pd-score { fill: #e5e7eb; }
     .pd-win .pd-team, .pd-win .pd-score { fill: #34d399; }
+    .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }&lt;/style&gt;
 &lt;rect class=&quot;pd-bg&quot; width=&quot;750&quot; height=&quot;352&quot;/&gt;
@@ -1485,6 +1530,8 @@
   .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
   .pd-team { font-size: 13px; padding: 5px 10px; }
   .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
   .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
               white-space: nowrap; }
   .pd-win td { font-weight: 700; color: #065f46; }
@@ -1507,6 +1554,7 @@
     .pd-season { color: #94a3b8; }
     .pd-header { color: #cbd5e1; }
     .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
     .pd-match { background: #1e293b; border-color: #334155; }
     .pd-side + .pd-side td { border-top-color: #334155; }
     .pd-win td, .pd-grid .pd-win { color: #34d399; }
@@ -1603,6 +1651,8 @@
   .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
   .pd-team { font-size: 13px; padding: 5px 10px; }
   .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
   .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
               white-space: nowrap; }
   .pd-win td { font-weight: 700; color: #065f46; }
@@ -1625,6 +1675,7 @@
     .pd-season { color: #94a3b8; }
     .pd-header { color: #cbd5e1; }
     .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
     .pd-match { background: #1e293b; border-color: #334155; }
     .pd-side + .pd-side td { border-top-color: #334155; }
     .pd-win td, .pd-grid .pd-win { color: #34d399; }

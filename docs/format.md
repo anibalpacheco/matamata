@@ -33,8 +33,9 @@ changes.
 
 ```jsonc
 {
-  "max_label_chars": 22,  // optional, longest team label before it is truncated
-  "box_width": 190        // optional, width of every match box in SVG units
+  "max_label_chars": 22,    // optional, longest team label before it is truncated
+  "box_width": 190,         // optional, width of every match box in SVG units
+  "crest_shape": "square"   // optional, "square" (default) or "flag"
 }
 ```
 
@@ -43,6 +44,11 @@ changes.
   a host's `get_match` can also read it and return shorter names.
 - `"box_width"` (default `190`) — the width of every match box. Widen it (instead of, or
   together with, lowering `max_label_chars`) to fit long names without truncation.
+- `"crest_shape"` (default `"square"`) — the shape of each side's crest/flag image.
+  `"square"` suits club crests; `"flag"` renders a rectangular (3:2) box with the image
+  fitted inside without distortion and a thin border, so national flags look like flags
+  instead of squashed squares. Only the *shape* is declared here — the image itself is
+  still supplied by the host's `get_crest`, never by the document.
 
 Each side always shows the goals of every played leg in order, e.g. `2 0` for a tie or
 `2` for a single match; a shootout is appended in parentheses on the relevant side, e.g.

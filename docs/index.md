@@ -211,8 +211,14 @@ the team name in both outputs — an `<image>` element in the SVG diagram, an `<
 the [HTML table layout](#the-html-table-layout) — and the renderer never fetches or
 processes it; rows without one (the unresolved placeholders) keep their layout.
 
-The World Cup example resolves each national team's flag, shown here in both the diagram
-and the table:
+Crests are square by default — right for club badges. National flags are rectangular, so
+forcing them into a square squashes them; set `"crest_shape": "flag"` in the document's
+[`render` object](format.md#render-options) to draw each image in a framed 3:2 box,
+fitted without distortion. It is a display preference (only the *shape*; the image is
+still the host's), honored by both the diagram and the table.
+
+The World Cup example does exactly that, resolving each national team's flag and
+declaring `"render": { "crest_shape": "flag" }`, shown here in both outputs:
 
 ![A schedule with flags](flags.png)
 

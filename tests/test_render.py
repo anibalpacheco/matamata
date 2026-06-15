@@ -119,6 +119,47 @@ def test_dark_mode_rules_are_embedded():
     assert ".pd-stage { color: #e5e7eb; background: #0f172a; }" in html
 
 
+def test_crest_shape_flag_renders_rectangular_framed_images():
+    from matamata import parse_stage
+
+    doc = {
+        "render": {"crest_shape": "flag"},
+        "rounds": [
+            {
+                "name": "Final",
+                "matches": [
+                    {
+                        "id": "f",
+                        "legs": [
+                            {"team1": "A", "goals1": 1, "team2": "B", "goals2": 0}
+                        ],
+                        "winner": 1,
+                    }
+                ],
+            }
+        ],
+    }
+    stage = parse_stage(doc)
+    # The host's get_crest normally sets this; inject one to exercise rendering.
+    stage.rounds[0].matches[0].home.crest = "a.svg"
+
+    html = render_html(stage)
+    assert 'class="pd-stage pd-flags"' in html
+    svg = render_svg(stage)
+    assert 'class="pd-crest-frame"' in svg
+    assert 'width="24"' in svg  # 3:2 flag box, not the 16px square
+
+    # Default ("square"): no flag class, square crest, no frame. (The pd-flags and
+    # pd-crest-frame rules always sit in the <style> block, so assert on real usage.)
+    doc["render"] = {}
+    square = parse_stage(doc)
+    square.rounds[0].matches[0].home.crest = "a.svg"
+    assert 'class="pd-stage pd-flags"' not in render_html(square)
+    square_svg = render_svg(square)
+    assert 'class="pd-crest-frame"' not in square_svg
+    assert 'width="16"' in square_svg
+
+
 def test_host_example_matches_golden(libertadores_diagram):
     _assert_golden(libertadores_diagram().render(), HOST_EXAMPLE, ".svg")
 
@@ -178,7 +219,7 @@ def test_cli_infers_html_from_the_output_extension(tmp_path):
     out = tmp_path / "schedule.html"
     src = os.path.join(EXAMPLES, "knockout-8.json")
     assert main([src, "-o", str(out)]) == 0
-    assert out.read_text(encoding="utf-8").startswith('<div class="pd-stage">')
+    assert out.read_text(encoding="utf-8").startswith('<div class="pd-stage')
 
     svg_out = tmp_path / "schedule.svg"
     assert main([src, "-o", str(svg_out)]) == 0
@@ -186,4 +227,4 @@ def test_cli_infers_html_from_the_output_extension(tmp_path):
 
     forced = tmp_path / "schedule.txt"
     assert main([src, "-o", str(forced), "-f", "html"]) == 0
-    assert forced.read_text(encoding="utf-8").startswith('<div class="pd-stage">')
+    assert forced.read_text(encoding="utf-8").startswith('<div class="pd-stage')

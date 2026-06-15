@@ -106,10 +106,17 @@ class RenderOptions:
 
     ``box_width``: the width of every match box, in SVG units. Widen it (instead of, or
     together with, raising ``max_label_chars``) to fit long names without truncation.
+
+    ``crest_shape``: how each side's crest/flag image is shaped. ``"square"`` (the
+    default) renders a square emblem, right for club crests; ``"flag"`` renders a
+    rectangular box (3:2) with the image fitted inside without distortion and a thin
+    border, so national flags look like flags instead of squashed squares. Only the
+    *shape* is a document preference — the image itself is still host-only (``get_crest``).
     """
 
     max_label_chars: int = 22
     box_width: int = 190
+    crest_shape: str = "square"
 
 
 @dataclass

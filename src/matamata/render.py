@@ -13,7 +13,8 @@ from .model import Stage
 
 _LABEL_PAD = 10
 _SCORE_PAD = 8
-_CREST_SIZE = 16  # crest/flag side, vertically centered in the 24-unit row
+_CREST_SIZE = 16  # square crest side, vertically centered in the 24-unit row
+_FLAG_W = 24  # flag box is 3:2 (24x16); the image is fitted inside without distortion
 _CREST_GAP = 6
 _ATTR = {'"': "&quot;"}  # extra escape for attribute values
 
@@ -27,6 +28,7 @@ _STYLE = """
   .pd-team { font: 400 13px sans-serif; fill: #1f2937; }
   .pd-score { font: 400 13px sans-serif; fill: #1f2937; text-anchor: end; }
   .pd-win .pd-team, .pd-win .pd-score { font-weight: 700; fill: #065f46; }
+  .pd-crest-frame { fill: none; stroke: #d1d5db; stroke-width: 1; }
   .pd-link { fill: none; stroke: #cbd5e1; stroke-width: 1.5; }
   @media (prefers-color-scheme: dark) {
     .pd-bg { fill: #0f172a; }
@@ -38,6 +40,7 @@ _STYLE = """
     .pd-team { fill: #e5e7eb; }
     .pd-score { fill: #e5e7eb; }
     .pd-win .pd-team, .pd-win .pd-score { fill: #34d399; }
+    .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }
 """.rstrip()
@@ -56,19 +59,29 @@ def _row(
     top: float,
     max_chars: int,
     box_w: float,
+    flag: bool = False,
 ) -> None:
     text_y = top + ROW_H / 2 + 4
     cls = "pd-win" if side.is_winner else ""
     out.append(f'<g class="{cls}">')
     label_x = pm.x + _LABEL_PAD
     if side.crest:
+        crest_w = _FLAG_W if flag else _CREST_SIZE
+        crest_y = top + (ROW_H - _CREST_SIZE) / 2
+        # In flag mode the image is fitted into the 3:2 box without distortion and framed.
+        fit = ' preserveAspectRatio="xMidYMid meet"' if flag else ""
         out.append(
             f'<image class="pd-crest" '
             f'href="{escape(side.crest, _ATTR)}" '
-            f'x="{label_x:.0f}" y="{top + (ROW_H - _CREST_SIZE) / 2:.0f}" '
-            f'width="{_CREST_SIZE}" height="{_CREST_SIZE}"/>'
+            f'x="{label_x:.0f}" y="{crest_y:.0f}" '
+            f'width="{crest_w}" height="{_CREST_SIZE}"{fit}/>'
         )
-        label_x += _CREST_SIZE + _CREST_GAP
+        if flag:
+            out.append(
+                f'<rect class="pd-crest-frame" x="{label_x:.0f}" y="{crest_y:.0f}" '
+                f'width="{crest_w}" height="{_CREST_SIZE}"/>'
+            )
+        label_x += crest_w + _CREST_GAP
     out.append(
         f'<text class="pd-team" x="{label_x:.0f}" y="{text_y:.0f}">'
         f"{escape(_truncate(side.label, max_chars))}</text>"
@@ -81,7 +94,9 @@ def _row(
     out.append("</g>")
 
 
-def _match(out: list[str], pm: PlacedMatch, max_chars: int, box_w: float) -> None:
+def _match(
+    out: list[str], pm: PlacedMatch, max_chars: int, box_w: float, flag: bool = False
+) -> None:
     out.append(
         f'<rect class="pd-box" x="{pm.x:.0f}" y="{pm.y:.0f}" '
         f'width="{box_w:.0f}" height="{BOX_H}" rx="3"/>'
@@ -91,8 +106,8 @@ def _match(out: list[str], pm: PlacedMatch, max_chars: int, box_w: float) -> Non
         f'<line class="pd-divider" x1="{pm.x:.0f}" y1="{mid:.0f}" '
         f'x2="{pm.x + box_w:.0f}" y2="{mid:.0f}"/>'
     )
-    _row(out, pm, pm.home, pm.y, max_chars, box_w)
-    _row(out, pm, pm.away, mid, max_chars, box_w)
+    _row(out, pm, pm.home, pm.y, max_chars, box_w, flag)
+    _row(out, pm, pm.away, mid, max_chars, box_w, flag)
 
 
 def render_layout(stage: Stage, layout: Layout) -> str:
@@ -127,8 +142,9 @@ def render_layout(stage: Stage, layout: Layout) -> str:
         d = "M " + " L ".join(f"{x:.0f} {y:.0f}" for x, y in conn.points)
         out.append(f'<path class="pd-link" d="{d}"/>')
 
+    flag = stage.render.crest_shape == "flag"
     for pm in layout.matches:
-        _match(out, pm, stage.render.max_label_chars, layout.box_width)
+        _match(out, pm, stage.render.max_label_chars, layout.box_width, flag)
 
     out.append("</svg>")
     return "\n".join(out)

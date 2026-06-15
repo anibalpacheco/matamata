@@ -17,8 +17,9 @@ themed by the host page, with sensible defaults embedded.
 Like the SVG renderer this computes nothing about the tournament: labels, scores, the
 emphasized winner and each side's crest/flag come straight from the model. Crests are
 only ever filled by the KnockoutStage path (the ``get_crest`` hook); a document rendered
-without it carries none. The ``render`` options are SVG geometry knobs and are ignored
-here — HTML handles long names natively.
+without it carries none, and ``render.crest_shape`` decides whether they are drawn as
+squares (club crests) or framed 3:2 rectangles (national flags). The other ``render``
+options are SVG geometry knobs and are ignored here — HTML handles long names natively.
 """
 
 from __future__ import annotations
@@ -40,6 +41,8 @@ _STYLE = """
   .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
   .pd-team { font-size: 13px; padding: 5px 10px; }
   .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
   .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
               white-space: nowrap; }
   .pd-win td { font-weight: 700; color: #065f46; }
@@ -62,6 +65,7 @@ _STYLE = """
     .pd-season { color: #94a3b8; }
     .pd-header { color: #cbd5e1; }
     .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
     .pd-match { background: #1e293b; border-color: #334155; }
     .pd-side + .pd-side td { border-top-color: #334155; }
     .pd-win td, .pd-grid .pd-win { color: #34d399; }
@@ -155,7 +159,10 @@ def render_html(stage: Stage, layout: str = "flat") -> str:
         raise ValueError(f"unknown layout {layout!r}")
     out: list[str] = []
     resolver = Resolver(stage)
-    out.append('<div class="pd-stage">')
+    stage_cls = (
+        "pd-stage pd-flags" if stage.render.crest_shape == "flag" else "pd-stage"
+    )
+    out.append(f'<div class="{stage_cls}">')
     out.append(f"<style>{_STYLE}</style>")
     if stage.tournament:
         title = escape(stage.tournament)
