@@ -17,7 +17,7 @@
   .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
               white-space: nowrap; }
   .pd-win td { font-weight: 700; color: #065f46; }
-  .pd-grid { border-collapse: collapse; margin: 0 0 4px; }
+  .pd-grid { border-collapse: separate; border-spacing: 0; margin: 0 0 4px; }
   .pd-grid td { font-size: 13px; padding: 4px 6px; vertical-align: middle;
                 white-space: nowrap; }
   .pd-team1, .pd-score1, .pd-crest1 { text-align: right; }
@@ -26,11 +26,19 @@
   .pd-crest1 .pd-crest { margin: 0 0 0 6px; }
   .pd-crest2 .pd-crest { margin: 0 6px 0 0; }
   .pd-vs { color: #9ca3af; padding: 4px 8px; }
+  /* Box each leg's score row, so a match reads as a unit like the SVG/stacked
+     boxes; the metadata line stays above the box (as in the stacked layout). */
+  .pd-grid .pd-match-row td { border-top: 1px solid #d1d5db;
+                              border-bottom: 1px solid #d1d5db; }
+  .pd-grid .pd-match-row td:first-child { border-left: 1px solid #d1d5db;
+      border-top-left-radius: 3px; border-bottom-left-radius: 3px; }
+  .pd-grid .pd-match-row td:last-child { border-right: 1px solid #d1d5db;
+      border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
   .pd-grid .pd-round-head { font-size: 15px; font-weight: 600; color: #374151;
                             text-align: left; padding: 26px 6px 6px; }
   .pd-grid tr:first-child .pd-round-head { padding-top: 4px; }
   .pd-grid .pd-meta { font-size: 11px; color: #6b7280; text-align: left;
-                      padding: 8px 6px 0; }
+                      padding: 8px 6px 2px; }
   .pd-grid .pd-win { font-weight: 700; color: #065f46; }
   @media (prefers-color-scheme: dark) {
     .pd-stage { color: #e5e7eb; background: #0f172a; }
@@ -41,6 +49,7 @@
     .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
     .pd-flags .pd-crest { border-color: #334155; }
     .pd-match { background: #1e293b; border-color: #334155; }
+    .pd-grid .pd-match-row td { background: #1e293b; border-color: #334155; }
     .pd-side + .pd-side td { border-top-color: #334155; }
     .pd-win td, .pd-grid .pd-win { color: #34d399; }
     .pd-vs { color: #64748b; }

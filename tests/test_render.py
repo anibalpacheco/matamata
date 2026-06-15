@@ -295,7 +295,7 @@ def test_flat_splits_a_two_leg_tie_into_two_id_rows():
     rows = [
         re.findall(r"pd-team\d[^>]*>([^<]+)<", r)
         for r in flat.split("</tr>")
-        if "pd-match-row" in r
+        if '<tr class="pd-match-row">' in r
     ]
     assert rows == [["Boca", "River"], ["River", "Boca"]]
 

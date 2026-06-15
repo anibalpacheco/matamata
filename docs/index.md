@@ -93,13 +93,14 @@ placeholders for unresolved sides.
 There are two layouts, selected with the `layout` argument:
 
 - **`"flat"`** (the default) — the whole stage is one table, each round name a full-width
-  header row. A single match is one row (`name1 score1 x score2 name2`); a two-legged tie
-  is **two rows**, one per leg with that leg's single score, each preceded by a
-  [metadata](#match-metadata) line (the id and that leg's own date/venue). Each leg row
-  honors its **localía** — the local side (the
-  leg's `team1`) goes on the left — so the second leg flips relative to the first. The
-  names are aligned outward and any crests/flags hug the central `x`. The `x` is always
-  shown, reading as "vs" before a result exists.
+  header row. A single match is one boxed row (`name1 score1 x score2 name2`); a
+  two-legged tie is **two boxed rows**, one per leg with that leg's single score, each
+  preceded by a [metadata](#match-metadata) line (the id and that leg's own date/venue).
+  Each leg's score row is drawn in its own bordered box (like the SVG and stacked match
+  boxes), with the metadata line above it. Each leg row honors its **localía** — the local
+  side (the leg's `team1`) goes on the left — so the second leg flips relative to the
+  first. The names are aligned outward and any crests/flags hug the central `x`. The `x`
+  is always shown, reading as "vs" before a result exists.
 - **`"stacked"`** — each match is its own little box of two rows (top side, then bottom
   side), like the SVG's match boxes, with the metadata line above it.
 

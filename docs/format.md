@@ -231,8 +231,9 @@ match carrying `"settle": false` is never settled, whatever the call says.
   stack vertically and no connectors are drawn — advancement is read top-down. The
   **stacked** layout draws each match as a two-row box (aggregate scores); the **flat**
   layout is one grid where a two-legged tie becomes **two rows**, one per leg, each
-  carrying that leg's single score and preceded by a full-width metadata row (the id plus
-  that leg's date/venue). Each flat row honors that leg's
+  carrying that leg's single score in its own bordered box (like the SVG/stacked boxes)
+  and preceded by a full-width metadata row (the id plus that leg's date/venue). Each flat
+  row honors that leg's
   **localía**: the leg's local side (its `team1`) sits in the home (left) column, so the
   second leg's row is flipped relative to the first. Both renderings show the same
   resolved data.
