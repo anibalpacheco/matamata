@@ -78,10 +78,10 @@ _STYLE = """
   .pd-grid .pd-match-row td:last-child { border-right: 1px solid #d1d5db;
       border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
   .pd-grid .pd-round-head { font-size: 15px; font-weight: 600; color: #374151;
-                            text-align: left; padding: 26px 6px 6px; }
+                            text-align: left; padding: 26px 6px 6px 0; }
   .pd-grid tr:first-child .pd-round-head { padding-top: 4px; }
   .pd-grid .pd-meta { font-size: 11px; color: #6b7280; text-align: left;
-                      padding: 8px 6px 2px; }
+                      padding: 14px 6px 2px 0; }
   .pd-grid .pd-win { font-weight: 700; color: #065f46; }
   @media (prefers-color-scheme: dark) {
     .pd-stage { color: #e5e7eb; background: #0f172a; }
@@ -93,6 +93,8 @@ _STYLE = """
     .pd-flags .pd-crest { border-color: #334155; }
     .pd-match { background: #1e293b; border-color: #334155; }
     .pd-grid .pd-match-row td { background: #1e293b; border-color: #334155; }
+    .pd-grid .pd-match-row td:first-child,
+    .pd-grid .pd-match-row td:last-child { border-color: #334155; }
     .pd-side + .pd-side td { border-top-color: #334155; }
     .pd-win td, .pd-grid .pd-win { color: #34d399; }
     .pd-vs { color: #64748b; }
