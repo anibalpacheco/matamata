@@ -46,10 +46,22 @@ def main(argv: list[str] | None = None) -> int:
         choices=sorted(_RENDERERS),
         help="output format (defaults to what the output extension implies, or svg)",
     )
+    parser.add_argument(
+        "--layout",
+        choices=("flat", "stacked"),
+        default="flat",
+        help="HTML table layout (default flat); ignored for svg",
+    )
     args = parser.parse_args(argv)
 
     try:
-        rendered = _RENDERERS[_format_of(args)](load_stage(args.input))
+        stage = load_stage(args.input)
+        fmt = _format_of(args)
+        rendered = (
+            render_html(stage, layout=args.layout)
+            if fmt == "html"
+            else render_svg(stage)
+        )
     except (StageError, OSError, ValueError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1

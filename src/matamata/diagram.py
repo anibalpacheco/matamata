@@ -162,17 +162,23 @@ class KnockoutStage:
             )
         return stage
 
-    def render(self, fmt: str = "svg", language: Optional[str] = None) -> str:
+    def render(
+        self, fmt: str = "svg", language: Optional[str] = None, layout: str = "flat"
+    ) -> str:
         """Render the knockout stage to a self-contained string.
 
         ``fmt`` is ``"svg"`` (the default, the diagram) or ``"html"`` (the table
-        layout for small screens). ``language`` is forwarded to :meth:`get_labels` to
-        localize the generated labels (``None`` leaves them in English).
+        layout for small screens). ``layout`` selects the HTML table arrangement
+        (``"flat"`` or ``"stacked"``) and is ignored for svg. ``language`` is forwarded
+        to :meth:`get_labels` to localize the generated labels (``None`` leaves them in
+        English).
         """
-        renderers = {"svg": render_svg, "html": render_html}
-        if fmt not in renderers:
+        if fmt not in ("svg", "html"):
             raise StageError(f"unknown render format {fmt!r}")
-        return renderers[fmt](self.build(language))
+        stage = self.build(language)
+        if fmt == "html":
+            return render_html(stage, layout=layout)
+        return render_svg(stage)
 
     # --------------------------------------------------------------- results
     def apply_results(

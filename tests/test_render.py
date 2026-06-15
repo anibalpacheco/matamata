@@ -1,8 +1,9 @@
 """Golden (snapshot) tests for SVG and HTML generation.
 
 Each example is rendered and compared against a versioned reference under
-``tests/golden/`` (an ``.svg`` and an ``.html`` per example). When the output
-legitimately changes, regenerate the goldens with::
+``tests/golden/`` (an ``.svg`` plus an ``.html`` for the flat HTML layout and a
+``.stacked.html`` for the stacked one, per example). When the output legitimately
+changes, regenerate the goldens with::
 
     PD_REGEN=1 pytest tests/test_render.py
 
@@ -81,14 +82,29 @@ def test_svg_is_well_formed(name):
     _assert_well_formed(render_svg(load_stage(os.path.join(EXAMPLES, name))), "svg")
 
 
-@pytest.mark.parametrize("name", EXAMPLE_FILES)
-def test_html_matches_golden(name):
-    _assert_golden(render_html(load_stage(os.path.join(EXAMPLES, name))), name, ".html")
+# The HTML renderer offers two layouts; each gets its own golden extension.
+HTML_LAYOUTS = {"flat": ".html", "stacked": ".stacked.html"}
 
 
 @pytest.mark.parametrize("name", EXAMPLE_FILES)
-def test_html_is_well_formed(name):
-    _assert_well_formed(render_html(load_stage(os.path.join(EXAMPLES, name))), "div")
+@pytest.mark.parametrize("layout", sorted(HTML_LAYOUTS))
+def test_html_matches_golden(name, layout):
+    rendered = render_html(load_stage(os.path.join(EXAMPLES, name)), layout=layout)
+    _assert_golden(rendered, name, HTML_LAYOUTS[layout])
+
+
+@pytest.mark.parametrize("name", EXAMPLE_FILES)
+@pytest.mark.parametrize("layout", sorted(HTML_LAYOUTS))
+def test_html_is_well_formed(name, layout):
+    rendered = render_html(load_stage(os.path.join(EXAMPLES, name)), layout=layout)
+    _assert_well_formed(rendered, "div")
+
+
+def test_unknown_html_layout_is_rejected():
+    with pytest.raises(ValueError):
+        render_html(
+            load_stage(os.path.join(EXAMPLES, "knockout-8.json")), layout="grid"
+        )
 
 
 def test_dark_mode_rules_are_embedded():
@@ -141,12 +157,19 @@ def test_html_emphasizes_only_the_explicit_winner():
     }
     from matamata import parse_stage
 
-    html = render_html(parse_stage(doc))
-    assert html.count('class="pd-side pd-win"') == 1
-    assert '<h3 class="pd-header">Final</h3>' in html
+    # Stacked: exactly one of the two side rows is emphasized.
+    stacked = render_html(parse_stage(doc), layout="stacked")
+    assert stacked.count('class="pd-side pd-win"') == 1
+    assert '<h3 class="pd-header">Final</h3>' in stacked
+
+    # Flat: the winning side's three cells (name, crest, score) carry pd-win.
+    flat = render_html(parse_stage(doc), layout="flat")
+    assert flat.count('pd-win"') == 3
+    assert '<td class="pd-vs">x</td>' in flat
 
     del doc["rounds"][0]["matches"][0]["winner"]
-    assert 'class="pd-side pd-win"' not in render_html(parse_stage(doc))
+    assert 'pd-win"' not in render_html(parse_stage(doc), layout="stacked")
+    assert 'pd-win"' not in render_html(parse_stage(doc), layout="flat")
 
 
 def test_cli_infers_html_from_the_output_extension(tmp_path):

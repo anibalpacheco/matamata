@@ -85,13 +85,26 @@ def knockout_stage_svg(request, championship):
 ### The HTML table layout
 
 On a phone the wide, tree-shaped SVG diagram needs panning; the HTML table layout is
-the alternative for small screens. Rounds stack vertically as one table each, every
-match is a group of two rows (top side, then bottom side), and advancement is read
+the alternative for small screens. Rounds stack vertically and advancement is read
 top-down — no connector lines. Everything shown follows the same rules as the SVG:
 explicit `winner` emphasis, per-leg scores with the shootout in parentheses,
 placeholders for unresolved sides.
 
+There are two layouts, selected with the `layout` argument:
+
+- **`"flat"`** (the default) — the whole stage is one table, each match a single row
+  (`name1 score1 x score2 name2`) and each round name a full-width header row. The names
+  are aligned outward and any crests/flags hug the central `x`, so every column lines up
+  vertically across all rounds. The `x` is always shown, reading as "vs" before a result
+  exists.
+- **`"stacked"`** — each match is its own little box of two rows (top side, then bottom
+  side), like the SVG's match boxes.
+
 ![World Cup knockout stage as an HTML table](knockout-8-table.png)
+
+Choose the layout from Python (`render_html(stage, layout="stacked")`), on the command
+line (`--layout stacked`), or through the host class (`diagram.render("html",
+layout="stacked")`); it defaults to `flat` everywhere.
 
 The output is a self-contained `<div>` fragment, ready to drop into a page. Styling
 is driven by `pd-*` CSS classes with embedded defaults, so the host page can theme it.
@@ -497,7 +510,7 @@ compared against a versioned reference SVG under `tests/golden/`. This catches v
 regressions without a browser.
 
 To eyeball the renders yourself, the repo ships a small dev tool, `examples/gallery.py`,
-that renders **every example** — both the SVG diagram and the HTML table, including the
-host-resolved ones with crests and flags — into a single self-contained `file://` page,
+that renders **every example** — the SVG diagram and the HTML table in both layouts,
+including the host-resolved ones with crests and flags — into a single self-contained `file://` page,
 `examples/gallery.html` (committed, so you can just open it). Its header shows the command
 to regenerate it.
