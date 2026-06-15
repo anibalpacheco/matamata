@@ -52,8 +52,9 @@ _STYLE = """
   .pd-crest1 .pd-crest { margin: 0 0 0 6px; }
   .pd-crest2 .pd-crest { margin: 0 6px 0 0; }
   .pd-vs { color: #9ca3af; padding: 4px 8px; }
-  .pd-round-head { font-size: 12px; font-weight: 600; color: #374151;
-                   text-align: left; padding: 16px 6px 6px; }
+  .pd-grid .pd-round-head { font-size: 12px; font-weight: 600; color: #374151;
+                            text-align: left; padding: 26px 6px 6px; }
+  .pd-grid tr:first-child .pd-round-head { padding-top: 4px; }
   .pd-grid .pd-win { font-weight: 700; color: #065f46; }
   @media (prefers-color-scheme: dark) {
     .pd-stage { color: #e5e7eb; background: #0f172a; }
@@ -65,7 +66,7 @@ _STYLE = """
     .pd-side + .pd-side td { border-top-color: #334155; }
     .pd-win td, .pd-grid .pd-win { color: #34d399; }
     .pd-vs { color: #64748b; }
-    .pd-round-head { color: #cbd5e1; }
+    .pd-grid .pd-round-head { color: #cbd5e1; }
   }
 """.rstrip()
 
