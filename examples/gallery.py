@@ -42,6 +42,7 @@ from typing import Callable
 from xml.sax.saxutils import escape
 
 from copa_rio_host import CopaRioDiagram
+from facup_host import FaCupDiagram
 from libertadores_host import LibertadoresDiagram
 from world_cup_flags_host import WorldCupFlagsDiagram
 
@@ -107,8 +108,10 @@ SPECS: "list[tuple[str, str, Builder]]" = [
     ),
     (
         "facup-pending-draw.json",
-        "FA Cup — a pending draw (absent winnerof: TBD, no connector). Base loader.",
-        _base("facup-pending-draw.json"),
+        "FA Cup — a pending draw (absent winnerof: TBD, no connector). Rendered through "
+        "facup_host in Spanish to show placeholder i18n: the undrawn semifinals become "
+        "'A definir' (tbd) and the final's links 'Ganador SF1/SF2' (winner).",
+        _host(FaCupDiagram, language="es"),
     ),
     (
         "facup-drawn.json",

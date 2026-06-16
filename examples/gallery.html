@@ -1656,7 +1656,7 @@
 </section>
 <section class="example">
 <h2>facup-pending-draw.json</h2>
-<p class="note">FA Cup — a pending draw (absent winnerof: TBD, no connector). Base loader.</p>
+<p class="note">FA Cup — a pending draw (absent winnerof: TBD, no connector). Rendered through facup_host in Spanish to show placeholder i18n: the undrawn semifinals become 'A definir' (tbd) and the final's links 'Ganador SF1/SF2' (winner).</p>
 <details class="src" open><summary>source JSON</summary><pre>{
   "tournament": "FA Cup",
   "season": "2025-26",
@@ -1743,8 +1743,8 @@
 &lt;rect class=&quot;pd-bg&quot; width=&quot;750&quot; height=&quot;488&quot;/&gt;
 &lt;text class=&quot;pd-title&quot; x=&quot;20&quot; y=&quot;28&quot;&gt;FA Cup&lt;/text&gt;
 &lt;text class=&quot;pd-season&quot; x=&quot;97&quot; y=&quot;28&quot;&gt;2025-26&lt;/text&gt;
-&lt;text class=&quot;pd-header&quot; x=&quot;115&quot; y=&quot;56&quot;&gt;Quarterfinals&lt;/text&gt;
-&lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;56&quot;&gt;Semifinals&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;115&quot; y=&quot;56&quot;&gt;Cuartos de final&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;56&quot;&gt;Semifinales&lt;/text&gt;
 &lt;text class=&quot;pd-header&quot; x=&quot;635&quot; y=&quot;56&quot;&gt;Final&lt;/text&gt;
 &lt;path class=&quot;pd-link&quot; d=&quot;M 470 128 L 505 128 L 505 168 L 540 168&quot;/&gt;
 &lt;path class=&quot;pd-link&quot; d=&quot;M 470 232 L 505 232 L 505 192 L 540 192&quot;/&gt;
@@ -1794,27 +1794,27 @@
 &lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;104&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;128&quot; x2=&quot;470&quot; y2=&quot;128&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;120&quot;&gt;TBD&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;120&quot;&gt;A definir&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;144&quot;&gt;TBD&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;144&quot;&gt;A definir&lt;/text&gt;
 &lt;/g&gt;
 &lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;269&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF2&lt;/tspan&gt;&lt;/text&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;208&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;232&quot; x2=&quot;470&quot; y2=&quot;232&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;224&quot;&gt;TBD&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;224&quot;&gt;A definir&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;248&quot;&gt;TBD&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;248&quot;&gt;A definir&lt;/text&gt;
 &lt;/g&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;540&quot; y=&quot;156&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;540&quot; y1=&quot;180&quot; x2=&quot;730&quot; y2=&quot;180&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;172&quot;&gt;Winner SF1&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;172&quot;&gt;Ganador SF1&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;196&quot;&gt;Winner SF2&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;196&quot;&gt;Ganador SF2&lt;/text&gt;
 &lt;/g&gt;
 &lt;/svg&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
 <div class="pane pane-table"><h3>HTML table — flat</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage&quot;&gt;
@@ -1880,7 +1880,7 @@
 &lt;table class=&quot;pd-grid&quot;&gt;
 &lt;tbody&gt;
 &lt;tr class=&quot;pd-round-row&quot;&gt;
-&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Quarterfinals&lt;/td&gt;
+&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Cuartos de final&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-meta-row&quot;&gt;
 &lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;QF1&lt;/span&gt;&lt;/td&gt;
@@ -1931,43 +1931,43 @@
 &lt;td class=&quot;pd-team pd-team2&quot;&gt;Tottenham&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-round-row&quot;&gt;
-&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Semifinals&lt;/td&gt;
+&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Semifinales&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-meta-row&quot;&gt;
 &lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;SF1&lt;/span&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-match-row&quot;&gt;
-&lt;td class=&quot;pd-team pd-team1&quot;&gt;TBD&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;A definir&lt;/td&gt;
 &lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
-&lt;td class=&quot;pd-team pd-team2&quot;&gt;TBD&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;A definir&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-meta-row&quot;&gt;
 &lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;SF2&lt;/span&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-match-row&quot;&gt;
-&lt;td class=&quot;pd-team pd-team1&quot;&gt;TBD&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;A definir&lt;/td&gt;
 &lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
-&lt;td class=&quot;pd-team pd-team2&quot;&gt;TBD&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;A definir&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-round-row&quot;&gt;
 &lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Final&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-match-row&quot;&gt;
-&lt;td class=&quot;pd-team pd-team1&quot;&gt;Winner SF1&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Ganador SF1&lt;/td&gt;
 &lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
-&lt;td class=&quot;pd-team pd-team2&quot;&gt;Winner SF2&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Ganador SF2&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -2033,7 +2033,7 @@
   }&lt;/style&gt;
 &lt;h2 class=&quot;pd-title&quot;&gt;FA Cup &lt;span class=&quot;pd-season&quot;&gt;2025-26&lt;/span&gt;&lt;/h2&gt;
 &lt;div class=&quot;pd-round&quot;&gt;
-&lt;h3 class=&quot;pd-header&quot;&gt;Quarterfinals&lt;/h3&gt;
+&lt;h3 class=&quot;pd-header&quot;&gt;Cuartos de final&lt;/h3&gt;
 &lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;QF1&lt;/span&gt;&lt;/div&gt;
 &lt;table class=&quot;pd-match&quot;&gt;
 &lt;tbody&gt;
@@ -2088,16 +2088,16 @@
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;div class=&quot;pd-round&quot;&gt;
-&lt;h3 class=&quot;pd-header&quot;&gt;Semifinals&lt;/h3&gt;
+&lt;h3 class=&quot;pd-header&quot;&gt;Semifinales&lt;/h3&gt;
 &lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;SF1&lt;/span&gt;&lt;/div&gt;
 &lt;table class=&quot;pd-match&quot;&gt;
 &lt;tbody&gt;
 &lt;tr class=&quot;pd-side&quot;&gt;
-&lt;td class=&quot;pd-team&quot;&gt;TBD&lt;/td&gt;
+&lt;td class=&quot;pd-team&quot;&gt;A definir&lt;/td&gt;
 &lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-side&quot;&gt;
-&lt;td class=&quot;pd-team&quot;&gt;TBD&lt;/td&gt;
+&lt;td class=&quot;pd-team&quot;&gt;A definir&lt;/td&gt;
 &lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -2106,11 +2106,11 @@
 &lt;table class=&quot;pd-match&quot;&gt;
 &lt;tbody&gt;
 &lt;tr class=&quot;pd-side&quot;&gt;
-&lt;td class=&quot;pd-team&quot;&gt;TBD&lt;/td&gt;
+&lt;td class=&quot;pd-team&quot;&gt;A definir&lt;/td&gt;
 &lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-side&quot;&gt;
-&lt;td class=&quot;pd-team&quot;&gt;TBD&lt;/td&gt;
+&lt;td class=&quot;pd-team&quot;&gt;A definir&lt;/td&gt;
 &lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -2121,11 +2121,11 @@
 &lt;table class=&quot;pd-match&quot;&gt;
 &lt;tbody&gt;
 &lt;tr class=&quot;pd-side&quot;&gt;
-&lt;td class=&quot;pd-team&quot;&gt;Winner SF1&lt;/td&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Ganador SF1&lt;/td&gt;
 &lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-side&quot;&gt;
-&lt;td class=&quot;pd-team&quot;&gt;Winner SF2&lt;/td&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Ganador SF2&lt;/td&gt;
 &lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
