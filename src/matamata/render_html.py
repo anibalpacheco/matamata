@@ -110,9 +110,9 @@ def _crest_img(slot) -> str:
     return f'<img class="pd-crest" src="{escape(slot.crest, _ATTR)}" alt=""/>'
 
 
-def _meta_html(match: Match, dt_format, tz) -> str:
+def _meta_html(match: Match, dt_format, tz, language) -> str:
     """The metadata line's inner HTML, with the id wrapped in a bold span. "" when empty."""
-    label, detail = meta_parts(match, dt_format, tz)
+    label, detail = meta_parts(match, dt_format, tz, language)
     if not label:
         return escape(detail)
     inner = f'<span class="pd-meta-id">{escape(label)}</span>'
@@ -148,6 +148,7 @@ def _flat_rows(
     show_meta: bool,
     dt_format: Optional[str],
     tz: Optional[str],
+    language: Optional[str],
 ) -> None:
     """A match as one ``<tr>`` per leg of the round's grid.
 
@@ -178,7 +179,9 @@ def _flat_rows(
         score1 = leg_score_text(leg, left) if leg is not None else ""
         score2 = leg_score_text(leg, right) if leg is not None else ""
         if show_meta:
-            detail = leg_meta_text(leg if leg is not None else match, dt_format, tz)
+            detail = leg_meta_text(
+                leg if leg is not None else match, dt_format, tz, language
+            )
             inner = _flat_meta_inner(id_cell, detail)
             if inner:
                 out.append('<tr class="pd-meta-row">')
@@ -208,13 +211,14 @@ def _render_stacked(
     show_meta: bool,
     dt_format: Optional[str],
     tz: Optional[str],
+    language: Optional[str],
 ) -> None:
     """Each round as a labeled block of two-row match boxes, each with a metadata line."""
     for rnd in rounds:
         out.append('<div class="pd-round">')
         out.append(f'<h3 class="pd-header">{escape(rnd.name)}</h3>')
         for match in rnd.matches:
-            meta = _meta_html(match, dt_format, tz) if show_meta else ""
+            meta = _meta_html(match, dt_format, tz, language) if show_meta else ""
             if meta:
                 out.append(f'<div class="pd-meta">{meta}</div>')
             out.append('<table class="pd-match">')
@@ -233,6 +237,7 @@ def _render_flat(
     show_meta: bool,
     dt_format: Optional[str],
     tz: Optional[str],
+    language: Optional[str],
 ) -> None:
     """The whole stage as one grid table: a header row per round, then a row per leg."""
     out.append('<table class="pd-grid">')
@@ -242,20 +247,26 @@ def _render_flat(
         out.append(f'<td class="pd-round-head" colspan="7">{escape(rnd.name)}</td>')
         out.append("</tr>")
         for match in rnd.matches:
-            _flat_rows(out, match, resolver, show_meta, dt_format, tz)
+            _flat_rows(out, match, resolver, show_meta, dt_format, tz, language)
     out.append("</tbody>")
     out.append("</table>")
 
 
 def render_html(
-    stage: Stage, layout: str = "flat", timezone: Optional[str] = None
+    stage: Stage,
+    layout: str = "flat",
+    timezone: Optional[str] = None,
+    language: Optional[str] = None,
 ) -> str:
     """Render the knockout stage to a self-contained HTML table fragment string.
 
     ``layout`` is ``"flat"`` (the default — the whole stage in one grid table, one row
     per leg with names aligned outward around a central ``x``) or ``"stacked"`` (each
     match its own two-row box). ``timezone`` is an optional zone name the metadata
-    datetimes (assumed GMT) are converted to before rendering.
+    datetimes (assumed GMT) are converted to before rendering. ``language`` is the locale
+    Babel formats those datetimes in (e.g. ``"es"`` -> Spanish weekday/month names);
+    ``None`` leaves them in English. It localizes only the dates — the generated labels
+    are translated upstream by ``KnockoutStage.translate`` at build time.
     """
     if layout not in ("flat", "stacked"):
         raise ValueError(f"unknown layout {layout!r}")
@@ -275,13 +286,14 @@ def render_html(
             else ""
         )
         out.append(f'<h2 class="pd-title">{title}{season}</h2>')
+    dt_format = stage.render.dt_format
     if layout == "flat":
         _render_flat(
-            out, stage.rounds, resolver, show_meta, stage.render.dt_format, timezone
+            out, stage.rounds, resolver, show_meta, dt_format, timezone, language
         )
     else:
         _render_stacked(
-            out, stage.rounds, resolver, show_meta, stage.render.dt_format, timezone
+            out, stage.rounds, resolver, show_meta, dt_format, timezone, language
         )
     out.append("</div>")
     return "\n".join(out)

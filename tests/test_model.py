@@ -658,9 +658,22 @@ def test_meta_text_two_legs_join_with_a_slash_and_skip_empty_parts():
 
 def test_meta_text_formats_and_converts_the_datetime():
     m = Match(id="f", home=Slot(), away=Slot(), legs=[Leg(dt="2026-05-01 18:00")])
-    assert meta_text(m, "%d/%m %H:%M") == "F · 01/05 18:00"
+    assert meta_text(m, "dd/MM HH:mm") == "F · 01/05 18:00"
     # 18:00 GMT is 15:00 in Montevideo (UTC-3).
-    assert meta_text(m, "%d/%m %H:%M", "America/Montevideo") == "F · 01/05 15:00"
+    assert meta_text(m, "dd/MM HH:mm", "America/Montevideo") == "F · 01/05 15:00"
+
+
+def test_render_dt_localizes_weekday_and_month_names_by_language():
+    # Babel localizes the EEEE/MMMM names to the requested locale (English is the source),
+    # independently of any label translation.
+    assert render_dt("2026-07-09 19:00", "EEEE dd MMMM", None) == "Thursday 09 July"
+    assert (
+        render_dt("2026-07-09 19:00", "EEEE dd MMMM", None, "es") == "jueves 09 julio"
+    )
+    assert (
+        render_dt("2026-07-09 19:00", "EEEE dd MMMM", None, "pt")
+        == "quinta-feira 09 julho"
+    )
 
 
 def test_meta_text_uses_match_level_dt_venue_only_without_legs():
@@ -692,7 +705,7 @@ def test_id_is_optional_when_nothing_references_the_match():
 
 def test_render_dt_passes_through_without_a_format_or_on_a_bad_value():
     assert render_dt("2026-05-01 18:00", None, None) == "2026-05-01 18:00"
-    assert render_dt("whenever", "%d/%m", None) == "whenever"  # unparseable -> raw
+    assert render_dt("whenever", "dd/MM", None) == "whenever"  # unparseable -> raw
 
 
 def test_leg_score_text_is_one_figure_with_optional_pens():
@@ -733,7 +746,7 @@ def test_schema_accepts_metadata_fields():
     pytest.importorskip("jsonschema")
     validate_document(
         {
-            "render": {"show_metadata": False, "dt_format": "%d/%m %H:%M"},
+            "render": {"show_metadata": False, "dt_format": "dd/MM HH:mm"},
             "rounds": [
                 {
                     "name": "F",

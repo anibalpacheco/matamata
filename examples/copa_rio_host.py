@@ -41,7 +41,17 @@ def _load_json(path: str) -> dict:
 
 
 class CopaRioDiagram(KnockoutStage):
-    """Resolves each side's crest from its ``id{n}`` against ``crest_data.json``."""
+    """Resolves each side's crest from its ``id{n}`` against ``crest_data.json``.
+
+    It also localizes the round names to Spanish (the generated placeholders too, though
+    this fully-resolved stage shows none), so the caller can render it with
+    ``language="es"`` — fitting for a Río de la Plata cup, and the foil to the World Cup's
+    English render when comparing how Babel localizes the metadata weekday/month names.
+    """
+
+    # Round names by their (English) value; placeholders under "_placeholder" by key.
+    _TRANS_PLACEHOLDERS = {"es": {"winner": "Ganador", "tbd": "A definir"}}
+    _TRANS = {"es": {"Semifinals": "Semifinales", "Final": "Final"}}
 
     def __init__(self, document: Optional[dict] = None) -> None:
         super().__init__(document if document is not None else _load_json(DOCUMENT))
@@ -55,9 +65,14 @@ class CopaRioDiagram(KnockoutStage):
             return None
         return self._crests.get(str(team_id))
 
+    def translate(self, path: str, value: str, language: str) -> Optional[str]:
+        table = self._TRANS_PLACEHOLDERS if path == "_placeholder" else self._TRANS
+        return table.get(language, {}).get(value)
+
 
 if __name__ == "__main__":
     import sys
 
+    # The caller picks the language; this Río de la Plata cup's demo renders in Spanish.
     fmt = sys.argv[1] if len(sys.argv) > 1 else "svg"
-    sys.stdout.write(CopaRioDiagram().render(fmt))
+    sys.stdout.write(CopaRioDiagram().render(fmt, language="es"))

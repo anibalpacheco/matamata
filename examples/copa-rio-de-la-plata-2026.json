@@ -1,7 +1,7 @@
 {
   "tournament": "Copa Río de la Plata",
   "season": "2026",
-  "render": { "box_width": 210, "dt_format": "%d/%m %H:%M" },
+  "render": { "box_width": 210, "dt_format": "EEEE dd MMMM, HH:mm" },
   "rounds": [
     {
       "name": "Semifinals",

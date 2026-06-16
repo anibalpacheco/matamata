@@ -11,7 +11,17 @@ import json
 import os
 from typing import Any, Optional
 
-from .model import Id, Leg, Match, Pens, RenderOptions, Round, Slot, Stage
+from .model import (
+    DEFAULT_DT_FORMAT,
+    Id,
+    Leg,
+    Match,
+    Pens,
+    RenderOptions,
+    Round,
+    Slot,
+    Stage,
+)
 
 _SCHEMA_PATH = os.path.join(
     os.path.dirname(__file__), "..", "..", "docs", "schema.json"
@@ -132,7 +142,7 @@ def render_options(data: dict) -> RenderOptions:
         box_width=r.get("box_width", 190),
         crest_shape=r.get("crest_shape", "square"),
         show_metadata=r.get("show_metadata", True),
-        dt_format=r.get("dt_format"),
+        dt_format=r.get("dt_format", DEFAULT_DT_FORMAT),
     )
 
 

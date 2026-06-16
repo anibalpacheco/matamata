@@ -37,7 +37,7 @@ changes.
   "box_width": 190,             // optional, width of every match box in SVG units
   "crest_shape": "square",      // optional, "square" (default) or "flag"
   "show_metadata": true,        // optional, draw the per-match metadata line (default true)
-  "dt_format": "%d/%m %H:%M"    // optional, strftime format for each leg's dt
+  "dt_format": "EEEE dd MMMM, HH:mm"  // optional, Babel/LDML pattern for each leg's dt
 }
 ```
 
@@ -53,10 +53,12 @@ changes.
   still supplied by the host's `get_crest`, never by the document.
 - `"show_metadata"` (default `true`) — whether the per-match metadata line (the id, then
   each leg's date and venue) is drawn. Set it `false` to suppress the line entirely.
-- `"dt_format"` (default unset) — a `strftime` format applied to each leg's `dt`. When
-  set, `dt` is parsed as **GMT** in `%Y-%m-%d %H:%M` and reformatted (and converted to the
-  render's timezone, if one is given — see "Host integration"); when unset, or when a
-  value does not parse, the raw string is shown unchanged.
+- `"dt_format"` (default `"dd/MM HH:mm"`) — a [Babel/LDML](https://babel.pocoo.org/en/latest/dates.html#date-fields)
+  pattern applied to each leg's `dt` (`EEEE` weekday, `MMMM` month, `dd` day, `HH:mm`
+  time). `dt` is parsed as **GMT** in `%Y-%m-%d %H:%M`, converted to the render's timezone
+  if one is given (see "Host integration"), and formatted by Babel in the render's language
+  so weekday/month names follow the locale. The default omits the year (usually already in
+  the title); a value that does not parse is shown unchanged.
 
 Each side always shows the goals of every played leg in order, e.g. `2 0` for a tie or
 `2` for a single match; a shootout is appended in parentheses on the relevant side, e.g.
@@ -181,7 +183,10 @@ design.
 The metadata datetimes are assumed to be **GMT**. The render entry points
 (`render_svg`, `render_html`, `KnockoutStage.render`, and the CLI's `--timezone`) take an
 optional `timezone` (a zone name like `"America/Montevideo"`) the datetimes are converted
-to before being formatted with `render.dt_format`.
+to before being formatted with `render.dt_format`. They also take a `language` that Babel
+uses to localize the weekday/month names in that pattern (e.g. `"es"` → `jueves`,
+`septiembre`); the same `language` drives the generated-label translation hook
+(`KnockoutStage.translate`), but the two are independent — only the argument is shared.
 
 ## Applying results (non-normative)
 

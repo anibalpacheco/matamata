@@ -126,9 +126,11 @@ def _match(
     _row(out, pm, pm.away, mid, max_chars, box_w, flag)
 
 
-def _meta_inner(match, dt_format: Optional[str], tz: Optional[str]) -> str:
+def _meta_inner(
+    match, dt_format: Optional[str], tz: Optional[str], language: Optional[str]
+) -> str:
     """The metadata line's inner SVG markup, with the id wrapped in a bold tspan."""
-    label, detail = meta_parts(match, dt_format, tz)
+    label, detail = meta_parts(match, dt_format, tz, language)
     if not label:
         return escape(detail)
     inner = f'<tspan class="pd-meta-id">{escape(label)}</tspan>'
@@ -137,7 +139,12 @@ def _meta_inner(match, dt_format: Optional[str], tz: Optional[str]) -> str:
     return inner
 
 
-def render_layout(stage: Stage, layout: Layout, timezone: Optional[str] = None) -> str:
+def render_layout(
+    stage: Stage,
+    layout: Layout,
+    timezone: Optional[str] = None,
+    language: Optional[str] = None,
+) -> str:
     out: list[str] = []
     out.append(
         f'<svg xmlns="http://www.w3.org/2000/svg" '
@@ -173,7 +180,9 @@ def render_layout(stage: Stage, layout: Layout, timezone: Optional[str] = None) 
     show_meta = stage.render.show_metadata
     for pm in layout.matches:
         meta = (
-            _meta_inner(pm.match, stage.render.dt_format, timezone) if show_meta else ""
+            _meta_inner(pm.match, stage.render.dt_format, timezone, language)
+            if show_meta
+            else ""
         )
         _match(out, pm, stage.render.max_label_chars, layout.box_width, flag, meta)
 
@@ -181,10 +190,17 @@ def render_layout(stage: Stage, layout: Layout, timezone: Optional[str] = None) 
     return "\n".join(out)
 
 
-def render_svg(stage: Stage, timezone: Optional[str] = None) -> str:
+def render_svg(
+    stage: Stage, timezone: Optional[str] = None, language: Optional[str] = None
+) -> str:
     """Render the knockout stage to a self-contained SVG document string.
 
     ``timezone`` is an optional zone name (e.g. ``"America/Montevideo"``) the metadata
-    datetimes (assumed GMT) are converted to before rendering.
+    datetimes (assumed GMT) are converted to before rendering. ``language`` is the locale
+    Babel formats those datetimes in (e.g. ``"es"`` -> Spanish weekday/month names);
+    ``None`` leaves them in English. It localizes only the dates here — the generated
+    labels are translated upstream by ``KnockoutStage.translate`` at build time.
     """
-    return render_layout(stage, compute_layout(stage), timezone)
+    return render_layout(
+        stage, compute_layout(stage, timezone, language), timezone, language
+    )

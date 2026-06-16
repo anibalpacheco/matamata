@@ -57,15 +57,25 @@ def main(argv: list[str] | None = None) -> int:
         help="zone name (e.g. America/Montevideo) the GMT metadata datetimes "
         "are converted to before rendering",
     )
+    parser.add_argument(
+        "--language",
+        help="locale (e.g. es) Babel formats the metadata weekday/month names in; "
+        "the generated labels stay English without a host",
+    )
     args = parser.parse_args(argv)
 
     try:
         stage = load_stage(args.input)
         fmt = _format_of(args)
         rendered = (
-            render_html(stage, layout=args.layout, timezone=args.timezone)
+            render_html(
+                stage,
+                layout=args.layout,
+                timezone=args.timezone,
+                language=args.language,
+            )
             if fmt == "html"
-            else render_svg(stage, timezone=args.timezone)
+            else render_svg(stage, timezone=args.timezone, language=args.language)
         )
     except (StageError, OSError, ValueError) as exc:
         print(f"error: {exc}", file=sys.stderr)

@@ -43,7 +43,8 @@
         "dt_format": {
           "type": "string",
           "minLength": 1,
-          "comment": "strftime format for rendering each leg's dt (parsed as GMT y-m-d HH:MM); absent => shown verbatim"
+          "default": "dd/MM HH:mm",
+          "comment": "Babel/LDML pattern for each leg's dt (parsed as GMT y-m-d HH:MM, then localized by the render language); e.g. 'EEEE dd MMMM, HH:mm'"
         }
       }
     },

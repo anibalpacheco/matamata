@@ -4,12 +4,12 @@ build-backend = "hatchling.build"
 
 [project]
 name = "matamata"
-version = "0.0.8"
+version = "0.0.9"
 description = "Model tournament knockout stages in JSON format and render the schedule in SVG or html table format"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-dependencies = []
+dependencies = ["babel>=2.12"]
 classifiers = [
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3",

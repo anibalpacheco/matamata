@@ -95,8 +95,10 @@ SPECS: "list[tuple[str, str, Builder]]" = [
     ),
     (
         "copa-rio-de-la-plata-2026.json",
-        "Copa Río de la Plata — host-resolved club crests by id (copa_rio_host).",
-        _host(CopaRioDiagram),
+        "Copa Río de la Plata — host-resolved club crests by id (copa_rio_host), rendered "
+        "in Spanish: compare its dates (jueves, septiembre) to the World Cup's English ones "
+        "(Thursday, July) — both use the same EEEE dd MMMM dt_format, localized by Babel.",
+        _host(CopaRioDiagram, language="es"),
     ),
     (
         "libertadores-2026.json",

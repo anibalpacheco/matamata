@@ -18,11 +18,19 @@ from datetime import datetime, timezone
 from typing import Optional, Union
 from zoneinfo import ZoneInfo
 
+from babel.dates import format_datetime
+
 Id = Union[str, int]
 
 # Datetime metadata in the document is assumed to be GMT in this format; anything else is
 # shown verbatim (see render_dt).
 _DT_INPUT = "%Y-%m-%d %H:%M"
+# The locale Babel formats dates in when no language is requested (English is the source).
+_SOURCE_LOCALE = "en"
+# The Babel/LDML pattern used for metadata dates when the document sets no dt_format, so
+# documents need not declare one (e.g. "09/07 19:00"). Override per-document for fuller
+# forms like weekday + month name ("EEEE dd MMMM, HH:mm").
+DEFAULT_DT_FORMAT = "dd/MM HH:mm"
 
 
 @dataclass
@@ -139,17 +147,20 @@ class RenderOptions:
     ``show_metadata``: whether the per-match metadata line (id, then each leg's date and
     venue) is drawn. Defaults to ``True``; set it ``False`` to suppress the line.
 
-    ``dt_format``: an optional ``strftime`` format for rendering each leg's ``dt``. When
-    set, ``dt`` is parsed as GMT (``_DT_INPUT``) and reformatted (and converted to the
-    render's timezone, if one is given); when unset — or when the value does not parse —
-    the raw string is shown (see ``render_dt``).
+    ``dt_format``: the `Babel/LDML
+    <https://babel.pocoo.org/en/latest/dates.html#date-fields>`_ pattern for rendering each
+    leg's ``dt``. ``dt`` is parsed as GMT (``_DT_INPUT``), converted to the render's
+    timezone if one is given, and formatted by Babel in the render's language (so
+    ``EEEE``/``MMMM`` weekday/month names follow the locale). Defaults to
+    ``DEFAULT_DT_FORMAT`` so documents need not set it; a value that fails to parse falls
+    back to the raw string (see ``render_dt``).
     """
 
     max_label_chars: int = 22
     box_width: int = 190
     crest_shape: str = "square"
     show_metadata: bool = True
-    dt_format: Optional[str] = None
+    dt_format: str = DEFAULT_DT_FORMAT
 
 
 @dataclass
@@ -233,14 +244,22 @@ def leg_score_text(leg: Leg, side: str) -> str:
     return goals
 
 
-def render_dt(raw: str, dt_format: Optional[str], tz: Optional[str]) -> str:
+def render_dt(
+    raw: str,
+    dt_format: Optional[str],
+    tz: Optional[str],
+    language: Optional[str] = None,
+) -> str:
     """Render a metadata datetime string, formatting/converting only when asked to.
 
     The document's ``dt`` is assumed to be GMT in the ``_DT_INPUT`` format. With no
     ``dt_format`` the raw string is returned unchanged (no parsing). With a ``dt_format``
-    the value is parsed, optionally converted to ``tz`` (a zone name like
-    ``"America/Montevideo"``), and reformatted. Anything that fails to parse — a value
-    that violates the input format, or an unknown zone — falls back to the raw string.
+    (a Babel/LDML pattern, e.g. ``"EEEE dd MMMM, HH:mm"``) the value is parsed, optionally
+    converted to ``tz`` (a zone name like ``"America/Montevideo"``), and formatted by Babel
+    in ``language`` (the requested locale; ``None`` -> English, the source). Babel is what
+    localizes the weekday/month names per language, independently of any label translation.
+    Anything that fails — a value that violates the input format, an unknown zone, a bad
+    pattern/locale — falls back to the raw string.
     """
     if not dt_format:
         return raw
@@ -253,11 +272,17 @@ def render_dt(raw: str, dt_format: Optional[str], tz: Optional[str]) -> str:
             moment = moment.astimezone(ZoneInfo(tz))
         except Exception:  # unknown zone: keep GMT rather than dropping the value
             pass
-    return moment.strftime(dt_format)
+    try:
+        return format_datetime(moment, dt_format, locale=language or _SOURCE_LOCALE)
+    except Exception:  # bad pattern or unknown locale: show the raw value
+        return raw
 
 
 def leg_meta_text(
-    src, dt_format: Optional[str] = None, tz: Optional[str] = None
+    src,
+    dt_format: Optional[str] = None,
+    tz: Optional[str] = None,
+    language: Optional[str] = None,
 ) -> str:
     """The ``dt venue`` detail for a single scheduling source (a ``Leg`` or a ``Match``).
 
@@ -266,28 +291,36 @@ def leg_meta_text(
     per-leg analogue of ``meta_parts``' detail, used by the flat table — which gives each
     leg its own row — to place each leg's date/venue next to that leg's scores.
     """
-    when = render_dt(src.dt, dt_format, tz) if src.dt else None
+    when = render_dt(src.dt, dt_format, tz, language) if src.dt else None
     return " ".join(p for p in (when, src.venue) if p)
 
 
 def meta_parts(
-    match: Match, dt_format: Optional[str] = None, tz: Optional[str] = None
+    match: Match,
+    dt_format: Optional[str] = None,
+    tz: Optional[str] = None,
+    language: Optional[str] = None,
 ) -> tuple[str, str]:
     """The metadata line split into ``(id_label, detail)`` for renderers that style them.
 
     ``id_label`` is the uppercased id (empty for an id-less match, e.g. the final).
     ``detail`` joins each leg's ``dt venue`` with " / " (the match-level ``dt``/``venue``
-    are used when the match has no legs); either may be "". ``dt_format``/``tz`` drive
-    datetime rendering (see ``render_dt``).
+    are used when the match has no legs); either may be "". ``dt_format``/``tz``/``language``
+    drive datetime rendering (see ``render_dt``).
     """
     label = match.id.upper() if match.id else ""
     sources: list = list(match.legs) if match.legs else [match]
-    parts = [text for src in sources if (text := leg_meta_text(src, dt_format, tz))]
+    parts = [
+        text for src in sources if (text := leg_meta_text(src, dt_format, tz, language))
+    ]
     return label, " / ".join(parts)
 
 
 def meta_text(
-    match: Match, dt_format: Optional[str] = None, tz: Optional[str] = None
+    match: Match,
+    dt_format: Optional[str] = None,
+    tz: Optional[str] = None,
+    language: Optional[str] = None,
 ) -> str:
     """The match's metadata line as one string: the id, then each leg's ``dt``/``venue``.
 
@@ -296,7 +329,7 @@ def meta_text(
     none. Returns "" when nothing is left to show. See :func:`meta_parts` for the split
     form used by renderers that bold the id.
     """
-    label, detail = meta_parts(match, dt_format, tz)
+    label, detail = meta_parts(match, dt_format, tz, language)
     if label and detail:
         return f"{label} · {detail}"
     return label or detail

@@ -136,10 +136,14 @@ Put `dt`/`venue` on each leg (or, when a match has no legs, at match level); a h
     "dt": "2026-09-30 23:30", "venue": "Estadio Monumental" } ] }
 ```
 
-`dt` is assumed to be **GMT** in `%Y-%m-%d %H:%M`. Set `render.dt_format` (a `strftime`
-string) to reformat it, and pass a `timezone` to the render call
+`dt` is assumed to be **GMT** in `%Y-%m-%d %H:%M`. `render.dt_format` is a
+[Babel/LDML](https://babel.pocoo.org/en/latest/dates.html#date-fields) pattern
+(`EEEE` = weekday, `MMMM` = month, `dd` = day, `HH:mm` = time); it defaults to
+`dd/MM HH:mm` (e.g. `09/07 19:00`), so you only set it for a fuller form like
+`EEEE dd MMMM, HH:mm`. Pass a `timezone` to the render call
 (`render_svg`/`render_html`/`KnockoutStage.render`, or the CLI's `--timezone`) to convert
-it first; a value that does not parse — or no `dt_format` at all — is shown verbatim.
+the GMT value first, and a `language` to localize the weekday/month names (Babel) — see
+[i18n](#translating-the-generated-labels). A value that does not parse is shown verbatim.
 Suppress the whole line with `render.show_metadata: false`. The Copa Libertadores example
 shows this conversion: its `dt`s are GMT and its demo renders with
 `timezone="America/Montevideo"` (its venues are all at GMT-3), so the times you see are
@@ -335,6 +339,14 @@ supplies the translations, not the choice of which one. The Copa Libertadores ex
 The host owns the translations, so you can resolve them however suits your app — literal
 dicts as above, your existing message catalogs, or `gettext`. Documents rendered without
 the class (the CLI, `render_svg`) show the English labels.
+
+The **same `language`** also localizes the metadata **dates**, but by a separate path:
+`render_svg`/`render_html` (and `KnockoutStage.render`) pass it to **Babel**, which renders
+the `EEEE`/`MMMM` weekday and month names in that locale — no `translate` involved, nothing
+for the host to provide. So `render(language="es")` gives both Spanish placeholders/round
+names (via `translate`) and Spanish dates (via Babel); the standalone `render_svg(stage,
+language="es")` localizes just the dates. The Copa Río de la Plata example renders in
+Spanish (`jueves 17 septiembre`) against the World Cup's English (`Thursday 09 July`).
 
 ### The `apply_results` method
 

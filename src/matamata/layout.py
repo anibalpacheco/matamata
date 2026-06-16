@@ -11,7 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional
 
-from .model import Match, Resolver, Stage, score_text
+from .model import Match, Resolver, Stage, meta_text, score_text
 
 # Geometry constants (SVG user units).
 MARGIN_X = 20
@@ -23,6 +23,7 @@ H_GAP = 70
 V_GAP = 22
 MARGIN_BOTTOM = 24
 META_H = 34  # vertical room reserved by each box's metadata line (above or below it)
+META_CHAR_W = 6.0  # rough px per glyph of the 11px metadata font, to size the canvas
 
 ROW_PITCH = BOX_H + V_GAP
 
@@ -83,7 +84,9 @@ def _side_view(resolver: Resolver, match: Match, side: str) -> SideView:
     )
 
 
-def compute_layout(stage: Stage) -> Layout:
+def compute_layout(
+    stage: Stage, timezone: Optional[str] = None, language: Optional[str] = None
+) -> Layout:
     resolver = Resolver(stage)
     bw = stage.render.box_width
     column_pitch = bw + H_GAP
@@ -126,7 +129,22 @@ def compute_layout(stage: Stage) -> Layout:
         for i, rnd in enumerate(stage.rounds)
     ]
 
-    width = MARGIN_X * 2 + len(stage.rounds) * bw + (len(stage.rounds) - 1) * H_GAP
+    width: float = (
+        MARGIN_X * 2 + len(stage.rounds) * bw + (len(stage.rounds) - 1) * H_GAP
+    )
+    # The metadata line is drawn left-anchored at its box's x and is not wrapped, so a long
+    # one (especially the rightmost column's, e.g. the final's) can run past the canvas and
+    # clip. Estimate each line's width by character count and widen the canvas to fit it.
+    if stage.render.show_metadata:
+        fmt = stage.render.dt_format
+        rightmost = max(
+            (
+                pm.x + len(meta_text(pm.match, fmt, timezone, language)) * META_CHAR_W
+                for pm in placed
+            ),
+            default=0.0,
+        )
+        width = max(width, rightmost + MARGIN_X)
     # A box whose metadata sits below it extends META_H further down.
     height = (
         max(

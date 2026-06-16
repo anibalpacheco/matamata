@@ -1,7 +1,7 @@
 {
   "tournament": "World Cup",
   "season": "2026",
-  "render": { "crest_shape": "flag", "dt_format": "%d/%m %H:%M" },
+  "render": { "crest_shape": "flag", "dt_format": "EEEE dd MMMM, HH:mm" },
   "rounds": [
     {
       "name": "Quarterfinals",

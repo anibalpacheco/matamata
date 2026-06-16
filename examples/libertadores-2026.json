@@ -1,7 +1,7 @@
 {
   "tournament": "Copa Libertadores",
   "season": "2026",
-  "render": { "box_width": 240, "dt_format": "%d/%m %H:%M" },
+  "render": { "box_width": 240 },
   "rounds": [
     {
       "name": "Quarterfinals",

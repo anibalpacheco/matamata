@@ -203,8 +203,10 @@ class KnockoutStage:
             raise StageError(f"unknown render format {fmt!r}")
         stage = self.build(language)
         if fmt == "html":
-            return render_html(stage, layout=layout, timezone=timezone)
-        return render_svg(stage, timezone=timezone)
+            return render_html(
+                stage, layout=layout, timezone=timezone, language=language
+            )
+        return render_svg(stage, timezone=timezone, language=language)
 
     # --------------------------------------------------------------- results
     def apply_results(
