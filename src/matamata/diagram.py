@@ -35,7 +35,17 @@ from __future__ import annotations
 import json
 from typing import Any, Iterator, Optional, Union
 
-from .model import Id, Labels, Match, Pens, RenderOptions, Stage, aggregate, pens_of
+from .model import (
+    Id,
+    Labels,
+    Match,
+    Pens,
+    RenderOptions,
+    Slot,
+    Stage,
+    aggregate,
+    pens_of,
+)
 from .parse import StageError, _parse_match, apply_game, parse_stage, render_options
 from .render import render_svg
 from .render_html import render_html
@@ -127,10 +137,10 @@ class KnockoutStage:
         it marks translatable. ``path`` says *what* is being translated:
 
         - ``"_placeholder"`` — a label the renderer generates. ``value`` is then the
-          placeholder *key* from this library's vocabulary (``"winner"``, ``"tbd"``), not
-          its English text; return the localized **word** (e.g. ``"Ganador"``), and the
-          renderer composes the rest (``"Ganador SF1"``). A key left untranslated keeps
-          its English default.
+          placeholder *key* from this library's vocabulary (``"winner"``, ``"loser"``,
+          ``"tbd"``), not its English text; return the localized **word** (e.g.
+          ``"Ganador"``), and the renderer composes the rest (``"Ganador SF1"``). A key
+          left untranslated keeps its English default.
         - ``"round.name"`` — a round name from the document. ``value`` is the document's
           own name; return its translation, or ``None`` to keep it.
 
@@ -176,6 +186,7 @@ class KnockoutStage:
 
             stage.labels = Labels(
                 winner=localize("_placeholder", "winner", stage.labels.winner),
+                loser=localize("_placeholder", "loser", stage.labels.loser),
                 tbd=localize("_placeholder", "tbd", stage.labels.tbd),
             )
             for rnd in stage.rounds:
@@ -333,23 +344,33 @@ class KnockoutStage:
         self._advance(match_data["id"], match, winner)
 
     def _advance(self, match_id: str, match: Match, winner: Optional[int]) -> None:
-        """Rewrite the advancing team on every side that consumes this match."""
-        slot = None
+        """Rewrite the team on every side that consumes this match.
+
+        The winner is pushed into ``winnerof`` sides and the loser into ``loserof`` sides
+        (the third-place mirror); an undecided match (``winner is None``) clears both.
+        """
+        win_slot = loss_slot = None
         if winner is not None:
-            slot = match.home if winner == 1 else match.away
+            win_slot = match.home if winner == 1 else match.away
+            loss_slot = match.away if winner == 1 else match.home
         for consumer in self._match_dicts():
             for n in ("1", "2"):
-                if consumer.get(f"winnerof{n}") != match_id:
-                    continue
-                # The consumed side is derived state: clear it, then write what is known.
-                consumer.pop(f"team{n}", None)
-                consumer.pop(f"id{n}", None)
-                if slot is None:
-                    continue
-                if slot.team is not None:
-                    consumer[f"team{n}"] = slot.team
-                if slot.team_id is not None:
-                    consumer[f"id{n}"] = slot.team_id
+                if consumer.get(f"winnerof{n}") == match_id:
+                    self._push_side(consumer, n, win_slot)
+                elif consumer.get(f"loserof{n}") == match_id:
+                    self._push_side(consumer, n, loss_slot)
+
+    @staticmethod
+    def _push_side(consumer: dict, n: str, slot: Optional[Slot]) -> None:
+        """Write a consumed side's derived team/id: clear it, then fill what is known."""
+        consumer.pop(f"team{n}", None)
+        consumer.pop(f"id{n}", None)
+        if slot is None:
+            return
+        if slot.team is not None:
+            consumer[f"team{n}"] = slot.team
+        if slot.team_id is not None:
+            consumer[f"id{n}"] = slot.team_id
 
     # --------------------------------------------------------------- hydrate
     def _hydrate_match(self, match: Match) -> None:

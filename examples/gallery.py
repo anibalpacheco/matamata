@@ -120,6 +120,13 @@ SPECS: "list[tuple[str, str, Builder]]" = [
         "FA Cup — the same stage once drawn (plain pairings). Base loader.",
         _base("facup-drawn.json"),
     ),
+    (
+        "third-place.json",
+        "Third place — a round fed by loserof ('Loser SF1/SF2'): off the winners' tree, so "
+        "it draws no connector and hangs below the bracket in the final's column, keeping "
+        "its own round header. Base loader.",
+        _base("third-place.json"),
+    ),
 ]
 
 # Wraps one render fragment into a tiny standalone document for an iframe's srcdoc. The

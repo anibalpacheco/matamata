@@ -558,6 +558,31 @@ is exactly what happened — the draw, not the schedule, decided the pairings:
 
 ![FA Cup, semifinals drawn](facup-drawn.png)
 
+### A third-place match
+
+A third-place match pairs the two beaten semifinalists, so its sides are the **losers**
+of the semifinals. That is the mirror of `winnerof{n}`: use `loserof1`/`loserof2`. Until
+the semifinals are decided, the sides show a placeholder ("Loser SF1"), and once they are
+— or when whoever maintains the document settles them — the beaten teams are written in,
+exactly as the winners flow to the final.
+
+Because it consumes losers, a third-place match is **off the winners' tree**: it draws no
+connector. Put it in its own round, *after* the final, so that round keeps its own header;
+the renderer lays it out below the bracket, in the final's column. In
+`examples/third-place.json`:
+
+```json
+{
+  "name": "Third place",
+  "matches": [{ "loserof1": "sf1", "loserof2": "sf2" }]
+}
+```
+
+Like the final, the match references nothing, so it omits `id` (its round title already
+names it):
+
+![World Cup, third-place match below the bracket](third-place.png)
+
 ## Testing
 
 Install the development extras and run the suite:

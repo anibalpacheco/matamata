@@ -168,6 +168,32 @@ def test_settle_writes_winner_and_advances_the_team():
     assert final["team1"] == "Peñarol" and final["id1"] == 10
 
 
+def test_settle_pushes_the_loser_into_a_third_place_match():
+    # The loser of a settled match drops into any loserof side, mirroring the winner push.
+    document = {
+        "rounds": [
+            {
+                "name": "SF",
+                "matches": [
+                    {
+                        "id": "sf1",
+                        "team1": "France",
+                        "id1": 1,
+                        "team2": "Spain",
+                        "id2": 2,
+                    }
+                ],
+            },
+            {"name": "Final", "matches": [{"id": "f", "winnerof1": "sf1"}]},
+            {"name": "Third place", "matches": [{"id": "tp", "loserof1": "sf1"}]},
+        ]
+    }
+    out = KnockoutStage(document).apply_results({"id": "sf1", "goals1": 2, "goals2": 1})
+    assert match_of(out, "f")["team1"] == "France" and match_of(out, "f")["id1"] == 1
+    tp = match_of(out, "tp")
+    assert tp["team1"] == "Spain" and tp["id1"] == 2
+
+
 def test_settle_decides_a_tie_by_penalties():
     out = KnockoutStage(doc()).apply_results(
         {"id": "s1", "goals1": 0, "goals2": 0, "pen1": 2, "pen2": 4}

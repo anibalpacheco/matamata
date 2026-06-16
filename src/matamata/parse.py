@@ -41,16 +41,17 @@ def _require(obj: dict, key: str, where: str) -> Any:
 def _parse_side(data: dict, n: str) -> Slot:
     """Build one side of a match from its flat fields (``n`` is "1" or "2").
 
-    A side is described at match level: ``winnerof{n}`` wires advancement, ``team{n}``
-    (with optional ``id{n}``) names a known/advancing team. Legs fill in
-    whatever the match level leaves unset (see ``_fill_team``), so both may name the
-    teams; the match-level name wins. A side with neither name nor wiring renders as
-    "TBD".
+    A side is described at match level: ``winnerof{n}`` wires advancement (``loserof{n}``
+    its third-place mirror), ``team{n}`` (with optional ``id{n}``) names a known/advancing
+    team. Legs fill in whatever the match level leaves unset (see ``_fill_team``), so both
+    may name the teams; the match-level name wins. A side with neither name nor wiring
+    renders as "TBD".
     """
     return Slot(
         team=data.get(f"team{n}"),
         team_id=data.get(f"id{n}"),
         winner_of=data.get(f"winnerof{n}"),
+        loser_of=data.get(f"loserof{n}"),
     )
 
 

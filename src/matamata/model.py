@@ -76,14 +76,18 @@ class Leg:
 class Slot:
     """One side of a match.
 
-    A slot is a concrete ``team``, a ``winner_of`` link, or ``tbd``. A ``winner_of``
-    slot may *also* carry a ``team`` once that team is known: the link still drives the
-    advancement connector while the name is shown instead of a placeholder.
+    A slot is a concrete ``team``, a ``winner_of`` link, a ``loser_of`` link, or ``tbd``.
+    A ``winner_of`` slot may *also* carry a ``team`` once that team is known: the link
+    still drives the advancement connector while the name is shown instead of a
+    placeholder. ``loser_of`` is the mirror used by a third-place match — the *loser* of
+    the referenced match — and behaves the same for labels and resolved names, but draws
+    no connector and marks its match as a satellite (see ``layout.py``).
     """
 
     team: Optional[str] = None
     team_id: Optional[Id] = None
     winner_of: Optional[str] = None
+    loser_of: Optional[str] = None
     tbd: bool = False
     # Image source for the side's crest/flag. Filled by the KnockoutStage path
     # (the get_crest hook) — never parsed from the document, which has no crest
@@ -96,6 +100,8 @@ class Slot:
             return "team"
         if self.winner_of is not None:
             return "winner_of"
+        if self.loser_of is not None:
+            return "loser_of"
         return "tbd"
 
 
@@ -171,11 +177,13 @@ class Labels:
     class (CLI, ``render_svg``) stays in English.
 
     ``winner``: the word for an unresolved ``winnerof`` side; the renderer composes it with
-    the referenced match id, e.g. ``"Winner" -> "Winner SF1"``. ``tbd``: the label for a
-    side with neither a team nor an advancement link (shown as-is, no id).
+    the referenced match id, e.g. ``"Winner" -> "Winner SF1"``. ``loser``: the mirror for a
+    ``loserof`` side (third-place match), e.g. ``"Loser" -> "Loser SF1"``. ``tbd``: the
+    label for a side with neither a team nor a link (shown as-is, no id).
     """
 
     winner: str = "Winner"
+    loser: str = "Loser"
     tbd: str = "TBD"
 
 
@@ -351,4 +359,6 @@ class Resolver:
             return slot.team
         if slot.winner_of is not None:
             return f"{self._labels.winner} {slot.winner_of.upper()}"
+        if slot.loser_of is not None:
+            return f"{self._labels.loser} {slot.loser_of.upper()}"
         return self._labels.tbd

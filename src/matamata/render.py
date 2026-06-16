@@ -108,7 +108,7 @@ def _match(
 ) -> None:
     if meta:
         # Below the box when its connector bends up (room above is taken), else above it.
-        meta_y = pm.y + BOX_H + 13 if pm.meta_below else pm.y - 6
+        meta_y = pm.y + BOX_H + 14 if pm.meta_below else pm.y - 6
         # ``meta`` is pre-built inner markup (the id wrapped in a bold tspan), not text.
         out.append(
             f'<text class="pd-meta" x="{pm.x:.0f}" y="{meta_y:.0f}">{meta}</text>'
@@ -168,7 +168,7 @@ def render_layout(
 
     for header in layout.headers:
         out.append(
-            f'<text class="pd-header" x="{header.cx:.0f}" y="56">'
+            f'<text class="pd-header" x="{header.cx:.0f}" y="{header.cy:.0f}">'
             f"{escape(header.name)}</text>"
         )
 

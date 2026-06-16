@@ -68,6 +68,14 @@ def test_winner_of_with_resolved_team_shows_the_name():
     assert Resolver().label(Slot(winner_of="sf1", team="Flamengo")) == "Flamengo"
 
 
+def test_loser_of_without_team_is_a_placeholder():
+    assert Resolver().label(Slot(loser_of="sf1")) == "Loser SF1"
+
+
+def test_loser_of_with_resolved_team_shows_the_name():
+    assert Resolver().label(Slot(loser_of="sf1", team="Spain")) == "Spain"
+
+
 def test_tbd_label():
     assert Resolver().label(Slot(tbd=True)) == "TBD"
 
@@ -101,6 +109,40 @@ def test_pending_draw_side_renders_tbd_without_a_connector():
     assert not layout.connectors
     final = layout.matches[-1]
     assert final.home.label == "TBD"
+
+
+def test_third_place_round_hangs_below_the_bracket_with_no_connector():
+    # A round fed entirely by loser_of (third place) comes after the final: it draws no
+    # connector and is placed below the bracket, in the final's column, with its own header.
+    from matamata.layout import compute_layout
+
+    doc = {
+        "rounds": [
+            {
+                "name": "SF",
+                "matches": [
+                    {"id": "sf1", "team1": "A", "team2": "B"},
+                    {"id": "sf2", "team1": "C", "team2": "D"},
+                ],
+            },
+            {"name": "Final", "matches": [{"winnerof1": "sf1", "winnerof2": "sf2"}]},
+            {
+                "name": "Third place",
+                "matches": [{"loserof1": "sf1", "loserof2": "sf2"}],
+            },
+        ]
+    }
+    layout = compute_layout(parse_stage(doc))
+    # The final's two connectors only; the third-place match adds none.
+    assert len(layout.connectors) == 2
+    final, third = layout.matches[-2], layout.matches[-1]
+    assert (third.home.label, third.away.label) == ("Loser SF1", "Loser SF2")
+    # The third-place box sits below the final, in the same column.
+    assert third.x == final.x
+    assert third.y > final.y
+    # Its round keeps its own header, below the top column headers.
+    third_header = next(h for h in layout.headers if h.name == "Third place")
+    assert third_header.cy > layout.headers[0].cy
 
 
 def test_metadata_sits_below_a_box_whose_connector_bends_up():

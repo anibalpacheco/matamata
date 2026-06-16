@@ -84,6 +84,8 @@ numbering. There are no `home`/`away` objects.
   "id": "sf1",            // optional, unique within the document (omit it on the final)
   "winnerof1": "qf1",     // optional, side 1 is the winner of another match (advancement link)
   "winnerof2": "qf2",     // optional, same for side 2
+  "loserof1": "sf1",      // optional, side 1 is the loser of another match (third-place link)
+  "loserof2": "sf2",      // optional, same for side 2
   "team1": "Flamengo",    // optional, a known/advancing team on side 1 (with id1)
   "team2": "River Plate", // optional, same for side 2
   "legs": [ /* Leg, ... */ ], // optional; absent => not played yet
@@ -103,11 +105,16 @@ numbering. There are no `home`/`away` objects.
   so omit the links — the sides render "TBD" with no connector — and, once the draw
   is made, write the drawn pairings as plain `team{n}` names, keeping the links (and
   their connectors, which could cross arbitrarily) out.
+- `loserof1`/`loserof2` — the third-place mirror of `winnerof{n}`: the side is the
+  **loser** of the referenced match, shown as a placeholder ("Loser SF1") until resolved.
+  A match fed by `loserof` is off the winners' tree, so it draws **no connector** and is
+  laid out below the bracket; put it in its own round (e.g. `"Third place"`) **after** the
+  final so that round keeps its own name. See "Rendering notes".
 - `team1`/`team2` (optional `id1`/`id2`) — a side's known team: an entrant, or the team
   that advanced (written here by whatever maintains the JSON; the renderer never works
   it out). Legs may also name teams: they fill in whatever the match level leaves
   unset, and where both name a side the match-level name wins.
-- A side with neither `team{n}` nor `winnerof{n}` renders as "TBD".
+- A side with no `team{n}`, `winnerof{n}` nor `loserof{n}` renders as "TBD".
 - `winner` — which side won, `1` or `2`. This is the **only** source of the winner: the
   renderer never computes it from the scores. Absent means undecided.
 - `settle` — when present it must be `false`: it opts this match out of having its
@@ -210,8 +217,9 @@ re-applied as it goes.
 With `settle` (the default), every match a result touched is then *settled*: its winner
 is recomputed from the data a render would show (aggregate over the played legs, then a
 shootout on a tied aggregate), written as `winner`, removed when undecided, and the
-advancing team's name/id is pushed into the match that consumes it via `winnerof`. A
-match carrying `"settle": false` is never settled, whatever the call says.
+advancing team's name/id is pushed into the match that consumes it via `winnerof` (and
+the **loser** into any match that consumes it via `loserof`, for third place). A match
+carrying `"settle": false` is never settled, whatever the call says.
 
 ## Rendering notes (non-normative)
 
@@ -220,8 +228,12 @@ match carrying `"settle": false` is never settled, whatever the call says.
   consumes (resolved via `winnerof1`/`winnerof2`). Connectors exist only where a
   `winnerof` link does; a match with no links (a pairing pending a draw) is stacked
   from the top of its column like a first-round match.
+- A round fed entirely by `loserof` (a third-place match) is off the winners' tree: it
+  draws no connector and is laid out **below** the bracket, in the final's column, keeping
+  its own round header.
 - An unresolved side displays the team that advanced when known, otherwise the
-  placeholder label (e.g. "Winner QF1") for a `winnerof` link, or "TBD".
+  placeholder label (e.g. "Winner QF1" for `winnerof`, "Loser SF1" for `loserof`), or
+  "TBD".
 - The winning side of a match is emphasized only when the `winner` field says so.
 - **Match metadata.** Next to each match the renderer draws a line that starts with the
   match **id** (uppercased; a match with no scheduling data still shows its id, while a

@@ -64,11 +64,13 @@
     "match": {
       "type": "object",
       "additionalProperties": false,
-      "comment": "two sides, 1 = top, 2 = bottom; winnerof{n} wires advancement, team{n} names a known side. id is optional (omit it on a match nothing references, e.g. the final). dt/venue here are a fallback used only when there are no legs to carry them",
+      "comment": "two sides, 1 = top, 2 = bottom; winnerof{n} wires advancement (loserof{n} the third-place mirror, the loser of the referenced match), team{n} names a known side. id is optional (omit it on a match nothing references, e.g. the final or a third-place match). dt/venue here are a fallback used only when there are no legs to carry them",
       "properties": {
         "id": { "type": "string", "minLength": 1 },
         "winnerof1": { "type": "string", "minLength": 1 },
         "winnerof2": { "type": "string", "minLength": 1 },
+        "loserof1": { "type": "string", "minLength": 1 },
+        "loserof2": { "type": "string", "minLength": 1 },
         "team1": { "type": "string", "minLength": 1 },
         "team2": { "type": "string", "minLength": 1 },
         "id1": { "type": ["string", "integer"] },

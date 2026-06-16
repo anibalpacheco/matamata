@@ -1,0 +1,48 @@
+{
+  "tournament": "World Cup",
+  "season": "2026",
+  "render": { "dt_format": "EEEE dd MMMM, HH:mm" },
+  "rounds": [
+    {
+      "name": "Semifinals",
+      "matches": [
+        {
+          "id": "sf1",
+          "team1": "France",
+          "team2": "Spain",
+          "dt": "2026-07-14 23:00",
+          "venue": "AT&T Stadium"
+        },
+        {
+          "id": "sf2",
+          "team1": "Argentina",
+          "team2": "Brazil",
+          "dt": "2026-07-15 23:00",
+          "venue": "Mercedes-Benz Stadium"
+        }
+      ]
+    },
+    {
+      "name": "Final",
+      "matches": [
+        {
+          "winnerof1": "sf1",
+          "winnerof2": "sf2",
+          "dt": "2026-07-19 19:00",
+          "venue": "MetLife Stadium"
+        }
+      ]
+    },
+    {
+      "name": "Third place",
+      "matches": [
+        {
+          "loserof1": "sf1",
+          "loserof2": "sf2",
+          "dt": "2026-07-18 19:00",
+          "venue": "Hard Rock Stadium"
+        }
+      ]
+    }
+  ]
+}

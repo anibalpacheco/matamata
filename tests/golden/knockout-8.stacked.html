@@ -3,7 +3,10 @@
   .pd-stage { font-family: sans-serif; color: #1f2937; background: #ffffff; }
   .pd-title { font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 12px; }
   .pd-season { font-size: 13px; font-weight: 400; color: #6b7280; margin-left: 8px; }
-  .pd-header { font-size: 15px; font-weight: 600; color: #374151; margin: 16px 0 8px; }
+  .pd-header { font-size: 15px; font-weight: 600; color: #374151; margin: 26px 0 8px; }
+  /* The first round sits tight under the title; later rounds get the full gap (matching
+     the flat layout's separation between a box and the next round head). */
+  .pd-round:first-child .pd-header { margin-top: 14px; }
   .pd-meta { font-size: 11px; color: #6b7280; margin: 0 0 3px; }
   .pd-meta-id { font-weight: 700; }
   .pd-match { border-collapse: separate; border-spacing: 0; width: 100%;
@@ -36,9 +39,12 @@
       border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
   .pd-grid .pd-round-head { font-size: 15px; font-weight: 600; color: #374151;
                             text-align: left; padding: 26px 6px 6px 0; }
-  .pd-grid tr:first-child .pd-round-head { padding-top: 4px; }
+  .pd-grid tr:first-child .pd-round-head { padding-top: 10px; }
   .pd-grid .pd-meta { font-size: 11px; color: #6b7280; text-align: left;
                       padding: 14px 6px 2px 0; }
+  /* The first match's metadata in a round sits right under the round head, which already
+     supplies the gap (matching the stacked layout); only later matches need the full top. */
+  .pd-grid .pd-round-row + .pd-meta-row .pd-meta { padding-top: 2px; }
   .pd-grid .pd-win { font-weight: 700; color: #065f46; }
   @media (prefers-color-scheme: dark) {
     .pd-stage { color: #e5e7eb; background: #0f172a; }
