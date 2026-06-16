@@ -3074,6 +3074,391 @@
 &lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
 </div>
 </section>
+<section class="example">
+<h2>third-place.json</h2>
+<p class="note">Third place, in French (third_place_host) — same stage rendered with language='fr': placeholders show both vocabularies localized (winner -&gt; 'Vainqueur SF1', loser -&gt; 'Perdant SF1') with the round names ('Petite finale'), and the same language drives Babel so the dates read in French ('mardi 14 juillet').</p>
+<details class="src" open><summary>source JSON</summary><pre>{
+  "tournament": "World Cup",
+  "season": "2026",
+  "render": { "dt_format": "EEEE dd MMMM, HH:mm" },
+  "rounds": [
+    {
+      "name": "Semifinals",
+      "matches": [
+        {
+          "id": "sf1",
+          "team1": "France",
+          "team2": "Spain",
+          "dt": "2026-07-14 23:00",
+          "venue": "AT&amp;T Stadium"
+        },
+        {
+          "id": "sf2",
+          "team1": "Argentina",
+          "team2": "Brazil",
+          "dt": "2026-07-15 23:00",
+          "venue": "Mercedes-Benz Stadium"
+        }
+      ]
+    },
+    {
+      "name": "Final",
+      "matches": [
+        {
+          "winnerof1": "sf1",
+          "winnerof2": "sf2",
+          "dt": "2026-07-19 19:00",
+          "venue": "MetLife Stadium"
+        }
+      ]
+    },
+    {
+      "name": "Third place",
+      "matches": [
+        {
+          "loserof1": "sf1",
+          "loserof2": "sf2",
+          "dt": "2026-07-18 19:00",
+          "venue": "Hard Rock Stadium"
+        }
+      ]
+    }
+  ]
+}
+</pre></details>
+<div class="panes">
+<div class="pane pane-svg"><h3>SVG diagram</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 552 442&quot; width=&quot;552&quot; height=&quot;442&quot; font-family=&quot;sans-serif&quot;&gt;
+&lt;style&gt;
+  .pd-bg { fill: #ffffff; }
+  .pd-title { font: 600 18px sans-serif; fill: #111827; }
+  .pd-season { font: 400 13px sans-serif; fill: #6b7280; }
+  .pd-header { font: 600 15px sans-serif; fill: #374151; text-anchor: middle; }
+  .pd-meta { font: 400 11px sans-serif; fill: #6b7280; }
+  .pd-meta-id { font-weight: 700; }
+  .pd-box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+  .pd-divider { stroke: #e5e7eb; stroke-width: 1; }
+  .pd-team { font: 400 13px sans-serif; fill: #1f2937; }
+  .pd-score { font: 400 13px sans-serif; fill: #1f2937; text-anchor: end; }
+  .pd-win .pd-team, .pd-win .pd-score { font-weight: 700; fill: #065f46; }
+  .pd-crest-frame { fill: none; stroke: #d1d5db; stroke-width: 1; }
+  .pd-link { fill: none; stroke: #cbd5e1; stroke-width: 1.5; }
+  @media (prefers-color-scheme: dark) {
+    .pd-bg { fill: #0f172a; }
+    .pd-title { fill: #f8fafc; }
+    .pd-season { fill: #94a3b8; }
+    .pd-header { fill: #cbd5e1; }
+    .pd-meta { fill: #94a3b8; }
+    .pd-box { fill: #1e293b; stroke: #334155; }
+    .pd-divider { stroke: #334155; }
+    .pd-team { fill: #e5e7eb; }
+    .pd-score { fill: #e5e7eb; }
+    .pd-win .pd-team, .pd-win .pd-score { fill: #34d399; }
+    .pd-crest-frame { stroke: #334155; }
+    .pd-link { stroke: #475569; }
+  }&lt;/style&gt;
+&lt;rect class=&quot;pd-bg&quot; width=&quot;552&quot; height=&quot;442&quot;/&gt;
+&lt;text class=&quot;pd-title&quot; x=&quot;20&quot; y=&quot;28&quot;&gt;World Cup&lt;/text&gt;
+&lt;text class=&quot;pd-season&quot; x=&quot;128&quot; y=&quot;28&quot;&gt;2026&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;115&quot; y=&quot;68&quot;&gt;Demi-finales&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;68&quot;&gt;Finale&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;338&quot;&gt;Petite finale&lt;/text&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 210 124 L 245 124 L 245 164 L 280 164&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 210 228 L 245 228 L 245 188 L 280 188&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;94&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF1&lt;/tspan&gt; · mardi 14 juillet, 23:00 AT&amp;amp;T Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;100&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;124&quot; x2=&quot;210&quot; y2=&quot;124&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;116&quot;&gt;France&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;140&quot;&gt;Spain&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;266&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF2&lt;/tspan&gt; · mercredi 15 juillet, 23:00 Mercedes-Benz Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;204&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;228&quot; x2=&quot;210&quot; y2=&quot;228&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;220&quot;&gt;Argentina&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;244&quot;&gt;Brazil&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;146&quot;&gt;dimanche 19 juillet, 19:00 MetLife Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;152&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;176&quot; x2=&quot;470&quot; y2=&quot;176&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;168&quot;&gt;Vainqueur SF1&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;192&quot;&gt;Vainqueur SF2&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;364&quot;&gt;samedi 18 juillet, 19:00 Hard Rock Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;370&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;394&quot; x2=&quot;470&quot; y2=&quot;394&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;386&quot;&gt;Perdant SF1&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;410&quot;&gt;Perdant SF2&lt;/text&gt;
+&lt;/g&gt;
+&lt;/svg&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
+<div class="pane pane-table"><h3>HTML table — flat</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage&quot;&gt;
+&lt;style&gt;
+  .pd-stage { font-family: sans-serif; color: #1f2937; background: #ffffff; }
+  .pd-title { font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 12px; }
+  .pd-season { font-size: 13px; font-weight: 400; color: #6b7280; margin-left: 8px; }
+  .pd-header { font-size: 15px; font-weight: 600; color: #374151; margin: 26px 0 8px; }
+  /* The first round sits tight under the title; later rounds get the full gap (matching
+     the flat layout's separation between a box and the next round head). */
+  .pd-round:first-child .pd-header { margin-top: 14px; }
+  .pd-meta { font-size: 11px; color: #6b7280; margin: 0 0 3px; }
+  .pd-meta-id { font-weight: 700; }
+  .pd-match { border-collapse: separate; border-spacing: 0; width: 100%;
+              max-width: 24em; border: 1px solid #d1d5db; border-radius: 3px;
+              overflow: hidden; margin: 0 0 15px; }
+  .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
+  .pd-team { font-size: 13px; padding: 5px 10px; }
+  .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
+  .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
+              white-space: nowrap; }
+  .pd-win td { font-weight: 700; color: #065f46; }
+  .pd-grid { border-collapse: separate; border-spacing: 0; margin: 0 0 4px; }
+  .pd-grid td { font-size: 13px; padding: 4px 6px; vertical-align: middle;
+                white-space: nowrap; }
+  .pd-team1, .pd-score1, .pd-crest1 { text-align: right; }
+  .pd-team2, .pd-score2, .pd-crest2 { text-align: left; }
+  .pd-crest1, .pd-crest2 { padding: 0; }
+  .pd-crest1 .pd-crest { margin: 0 0 0 6px; }
+  .pd-crest2 .pd-crest { margin: 0 6px 0 0; }
+  .pd-vs { color: #9ca3af; padding: 4px 8px; }
+  /* Box each leg's score row, so a match reads as a unit like the SVG/stacked
+     boxes; the metadata line stays above the box (as in the stacked layout). */
+  .pd-grid .pd-match-row td { border-top: 1px solid #d1d5db;
+                              border-bottom: 1px solid #d1d5db; }
+  .pd-grid .pd-match-row td:first-child { border-left: 1px solid #d1d5db;
+      border-top-left-radius: 3px; border-bottom-left-radius: 3px; }
+  .pd-grid .pd-match-row td:last-child { border-right: 1px solid #d1d5db;
+      border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
+  .pd-grid .pd-round-head { font-size: 15px; font-weight: 600; color: #374151;
+                            text-align: left; padding: 26px 6px 6px 0; }
+  .pd-grid tr:first-child .pd-round-head { padding-top: 10px; }
+  .pd-grid .pd-meta { font-size: 11px; color: #6b7280; text-align: left;
+                      padding: 14px 6px 2px 0; }
+  /* The first match's metadata in a round sits right under the round head, which already
+     supplies the gap (matching the stacked layout); only later matches need the full top. */
+  .pd-grid .pd-round-row + .pd-meta-row .pd-meta { padding-top: 2px; }
+  .pd-grid .pd-win { font-weight: 700; color: #065f46; }
+  @media (prefers-color-scheme: dark) {
+    .pd-stage { color: #e5e7eb; background: #0f172a; }
+    .pd-title { color: #f8fafc; }
+    .pd-season { color: #94a3b8; }
+    .pd-header { color: #cbd5e1; }
+    .pd-meta, .pd-grid .pd-meta { color: #94a3b8; }
+    .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
+    .pd-match { background: #1e293b; border-color: #334155; }
+    .pd-grid .pd-match-row td { background: #1e293b; border-color: #334155; }
+    .pd-grid .pd-match-row td:first-child,
+    .pd-grid .pd-match-row td:last-child { border-color: #334155; }
+    .pd-side + .pd-side td { border-top-color: #334155; }
+    .pd-win td, .pd-grid .pd-win { color: #34d399; }
+    .pd-vs { color: #64748b; }
+    .pd-grid .pd-round-head { color: #cbd5e1; }
+  }&lt;/style&gt;
+&lt;h2 class=&quot;pd-title&quot;&gt;World Cup &lt;span class=&quot;pd-season&quot;&gt;2026&lt;/span&gt;&lt;/h2&gt;
+&lt;table class=&quot;pd-grid&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-round-row&quot;&gt;
+&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Demi-finales&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;SF1&lt;/span&gt; · mardi 14 juillet, 23:00 AT&amp;amp;T Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;France&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Spain&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;SF2&lt;/span&gt; · mercredi 15 juillet, 23:00 Mercedes-Benz Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Argentina&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Brazil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-round-row&quot;&gt;
+&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Finale&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;dimanche 19 juillet, 19:00 MetLife Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Vainqueur SF1&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Vainqueur SF2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-round-row&quot;&gt;
+&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Petite finale&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;samedi 18 juillet, 19:00 Hard Rock Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Perdant SF1&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Perdant SF2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
+<div class="pane pane-table"><h3>HTML table — stacked</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage&quot;&gt;
+&lt;style&gt;
+  .pd-stage { font-family: sans-serif; color: #1f2937; background: #ffffff; }
+  .pd-title { font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 12px; }
+  .pd-season { font-size: 13px; font-weight: 400; color: #6b7280; margin-left: 8px; }
+  .pd-header { font-size: 15px; font-weight: 600; color: #374151; margin: 26px 0 8px; }
+  /* The first round sits tight under the title; later rounds get the full gap (matching
+     the flat layout's separation between a box and the next round head). */
+  .pd-round:first-child .pd-header { margin-top: 14px; }
+  .pd-meta { font-size: 11px; color: #6b7280; margin: 0 0 3px; }
+  .pd-meta-id { font-weight: 700; }
+  .pd-match { border-collapse: separate; border-spacing: 0; width: 100%;
+              max-width: 24em; border: 1px solid #d1d5db; border-radius: 3px;
+              overflow: hidden; margin: 0 0 15px; }
+  .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
+  .pd-team { font-size: 13px; padding: 5px 10px; }
+  .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
+  .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
+              white-space: nowrap; }
+  .pd-win td { font-weight: 700; color: #065f46; }
+  .pd-grid { border-collapse: separate; border-spacing: 0; margin: 0 0 4px; }
+  .pd-grid td { font-size: 13px; padding: 4px 6px; vertical-align: middle;
+                white-space: nowrap; }
+  .pd-team1, .pd-score1, .pd-crest1 { text-align: right; }
+  .pd-team2, .pd-score2, .pd-crest2 { text-align: left; }
+  .pd-crest1, .pd-crest2 { padding: 0; }
+  .pd-crest1 .pd-crest { margin: 0 0 0 6px; }
+  .pd-crest2 .pd-crest { margin: 0 6px 0 0; }
+  .pd-vs { color: #9ca3af; padding: 4px 8px; }
+  /* Box each leg's score row, so a match reads as a unit like the SVG/stacked
+     boxes; the metadata line stays above the box (as in the stacked layout). */
+  .pd-grid .pd-match-row td { border-top: 1px solid #d1d5db;
+                              border-bottom: 1px solid #d1d5db; }
+  .pd-grid .pd-match-row td:first-child { border-left: 1px solid #d1d5db;
+      border-top-left-radius: 3px; border-bottom-left-radius: 3px; }
+  .pd-grid .pd-match-row td:last-child { border-right: 1px solid #d1d5db;
+      border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
+  .pd-grid .pd-round-head { font-size: 15px; font-weight: 600; color: #374151;
+                            text-align: left; padding: 26px 6px 6px 0; }
+  .pd-grid tr:first-child .pd-round-head { padding-top: 10px; }
+  .pd-grid .pd-meta { font-size: 11px; color: #6b7280; text-align: left;
+                      padding: 14px 6px 2px 0; }
+  /* The first match's metadata in a round sits right under the round head, which already
+     supplies the gap (matching the stacked layout); only later matches need the full top. */
+  .pd-grid .pd-round-row + .pd-meta-row .pd-meta { padding-top: 2px; }
+  .pd-grid .pd-win { font-weight: 700; color: #065f46; }
+  @media (prefers-color-scheme: dark) {
+    .pd-stage { color: #e5e7eb; background: #0f172a; }
+    .pd-title { color: #f8fafc; }
+    .pd-season { color: #94a3b8; }
+    .pd-header { color: #cbd5e1; }
+    .pd-meta, .pd-grid .pd-meta { color: #94a3b8; }
+    .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
+    .pd-match { background: #1e293b; border-color: #334155; }
+    .pd-grid .pd-match-row td { background: #1e293b; border-color: #334155; }
+    .pd-grid .pd-match-row td:first-child,
+    .pd-grid .pd-match-row td:last-child { border-color: #334155; }
+    .pd-side + .pd-side td { border-top-color: #334155; }
+    .pd-win td, .pd-grid .pd-win { color: #34d399; }
+    .pd-vs { color: #64748b; }
+    .pd-grid .pd-round-head { color: #cbd5e1; }
+  }&lt;/style&gt;
+&lt;h2 class=&quot;pd-title&quot;&gt;World Cup &lt;span class=&quot;pd-season&quot;&gt;2026&lt;/span&gt;&lt;/h2&gt;
+&lt;div class=&quot;pd-round&quot;&gt;
+&lt;h3 class=&quot;pd-header&quot;&gt;Demi-finales&lt;/h3&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;SF1&lt;/span&gt; · mardi 14 juillet, 23:00 AT&amp;amp;T Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;France&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Spain&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;SF2&lt;/span&gt; · mercredi 15 juillet, 23:00 Mercedes-Benz Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Argentina&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Brazil&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;pd-round&quot;&gt;
+&lt;h3 class=&quot;pd-header&quot;&gt;Finale&lt;/h3&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;dimanche 19 juillet, 19:00 MetLife Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Vainqueur SF1&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Vainqueur SF2&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;pd-round&quot;&gt;
+&lt;h3 class=&quot;pd-header&quot;&gt;Petite finale&lt;/h3&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;samedi 18 juillet, 19:00 Hard Rock Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Perdant SF1&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Perdant SF2&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
+</div>
+</section>
 
 <script>
   // Each render is isolated in an iframe; fit each one to its content's height, and

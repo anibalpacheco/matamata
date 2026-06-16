@@ -53,5 +53,8 @@ class FaCupDiagram(KnockoutStage):
 if __name__ == "__main__":
     import sys
 
-    fmt = sys.argv[1] if len(sys.argv) > 1 else "svg"
-    sys.stdout.write(FaCupDiagram().render(fmt, language="es"))
+    # Pass the format only if given on the CLI, so "svg" stays the library's default.
+    opts = {"language": "es"}
+    if len(sys.argv) > 1:
+        opts["fmt"] = sys.argv[1]
+    sys.stdout.write(FaCupDiagram().render(**opts))

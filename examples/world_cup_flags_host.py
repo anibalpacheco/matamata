@@ -58,5 +58,8 @@ class WorldCupFlagsDiagram(KnockoutStage):
 if __name__ == "__main__":
     import sys
 
-    fmt = sys.argv[1] if len(sys.argv) > 1 else "svg"
-    sys.stdout.write(WorldCupFlagsDiagram().render(fmt))
+    # Pass the format only if given on the CLI, so "svg" stays the library's default.
+    opts: dict[str, str] = {}
+    if len(sys.argv) > 1:
+        opts["fmt"] = sys.argv[1]
+    sys.stdout.write(WorldCupFlagsDiagram().render(**opts))

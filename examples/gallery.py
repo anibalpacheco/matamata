@@ -44,6 +44,7 @@ from xml.sax.saxutils import escape
 from copa_rio_host import CopaRioDiagram
 from facup_host import FaCupDiagram
 from libertadores_host import LibertadoresDiagram
+from third_place_host import ThirdPlaceDiagram
 from world_cup_flags_host import WorldCupFlagsDiagram
 
 from matamata import KnockoutStage, load_stage, render_html, render_svg
@@ -126,6 +127,14 @@ SPECS: "list[tuple[str, str, Builder]]" = [
         "it draws no connector and hangs below the bracket in the final's column, keeping "
         "its own round header. Base loader.",
         _base("third-place.json"),
+    ),
+    (
+        "third-place.json",
+        "Third place, in French (third_place_host) — same stage rendered with language='fr': "
+        "placeholders show both vocabularies localized (winner -> 'Vainqueur SF1', loser -> "
+        "'Perdant SF1') with the round names ('Petite finale'), and the same language drives "
+        "Babel so the dates read in French ('mardi 14 juillet').",
+        _host(ThirdPlaceDiagram, language="fr"),
     ),
 ]
 

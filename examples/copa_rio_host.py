@@ -74,5 +74,8 @@ if __name__ == "__main__":
     import sys
 
     # The caller picks the language; this Río de la Plata cup's demo renders in Spanish.
-    fmt = sys.argv[1] if len(sys.argv) > 1 else "svg"
-    sys.stdout.write(CopaRioDiagram().render(fmt, language="es"))
+    # Pass the format only if given on the CLI, so "svg" stays the library's default.
+    opts = {"language": "es"}
+    if len(sys.argv) > 1:
+        opts["fmt"] = sys.argv[1]
+    sys.stdout.write(CopaRioDiagram().render(**opts))
