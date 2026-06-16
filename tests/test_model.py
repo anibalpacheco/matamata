@@ -537,39 +537,58 @@ def test_tournament_and_season_overrides():
     assert stage.season == "2027"
 
 
-def test_get_labels_translates_generated_labels():
+def test_translate_localizes_placeholders_and_round_names():
     doc = {
         "rounds": [
-            {"name": "SF", "matches": [{"id": "sf1", "team1": "A", "team2": "B"}]},
-            {"name": "F", "matches": [{"id": "f", "winnerof1": "sf1"}]},
+            {
+                "name": "Semis",
+                "matches": [
+                    {"id": "sf1", "team1": "A", "team2": "B"},
+                    {"id": "sf2", "team1": "C", "team2": "D"},
+                ],
+            },
+            {  # one match; an unresolved side exercises the "winner" placeholder
+                "name": "Final",
+                "matches": [{"id": "f", "winnerof1": "sf1"}],
+            },
         ]
     }
-    translations = {
-        "es": {"winner": "Ganador {id}", "tbd": "A definir"},
-        "pt": {"winner": "Vencedor {id}"},  # partial: tbd falls back to English
-    }
+    seen = []
 
     class D(KnockoutStage):
-        def get_labels(self, language):
-            return translations.get(language)
+        def translate(self, path, value, language):
+            seen.append((path, value, language))
+            if language != "es":
+                return None
+            if path == "_placeholder":
+                # The host returns the bare word; the library composes the id.
+                return {"winner": "Ganador"}.get(value)  # "tbd" left untranslated
+            return {"Semis": "Semifinales"}.get(value)  # "Final" left untranslated
 
-    # The requested language flows through build/render to the hook.
     es = D(doc).build("es")
     ef = es.matches_by_id()["f"]
-    assert Resolver(es).label(ef.home) == "Ganador SF1"  # unresolved winnerof
-    assert Resolver(es).label(ef.away) == "A definir"  # no team, no link
+    # winner: host word "Ganador" + the composed id; tbd: untranslated -> English default.
+    assert Resolver(es).label(ef.home) == "Ganador SF1"
+    assert Resolver(es).label(ef.away) == "TBD"
+    # round.name translated by value; the untranslated one keeps the document name.
+    assert [rnd.name for rnd in es.rounds] == ["Semifinales", "Final"]
+    # The library calls translate by path: the two placeholders, then each round name.
+    assert ("_placeholder", "winner", "es") in seen
+    assert ("_placeholder", "tbd", "es") in seen
+    assert ("round.name", "Semis", "es") in seen
 
-    # A partial translation keeps the English default for the key left out.
-    pt = D(doc).build("pt")
-    pf = pt.matches_by_id()["f"]
-    assert Resolver(pt).label(pf.home) == "Vencedor SF1"
-    assert Resolver(pt).label(pf.away) == "TBD"
-
-    # No language (or an unknown one) leaves the labels in English.
-    en = D(doc).build()
+    # English is the source language: translate is never called, defaults stay.
+    seen.clear()
+    en = D(doc).build("en")
+    assert not seen
     enf = en.matches_by_id()["f"]
     assert Resolver(en).label(enf.home) == "Winner SF1"
     assert Resolver(en).label(enf.away) == "TBD"
+    assert [rnd.name for rnd in en.rounds] == ["Semis", "Final"]
+
+    # No language behaves like the source language too.
+    D(doc).build()
+    assert not seen
 
 
 def test_diagram_accepts_a_json_string():

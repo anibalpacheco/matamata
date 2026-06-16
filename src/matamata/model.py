@@ -154,17 +154,17 @@ class RenderOptions:
 
 @dataclass
 class Labels:
-    """Text for the labels the renderer *generates* (not the team/round names, which
-    come from the document). Supplied through ``KnockoutStage.get_labels`` for i18n —
-    host-only, with no JSON surface, so the defaults are English and a document rendered
-    without the class (CLI, ``render_svg``) stays in English.
+    """Text for the labels the renderer *generates* (not the team names, which come from
+    the document). Localized through ``KnockoutStage.translate`` for i18n — host-only,
+    with no JSON surface, so the defaults are English and a document rendered without the
+    class (CLI, ``render_svg``) stays in English.
 
-    ``winner``: the placeholder for an unresolved ``winnerof`` side; ``{id}`` is replaced
-    with the referenced match id (uppercased). ``tbd``: the placeholder for a side with
-    neither a team nor an advancement link.
+    ``winner``: the word for an unresolved ``winnerof`` side; the renderer composes it with
+    the referenced match id, e.g. ``"Winner" -> "Winner SF1"``. ``tbd``: the label for a
+    side with neither a team nor an advancement link (shown as-is, no id).
     """
 
-    winner: str = "Winner {id}"
+    winner: str = "Winner"
     tbd: str = "TBD"
 
 
@@ -291,7 +291,7 @@ def meta_text(
 ) -> str:
     """The match's metadata line as one string: the id, then each leg's ``dt``/``venue``.
 
-    Starts with the uppercased id (mirroring the "Winner {id}" placeholder), so a match
+    Starts with the uppercased id (mirroring the ``Winner SF1`` placeholder), so a match
     with no scheduling data still shows its id; a match with **no** id (the final) shows
     none. Returns "" when nothing is left to show. See :func:`meta_parts` for the split
     form used by renderers that bold the id.
@@ -317,5 +317,5 @@ class Resolver:
         if slot.team is not None:
             return slot.team
         if slot.winner_of is not None:
-            return self._labels.winner.replace("{id}", slot.winner_of.upper())
+            return f"{self._labels.winner} {slot.winner_of.upper()}"
         return self._labels.tbd

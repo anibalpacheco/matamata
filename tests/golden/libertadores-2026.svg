@@ -30,8 +30,8 @@
 <rect class="pd-bg" width="900" height="522"/>
 <text class="pd-title" x="20" y="28">Copa Libertadores</text>
 <text class="pd-season" x="212" y="28">2026</text>
-<text class="pd-header" x="140" y="56">Quarterfinals</text>
-<text class="pd-header" x="450" y="56">Semifinals</text>
+<text class="pd-header" x="140" y="56">Cuartos de final</text>
+<text class="pd-header" x="450" y="56">Semifinales</text>
 <text class="pd-header" x="760" y="56">Final</text>
 <path class="pd-link" d="M 260 128 L 295 128 L 295 168 L 330 168"/>
 <path class="pd-link" d="M 260 232 L 295 232 L 295 192 L 330 192"/>

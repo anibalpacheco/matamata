@@ -141,9 +141,9 @@ string) to reformat it, and pass a `timezone` to the render call
 (`render_svg`/`render_html`/`KnockoutStage.render`, or the CLI's `--timezone`) to convert
 it first; a value that does not parse — or no `dt_format` at all — is shown verbatim.
 Suppress the whole line with `render.show_metadata: false`. The Copa Libertadores example
-host (`examples/libertadores_host.py`) shows this conversion: it stores GMT datetimes and
-renders them in `America/Montevideo` (its venues are all at GMT-3), so the times you see
-are three hours behind the document's.
+shows this conversion: its `dt`s are GMT and its demo renders with
+`timezone="America/Montevideo"` (its venues are all at GMT-3), so the times you see are
+three hours behind the document's.
 
 ### Light and dark mode
 
@@ -294,39 +294,46 @@ Documents rendered without the class (the CLI, `render_svg`) simply show no cres
 
 ### Translating the generated labels
 
-Almost every label in the schedule comes straight from the document — team names, round
-names, the tournament — so translating those is just a matter of storing them already
-translated. The exception is the handful of labels the renderer *generates* for sides
-that have no team yet: `Winner SF1` (an unresolved `winnerof` link) and `TBD` (a side
-with neither a team nor a link). Those are what this covers.
+Team names and the tournament come straight from the document, so translating those is
+just a matter of storing them already translated. Two other kinds of text are localized
+through a hook instead: the renderer-*generated* placeholders for sides with no team yet
+— `Winner SF1` (an unresolved `winnerof` link) and `TBD` (a side with neither a team nor
+a link) — and the **round names** (the document keeps a canonical name like
+`Quarterfinals`, and the host translates it per language).
 
-Like crests above, it is a hook with no JSON surface: override `get_labels`, which
-receives the `language` requested at render time and returns the strings to use (or
-`None` to keep the English defaults). The same document can be rendered in several
-languages — the language flows from `render` / `build` straight to the hook:
+Like crests, it is a hook with no JSON surface: override `translate`. **English is the
+source language**, so the renderer calls `translate` only when a target language other
+than `"en"` was requested, and only for the values it marks translatable. The hook gets
+`(path, value, language)` and returns the localized string, or `None` to keep the default:
 
 ```python
 from matamata import KnockoutStage
 
-TRANSLATIONS = {
-    "es": {"winner": "Ganador {id}", "tbd": "A definir"},
-    "pt": {"winner": "Vencedor {id}", "tbd": "A definir"},
-}
+# Placeholders are a defined vocabulary, so they get their own table; the second one is
+# generic — any text translated by its value, here the round names.
+PLACEHOLDERS = {"es": {"winner": "Ganador", "tbd": "A definir"}}
+TEXT = {"es": {"Quarterfinals": "Cuartos de final", "Semifinals": "Semifinales"}}
 
 class ChampionshipDiagram(KnockoutStage):
-    def get_labels(self, language):
-        return TRANSLATIONS.get(language)
+    def translate(self, path, value, language):
+        table = PLACEHOLDERS if path == "_placeholder" else TEXT
+        return table.get(language, {}).get(value)
 
 svg = ChampionshipDiagram(document).render(language="es")
 ```
 
-`get_labels` returns a dict with either or both of `"winner"` (where `{id}` is replaced
-by the referenced match id) and `"tbd"`; a key left out falls back to its English
-default, and an unknown `language` — or none — leaves everything in English. Team and
-round names are not handled here: they are already whatever the document says.
+`path` tells you *what* is being translated. For `"_placeholder"`, `value` is the
+placeholder's stable key (`"winner"`, `"tbd"`) and you return the bare **word** —
+`"Ganador"`, not `"Ganador SF1"` — because the renderer composes the id. For `"round.name"`,
+`value` is the round's own name and you return its translation. Returning `None` (or leaving
+a key out of your tables) keeps the English / document default; requesting `"en"` or no
+language skips translation entirely. The language is the *caller's* to pass — the host
+supplies the translations, not the choice of which one. The Copa Libertadores example host
+(`examples/libertadores_host.py`) does exactly this; its demo renders the stage in Spanish
+(`Cuartos de final`, `Semifinales`, `Final`).
 
-The host owns the translations, so you can resolve them however suits your app — a literal
-dict as above, your existing message catalogs, or `gettext`. Documents rendered without
+The host owns the translations, so you can resolve them however suits your app — literal
+dicts as above, your existing message catalogs, or `gettext`. Documents rendered without
 the class (the CLI, `render_svg`) show the English labels.
 
 ### The `apply_results` method

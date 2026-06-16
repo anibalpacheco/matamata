@@ -7,11 +7,11 @@ resolves those refs: :class:`LibertadoresDiagram` reads the games from a sibling
 flat game dict (``team1``/``goals1``/``team2``/``goals2``, local first). In a real
 deployment that lookup would be a database query.
 
-It also shows the **timezone** conversion: the document's ``dt`` values are GMT, and this
-host displays them in ``America/Montevideo`` (every Conmebol venue here — in Brazil,
-Argentina and Uruguay — sits at GMT-3, so a single display zone is correct for all). It
-does so by defaulting :meth:`render`'s ``timezone`` to that zone, the same knob the CLI
-exposes as ``--timezone``.
+It also demonstrates **i18n** (``translate``) and the **timezone** conversion — but those
+are decisions of *whoever renders*, not of this host, so the caller passes them to
+``render`` (the ``__main__`` below renders in Spanish and ``America/Montevideo`` time,
+where every Conmebol venue here — Brazil, Argentina, Uruguay — sits at GMT-3). The host
+only supplies the *translations*; it does not pick the language or the zone.
 
 Run it to render the host-resolved knockout stage to SVG on stdout::
 
@@ -41,8 +41,20 @@ def _load_json(path: str) -> dict:
 class LibertadoresDiagram(KnockoutStage):
     """Resolves each leg's ``ref`` against ``example_data.json``."""
 
-    # The timezone this host displays the GMT metadata datetimes in (see module docstring).
-    TIMEZONE = "America/Montevideo"
+    # Placeholders are a defined concept (the library's own vocabulary: "winner", "tbd"),
+    # so their translations get a dedicated table; the renderer routes to it via the
+    # "_placeholder" path. The renderer composes the id, so the word alone suffices
+    # ("Ganador" -> "Ganador SF1").
+    _TRANS_PLACEHOLDERS = {"es": {"winner": "Ganador", "tbd": "A definir"}}
+    # Everything else (here, the document's round names) is translated by its own value;
+    # this table is generic, not round-name specific.
+    _TRANS = {
+        "es": {
+            "Quarterfinals": "Cuartos de final",
+            "Semifinals": "Semifinales",
+            "Final": "Final",
+        },
+    }
 
     def __init__(self, document: Optional[dict] = None) -> None:
         super().__init__(document if document is not None else _load_json(DOCUMENT))
@@ -52,18 +64,18 @@ class LibertadoresDiagram(KnockoutStage):
     def get_match(self, ref: Id) -> GameData:
         return self._games.get(str(ref))
 
-    def render(
-        self,
-        fmt: str = "svg",
-        language: Optional[str] = None,
-        layout: str = "flat",
-        timezone: Optional[str] = None,
-    ) -> str:
-        # Default the display timezone to this host's, while still allowing an override.
-        return super().render(fmt, language, layout, timezone or self.TIMEZONE)
+    def translate(self, path: str, value: str, language: str) -> Optional[str]:
+        # Placeholders have their own table (routed by path); anything else translates by
+        # value. The renderer only calls this for a target language other than English.
+        table = self._TRANS_PLACEHOLDERS if path == "_placeholder" else self._TRANS
+        return table.get(language, {}).get(value)
 
 
 if __name__ == "__main__":
     import sys
 
-    sys.stdout.write(LibertadoresDiagram().render())
+    # Language and timezone are the caller's choice; this demo renders the Conmebol stage
+    # in Spanish and local (GMT-3) time.
+    sys.stdout.write(
+        LibertadoresDiagram().render(language="es", timezone="America/Montevideo")
+    )

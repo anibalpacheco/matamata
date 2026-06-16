@@ -160,16 +160,21 @@ def test_crest_shape_flag_renders_rectangular_framed_images():
     assert 'width="16"' in square_svg
 
 
+# Language and timezone are the caller's choice; the demo renders in Spanish and
+# Montevideo time, and the goldens capture that, matching the docs preview.
+_ES = {"language": "es", "timezone": "America/Montevideo"}
+
+
 def test_host_example_matches_golden(libertadores_diagram):
-    _assert_golden(libertadores_diagram().render(), HOST_EXAMPLE, ".svg")
+    _assert_golden(libertadores_diagram().render(**_ES), HOST_EXAMPLE, ".svg")
 
 
 def test_host_example_is_well_formed(libertadores_diagram):
-    _assert_well_formed(libertadores_diagram().render(), "svg")
+    _assert_well_formed(libertadores_diagram().render(**_ES), "svg")
 
 
 def test_host_example_html_matches_golden(libertadores_diagram):
-    _assert_golden(libertadores_diagram().render("html"), HOST_EXAMPLE, ".html")
+    _assert_golden(libertadores_diagram().render("html", **_ES), HOST_EXAMPLE, ".html")
 
 
 def test_unknown_render_format_is_rejected(libertadores_diagram):

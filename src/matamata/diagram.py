@@ -115,20 +115,29 @@ class KnockoutStage:
         """Return the season label. Defaults to the document's ``season``."""
         return self._doc.get("season")
 
-    def get_labels(  # pylint: disable=unused-argument
-        self, language: Optional[str]
-    ) -> Optional[dict[str, str]]:
-        """Return overrides for the labels the renderer *generates*, or ``None``.
+    def translate(  # pylint: disable=unused-argument
+        self, path: str, value: str, language: str
+    ) -> Optional[str]:
+        """Localize one translatable value, for i18n. Return the localized string, or
+        ``None`` to keep the default.
 
-        For i18n. ``language`` is the language requested at render time (``render`` /
-        ``build`` take it and pass it here, so the same document can be rendered in
-        several languages); switch on it to return the matching strings. Keys:
-        ``"winner"`` (the placeholder for an unresolved ``winnerof`` side — ``{id}`` is
-        replaced with the referenced match id) and ``"tbd"`` (the placeholder for a side
-        with neither a team nor a link); supply either or both. Team and round names come
-        from the document, so they are not handled here. The base returns ``None``:
-        English defaults, nothing changes for existing hosts or for documents rendered
-        without the class.
+        English is the source language, so the renderer calls this **only** when a target
+        language other than ``"en"`` was requested (``render`` / ``build`` take the
+        ``language`` and forward it; it is opaque to the library), and only for the values
+        it marks translatable. ``path`` says *what* is being translated:
+
+        - ``"_placeholder"`` — a label the renderer generates. ``value`` is then the
+          placeholder *key* from this library's vocabulary (``"winner"``, ``"tbd"``), not
+          its English text; return the localized **word** (e.g. ``"Ganador"``), and the
+          renderer composes the rest (``"Ganador SF1"``). A key left untranslated keeps
+          its English default.
+        - ``"round.name"`` — a round name from the document. ``value`` is the document's
+          own name; return its translation, or ``None`` to keep it.
+
+        Most overrides ignore ``path`` and just look ``value`` up for ``language``; it is
+        there for hosts that need to know which field they are translating. The base
+        returns ``None``: English / document defaults, so class-less rendering (CLI,
+        ``render_svg``) is unaffected.
         """
         return None
 
@@ -136,8 +145,8 @@ class KnockoutStage:
     def build(self, language: Optional[str] = None) -> Stage:
         """Parse the document, hydrate it from the hooks and return the model.
 
-        ``language`` is forwarded to :meth:`get_labels` to localize the generated
-        labels; ``None`` (the default) leaves them in English.
+        ``language`` localizes the generated labels and round names through
+        :meth:`translate`; ``None`` or ``"en"`` (the source language) leaves them as is.
         """
         stage = parse_stage(self._doc)
         for rnd in stage.rounds:
@@ -155,13 +164,22 @@ class KnockoutStage:
         if tournament is not None:
             stage.tournament = tournament
         stage.season = self.get_season()
-        # get_labels is an overridable hook; the base returns None (English defaults).
-        labels = self.get_labels(language)  # pylint: disable=assignment-from-none
-        if labels:
+        # English is the source language: only call the translate hook for a real target.
+        if language is not None and language != "en":
+
+            def localize(path: str, value: str, default: str) -> str:
+                # translate is an overridable hook; the base returns None (keep default).
+                out = self.translate(  # pylint: disable=assignment-from-none
+                    path, value, language
+                )
+                return default if out is None else out
+
             stage.labels = Labels(
-                winner=labels.get("winner", stage.labels.winner),
-                tbd=labels.get("tbd", stage.labels.tbd),
+                winner=localize("_placeholder", "winner", stage.labels.winner),
+                tbd=localize("_placeholder", "tbd", stage.labels.tbd),
             )
+            for rnd in stage.rounds:
+                rnd.name = localize("round.name", rnd.name, rnd.name)
         return stage
 
     def render(
@@ -176,9 +194,10 @@ class KnockoutStage:
         ``fmt`` is ``"svg"`` (the default, the diagram) or ``"html"`` (the table
         layout for small screens). ``layout`` selects the HTML table arrangement
         (``"flat"`` or ``"stacked"``) and is ignored for svg. ``language`` is forwarded
-        to :meth:`get_labels` to localize the generated labels (``None`` leaves them in
-        English). ``timezone`` is a zone name (e.g. ``"America/Montevideo"``) the
-        metadata datetimes (assumed GMT) are converted to before rendering.
+        to :meth:`translate` to localize the generated labels and round names (``None`` or
+        ``"en"`` leaves them as is). ``timezone`` is a zone name (e.g.
+        ``"America/Montevideo"``) the metadata datetimes (assumed GMT) are converted to
+        before rendering.
         """
         if fmt not in ("svg", "html"):
             raise StageError(f"unknown render format {fmt!r}")
