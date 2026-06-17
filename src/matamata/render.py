@@ -14,6 +14,9 @@ from .model import Stage, meta_parts
 
 _LABEL_PAD = 10
 _SCORE_PAD = 8
+_META_CHAR_W = (
+    6.0  # rough px per glyph of the 11px metadata font, for wrapping to box width
+)
 _CREST_SIZE = 16  # square crest side, vertically centered in the 24-unit row
 _FLAG_W = 24  # flag box is 3:2 (24x16); the image is fitted inside without distortion
 _CREST_GAP = 6
@@ -104,14 +107,19 @@ def _match(
     max_chars: int,
     box_w: float,
     flag: bool = False,
-    meta: Optional[str] = None,
+    label: str = "",
+    detail: str = "",
 ) -> None:
-    if meta:
+    if label or detail:
         # Below the box when its connector bends up (room above is taken), else above it.
         meta_y = pm.y + BOX_H + 14 if pm.meta_below else pm.y - 6
-        # ``meta`` is pre-built inner markup (the id wrapped in a bold tspan), not text.
+        inner = (
+            _meta_wrapped(pm.x, label, detail, box_w)
+            if pm.meta_wrap
+            else _meta_single(label, detail)
+        )
         out.append(
-            f'<text class="pd-meta" x="{pm.x:.0f}" y="{meta_y:.0f}">{meta}</text>'
+            f'<text class="pd-meta" x="{pm.x:.0f}" y="{meta_y:.0f}">{inner}</text>'
         )
     out.append(
         f'<rect class="pd-box" x="{pm.x:.0f}" y="{pm.y:.0f}" '
@@ -126,17 +134,57 @@ def _match(
     _row(out, pm, pm.away, mid, max_chars, box_w, flag)
 
 
-def _meta_inner(
-    match, dt_format: Optional[str], tz: Optional[str], language: Optional[str]
-) -> str:
-    """The metadata line's inner SVG markup, with the id wrapped in a bold tspan."""
-    label, detail = meta_parts(match, dt_format, tz, language)
+def _meta_single(label: str, detail: str) -> str:
+    """The metadata line's inner SVG markup on one line, the id wrapped in a bold tspan."""
     if not label:
         return escape(detail)
     inner = f'<tspan class="pd-meta-id">{escape(label)}</tspan>'
     if detail:
         inner += escape(f" · {detail}")
     return inner
+
+
+def _wrap_lines(text: str, max_chars: int, max_lines: int = 2) -> list[str]:
+    """Greedily wrap ``text`` into at most ``max_lines`` lines of ~``max_chars`` each.
+
+    A word longer than a line still takes its own line; when the line budget runs out the
+    rest is crammed onto the last line and truncated with an ellipsis (so the wrap is
+    bounded — the layout reserves room for ``max_lines``).
+    """
+    words = text.split(" ")
+    lines: list[str] = []
+    cur = ""
+    for i, word in enumerate(words):
+        candidate = f"{cur} {word}".strip()
+        if not cur or len(candidate) <= max_chars:
+            cur = candidate
+        elif len(lines) + 1 < max_lines:
+            lines.append(cur)
+            cur = word
+        else:  # last allowed line: cram the remainder and ellipsize
+            lines.append(_truncate(" ".join([cur] + words[i:]), max_chars))
+            cur = ""
+            break
+    if cur:
+        lines.append(cur)
+    return lines or [""]
+
+
+def _meta_wrapped(x: float, label: str, detail: str, box_w: float) -> str:
+    """The metadata wrapped to the box width as stacked ``<tspan>`` lines (id bold on line 1)."""
+    full = f"{label} · {detail}" if label and detail else (label or detail)
+    max_chars = max(8, int((box_w - 2 * _SCORE_PAD) / _META_CHAR_W))
+    parts = []
+    for i, line in enumerate(_wrap_lines(full, max_chars)):
+        dy = ' dy="13"' if i else ""
+        if i == 0 and label and line.startswith(label):
+            inner = f'<tspan class="pd-meta-id">{escape(label)}</tspan>' + escape(
+                line[len(label) :]
+            )
+        else:
+            inner = escape(line)
+        parts.append(f'<tspan x="{x:.0f}"{dy}>{inner}</tspan>')
+    return "".join(parts)
 
 
 def render_layout(
@@ -179,12 +227,15 @@ def render_layout(
     flag = stage.render.crest_shape == "flag"
     show_meta = stage.render.show_metadata
     for pm in layout.matches:
-        meta = (
-            _meta_inner(pm.match, stage.render.dt_format, timezone, language)
-            if show_meta
-            else ""
+        if show_meta:
+            label, detail = meta_parts(
+                pm.match, stage.render.dt_format, timezone, language
+            )
+        else:
+            label, detail = "", ""
+        _match(
+            out, pm, stage.render.max_label_chars, layout.box_width, flag, label, detail
         )
-        _match(out, pm, stage.render.max_label_chars, layout.box_width, flag, meta)
 
     out.append("</svg>")
     return "\n".join(out)

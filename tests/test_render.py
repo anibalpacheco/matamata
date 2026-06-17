@@ -364,6 +364,42 @@ def test_show_metadata_false_drops_the_line_and_the_flat_column():
     assert '<div class="pd-meta">' not in render_html(stage, layout="stacked")
 
 
+def test_symmetric_layout_mirrors_the_bracket():
+    from matamata.layout import compute_layout
+
+    stage = load_stage(os.path.join(EXAMPLES, "symmetric-8.json"))
+    layout = compute_layout(stage)
+
+    # Every round but the final draws over two columns (left + right), so its header is
+    # emitted twice; the final's single central header is emitted once.
+    names = [h.name for h in layout.headers]
+    assert names.count("Quarterfinals") == 2
+    assert names.count("Semifinals") == 2
+    assert names.count("Final") == 1
+
+    by_id = {pm.match.id: pm for pm in layout.matches}
+    # The final and the third place are both id-less; tell them apart by their links.
+    final = next(
+        pm
+        for pm in layout.matches
+        if pm.match.home.winner_of is not None and pm.match.id is None
+    )
+    third = next(pm for pm in layout.matches if pm.match.home.loser_of is not None)
+
+    # The two semifinals meet in the centre at equal height, the final straddling them...
+    assert by_id["sf1"].cy == by_id["sf2"].cy
+    assert by_id["sf1"].x < final.x < by_id["sf2"].x
+    # ...lifted into the gap above them, with the third place dropped below — both central.
+    assert final.cy < by_id["sf1"].cy < third.cy
+    assert final.x == third.x
+
+    # The quarterfinals' connectors run inward toward the centre: the left half rightward,
+    # the right half leftward (leaving a box's left edge). Both directions are present.
+    runs_left = [c for c in layout.connectors if c.points[0][0] > c.points[-1][0]]
+    runs_right = [c for c in layout.connectors if c.points[0][0] < c.points[-1][0]]
+    assert runs_left and runs_right
+
+
 def test_cli_infers_html_from_the_output_extension(tmp_path):
     from matamata.__main__ import main
 

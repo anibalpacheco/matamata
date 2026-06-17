@@ -122,6 +122,15 @@ SPECS: "list[tuple[str, str, Builder]]" = [
         _base("facup-drawn.json"),
     ),
     (
+        "symmetric-8.json",
+        "League Cup — the FIFA-style mirrored bracket (render.layout: 'symmetric'): the two "
+        "halves of the draw expand outward to left and right (connectors running inward), "
+        "the semifinals meet in the centre, and the final is lifted above them with the "
+        "third place dropped below. SVG-only; the HTML table is a vertical list and ignores "
+        "it. Base loader.",
+        _base("symmetric-8.json"),
+    ),
+    (
         "third-place.json",
         "Third place — a round fed by loserof ('Loser SF1/SF2'): off the winners' tree, so "
         "it draws no connector and hangs below the bracket in the final's column, keeping "

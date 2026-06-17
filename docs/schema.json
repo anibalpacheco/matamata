@@ -45,6 +45,12 @@
           "minLength": 1,
           "default": "dd/MM HH:mm",
           "comment": "Babel/LDML pattern for each leg's dt (parsed as GMT y-m-d HH:MM, then localized by the render language); e.g. 'EEEE dd MMMM, HH:mm'"
+        },
+        "layout": {
+          "type": "string",
+          "enum": ["linear", "symmetric"],
+          "default": "linear",
+          "comment": "SVG diagram arrangement: 'linear' flows left to right (final last); 'symmetric' is the FIFA-style mirrored bracket — halves expanding outward, semifinals meeting in the centre, final lifted above and third place below. SVG-only; the HTML table ignores it"
         }
       }
     },

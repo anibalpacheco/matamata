@@ -1,10 +1,16 @@
 """Deterministic geometry for a single-elimination knockout stage.
 
-Rounds become columns laid out left to right. Each match is a fixed-size box with a
-home row and an away row. A match in a later round is centered vertically between the
-matches it consumes (resolved through ``winner_of``); first-round matches are stacked
-with a fixed gap. A third-place match (fed by ``loser_of``) is off the tree: it hangs
-below the whole bracket with no connector. No external layout engine is involved.
+Rounds become columns. Each match is a fixed-size box with a home row and an away row. A
+match in a later round is centered vertically between the matches it consumes (resolved
+through ``winner_of``); first-round matches are stacked with a fixed gap. A third-place
+match (fed by ``loser_of``) is off the tree: it hangs below the whole bracket with no
+connector. No external layout engine is involved.
+
+Two arrangements (``render.layout``): ``"linear"`` (default) flows the columns left to
+right with the final in the last column; ``"symmetric"`` is the FIFA-style mirrored
+bracket — every round before the final split by document order so its two halves expand
+outward, the semifinals meeting in the centre, with the final lifted above them and a
+third-place round dropped below (see ``_place_symmetric``).
 """
 
 from __future__ import annotations
@@ -28,6 +34,7 @@ META_TOP = 30  # room above the first box of a column for its single metadata ca
 META_CHAR_W = 6.0  # rough px per glyph of the 11px metadata font, to size the canvas
 HEADER_Y = 68  # baseline of a column header at the top of the bracket
 HEADER_BAND = 30  # vertical room a below-the-bracket round header takes (third place)
+CENTRE_GAP = BOX_H + V_GAP  # gap above the semis the centred final is lifted into
 
 ROW_PITCH = BOX_H + V_GAP
 
@@ -51,6 +58,9 @@ class PlacedMatch:
     # up (the room above is taken by the connector), above it otherwise — including when
     # there is no outgoing connector. Set while wiring connectors.
     meta_below: bool = False
+    # Wrap the metadata to the box width instead of letting it run past. Set for the
+    # symmetric centre semis, whose two same-height lines would otherwise collide.
+    meta_wrap: bool = False
 
     @property
     def cy(self) -> float:
@@ -133,67 +143,86 @@ def compute_layout(
     centers: dict[Optional[str], float] = {}
     placed: list[PlacedMatch] = []
     by_placed: dict[Optional[str], PlacedMatch] = {}
+    headers: list[Header] = []
 
-    # Bracket rounds are columns left to right; rounds after the final (third place, all
-    # satellites) hang below it. Splitting here keeps the round-name header generic — the
-    # below round draws its own, so the final needs no special-casing.
+    # Bracket rounds are columns; rounds after the final (third place, all satellites) hang
+    # below it. Splitting here keeps the round-name header generic — the below round draws
+    # its own, so the final needs no special-casing.
     bracket_rounds = [r for r in stage.rounds if not _is_below_round(r)]
     below_rounds = [r for r in stage.rounds if _is_below_round(r)]
 
-    headers: list[Header] = []
-    for r_index, rnd in enumerate(bracket_rounds):
-        x = MARGIN_X + r_index * column_pitch
-        headers.append(Header(name=rnd.name, cx=x + bw / 2))
-        for m_index, match in enumerate(rnd.matches):
-            parents = [
-                centers[s.winner_of]
-                for s in (match.home, match.away)
-                if s.winner_of is not None and s.winner_of in centers
-            ]
-            if parents:
-                cy = sum(parents) / len(parents)
-            else:
-                cy = TOP + meta_top + BOX_H / 2 + m_index * row_pitch
-            centers[match.id] = cy
-            pm = PlacedMatch(
-                match=match,
-                x=x,
-                y=cy - BOX_H / 2,
-                home=_side_view(resolver, match, "home"),
-                away=_side_view(resolver, match, "away"),
-            )
-            placed.append(pm)
-            by_placed[match.id] = pm
+    def stack_cy(match: Match, index: int) -> float:
+        """Vertical centre of a match: between the matches it consumes (via ``winner_of``),
+        or stacked from the top by its index within its column/half when it has no parents.
+        """
+        parents = [
+            centers[s.winner_of]
+            for s in (match.home, match.away)
+            if s.winner_of is not None and s.winner_of in centers
+        ]
+        if parents:
+            return sum(parents) / len(parents)
+        return TOP + meta_top + BOX_H / 2 + index * row_pitch
 
-    # Below the bracket, in the final's column: each below round's header, then its
-    # match(es), with no connector. Reserve a band for the lowest bracket box's possible
-    # below-box metadata (meta_below is only set later, in _connectors).
-    if below_rounds:
-        below_x = MARGIN_X + max(len(bracket_rounds) - 1, 0) * column_pitch
+    def place(match: Match, x: float, cy: float) -> None:
+        centers[match.id] = cy
+        pm = PlacedMatch(
+            match=match,
+            x=x,
+            y=cy - BOX_H / 2,
+            home=_side_view(resolver, match, "home"),
+            away=_side_view(resolver, match, "away"),
+        )
+        placed.append(pm)
+        by_placed[match.id] = pm
+
+    def place_below(rnds, below_x: float, cursor: float) -> None:
+        """Stack below-the-bracket rounds (third place) downward from ``cursor``, each with
+        its own header and no connector — they hang off the winners' tree."""
         cx = below_x + bw / 2
-        cursor = max((pm.y + BOX_H for pm in placed), default=TOP) + meta_h + V_GAP
-        for rnd in below_rounds:
+        for rnd in rnds:
             header_cy = cursor + HEADER_BAND
             headers.append(Header(name=rnd.name, cx=cx, cy=header_cy))
             box_y = header_cy + header_to_box
             for match in rnd.matches:
                 cy = box_y + BOX_H / 2
-                centers[match.id] = cy
-                pm = PlacedMatch(
-                    match=match,
-                    x=below_x,
-                    y=box_y,
-                    home=_side_view(resolver, match, "home"),
-                    away=_side_view(resolver, match, "away"),
-                )
-                placed.append(pm)
-                by_placed[match.id] = pm
+                place(match, below_x, cy)
                 box_y = cy + BOX_H / 2 + V_GAP + meta_top
             cursor = box_y
 
-    connectors = _connectors(placed, by_placed, bw)
+    if stage.render.layout == "symmetric":
+        n_cols, connect = _place_symmetric(
+            bracket_rounds,
+            below_rounds,
+            bw,
+            column_pitch,
+            meta_top,
+            meta_h,
+            headers,
+            by_placed,
+            stack_cy,
+            place,
+            place_below,
+        )
+        # The lifted final can reach above the header band; nudge the diagram down to fit.
+        _apply_top_offset(placed, headers, meta_top)
+    else:
+        for r_index, rnd in enumerate(bracket_rounds):
+            x = MARGIN_X + r_index * column_pitch
+            headers.append(Header(name=rnd.name, cx=x + bw / 2))
+            for m_index, match in enumerate(rnd.matches):
+                place(match, x, stack_cy(match, m_index))
+        n_cols = len(bracket_rounds)
+        # Below the bracket, in the final's column: hang any third-place round under the
+        # lowest box (meta_below is only set later, in _connectors).
+        if below_rounds:
+            below_x = MARGIN_X + max(n_cols - 1, 0) * column_pitch
+            cursor = max((pm.y + BOX_H for pm in placed), default=TOP) + meta_h + V_GAP
+            place_below(below_rounds, below_x, cursor)
+        connect = placed  # every placed match's incoming connector is drawn
 
-    n_cols = len(bracket_rounds)
+    connectors = _connectors(connect, by_placed, bw)
+
     width: float = MARGIN_X * 2 + n_cols * bw + max(n_cols - 1, 0) * H_GAP
     # The metadata line is drawn left-anchored at its box's x and is not wrapped, so a long
     # one (especially the rightmost column's, e.g. the final's) can run past the canvas and
@@ -226,32 +255,154 @@ def compute_layout(
     )
 
 
+def _place_symmetric(  # noqa: PLR0913 — geometry helper, threads compute_layout's state
+    bracket_rounds,
+    below_rounds,
+    bw: float,
+    column_pitch: float,
+    meta_top: float,
+    meta_h: float,
+    headers: list[Header],
+    by_placed: dict[Optional[str], PlacedMatch],
+    stack_cy,
+    place,
+    place_below,
+) -> "tuple[int, list[PlacedMatch]]":
+    """Place the FIFA-style mirrored diagram; return its column count and the matches to connect.
+
+    Every round *before* the final is mirror-split by document order — its first half fans
+    in from the left, its second half mirrors on the right — so the innermost such round
+    (the semifinals) lands in the two central, adjacent columns ("pegadas"); an odd round
+    puts the extra match on the left. Each outer round draws *two* top-band headers (left
+    and right column), its winners' connectors running inward (handled by ``_connectors``).
+
+    The final is lifted into the gap *above* the semis and a third-place (below) round
+    dropped *below* them, both straddling the centre. No connector is drawn between the
+    final and the semis — the pairing into the final is understood by position, so the
+    final is skipped in ``_connectors`` — which frees the gap above the semis for their
+    title, placed there (close to the boxes) instead of in the top band. The central column
+    is therefore taller than the side ones — accepted, per the FIFA layout.
+    """
+    *mirror_rounds, final_round = bracket_rounds  # the last bracket round is the final
+    m = len(mirror_rounds)
+    connect: list[PlacedMatch] = []  # the matches whose incoming connectors are drawn
+    for r_index, rnd in enumerate(mirror_rounds):
+        x_left = MARGIN_X + r_index * column_pitch
+        x_right = MARGIN_X + (2 * m - 1 - r_index) * column_pitch
+        split = (len(rnd.matches) + 1) // 2  # odd round: the extra match goes left
+        for i, match in enumerate(rnd.matches[:split]):
+            place(match, x_left, stack_cy(match, i))
+        for i, match in enumerate(rnd.matches[split:]):
+            place(match, x_right, stack_cy(match, i))
+        connect.extend(by_placed[mt.id] for mt in rnd.matches)
+        if r_index < m - 1:  # outer rounds: header in the top band over each column
+            headers.append(Header(name=rnd.name, cx=x_left + bw / 2))
+            headers.append(Header(name=rnd.name, cx=x_right + bw / 2))
+
+    # The centre straddles the two innermost columns (the semis). With no earlier rounds
+    # the final stands alone in the first column.
+    if m:
+        centre_x = MARGIN_X + (m - 0.5) * column_pitch
+        semis = [by_placed[mt.id] for mt in mirror_rounds[-1].matches]
+        semi_top = min(s.y for s in semis)
+        semi_bottom = max(s.y + BOX_H for s in semis)
+        # The semifinals' title hugs their boxes (in the gap the dropped final connector
+        # used to fill); their metadata goes below, leaving that gap free for it, and wraps
+        # to the box width so the two adjacent same-height lines can't collide.
+        for s in semis:
+            s.meta_below = True
+            s.meta_wrap = True
+            headers.append(
+                Header(name=mirror_rounds[-1].name, cx=s.x + bw / 2, cy=s.y - 16)
+            )
+    else:
+        centre_x = MARGIN_X
+        semi_top = TOP + meta_top
+        semi_bottom = TOP + meta_top + BOX_H
+
+    # The final, lifted into the gap above the semis, with its header above its box. No
+    # connector down to the semis (the pairing is implied), so it is skipped in _connectors.
+    final_cy = semi_top - CENTRE_GAP - BOX_H / 2
+    for match in final_round.matches:
+        place(match, centre_x, final_cy)
+        fp = by_placed[match.id]
+        headers.append(
+            Header(name=final_round.name, cx=centre_x + bw / 2, cy=fp.y - meta_top - 6)
+        )
+
+    # Third place dropped below the semis, straddling the centre.
+    if below_rounds:
+        place_below(below_rounds, centre_x, semi_bottom + meta_h + V_GAP)
+
+    n_cols = 2 * m if m else 1
+    return n_cols, connect
+
+
+def _apply_top_offset(
+    placed: list[PlacedMatch],
+    headers: list[Header],
+    meta_top: float,
+) -> None:
+    """Shift boxes and their attached captions down so the lifted final clears the band.
+
+    The symmetric final is lifted above the semis and, in a short bracket, would otherwise
+    overlap the column-header band (which keeps its place at the top). Pushing the topmost
+    box down to a normal first-row position keeps the final's own (attached) header and
+    metadata clear of that band; the side columns then hang lower, the intended taller
+    centre. Top-band column headers (at ``HEADER_Y``) stay put; the final's, the semis' and
+    the third place's captions travel with their boxes. A no-op when nothing rises that
+    high. (Connectors are wired afterwards, from the shifted boxes, so none need moving.)
+    """
+    top = min((p.y for p in placed), default=TOP)
+    offset = (TOP + meta_top + 14) - top
+    if offset <= 0:
+        return
+    for p in placed:
+        p.y += offset
+    for h in headers:
+        if h.cy != HEADER_Y:  # column headers stay in the band; attached captions move
+            h.cy += offset
+
+
 def _connectors(
-    placed: list[PlacedMatch], by_placed: dict[Optional[str], PlacedMatch], bw: float
+    children: list[PlacedMatch],
+    by_placed: dict[Optional[str], PlacedMatch],
+    bw: float,
 ) -> list[Connector]:
+    """Draw the advancement connector into each given child from its ``winner_of`` parents.
+
+    The caller passes exactly the matches whose incoming connectors should be drawn — every
+    placed match in the linear layout, but only the mirror rounds in the symmetric one,
+    where the centred final's pairing is shown by position rather than a connector. Children
+    are passed as placed matches (not looked up by id) because two id-less matches — the
+    final and a third place — would share the ``None`` key; parents are always a real
+    ``winner_of`` id, never None.
+    """
     connectors: list[Connector] = []
-    # Iterate placed matches (not ids): two id-less matches — the final and a third-place
-    # match — share the ``None`` key in by_placed, so the child must be the placed match
-    # itself. Parents are always looked up by a real ``winner_of`` id, never None.
-    for child in placed:
+    for child in children:
         match = child.match
         for side, slot in (("home", match.home), ("away", match.away)):
             if slot.winner_of is None or slot.winner_of not in by_placed:
                 continue
             parent = by_placed[slot.winner_of]
-            start = (parent.x + bw, parent.cy)
+            # In the mirrored (symmetric) layout the right half's parent sits to the right
+            # of its child, so the connector leaves the parent's *left* edge and meets the
+            # child's *right* edge; the linear case (and the left half) is the reverse.
+            mirrored = parent.x > child.x
+            start = (parent.x if mirrored else parent.x + bw, parent.cy)
+            child_x = child.x + bw if mirrored else child.x
             conn_y = child.y + (ROW_H / 2 if side == "home" else ROW_H + ROW_H / 2)
             # This connector leaves the parent toward its child: bending up means the
             # space above the parent is taken, so its metadata goes below.
             parent.meta_below = conn_y < parent.cy
-            mid_x = (parent.x + bw + child.x) / 2
+            mid_x = (start[0] + child_x) / 2
             connectors.append(
                 Connector(
                     points=[
                         start,
                         (mid_x, parent.cy),
                         (mid_x, conn_y),
-                        (child.x, conn_y),
+                        (child_x, conn_y),
                     ]
                 )
             )

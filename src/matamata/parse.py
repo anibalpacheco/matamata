@@ -144,6 +144,7 @@ def render_options(data: dict) -> RenderOptions:
         crest_shape=r.get("crest_shape", "square"),
         show_metadata=r.get("show_metadata", True),
         dt_format=r.get("dt_format", DEFAULT_DT_FORMAT),
+        layout=r.get("layout", "linear"),
     )
 
 

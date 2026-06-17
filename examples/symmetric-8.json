@@ -1,0 +1,147 @@
+{
+  "tournament": "League Cup",
+  "season": "2026",
+  "render": { "layout": "symmetric" },
+  "rounds": [
+    {
+      "name": "Quarterfinals",
+      "matches": [
+        {
+          "id": "qf1",
+          "legs": [
+            {
+              "team1": "Manchester City",
+              "goals1": 2,
+              "team2": "Newcastle",
+              "goals2": 1,
+              "dt": "2026-02-24 19:45",
+              "venue": "Etihad Stadium"
+            }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "qf2",
+          "legs": [
+            {
+              "team1": "Arsenal",
+              "goals1": 0,
+              "team2": "Aston Villa",
+              "goals2": 2,
+              "dt": "2026-02-24 19:45",
+              "venue": "Emirates Stadium"
+            }
+          ],
+          "winner": 2
+        },
+        {
+          "id": "qf3",
+          "legs": [
+            {
+              "team1": "Liverpool",
+              "goals1": 3,
+              "team2": "Tottenham",
+              "goals2": 1,
+              "dt": "2026-02-25 19:45",
+              "venue": "Anfield"
+            }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "qf4",
+          "legs": [
+            {
+              "team1": "Chelsea",
+              "goals1": 1,
+              "team2": "Manchester United",
+              "goals2": 1,
+              "pen1": 4,
+              "pen2": 2,
+              "dt": "2026-02-25 19:45",
+              "venue": "Stamford Bridge"
+            }
+          ],
+          "winner": 1
+        }
+      ]
+    },
+    {
+      "name": "Semifinals",
+      "matches": [
+        {
+          "id": "sf1",
+          "winnerof1": "qf1",
+          "winnerof2": "qf2",
+          "team1": "Manchester City",
+          "team2": "Aston Villa",
+          "legs": [
+            {
+              "goals1": 2,
+              "goals2": 0,
+              "dt": "2026-03-04 20:00",
+              "venue": "Etihad Stadium"
+            }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "sf2",
+          "winnerof1": "qf3",
+          "winnerof2": "qf4",
+          "team1": "Liverpool",
+          "team2": "Chelsea",
+          "legs": [
+            {
+              "goals1": 1,
+              "goals2": 2,
+              "dt": "2026-03-05 20:00",
+              "venue": "Anfield"
+            }
+          ],
+          "winner": 2
+        }
+      ]
+    },
+    {
+      "name": "Final",
+      "matches": [
+        {
+          "winnerof1": "sf1",
+          "winnerof2": "sf2",
+          "team1": "Manchester City",
+          "team2": "Chelsea",
+          "legs": [
+            {
+              "goals1": 1,
+              "goals2": 0,
+              "dt": "2026-03-15 16:30",
+              "venue": "Wembley Stadium"
+            }
+          ],
+          "winner": 1
+        }
+      ]
+    },
+    {
+      "name": "Third place",
+      "matches": [
+        {
+          "loserof1": "sf1",
+          "loserof2": "sf2",
+          "team1": "Aston Villa",
+          "team2": "Liverpool",
+          "legs": [
+            {
+              "goals1": 2,
+              "goals2": 1,
+              "dt": "2026-03-14 15:00",
+              "venue": "Wembley Stadium"
+            }
+          ],
+          "winner": 1
+        }
+      ]
+    }
+  ]
+}
