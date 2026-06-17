@@ -1,0 +1,69 @@
+{
+  "tournament": "FIFA World Cup",
+  "season": "2026",
+  "render": { "layout": "symmetric", "dt_format": "dd MMM" },
+  "rounds": [
+    {
+      "name": "Round of 32",
+      "matches": [
+        { "id": "p74", "team1": "1E", "team2": "3ABCDF", "dt": "2026-06-29 12:00", "venue": "Foxborough" },
+        { "id": "p77", "team1": "1I", "team2": "3CDFGH", "dt": "2026-06-30 12:00", "venue": "East Rutherford" },
+        { "id": "p73", "team1": "2A", "team2": "2B", "dt": "2026-06-28 12:00", "venue": "Inglewood" },
+        { "id": "p75", "team1": "1F", "team2": "2C", "dt": "2026-06-29 12:00", "venue": "Monterrey" },
+        { "id": "p83", "team1": "2K", "team2": "2L", "dt": "2026-07-02 12:00", "venue": "Toronto" },
+        { "id": "p84", "team1": "1H", "team2": "2J", "dt": "2026-07-02 12:00", "venue": "Inglewood" },
+        { "id": "p81", "team1": "1D", "team2": "3BEFIJ", "dt": "2026-07-01 12:00", "venue": "Santa Clara" },
+        { "id": "p82", "team1": "1G", "team2": "3AEHIJ", "dt": "2026-07-01 12:00", "venue": "Seattle" },
+        { "id": "p76", "team1": "1C", "team2": "2F", "dt": "2026-06-29 12:00", "venue": "Houston" },
+        { "id": "p78", "team1": "2E", "team2": "2I", "dt": "2026-06-30 12:00", "venue": "Arlington" },
+        { "id": "p79", "team1": "1A", "team2": "3CEFHI", "dt": "2026-06-30 12:00", "venue": "Mexico City" },
+        { "id": "p80", "team1": "1L", "team2": "3EHIJK", "dt": "2026-07-01 12:00", "venue": "Atlanta" },
+        { "id": "p86", "team1": "1J", "team2": "2H", "dt": "2026-07-03 12:00", "venue": "Miami Gardens" },
+        { "id": "p88", "team1": "2D", "team2": "2G", "dt": "2026-07-03 12:00", "venue": "Arlington" },
+        { "id": "p85", "team1": "1B", "team2": "3EFGIJ", "dt": "2026-07-02 12:00", "venue": "Vancouver" },
+        { "id": "p87", "team1": "1K", "team2": "3DEIJL", "dt": "2026-07-03 12:00", "venue": "Kansas City" }
+      ]
+    },
+    {
+      "name": "Round of 16",
+      "matches": [
+        { "id": "p89", "winnerof1": "p74", "winnerof2": "p77", "dt": "2026-07-04 12:00", "venue": "Philadelphia" },
+        { "id": "p90", "winnerof1": "p73", "winnerof2": "p75", "dt": "2026-07-04 12:00", "venue": "Houston" },
+        { "id": "p93", "winnerof1": "p83", "winnerof2": "p84", "dt": "2026-07-06 12:00", "venue": "Arlington" },
+        { "id": "p94", "winnerof1": "p81", "winnerof2": "p82", "dt": "2026-07-06 12:00", "venue": "Seattle" },
+        { "id": "p91", "winnerof1": "p76", "winnerof2": "p78", "dt": "2026-07-05 12:00", "venue": "East Rutherford" },
+        { "id": "p92", "winnerof1": "p79", "winnerof2": "p80", "dt": "2026-07-05 12:00", "venue": "Mexico City" },
+        { "id": "p95", "winnerof1": "p86", "winnerof2": "p88", "dt": "2026-07-07 12:00", "venue": "Atlanta" },
+        { "id": "p96", "winnerof1": "p85", "winnerof2": "p87", "dt": "2026-07-07 12:00", "venue": "Vancouver" }
+      ]
+    },
+    {
+      "name": "Quarterfinals",
+      "matches": [
+        { "id": "p97", "winnerof1": "p89", "winnerof2": "p90", "dt": "2026-07-09 12:00", "venue": "Foxborough" },
+        { "id": "p98", "winnerof1": "p93", "winnerof2": "p94", "dt": "2026-07-10 12:00", "venue": "Inglewood" },
+        { "id": "p99", "winnerof1": "p91", "winnerof2": "p92", "dt": "2026-07-11 12:00", "venue": "Miami Gardens" },
+        { "id": "p100", "winnerof1": "p95", "winnerof2": "p96", "dt": "2026-07-11 12:00", "venue": "Kansas City" }
+      ]
+    },
+    {
+      "name": "Semifinals",
+      "matches": [
+        { "id": "p101", "winnerof1": "p97", "winnerof2": "p98", "dt": "2026-07-14 12:00", "venue": "Arlington" },
+        { "id": "p102", "winnerof1": "p99", "winnerof2": "p100", "dt": "2026-07-15 12:00", "venue": "Atlanta" }
+      ]
+    },
+    {
+      "name": "Final",
+      "matches": [
+        { "winnerof1": "p101", "winnerof2": "p102", "dt": "2026-07-19 12:00", "venue": "East Rutherford" }
+      ]
+    },
+    {
+      "name": "Third place",
+      "matches": [
+        { "loserof1": "p101", "loserof2": "p102", "dt": "2026-07-18 12:00", "venue": "Miami Gardens" }
+      ]
+    }
+  ]
+}

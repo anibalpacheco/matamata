@@ -35,6 +35,11 @@
   .pane-svg { flex-grow: 2; }
   .pane > h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .05em;
                color: #6b7280; margin: 0 0 6px; }
+  /* Opens the pane's SVG standalone in a new tab (full size, no iframe scroll). */
+  .pane > h3 button.open { text-transform: none; letter-spacing: 0; color: #2563eb;
+                           background: none; border: 0; padding: 0; margin-left: 8px;
+                           font: inherit; font-weight: 600; cursor: pointer; }
+  .pane > h3 button.open:hover { text-decoration: underline; }
   iframe.pane-frame { width: 100%; border: 1px solid #e5e7eb; border-radius: 4px;
                       display: block; }
   @media (prefers-color-scheme: dark) {
@@ -42,6 +47,7 @@
     header p, header .regen, .pane > h3, .example > .note { color: #94a3b8; }
     header .regen code { background: #1e293b; color: #e5e7eb; }
     .example { border-top-color: #334155; }
+    .pane > h3 button.open { color: #60a5fa; }
     iframe.pane-frame { border-color: #334155; }
     details.src > summary { color: #94a3b8; }
     details.src > pre { background: #1e293b; color: #e5e7eb; border-color: #334155; }
@@ -161,7 +167,7 @@
 }
 </pre></details>
 <div class="panes">
-<div class="pane pane-svg"><h3>SVG diagram</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 782 518&quot; width=&quot;782&quot; height=&quot;518&quot; font-family=&quot;sans-serif&quot;&gt;
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 782 518&quot; width=&quot;782&quot; height=&quot;518&quot; font-family=&quot;sans-serif&quot;&gt;
 &lt;style&gt;
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -700,7 +706,7 @@
 }
 </pre></details>
 <div class="panes">
-<div class="pane pane-svg"><h3>SVG diagram</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 602 310&quot; width=&quot;602&quot; height=&quot;310&quot; font-family=&quot;sans-serif&quot;&gt;
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 602 310&quot; width=&quot;602&quot; height=&quot;310&quot; font-family=&quot;sans-serif&quot;&gt;
 &lt;style&gt;
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -1166,7 +1172,7 @@
 }
 </pre></details>
 <div class="panes">
-<div class="pane pane-svg"><h3>SVG diagram</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 900 518&quot; width=&quot;900&quot; height=&quot;518&quot; font-family=&quot;sans-serif&quot;&gt;
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 900 518&quot; width=&quot;900&quot; height=&quot;518&quot; font-family=&quot;sans-serif&quot;&gt;
 &lt;style&gt;
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -1747,7 +1753,7 @@
 }
 </pre></details>
 <div class="panes">
-<div class="pane pane-svg"><h3>SVG diagram</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 750 484&quot; width=&quot;750&quot; height=&quot;484&quot; font-family=&quot;sans-serif&quot;&gt;
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 750 484&quot; width=&quot;750&quot; height=&quot;484&quot; font-family=&quot;sans-serif&quot;&gt;
 &lt;style&gt;
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -2252,7 +2258,7 @@
 }
 </pre></details>
 <div class="panes">
-<div class="pane pane-svg"><h3>SVG diagram</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 750 484&quot; width=&quot;750&quot; height=&quot;484&quot; font-family=&quot;sans-serif&quot;&gt;
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 750 484&quot; width=&quot;750&quot; height=&quot;484&quot; font-family=&quot;sans-serif&quot;&gt;
 &lt;style&gt;
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -2841,7 +2847,7 @@
 }
 </pre></details>
 <div class="panes">
-<div class="pane pane-svg"><h3>SVG diagram</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 1018 470&quot; width=&quot;1018&quot; height=&quot;470&quot; font-family=&quot;sans-serif&quot;&gt;
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 1018 470&quot; width=&quot;1018&quot; height=&quot;470&quot; font-family=&quot;sans-serif&quot;&gt;
 &lt;style&gt;
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -3337,6 +3343,1415 @@
 </div>
 </section>
 <section class="example">
+<h2>world-cup-2026.json</h2>
+<p class="note">2026 FIFA World Cup — the full 32-team knockout drawn symmetric, while the group stage is still on: the bracket is all seed placeholders (1E, 3ABCDF, ...) and the later rounds read 'Winner Pxx'. Real match ids, dates and venues. Base loader.</p>
+<details class="src" open><summary>source JSON</summary><pre>{
+  "tournament": "FIFA World Cup",
+  "season": "2026",
+  "render": { "layout": "symmetric", "dt_format": "dd MMM" },
+  "rounds": [
+    {
+      "name": "Round of 32",
+      "matches": [
+        { "id": "p74", "team1": "1E", "team2": "3ABCDF", "dt": "2026-06-29 12:00", "venue": "Foxborough" },
+        { "id": "p77", "team1": "1I", "team2": "3CDFGH", "dt": "2026-06-30 12:00", "venue": "East Rutherford" },
+        { "id": "p73", "team1": "2A", "team2": "2B", "dt": "2026-06-28 12:00", "venue": "Inglewood" },
+        { "id": "p75", "team1": "1F", "team2": "2C", "dt": "2026-06-29 12:00", "venue": "Monterrey" },
+        { "id": "p83", "team1": "2K", "team2": "2L", "dt": "2026-07-02 12:00", "venue": "Toronto" },
+        { "id": "p84", "team1": "1H", "team2": "2J", "dt": "2026-07-02 12:00", "venue": "Inglewood" },
+        { "id": "p81", "team1": "1D", "team2": "3BEFIJ", "dt": "2026-07-01 12:00", "venue": "Santa Clara" },
+        { "id": "p82", "team1": "1G", "team2": "3AEHIJ", "dt": "2026-07-01 12:00", "venue": "Seattle" },
+        { "id": "p76", "team1": "1C", "team2": "2F", "dt": "2026-06-29 12:00", "venue": "Houston" },
+        { "id": "p78", "team1": "2E", "team2": "2I", "dt": "2026-06-30 12:00", "venue": "Arlington" },
+        { "id": "p79", "team1": "1A", "team2": "3CEFHI", "dt": "2026-06-30 12:00", "venue": "Mexico City" },
+        { "id": "p80", "team1": "1L", "team2": "3EHIJK", "dt": "2026-07-01 12:00", "venue": "Atlanta" },
+        { "id": "p86", "team1": "1J", "team2": "2H", "dt": "2026-07-03 12:00", "venue": "Miami Gardens" },
+        { "id": "p88", "team1": "2D", "team2": "2G", "dt": "2026-07-03 12:00", "venue": "Arlington" },
+        { "id": "p85", "team1": "1B", "team2": "3EFGIJ", "dt": "2026-07-02 12:00", "venue": "Vancouver" },
+        { "id": "p87", "team1": "1K", "team2": "3DEIJL", "dt": "2026-07-03 12:00", "venue": "Kansas City" }
+      ]
+    },
+    {
+      "name": "Round of 16",
+      "matches": [
+        { "id": "p89", "winnerof1": "p74", "winnerof2": "p77", "dt": "2026-07-04 12:00", "venue": "Philadelphia" },
+        { "id": "p90", "winnerof1": "p73", "winnerof2": "p75", "dt": "2026-07-04 12:00", "venue": "Houston" },
+        { "id": "p93", "winnerof1": "p83", "winnerof2": "p84", "dt": "2026-07-06 12:00", "venue": "Arlington" },
+        { "id": "p94", "winnerof1": "p81", "winnerof2": "p82", "dt": "2026-07-06 12:00", "venue": "Seattle" },
+        { "id": "p91", "winnerof1": "p76", "winnerof2": "p78", "dt": "2026-07-05 12:00", "venue": "East Rutherford" },
+        { "id": "p92", "winnerof1": "p79", "winnerof2": "p80", "dt": "2026-07-05 12:00", "venue": "Mexico City" },
+        { "id": "p95", "winnerof1": "p86", "winnerof2": "p88", "dt": "2026-07-07 12:00", "venue": "Atlanta" },
+        { "id": "p96", "winnerof1": "p85", "winnerof2": "p87", "dt": "2026-07-07 12:00", "venue": "Vancouver" }
+      ]
+    },
+    {
+      "name": "Quarterfinals",
+      "matches": [
+        { "id": "p97", "winnerof1": "p89", "winnerof2": "p90", "dt": "2026-07-09 12:00", "venue": "Foxborough" },
+        { "id": "p98", "winnerof1": "p93", "winnerof2": "p94", "dt": "2026-07-10 12:00", "venue": "Inglewood" },
+        { "id": "p99", "winnerof1": "p91", "winnerof2": "p92", "dt": "2026-07-11 12:00", "venue": "Miami Gardens" },
+        { "id": "p100", "winnerof1": "p95", "winnerof2": "p96", "dt": "2026-07-11 12:00", "venue": "Kansas City" }
+      ]
+    },
+    {
+      "name": "Semifinals",
+      "matches": [
+        { "id": "p101", "winnerof1": "p97", "winnerof2": "p98", "dt": "2026-07-14 12:00", "venue": "Arlington" },
+        { "id": "p102", "winnerof1": "p99", "winnerof2": "p100", "dt": "2026-07-15 12:00", "venue": "Atlanta" }
+      ]
+    },
+    {
+      "name": "Final",
+      "matches": [
+        { "winnerof1": "p101", "winnerof2": "p102", "dt": "2026-07-19 12:00", "venue": "East Rutherford" }
+      ]
+    },
+    {
+      "name": "Third place",
+      "matches": [
+        { "loserof1": "p101", "loserof2": "p102", "dt": "2026-07-18 12:00", "venue": "Miami Gardens" }
+      ]
+    }
+  ]
+}
+</pre></details>
+<div class="panes">
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 2050 948&quot; width=&quot;2050&quot; height=&quot;948&quot; font-family=&quot;sans-serif&quot;&gt;
+&lt;style&gt;
+  .pd-bg { fill: #ffffff; }
+  .pd-title { font: 600 18px sans-serif; fill: #111827; }
+  .pd-season { font: 400 13px sans-serif; fill: #6b7280; }
+  .pd-header { font: 600 15px sans-serif; fill: #374151; text-anchor: middle; }
+  .pd-meta { font: 400 11px sans-serif; fill: #6b7280; }
+  .pd-meta-id { font-weight: 700; }
+  .pd-box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+  .pd-divider { stroke: #e5e7eb; stroke-width: 1; }
+  .pd-team { font: 400 13px sans-serif; fill: #1f2937; }
+  .pd-score { font: 400 13px sans-serif; fill: #1f2937; text-anchor: end; }
+  .pd-win .pd-team, .pd-win .pd-score { font-weight: 700; fill: #065f46; }
+  .pd-crest-frame { fill: none; stroke: #d1d5db; stroke-width: 1; }
+  .pd-link { fill: none; stroke: #cbd5e1; stroke-width: 1.5; }
+  @media (prefers-color-scheme: dark) {
+    .pd-bg { fill: #0f172a; }
+    .pd-title { fill: #f8fafc; }
+    .pd-season { fill: #94a3b8; }
+    .pd-header { fill: #cbd5e1; }
+    .pd-meta { fill: #94a3b8; }
+    .pd-box { fill: #1e293b; stroke: #334155; }
+    .pd-divider { stroke: #334155; }
+    .pd-team { fill: #e5e7eb; }
+    .pd-score { fill: #e5e7eb; }
+    .pd-win .pd-team, .pd-win .pd-score { fill: #34d399; }
+    .pd-crest-frame { stroke: #334155; }
+    .pd-link { stroke: #475569; }
+  }&lt;/style&gt;
+&lt;rect class=&quot;pd-bg&quot; width=&quot;2050&quot; height=&quot;948&quot;/&gt;
+&lt;text class=&quot;pd-title&quot; x=&quot;20&quot; y=&quot;28&quot;&gt;FIFA World Cup&lt;/text&gt;
+&lt;text class=&quot;pd-season&quot; x=&quot;181&quot; y=&quot;28&quot;&gt;2026&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;115&quot; y=&quot;68&quot;&gt;Round of 32&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;1935&quot; y=&quot;68&quot;&gt;Round of 32&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;68&quot;&gt;Round of 16&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;1675&quot; y=&quot;68&quot;&gt;Round of 16&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;635&quot; y=&quot;68&quot;&gt;Quarterfinals&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;1415&quot; y=&quot;68&quot;&gt;Quarterfinals&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;895&quot; y=&quot;462&quot;&gt;Semifinals&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;1155&quot; y=&quot;462&quot;&gt;Semifinals&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;1025&quot; y=&quot;324&quot;&gt;Final&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;1025&quot; y=&quot;612&quot;&gt;Third place&lt;/text&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 210 138 L 245 138 L 245 178 L 280 178&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 210 242 L 245 242 L 245 202 L 280 202&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 210 346 L 245 346 L 245 386 L 280 386&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 210 450 L 245 450 L 245 410 L 280 410&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 210 554 L 245 554 L 245 594 L 280 594&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 210 658 L 245 658 L 245 618 L 280 618&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 210 762 L 245 762 L 245 802 L 280 802&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 210 866 L 245 866 L 245 826 L 280 826&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1840 138 L 1805 138 L 1805 178 L 1770 178&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1840 242 L 1805 242 L 1805 202 L 1770 202&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1840 346 L 1805 346 L 1805 386 L 1770 386&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1840 450 L 1805 450 L 1805 410 L 1770 410&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1840 554 L 1805 554 L 1805 594 L 1770 594&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1840 658 L 1805 658 L 1805 618 L 1770 618&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1840 762 L 1805 762 L 1805 802 L 1770 802&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1840 866 L 1805 866 L 1805 826 L 1770 826&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 470 190 L 505 190 L 505 282 L 540 282&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 470 398 L 505 398 L 505 306 L 540 306&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 470 606 L 505 606 L 505 698 L 540 698&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 470 814 L 505 814 L 505 722 L 540 722&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1580 190 L 1545 190 L 1545 282 L 1510 282&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1580 398 L 1545 398 L 1545 306 L 1510 306&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1580 606 L 1545 606 L 1545 698 L 1510 698&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1580 814 L 1545 814 L 1545 722 L 1510 722&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 730 294 L 765 294 L 765 490 L 800 490&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 730 710 L 765 710 L 765 514 L 800 514&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1320 294 L 1285 294 L 1285 490 L 1250 490&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1320 710 L 1285 710 L 1285 514 L 1250 514&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;108&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P74&lt;/tspan&gt; · 29 Jun Foxborough&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;114&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;138&quot; x2=&quot;210&quot; y2=&quot;138&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;130&quot;&gt;1E&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;154&quot;&gt;3ABCDF&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;280&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P77&lt;/tspan&gt; · 30 Jun East Rutherford&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;218&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;242&quot; x2=&quot;210&quot; y2=&quot;242&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;234&quot;&gt;1I&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;258&quot;&gt;3CDFGH&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;316&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P73&lt;/tspan&gt; · 28 Jun Inglewood&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;322&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;346&quot; x2=&quot;210&quot; y2=&quot;346&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;338&quot;&gt;2A&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;362&quot;&gt;2B&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;488&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P75&lt;/tspan&gt; · 29 Jun Monterrey&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;426&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;450&quot; x2=&quot;210&quot; y2=&quot;450&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;442&quot;&gt;1F&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;466&quot;&gt;2C&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;524&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P83&lt;/tspan&gt; · 02 Jul Toronto&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;530&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;554&quot; x2=&quot;210&quot; y2=&quot;554&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;546&quot;&gt;2K&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;570&quot;&gt;2L&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;696&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P84&lt;/tspan&gt; · 02 Jul Inglewood&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;634&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;658&quot; x2=&quot;210&quot; y2=&quot;658&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;650&quot;&gt;1H&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;674&quot;&gt;2J&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;732&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P81&lt;/tspan&gt; · 01 Jul Santa Clara&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;738&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;762&quot; x2=&quot;210&quot; y2=&quot;762&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;754&quot;&gt;1D&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;778&quot;&gt;3BEFIJ&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;904&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P82&lt;/tspan&gt; · 01 Jul Seattle&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;842&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;866&quot; x2=&quot;210&quot; y2=&quot;866&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;858&quot;&gt;1G&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;882&quot;&gt;3AEHIJ&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1840&quot; y=&quot;108&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P76&lt;/tspan&gt; · 29 Jun Houston&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1840&quot; y=&quot;114&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1840&quot; y1=&quot;138&quot; x2=&quot;2030&quot; y2=&quot;138&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;130&quot;&gt;1C&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;154&quot;&gt;2F&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1840&quot; y=&quot;280&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P78&lt;/tspan&gt; · 30 Jun Arlington&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1840&quot; y=&quot;218&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1840&quot; y1=&quot;242&quot; x2=&quot;2030&quot; y2=&quot;242&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;234&quot;&gt;2E&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;258&quot;&gt;2I&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1840&quot; y=&quot;316&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P79&lt;/tspan&gt; · 30 Jun Mexico City&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1840&quot; y=&quot;322&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1840&quot; y1=&quot;346&quot; x2=&quot;2030&quot; y2=&quot;346&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;338&quot;&gt;1A&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;362&quot;&gt;3CEFHI&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1840&quot; y=&quot;488&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P80&lt;/tspan&gt; · 01 Jul Atlanta&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1840&quot; y=&quot;426&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1840&quot; y1=&quot;450&quot; x2=&quot;2030&quot; y2=&quot;450&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;442&quot;&gt;1L&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;466&quot;&gt;3EHIJK&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1840&quot; y=&quot;524&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P86&lt;/tspan&gt; · 03 Jul Miami Gardens&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1840&quot; y=&quot;530&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1840&quot; y1=&quot;554&quot; x2=&quot;2030&quot; y2=&quot;554&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;546&quot;&gt;1J&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;570&quot;&gt;2H&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1840&quot; y=&quot;696&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P88&lt;/tspan&gt; · 03 Jul Arlington&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1840&quot; y=&quot;634&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1840&quot; y1=&quot;658&quot; x2=&quot;2030&quot; y2=&quot;658&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;650&quot;&gt;2D&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;674&quot;&gt;2G&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1840&quot; y=&quot;732&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P85&lt;/tspan&gt; · 02 Jul Vancouver&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1840&quot; y=&quot;738&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1840&quot; y1=&quot;762&quot; x2=&quot;2030&quot; y2=&quot;762&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;754&quot;&gt;1B&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;778&quot;&gt;3EFGIJ&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1840&quot; y=&quot;904&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P87&lt;/tspan&gt; · 03 Jul Kansas City&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1840&quot; y=&quot;842&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1840&quot; y1=&quot;866&quot; x2=&quot;2030&quot; y2=&quot;866&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;858&quot;&gt;1K&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;882&quot;&gt;3DEIJL&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;160&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P89&lt;/tspan&gt; · 04 Jul Philadelphia&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;166&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;190&quot; x2=&quot;470&quot; y2=&quot;190&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;182&quot;&gt;Winner P74&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;206&quot;&gt;Winner P77&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;436&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P90&lt;/tspan&gt; · 04 Jul Houston&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;374&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;398&quot; x2=&quot;470&quot; y2=&quot;398&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;390&quot;&gt;Winner P73&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;414&quot;&gt;Winner P75&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;576&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P93&lt;/tspan&gt; · 06 Jul Arlington&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;582&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;606&quot; x2=&quot;470&quot; y2=&quot;606&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;598&quot;&gt;Winner P83&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;622&quot;&gt;Winner P84&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;852&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P94&lt;/tspan&gt; · 06 Jul Seattle&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;790&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;814&quot; x2=&quot;470&quot; y2=&quot;814&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;806&quot;&gt;Winner P81&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;830&quot;&gt;Winner P82&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1580&quot; y=&quot;160&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P91&lt;/tspan&gt; · 05 Jul East Rutherford&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1580&quot; y=&quot;166&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1580&quot; y1=&quot;190&quot; x2=&quot;1770&quot; y2=&quot;190&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1590&quot; y=&quot;182&quot;&gt;Winner P76&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1590&quot; y=&quot;206&quot;&gt;Winner P78&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1580&quot; y=&quot;436&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P92&lt;/tspan&gt; · 05 Jul Mexico City&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1580&quot; y=&quot;374&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1580&quot; y1=&quot;398&quot; x2=&quot;1770&quot; y2=&quot;398&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1590&quot; y=&quot;390&quot;&gt;Winner P79&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1590&quot; y=&quot;414&quot;&gt;Winner P80&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1580&quot; y=&quot;576&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P95&lt;/tspan&gt; · 07 Jul Atlanta&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1580&quot; y=&quot;582&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1580&quot; y1=&quot;606&quot; x2=&quot;1770&quot; y2=&quot;606&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1590&quot; y=&quot;598&quot;&gt;Winner P86&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1590&quot; y=&quot;622&quot;&gt;Winner P88&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1580&quot; y=&quot;852&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P96&lt;/tspan&gt; · 07 Jul Vancouver&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1580&quot; y=&quot;790&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1580&quot; y1=&quot;814&quot; x2=&quot;1770&quot; y2=&quot;814&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1590&quot; y=&quot;806&quot;&gt;Winner P85&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1590&quot; y=&quot;830&quot;&gt;Winner P87&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;540&quot; y=&quot;264&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P97&lt;/tspan&gt; · 09 Jul Foxborough&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;540&quot; y=&quot;270&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;540&quot; y1=&quot;294&quot; x2=&quot;730&quot; y2=&quot;294&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;286&quot;&gt;Winner P89&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;310&quot;&gt;Winner P90&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;540&quot; y=&quot;748&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P98&lt;/tspan&gt; · 10 Jul Inglewood&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;540&quot; y=&quot;686&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;540&quot; y1=&quot;710&quot; x2=&quot;730&quot; y2=&quot;710&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;702&quot;&gt;Winner P93&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;726&quot;&gt;Winner P94&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1320&quot; y=&quot;264&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P99&lt;/tspan&gt; · 11 Jul Miami Gardens&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1320&quot; y=&quot;270&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1320&quot; y1=&quot;294&quot; x2=&quot;1510&quot; y2=&quot;294&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1330&quot; y=&quot;286&quot;&gt;Winner P91&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1330&quot; y=&quot;310&quot;&gt;Winner P92&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1320&quot; y=&quot;748&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P100&lt;/tspan&gt; · 11 Jul Kansas City&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1320&quot; y=&quot;686&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1320&quot; y1=&quot;710&quot; x2=&quot;1510&quot; y2=&quot;710&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1330&quot; y=&quot;702&quot;&gt;Winner P95&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1330&quot; y=&quot;726&quot;&gt;Winner P96&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;800&quot; y=&quot;540&quot;&gt;&lt;tspan x=&quot;800&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P101&lt;/tspan&gt; · 14 Jul Arlington&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;800&quot; y=&quot;478&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;800&quot; y1=&quot;502&quot; x2=&quot;990&quot; y2=&quot;502&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;810&quot; y=&quot;494&quot;&gt;Winner P97&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;810&quot; y=&quot;518&quot;&gt;Winner P98&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1060&quot; y=&quot;540&quot;&gt;&lt;tspan x=&quot;1060&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P102&lt;/tspan&gt; · 15 Jul Atlanta&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1060&quot; y=&quot;478&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1060&quot; y1=&quot;502&quot; x2=&quot;1250&quot; y2=&quot;502&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1070&quot; y=&quot;494&quot;&gt;Winner P99&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1070&quot; y=&quot;518&quot;&gt;Winner P100&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;930&quot; y=&quot;354&quot;&gt;19 Jul East Rutherford&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;930&quot; y=&quot;360&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;930&quot; y1=&quot;384&quot; x2=&quot;1120&quot; y2=&quot;384&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;940&quot; y=&quot;376&quot;&gt;Winner P101&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;940&quot; y=&quot;400&quot;&gt;Winner P102&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;930&quot; y=&quot;638&quot;&gt;18 Jul Miami Gardens&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;930&quot; y=&quot;644&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;930&quot; y1=&quot;668&quot; x2=&quot;1120&quot; y2=&quot;668&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;940&quot; y=&quot;660&quot;&gt;Loser P101&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;940&quot; y=&quot;684&quot;&gt;Loser P102&lt;/text&gt;
+&lt;/g&gt;
+&lt;/svg&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
+<div class="pane pane-table"><h3>HTML table — flat</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage&quot;&gt;
+&lt;style&gt;
+  .pd-stage { font-family: sans-serif; color: #1f2937; background: #ffffff; }
+  .pd-title { font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 12px; }
+  .pd-season { font-size: 13px; font-weight: 400; color: #6b7280; margin-left: 8px; }
+  .pd-header { font-size: 15px; font-weight: 600; color: #374151; margin: 26px 0 8px; }
+  /* The first round sits tight under the title; later rounds get the full gap (matching
+     the flat layout's separation between a box and the next round head). */
+  .pd-round:first-child .pd-header { margin-top: 14px; }
+  .pd-meta { font-size: 11px; color: #6b7280; margin: 0 0 3px; }
+  .pd-meta-id { font-weight: 700; }
+  .pd-match { border-collapse: separate; border-spacing: 0; width: 100%;
+              max-width: 24em; border: 1px solid #d1d5db; border-radius: 3px;
+              overflow: hidden; margin: 0 0 15px; }
+  .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
+  .pd-team { font-size: 13px; padding: 5px 10px; }
+  .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
+  .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
+              white-space: nowrap; }
+  .pd-win td { font-weight: 700; color: #065f46; }
+  .pd-grid { border-collapse: separate; border-spacing: 0; margin: 0 0 4px; }
+  .pd-grid td { font-size: 13px; padding: 4px 6px; vertical-align: middle;
+                white-space: nowrap; }
+  .pd-team1, .pd-score1, .pd-crest1 { text-align: right; }
+  .pd-team2, .pd-score2, .pd-crest2 { text-align: left; }
+  .pd-crest1, .pd-crest2 { padding: 0; }
+  .pd-crest1 .pd-crest { margin: 0 0 0 6px; }
+  .pd-crest2 .pd-crest { margin: 0 6px 0 0; }
+  .pd-vs { color: #9ca3af; padding: 4px 8px; }
+  /* Box each leg's score row, so a match reads as a unit like the SVG/stacked
+     boxes; the metadata line stays above the box (as in the stacked layout). */
+  .pd-grid .pd-match-row td { border-top: 1px solid #d1d5db;
+                              border-bottom: 1px solid #d1d5db; }
+  .pd-grid .pd-match-row td:first-child { border-left: 1px solid #d1d5db;
+      border-top-left-radius: 3px; border-bottom-left-radius: 3px; }
+  .pd-grid .pd-match-row td:last-child { border-right: 1px solid #d1d5db;
+      border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
+  .pd-grid .pd-round-head { font-size: 15px; font-weight: 600; color: #374151;
+                            text-align: left; padding: 26px 6px 6px 0; }
+  .pd-grid tr:first-child .pd-round-head { padding-top: 10px; }
+  .pd-grid .pd-meta { font-size: 11px; color: #6b7280; text-align: left;
+                      padding: 14px 6px 2px 0; }
+  /* The first match's metadata in a round sits right under the round head, which already
+     supplies the gap (matching the stacked layout); only later matches need the full top. */
+  .pd-grid .pd-round-row + .pd-meta-row .pd-meta { padding-top: 2px; }
+  .pd-grid .pd-win { font-weight: 700; color: #065f46; }
+  @media (prefers-color-scheme: dark) {
+    .pd-stage { color: #e5e7eb; background: #0f172a; }
+    .pd-title { color: #f8fafc; }
+    .pd-season { color: #94a3b8; }
+    .pd-header { color: #cbd5e1; }
+    .pd-meta, .pd-grid .pd-meta { color: #94a3b8; }
+    .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
+    .pd-match { background: #1e293b; border-color: #334155; }
+    .pd-grid .pd-match-row td { background: #1e293b; border-color: #334155; }
+    .pd-grid .pd-match-row td:first-child,
+    .pd-grid .pd-match-row td:last-child { border-color: #334155; }
+    .pd-side + .pd-side td { border-top-color: #334155; }
+    .pd-win td, .pd-grid .pd-win { color: #34d399; }
+    .pd-vs { color: #64748b; }
+    .pd-grid .pd-round-head { color: #cbd5e1; }
+  }&lt;/style&gt;
+&lt;h2 class=&quot;pd-title&quot;&gt;FIFA World Cup &lt;span class=&quot;pd-season&quot;&gt;2026&lt;/span&gt;&lt;/h2&gt;
+&lt;table class=&quot;pd-grid&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-round-row&quot;&gt;
+&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Round of 32&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P74&lt;/span&gt; · 29 Jun Foxborough&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;1E&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;3ABCDF&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P77&lt;/span&gt; · 30 Jun East Rutherford&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;1I&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;3CDFGH&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P73&lt;/span&gt; · 28 Jun Inglewood&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;2A&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;2B&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P75&lt;/span&gt; · 29 Jun Monterrey&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;1F&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;2C&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P83&lt;/span&gt; · 02 Jul Toronto&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;2K&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;2L&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P84&lt;/span&gt; · 02 Jul Inglewood&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;1H&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;2J&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P81&lt;/span&gt; · 01 Jul Santa Clara&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;1D&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;3BEFIJ&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P82&lt;/span&gt; · 01 Jul Seattle&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;1G&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;3AEHIJ&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P76&lt;/span&gt; · 29 Jun Houston&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;1C&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;2F&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P78&lt;/span&gt; · 30 Jun Arlington&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;2E&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;2I&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P79&lt;/span&gt; · 30 Jun Mexico City&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;1A&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;3CEFHI&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P80&lt;/span&gt; · 01 Jul Atlanta&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;1L&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;3EHIJK&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P86&lt;/span&gt; · 03 Jul Miami Gardens&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;1J&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;2H&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P88&lt;/span&gt; · 03 Jul Arlington&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;2D&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;2G&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P85&lt;/span&gt; · 02 Jul Vancouver&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;1B&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;3EFGIJ&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P87&lt;/span&gt; · 03 Jul Kansas City&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;1K&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;3DEIJL&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-round-row&quot;&gt;
+&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Round of 16&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P89&lt;/span&gt; · 04 Jul Philadelphia&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Winner P74&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Winner P77&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P90&lt;/span&gt; · 04 Jul Houston&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Winner P73&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Winner P75&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P93&lt;/span&gt; · 06 Jul Arlington&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Winner P83&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Winner P84&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P94&lt;/span&gt; · 06 Jul Seattle&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Winner P81&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Winner P82&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P91&lt;/span&gt; · 05 Jul East Rutherford&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Winner P76&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Winner P78&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P92&lt;/span&gt; · 05 Jul Mexico City&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Winner P79&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Winner P80&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P95&lt;/span&gt; · 07 Jul Atlanta&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Winner P86&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Winner P88&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P96&lt;/span&gt; · 07 Jul Vancouver&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Winner P85&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Winner P87&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-round-row&quot;&gt;
+&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Quarterfinals&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P97&lt;/span&gt; · 09 Jul Foxborough&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Winner P89&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Winner P90&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P98&lt;/span&gt; · 10 Jul Inglewood&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Winner P93&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Winner P94&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P99&lt;/span&gt; · 11 Jul Miami Gardens&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Winner P91&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Winner P92&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P100&lt;/span&gt; · 11 Jul Kansas City&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Winner P95&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Winner P96&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-round-row&quot;&gt;
+&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Semifinals&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P101&lt;/span&gt; · 14 Jul Arlington&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Winner P97&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Winner P98&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P102&lt;/span&gt; · 15 Jul Atlanta&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Winner P99&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Winner P100&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-round-row&quot;&gt;
+&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Final&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;19 Jul East Rutherford&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Winner P101&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Winner P102&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-round-row&quot;&gt;
+&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Third place&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;18 Jul Miami Gardens&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Loser P101&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Loser P102&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
+<div class="pane pane-table"><h3>HTML table — stacked</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage&quot;&gt;
+&lt;style&gt;
+  .pd-stage { font-family: sans-serif; color: #1f2937; background: #ffffff; }
+  .pd-title { font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 12px; }
+  .pd-season { font-size: 13px; font-weight: 400; color: #6b7280; margin-left: 8px; }
+  .pd-header { font-size: 15px; font-weight: 600; color: #374151; margin: 26px 0 8px; }
+  /* The first round sits tight under the title; later rounds get the full gap (matching
+     the flat layout's separation between a box and the next round head). */
+  .pd-round:first-child .pd-header { margin-top: 14px; }
+  .pd-meta { font-size: 11px; color: #6b7280; margin: 0 0 3px; }
+  .pd-meta-id { font-weight: 700; }
+  .pd-match { border-collapse: separate; border-spacing: 0; width: 100%;
+              max-width: 24em; border: 1px solid #d1d5db; border-radius: 3px;
+              overflow: hidden; margin: 0 0 15px; }
+  .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
+  .pd-team { font-size: 13px; padding: 5px 10px; }
+  .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
+  .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
+              white-space: nowrap; }
+  .pd-win td { font-weight: 700; color: #065f46; }
+  .pd-grid { border-collapse: separate; border-spacing: 0; margin: 0 0 4px; }
+  .pd-grid td { font-size: 13px; padding: 4px 6px; vertical-align: middle;
+                white-space: nowrap; }
+  .pd-team1, .pd-score1, .pd-crest1 { text-align: right; }
+  .pd-team2, .pd-score2, .pd-crest2 { text-align: left; }
+  .pd-crest1, .pd-crest2 { padding: 0; }
+  .pd-crest1 .pd-crest { margin: 0 0 0 6px; }
+  .pd-crest2 .pd-crest { margin: 0 6px 0 0; }
+  .pd-vs { color: #9ca3af; padding: 4px 8px; }
+  /* Box each leg's score row, so a match reads as a unit like the SVG/stacked
+     boxes; the metadata line stays above the box (as in the stacked layout). */
+  .pd-grid .pd-match-row td { border-top: 1px solid #d1d5db;
+                              border-bottom: 1px solid #d1d5db; }
+  .pd-grid .pd-match-row td:first-child { border-left: 1px solid #d1d5db;
+      border-top-left-radius: 3px; border-bottom-left-radius: 3px; }
+  .pd-grid .pd-match-row td:last-child { border-right: 1px solid #d1d5db;
+      border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
+  .pd-grid .pd-round-head { font-size: 15px; font-weight: 600; color: #374151;
+                            text-align: left; padding: 26px 6px 6px 0; }
+  .pd-grid tr:first-child .pd-round-head { padding-top: 10px; }
+  .pd-grid .pd-meta { font-size: 11px; color: #6b7280; text-align: left;
+                      padding: 14px 6px 2px 0; }
+  /* The first match's metadata in a round sits right under the round head, which already
+     supplies the gap (matching the stacked layout); only later matches need the full top. */
+  .pd-grid .pd-round-row + .pd-meta-row .pd-meta { padding-top: 2px; }
+  .pd-grid .pd-win { font-weight: 700; color: #065f46; }
+  @media (prefers-color-scheme: dark) {
+    .pd-stage { color: #e5e7eb; background: #0f172a; }
+    .pd-title { color: #f8fafc; }
+    .pd-season { color: #94a3b8; }
+    .pd-header { color: #cbd5e1; }
+    .pd-meta, .pd-grid .pd-meta { color: #94a3b8; }
+    .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
+    .pd-match { background: #1e293b; border-color: #334155; }
+    .pd-grid .pd-match-row td { background: #1e293b; border-color: #334155; }
+    .pd-grid .pd-match-row td:first-child,
+    .pd-grid .pd-match-row td:last-child { border-color: #334155; }
+    .pd-side + .pd-side td { border-top-color: #334155; }
+    .pd-win td, .pd-grid .pd-win { color: #34d399; }
+    .pd-vs { color: #64748b; }
+    .pd-grid .pd-round-head { color: #cbd5e1; }
+  }&lt;/style&gt;
+&lt;h2 class=&quot;pd-title&quot;&gt;FIFA World Cup &lt;span class=&quot;pd-season&quot;&gt;2026&lt;/span&gt;&lt;/h2&gt;
+&lt;div class=&quot;pd-round&quot;&gt;
+&lt;h3 class=&quot;pd-header&quot;&gt;Round of 32&lt;/h3&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P74&lt;/span&gt; · 29 Jun Foxborough&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;1E&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;3ABCDF&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P77&lt;/span&gt; · 30 Jun East Rutherford&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;1I&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;3CDFGH&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P73&lt;/span&gt; · 28 Jun Inglewood&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;2A&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;2B&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P75&lt;/span&gt; · 29 Jun Monterrey&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;1F&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;2C&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P83&lt;/span&gt; · 02 Jul Toronto&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;2K&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;2L&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P84&lt;/span&gt; · 02 Jul Inglewood&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;1H&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;2J&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P81&lt;/span&gt; · 01 Jul Santa Clara&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;1D&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;3BEFIJ&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P82&lt;/span&gt; · 01 Jul Seattle&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;1G&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;3AEHIJ&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P76&lt;/span&gt; · 29 Jun Houston&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;1C&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;2F&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P78&lt;/span&gt; · 30 Jun Arlington&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;2E&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;2I&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P79&lt;/span&gt; · 30 Jun Mexico City&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;1A&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;3CEFHI&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P80&lt;/span&gt; · 01 Jul Atlanta&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;1L&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;3EHIJK&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P86&lt;/span&gt; · 03 Jul Miami Gardens&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;1J&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;2H&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P88&lt;/span&gt; · 03 Jul Arlington&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;2D&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;2G&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P85&lt;/span&gt; · 02 Jul Vancouver&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;1B&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;3EFGIJ&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P87&lt;/span&gt; · 03 Jul Kansas City&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;1K&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;3DEIJL&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;pd-round&quot;&gt;
+&lt;h3 class=&quot;pd-header&quot;&gt;Round of 16&lt;/h3&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P89&lt;/span&gt; · 04 Jul Philadelphia&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P74&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P77&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P90&lt;/span&gt; · 04 Jul Houston&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P73&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P75&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P93&lt;/span&gt; · 06 Jul Arlington&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P83&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P84&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P94&lt;/span&gt; · 06 Jul Seattle&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P81&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P82&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P91&lt;/span&gt; · 05 Jul East Rutherford&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P76&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P78&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P92&lt;/span&gt; · 05 Jul Mexico City&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P79&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P80&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P95&lt;/span&gt; · 07 Jul Atlanta&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P86&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P88&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P96&lt;/span&gt; · 07 Jul Vancouver&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P85&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P87&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;pd-round&quot;&gt;
+&lt;h3 class=&quot;pd-header&quot;&gt;Quarterfinals&lt;/h3&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P97&lt;/span&gt; · 09 Jul Foxborough&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P89&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P90&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P98&lt;/span&gt; · 10 Jul Inglewood&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P93&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P94&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P99&lt;/span&gt; · 11 Jul Miami Gardens&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P91&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P92&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P100&lt;/span&gt; · 11 Jul Kansas City&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P95&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P96&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;pd-round&quot;&gt;
+&lt;h3 class=&quot;pd-header&quot;&gt;Semifinals&lt;/h3&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P101&lt;/span&gt; · 14 Jul Arlington&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P97&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P98&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;P102&lt;/span&gt; · 15 Jul Atlanta&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P99&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P100&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;pd-round&quot;&gt;
+&lt;h3 class=&quot;pd-header&quot;&gt;Final&lt;/h3&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;19 Jul East Rutherford&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P101&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Winner P102&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;pd-round&quot;&gt;
+&lt;h3 class=&quot;pd-header&quot;&gt;Third place&lt;/h3&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;18 Jul Miami Gardens&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Loser P101&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Loser P102&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
+</div>
+</section>
+<section class="example">
 <h2>third-place.json</h2>
 <p class="note">Third place — a round fed by loserof ('Loser SF1/SF2'): off the winners' tree, so it draws no connector and hangs below the bracket in the final's column, keeping its own round header. Base loader.</p>
 <details class="src" open><summary>source JSON</summary><pre>{
@@ -3389,7 +4804,7 @@
 }
 </pre></details>
 <div class="panes">
-<div class="pane pane-svg"><h3>SVG diagram</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 546 442&quot; width=&quot;546&quot; height=&quot;442&quot; font-family=&quot;sans-serif&quot;&gt;
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 546 442&quot; width=&quot;546&quot; height=&quot;442&quot; font-family=&quot;sans-serif&quot;&gt;
 &lt;style&gt;
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -3774,7 +5189,7 @@
 }
 </pre></details>
 <div class="panes">
-<div class="pane pane-svg"><h3>SVG diagram</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 552 442&quot; width=&quot;552&quot; height=&quot;442&quot; font-family=&quot;sans-serif&quot;&gt;
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 552 442&quot; width=&quot;552&quot; height=&quot;442&quot; font-family=&quot;sans-serif&quot;&gt;
 &lt;style&gt;
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -4118,6 +5533,22 @@
   for (const f of frames) f.addEventListener('load', () => fit(f));
   matchMedia('(prefers-color-scheme: dark)').addEventListener(
     'change', () => { for (const f of frames) fit(f); });
+
+  // Open a pane's SVG (already rendered in its iframe) standalone in a new tab, scaled to
+  // fit the window so a wide bracket needs no scroll. Reuses the iframe's SVG via a
+  // transient blob URL — nothing is duplicated into this page.
+  function openPane(btn) {
+    const svg = btn.closest('.pane').querySelector('iframe').contentDocument
+                   .querySelector('svg');
+    if (!svg) return;
+    const doc = "<!doctype html><meta charset='utf-8'><title>matamata SVG</title>"
+      + "<style>html,body{margin:0;background:#fff}"
+      + "@media(prefers-color-scheme:dark){html,body{background:#0f172a}}"
+      + "svg{display:block;max-width:100%;height:auto;margin:0 auto}</style>"
+      + svg.outerHTML;
+    const url = URL.createObjectURL(new Blob([doc], {type: 'text/html'}));
+    window.open(url, '_blank');
+  }
 </script>
 </body>
 </html>
