@@ -82,6 +82,27 @@ def knockout_stage_svg(request, championship):
     return HttpResponse(svg, content_type="image/svg+xml")
 ```
 
+### The symmetric SVG layout
+
+By default the SVG diagram flows left to right, one column per round, with the final in
+the last column (`"layout": "linear"`). Setting `"layout": "symmetric"` in the document's
+`render` object draws the classic FIFA-style mirrored bracket instead: every round before
+the final is split by document order so its two halves expand outward to the left and
+right, the semifinals meeting in the two central columns, with the final lifted into the
+gap **above** them and any third-place round dropped **below**.
+
+![League Cup knockout stage in the symmetric layout](symmetric-8.png)
+
+The split is **automatic by document order** — the first half of each round's matches goes
+left, the second half is mirrored right; there is no per-match `side` field. No connector
+is drawn between the final and the semifinals: the pairing is implied by position. This is
+a property of the document (it lives in the `render` object, not a render parameter), and
+it is **SVG-only** — the HTML table is a vertical list and renders the same either way.
+
+```python
+svg = render_svg(load_stage("examples/symmetric-8.json"))  # render.layout == "symmetric"
+```
+
 ### The HTML table layout
 
 On a phone the wide, tree-shaped SVG diagram needs panning; the HTML table layout is
