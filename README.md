@@ -6,8 +6,7 @@
 [![Docs](https://github.com/anibalpacheco/matamata/actions/workflows/docs.yml/badge.svg)](https://anibalpacheco.github.io/matamata/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Model a **tournament knockout stage** in a small **JSON "language"** and render
-the schedule in **SVG** or **HTML table** format.
+**matamata** is a JSON format for modeling tournament knockout stages, defined with a JSON Schema, plus a Python renderer to SVG or HTML tables.
 
 **matamata** also lets a host system map documents representing championship
 knockout stages onto its own business objects (e.g. a Championship or Cup entity) and persist
@@ -15,11 +14,12 @@ them apart from any presentation concern — updating results means editing a do
 never the code.
 
 Example rendered from
-[`examples/knockout-8.json`](https://github.com/anibalpacheco/matamata/blob/main/examples/knockout-8.json),
-with each match's date and venue from the document and national flags supplied by a host
-([`examples/world_cup_flags_host.py`](https://github.com/anibalpacheco/matamata/blob/main/examples/world_cup_flags_host.py)):
+[`examples/world-cup-2022.json`](https://github.com/anibalpacheco/matamata/blob/main/examples/world-cup-2022.json) —
+the finished Qatar 2022 knockout from the Round of 16 to the final plus third place, with
+each match's date and venue from the document and national flags supplied by a host
+([`examples/world_cup_2022_host.py`](https://github.com/anibalpacheco/matamata/blob/main/examples/world_cup_2022_host.py)):
 
-![World Cup 2026 knockout stage](https://raw.githubusercontent.com/anibalpacheco/matamata/main/docs/flags.png)
+![World Cup 2022 knockout stage](https://raw.githubusercontent.com/anibalpacheco/matamata/main/docs/world-cup-2022.png)
 
 ## Quickstart
 
@@ -62,11 +62,12 @@ itself, clone the repo and `pip install -e .`.
 
 Both examples are rendered from the JSON files in [`examples/`](https://github.com/anibalpacheco/matamata/tree/main/examples).
 
-The World Cup example above shows single matches — one goal figure per side, with
-shootouts in parentheses (Argentina won its quarterfinal on penalties). Each match draws a
-metadata line with its date and venue, and sides not resolved yet fall back to
-placeholders such as "Winner SF2". The flags come from a host: `knockout-8.json` carries no
-ids, so [`examples/world_cup_flags_host.py`](https://github.com/anibalpacheco/matamata/blob/main/examples/world_cup_flags_host.py)
+The World Cup example above shows single matches — one goal figure per side, with shootouts
+in parentheses (Argentina beat the Netherlands in the quarterfinals and France in the final
+on penalties). Each match draws a metadata line with its date and venue, the bracket is
+drawn in the default **symmetric** (FIFA-style) layout with the third-place match below the
+final, and the winner of each match is emphasized. The flags come from a host:
+`world-cup-2022.json` carries no ids, so [`examples/world_cup_2022_host.py`](https://github.com/anibalpacheco/matamata/blob/main/examples/world_cup_2022_host.py)
 resolves each national team's flag from its name, while the dates and venues live in the
 document itself.
 

@@ -113,13 +113,19 @@ def _match(
     if label or detail:
         # Below the box when its connector bends up (room above is taken), else above it.
         meta_y = pm.y + BOX_H + 14 if pm.meta_below else pm.y - 6
-        inner = (
-            _meta_wrapped(pm.x, label, detail, box_w)
-            if pm.meta_wrap
-            else _meta_single(label, detail)
-        )
+        if pm.meta_wrap:
+            inner = _meta_wrapped(pm.x, label, detail, box_w)
+            meta_x, anchor = pm.x, ""
+        elif pm.meta_end:
+            # Right half of the symmetric layout: anchor at the box's right edge so a long
+            # line overflows inward (toward the centre) instead of off the right margin.
+            inner = _meta_single(label, detail)
+            meta_x, anchor = pm.x + box_w, ' text-anchor="end"'
+        else:
+            inner = _meta_single(label, detail)
+            meta_x, anchor = pm.x, ""
         out.append(
-            f'<text class="pd-meta" x="{pm.x:.0f}" y="{meta_y:.0f}">{inner}</text>'
+            f'<text class="pd-meta" x="{meta_x:.0f}" y="{meta_y:.0f}"{anchor}>{inner}</text>'
         )
     out.append(
         f'<rect class="pd-box" x="{pm.x:.0f}" y="{pm.y:.0f}" '

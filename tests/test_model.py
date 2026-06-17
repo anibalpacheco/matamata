@@ -87,6 +87,7 @@ def test_pending_draw_side_renders_tbd_without_a_connector():
     from matamata.layout import compute_layout
 
     doc = {
+        "render": {"layout": "linear"},
         "rounds": [
             {
                 "name": "SF",
@@ -96,7 +97,7 @@ def test_pending_draw_side_renders_tbd_without_a_connector():
                 ],
             },
             {"name": "F", "matches": [{"id": "f", "winnerof1": "sf1"}]},
-        ]
+        ],
     }
     layout = compute_layout(parse_stage(doc))
     assert len(layout.connectors) == 1  # only the linked side connects
@@ -117,6 +118,7 @@ def test_third_place_round_hangs_below_the_bracket_with_no_connector():
     from matamata.layout import compute_layout
 
     doc = {
+        "render": {"layout": "linear"},
         "rounds": [
             {
                 "name": "SF",
@@ -130,7 +132,7 @@ def test_third_place_round_hangs_below_the_bracket_with_no_connector():
                 "name": "Third place",
                 "matches": [{"loserof1": "sf1", "loserof2": "sf2"}],
             },
-        ]
+        ],
     }
     layout = compute_layout(parse_stage(doc))
     # The final's two connectors only; the third-place match adds none.
@@ -152,6 +154,7 @@ def test_metadata_sits_below_a_box_whose_connector_bends_up():
     from matamata.layout import compute_layout
 
     doc = {
+        "render": {"layout": "linear"},
         "rounds": [
             {
                 "name": "SF",
@@ -161,12 +164,45 @@ def test_metadata_sits_below_a_box_whose_connector_bends_up():
                 ],
             },
             {"name": "Final", "matches": [{"winnerof1": "sf1", "winnerof2": "sf2"}]},
-        ]
+        ],
     }
     placed = {pm.match.id: pm for pm in compute_layout(parse_stage(doc)).matches}
     assert placed["sf1"].meta_below is False  # top feeder -> above
     assert placed["sf2"].meta_below is True  # bottom feeder -> below
     assert placed[None].meta_below is False  # the final has no outgoing connector
+
+
+def test_symmetric_is_the_default_and_mirrors_right_half_metadata():
+    # With no render.layout the diagram defaults to the symmetric (FIFA-style) bracket:
+    # each round splits by document order into a left and a mirrored right half, the final
+    # is centred between the two semifinal columns, and the right half's metadata is anchored
+    # at the box's right edge (meta_end) so a long line overflows inward, not off the margin.
+    from matamata.layout import compute_layout
+
+    doc = {
+        "rounds": [
+            {
+                "name": "QF",
+                "matches": [
+                    {"id": f"qf{i}", "team1": "A", "team2": "B"} for i in range(1, 5)
+                ],
+            },
+            {
+                "name": "SF",
+                "matches": [
+                    {"id": "sf1", "winnerof1": "qf1", "winnerof2": "qf2"},
+                    {"id": "sf2", "winnerof1": "qf3", "winnerof2": "qf4"},
+                ],
+            },
+            {"name": "Final", "matches": [{"winnerof1": "sf1", "winnerof2": "sf2"}]},
+        ]
+    }
+    placed = {pm.match.id: pm for pm in compute_layout(parse_stage(doc)).matches}
+    # First half of each round goes left (anchored left), the second half mirrors right.
+    assert placed["qf1"].meta_end is False
+    assert placed["qf3"].meta_end is True
+    # The final is centred between the two semifinal columns, not in a far last column.
+    assert placed["sf1"].x < placed[None].x < placed["sf2"].x
 
 
 def test_unknown_reference_is_rejected():

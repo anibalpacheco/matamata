@@ -26,21 +26,22 @@ GOLDEN = os.path.join(os.path.dirname(__file__), "golden")
 HOST_EXAMPLE = "libertadores-2026.json"
 # copa-rio-de-la-plata-2026.json is a documentation example for the get_crest hook (it is
 # rendered with crests through examples/copa_rio_host.py for docs/copa-rio-de-la-plata.png
-# and its table variant). knockout-8.json *is* a base-loader stage (no images, snapshot-
-# tested below), but it is also rendered with flags through examples/world_cup_flags_host.py
-# for docs/flags.png and its table variant; that crest render is illustrative, not
-# snapshot-tested. crest_data.json and flag_data.json are the hosts' lookup tables, not
-# stage documents, so they are skipped by the base-loader tests below.
+# and its table variant); crest_data.json is that host's lookup table, not a stage document,
+# so it is skipped by the base-loader tests below. knockout-8.json *is* a base-loader stage
+# (no images, snapshot-tested below).
 # world-cup-2026.json is a gallery-only illustration (the full 32-team symmetric bracket of
 # the in-progress World Cup, all seed placeholders); like the host examples it is not
 # snapshot-tested, so it carries no goldens.
+# world-cup-2022.json *is* a base-loader stage (snapshot-tested below), but it is also
+# rendered with flags through examples/world_cup_2022_host.py for docs/world-cup-2022.png;
+# world_cup_2022_flags.json is that host's lookup table, not a stage document.
 NON_STAGE = {
     HOST_EXAMPLE,
     "example_data.json",
     "copa-rio-de-la-plata-2026.json",
     "crest_data.json",
-    "flag_data.json",
     "world-cup-2026.json",
+    "world_cup_2022_flags.json",
 }
 EXAMPLE_FILES = sorted(
     name

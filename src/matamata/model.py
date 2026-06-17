@@ -161,11 +161,11 @@ class RenderOptions:
     ``DEFAULT_DT_FORMAT`` so documents need not set it; a value that fails to parse falls
     back to the raw string (see ``render_dt``).
 
-    ``layout``: how the SVG diagram arranges the rounds. ``"linear"`` (the default) flows
-    left to right with the final in the last column; ``"symmetric"`` draws the FIFA-style
-    mirrored bracket — the two halves of the draw expanding outward to left and right, the
-    semifinals meeting in the centre, with the final lifted above them and any third-place
-    round dropped below. SVG-only: the HTML table is a vertical list and ignores it.
+    ``layout``: how the SVG diagram arranges the rounds. ``"symmetric"`` (the default) draws
+    the FIFA-style mirrored bracket — the two halves of the draw expanding outward to left
+    and right, the semifinals meeting in the centre, with the final lifted above them and
+    any third-place round dropped below; ``"linear"`` flows left to right with the final in
+    the last column. SVG-only: the HTML table is a vertical list and ignores it.
     """
 
     max_label_chars: int = 22
@@ -173,7 +173,7 @@ class RenderOptions:
     crest_shape: str = "square"
     show_metadata: bool = True
     dt_format: str = DEFAULT_DT_FORMAT
-    layout: str = "linear"
+    layout: str = "symmetric"
 
 
 @dataclass

@@ -38,7 +38,7 @@ changes.
   "crest_shape": "square",      // optional, "square" (default) or "flag"
   "show_metadata": true,        // optional, draw the per-match metadata line (default true)
   "dt_format": "EEEE dd MMMM, HH:mm",  // optional, Babel/LDML pattern for each leg's dt
-  "layout": "linear"            // optional, SVG arrangement: "linear" (default) or "symmetric"
+  "layout": "symmetric"         // optional, SVG arrangement: "symmetric" (default) or "linear"
 }
 ```
 
@@ -60,13 +60,13 @@ changes.
   if one is given (see "Host integration"), and formatted by Babel in the render's language
   so weekday/month names follow the locale. The default omits the year (usually already in
   the title); a value that does not parse is shown unchanged.
-- `"layout"` (default `"linear"`) — how the **SVG** diagram arranges the rounds.
-  `"linear"` flows the columns left to right with the final in the last column;
+- `"layout"` (default `"symmetric"`) — how the **SVG** diagram arranges the rounds.
   `"symmetric"` draws the FIFA-style mirrored bracket — every round before the final is
   split by document order so its two halves expand outward to the left and right (rounds
   flow inward toward the middle), the semifinals meeting in the centre, with the final
-  lifted above them and any third-place round dropped below. This is an SVG-only concern:
-  the HTML table is a vertical list and renders the same either way.
+  lifted above them and any third-place round dropped below; `"linear"` flows the columns
+  left to right with the final in the last column. This is an SVG-only concern: the HTML
+  table is a vertical list and renders the same either way.
 
 Each side always shows the goals of every played leg in order, e.g. `2 0` for a tie or
 `2` for a single match; a shootout is appended in parentheses on the relevant side, e.g.

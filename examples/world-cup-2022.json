@@ -1,0 +1,158 @@
+{
+  "tournament": "World Cup",
+  "season": "Qatar 2022",
+  "render": { "crest_shape": "flag", "dt_format": "EEEE dd MMMM" },
+  "rounds": [
+    {
+      "name": "Round of 16",
+      "matches": [
+        {
+          "id": "r16-1",
+          "legs": [
+            { "team1": "Netherlands", "goals1": 3, "team2": "USA", "goals2": 1, "dt": "2022-12-03 12:00", "venue": "Khalifa International Stadium" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "r16-2",
+          "legs": [
+            { "team1": "Argentina", "goals1": 2, "team2": "Australia", "goals2": 1, "dt": "2022-12-03 12:00", "venue": "Ahmad bin Ali Stadium" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "r16-3",
+          "legs": [
+            { "team1": "Japan", "goals1": 1, "team2": "Croatia", "goals2": 1, "pen1": 1, "pen2": 3, "dt": "2022-12-05 12:00", "venue": "Al Janoub Stadium" }
+          ],
+          "winner": 2
+        },
+        {
+          "id": "r16-4",
+          "legs": [
+            { "team1": "Brazil", "goals1": 4, "team2": "South Korea", "goals2": 1, "dt": "2022-12-05 12:00", "venue": "Stadium 974" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "r16-5",
+          "legs": [
+            { "team1": "Morocco", "goals1": 0, "team2": "Spain", "goals2": 0, "pen1": 3, "pen2": 0, "dt": "2022-12-06 12:00", "venue": "Education City Stadium" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "r16-6",
+          "legs": [
+            { "team1": "Portugal", "goals1": 6, "team2": "Switzerland", "goals2": 1, "dt": "2022-12-06 12:00", "venue": "Lusail Stadium" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "r16-7",
+          "legs": [
+            { "team1": "England", "goals1": 3, "team2": "Senegal", "goals2": 0, "dt": "2022-12-04 12:00", "venue": "Al Bayt Stadium" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "r16-8",
+          "legs": [
+            { "team1": "France", "goals1": 3, "team2": "Poland", "goals2": 1, "dt": "2022-12-04 12:00", "venue": "Al Thumama Stadium" }
+          ],
+          "winner": 1
+        }
+      ]
+    },
+    {
+      "name": "Quarterfinals",
+      "matches": [
+        {
+          "id": "qf1",
+          "winnerof1": "r16-1",
+          "winnerof2": "r16-2",
+          "legs": [
+            { "team1": "Netherlands", "goals1": 2, "team2": "Argentina", "goals2": 2, "pen1": 3, "pen2": 4, "dt": "2022-12-09 12:00", "venue": "Lusail Stadium" }
+          ],
+          "winner": 2
+        },
+        {
+          "id": "qf2",
+          "winnerof1": "r16-3",
+          "winnerof2": "r16-4",
+          "legs": [
+            { "team1": "Croatia", "goals1": 1, "team2": "Brazil", "goals2": 1, "pen1": 4, "pen2": 2, "dt": "2022-12-09 12:00", "venue": "Education City Stadium" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "qf3",
+          "winnerof1": "r16-5",
+          "winnerof2": "r16-6",
+          "legs": [
+            { "team1": "Morocco", "goals1": 1, "team2": "Portugal", "goals2": 0, "dt": "2022-12-10 12:00", "venue": "Al Thumama Stadium" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "qf4",
+          "winnerof1": "r16-7",
+          "winnerof2": "r16-8",
+          "legs": [
+            { "team1": "England", "goals1": 1, "team2": "France", "goals2": 2, "dt": "2022-12-10 12:00", "venue": "Al Bayt Stadium" }
+          ],
+          "winner": 2
+        }
+      ]
+    },
+    {
+      "name": "Semifinals",
+      "matches": [
+        {
+          "id": "sf1",
+          "winnerof1": "qf1",
+          "winnerof2": "qf2",
+          "legs": [
+            { "team1": "Argentina", "goals1": 3, "team2": "Croatia", "goals2": 0, "dt": "2022-12-13 12:00", "venue": "Lusail Stadium" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "sf2",
+          "winnerof1": "qf3",
+          "winnerof2": "qf4",
+          "legs": [
+            { "team1": "Morocco", "goals1": 0, "team2": "France", "goals2": 2, "dt": "2022-12-14 12:00", "venue": "Al Bayt Stadium" }
+          ],
+          "winner": 2
+        }
+      ]
+    },
+    {
+      "name": "Final",
+      "matches": [
+        {
+          "winnerof1": "sf1",
+          "winnerof2": "sf2",
+          "legs": [
+            { "team1": "Argentina", "goals1": 3, "team2": "France", "goals2": 3, "pen1": 4, "pen2": 2, "dt": "2022-12-18 12:00", "venue": "Lusail Stadium" }
+          ],
+          "winner": 1
+        }
+      ]
+    },
+    {
+      "name": "Third place",
+      "matches": [
+        {
+          "loserof1": "sf1",
+          "loserof2": "sf2",
+          "legs": [
+            { "team1": "Croatia", "goals1": 2, "team2": "Morocco", "goals2": 1, "dt": "2022-12-17 12:00", "venue": "Khalifa International Stadium" }
+          ],
+          "winner": 1
+        }
+      ]
+    }
+  ]
+}

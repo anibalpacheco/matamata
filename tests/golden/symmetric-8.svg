@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1018 470" width="1018" height="470" font-family="sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1010 470" width="1010" height="470" font-family="sans-serif">
 <style>
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -27,7 +27,7 @@
     .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }</style>
-<rect class="pd-bg" width="1018" height="470"/>
+<rect class="pd-bg" width="1010" height="470"/>
 <text class="pd-title" x="20" y="28">League Cup</text>
 <text class="pd-season" x="139" y="28">2026</text>
 <text class="pd-header" x="115" y="68">Quarterfinals</text>
@@ -62,7 +62,7 @@
 <text class="pd-team" x="30" y="324">Aston Villa</text>
 <text class="pd-score" x="202" y="324">2</text>
 </g>
-<text class="pd-meta" x="800" y="174"><tspan class="pd-meta-id">QF3</tspan> · 25/02 19:45 Anfield</text>
+<text class="pd-meta" x="990" y="174" text-anchor="end"><tspan class="pd-meta-id">QF3</tspan> · 25/02 19:45 Anfield</text>
 <rect class="pd-box" x="800" y="180" width="190" height="48" rx="3"/>
 <line class="pd-divider" x1="800" y1="204" x2="990" y2="204"/>
 <g class="pd-win">
@@ -73,7 +73,7 @@
 <text class="pd-team" x="810" y="220">Tottenham</text>
 <text class="pd-score" x="982" y="220">1</text>
 </g>
-<text class="pd-meta" x="800" y="346"><tspan class="pd-meta-id">QF4</tspan> · 25/02 19:45 Stamford Bridge</text>
+<text class="pd-meta" x="990" y="346" text-anchor="end"><tspan class="pd-meta-id">QF4</tspan> · 25/02 19:45 Stamford Bridge</text>
 <rect class="pd-box" x="800" y="284" width="190" height="48" rx="3"/>
 <line class="pd-divider" x1="800" y1="308" x2="990" y2="308"/>
 <g class="pd-win">

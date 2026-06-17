@@ -84,12 +84,12 @@ def knockout_stage_svg(request, championship):
 
 ### The symmetric SVG layout
 
-By default the SVG diagram flows left to right, one column per round, with the final in
-the last column (`"layout": "linear"`). Setting `"layout": "symmetric"` in the document's
-`render` object draws the classic FIFA-style mirrored bracket instead: every round before
-the final is split by document order so its two halves expand outward to the left and
-right, the semifinals meeting in the two central columns, with the final lifted into the
-gap **above** them and any third-place round dropped **below**.
+By default the SVG diagram draws the classic FIFA-style mirrored bracket
+(`"layout": "symmetric"`): every round before the final is split by document order so its
+two halves expand outward to the left and right, the semifinals meeting in the two central
+columns, with the final lifted into the gap **above** them and any third-place round
+dropped **below**. Setting `"layout": "linear"` in the document's `render` object flows the
+diagram left to right instead, one column per round, with the final in the last column.
 
 ![League Cup knockout stage in the symmetric layout](symmetric-8.png)
 
@@ -280,21 +280,19 @@ still the host's), honored by both the diagram and the table.
 
 The World Cup example does exactly that, resolving each national team's flag and setting
 `"crest_shape": "flag"` in its `render` object (it also carries per-match dates and venues
-— see [Match metadata](#match-metadata)), shown here in both outputs:
+— see [Match metadata](#match-metadata)):
 
-![A schedule with flags](flags.png)
-
-![The same schedule as an HTML table, with flags](flags-table.png)
+![A schedule with flags](world-cup-2022.png)
 
 <small>Flags: public-domain national flags from [Wikimedia
 Commons](https://commons.wikimedia.org/), referenced by relative path under
 `examples/flags/`.</small>
 
-The runnable host behind it is `examples/world_cup_flags_host.py`: a `KnockoutStage`
-whose `get_crest` looks each side's `team_name` up in a sibling `flag_data.json` (a
-name → flag-file table). `knockout-8.json` carries no ids, so this one resolves by name
-(`PYTHONPATH=../src python world_cup_flags_host.py html` from inside `examples/` prints
-the table above).
+The runnable host behind it is `examples/world_cup_2022_host.py`: a `KnockoutStage` whose
+`get_crest` looks each side's `team_name` up in a sibling `world_cup_2022_flags.json` (a
+name → flag-file table). `world-cup-2022.json` carries no ids, so this one resolves by name.
+The same `"crest_shape": "flag"` is honored by the HTML table too, as the club-crest example
+below shows.
 
 Club crests work exactly the same — here a short invitational, where each side instead
 carries an integer `id{n}` that `get_crest` turns into a crest image:

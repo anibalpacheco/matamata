@@ -1,0 +1,229 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1530 532" width="1530" height="532" font-family="sans-serif">
+<style>
+  .pd-bg { fill: #ffffff; }
+  .pd-title { font: 600 18px sans-serif; fill: #111827; }
+  .pd-season { font: 400 13px sans-serif; fill: #6b7280; }
+  .pd-header { font: 600 15px sans-serif; fill: #374151; text-anchor: middle; }
+  .pd-meta { font: 400 11px sans-serif; fill: #6b7280; }
+  .pd-meta-id { font-weight: 700; }
+  .pd-box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+  .pd-divider { stroke: #e5e7eb; stroke-width: 1; }
+  .pd-team { font: 400 13px sans-serif; fill: #1f2937; }
+  .pd-score { font: 400 13px sans-serif; fill: #1f2937; text-anchor: end; }
+  .pd-win .pd-team, .pd-win .pd-score { font-weight: 700; fill: #065f46; }
+  .pd-crest-frame { fill: none; stroke: #d1d5db; stroke-width: 1; }
+  .pd-link { fill: none; stroke: #cbd5e1; stroke-width: 1.5; }
+  @media (prefers-color-scheme: dark) {
+    .pd-bg { fill: #0f172a; }
+    .pd-title { fill: #f8fafc; }
+    .pd-season { fill: #94a3b8; }
+    .pd-header { fill: #cbd5e1; }
+    .pd-meta { fill: #94a3b8; }
+    .pd-box { fill: #1e293b; stroke: #334155; }
+    .pd-divider { stroke: #334155; }
+    .pd-team { fill: #e5e7eb; }
+    .pd-score { fill: #e5e7eb; }
+    .pd-win .pd-team, .pd-win .pd-score { fill: #34d399; }
+    .pd-crest-frame { stroke: #334155; }
+    .pd-link { stroke: #475569; }
+  }</style>
+<rect class="pd-bg" width="1530" height="532"/>
+<text class="pd-title" x="20" y="28">World Cup</text>
+<text class="pd-season" x="128" y="28">Qatar 2022</text>
+<text class="pd-header" x="115" y="68">Round of 16</text>
+<text class="pd-header" x="1415" y="68">Round of 16</text>
+<text class="pd-header" x="375" y="68">Quarterfinals</text>
+<text class="pd-header" x="1155" y="68">Quarterfinals</text>
+<text class="pd-header" x="635" y="254">Semifinals</text>
+<text class="pd-header" x="895" y="254">Semifinals</text>
+<text class="pd-header" x="765" y="116">Final</text>
+<text class="pd-header" x="765" y="404">Third place</text>
+<path class="pd-link" d="M 210 138 L 245 138 L 245 178 L 280 178"/>
+<path class="pd-link" d="M 210 242 L 245 242 L 245 202 L 280 202"/>
+<path class="pd-link" d="M 210 346 L 245 346 L 245 386 L 280 386"/>
+<path class="pd-link" d="M 210 450 L 245 450 L 245 410 L 280 410"/>
+<path class="pd-link" d="M 1320 138 L 1285 138 L 1285 178 L 1250 178"/>
+<path class="pd-link" d="M 1320 242 L 1285 242 L 1285 202 L 1250 202"/>
+<path class="pd-link" d="M 1320 346 L 1285 346 L 1285 386 L 1250 386"/>
+<path class="pd-link" d="M 1320 450 L 1285 450 L 1285 410 L 1250 410"/>
+<path class="pd-link" d="M 470 190 L 505 190 L 505 282 L 540 282"/>
+<path class="pd-link" d="M 470 398 L 505 398 L 505 306 L 540 306"/>
+<path class="pd-link" d="M 1060 190 L 1025 190 L 1025 282 L 990 282"/>
+<path class="pd-link" d="M 1060 398 L 1025 398 L 1025 306 L 990 306"/>
+<text class="pd-meta" x="20" y="108"><tspan class="pd-meta-id">R16-1</tspan> · Saturday 03 December Khalifa International Stadium</text>
+<rect class="pd-box" x="20" y="114" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="20" y1="138" x2="210" y2="138"/>
+<g class="pd-win">
+<text class="pd-team" x="30" y="130">Netherlands</text>
+<text class="pd-score" x="202" y="130">3</text>
+</g>
+<g class="">
+<text class="pd-team" x="30" y="154">USA</text>
+<text class="pd-score" x="202" y="154">1</text>
+</g>
+<text class="pd-meta" x="20" y="280"><tspan class="pd-meta-id">R16-2</tspan> · Saturday 03 December Ahmad bin Ali Stadium</text>
+<rect class="pd-box" x="20" y="218" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="20" y1="242" x2="210" y2="242"/>
+<g class="pd-win">
+<text class="pd-team" x="30" y="234">Argentina</text>
+<text class="pd-score" x="202" y="234">2</text>
+</g>
+<g class="">
+<text class="pd-team" x="30" y="258">Australia</text>
+<text class="pd-score" x="202" y="258">1</text>
+</g>
+<text class="pd-meta" x="20" y="316"><tspan class="pd-meta-id">R16-3</tspan> · Monday 05 December Al Janoub Stadium</text>
+<rect class="pd-box" x="20" y="322" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="20" y1="346" x2="210" y2="346"/>
+<g class="">
+<text class="pd-team" x="30" y="338">Japan</text>
+<text class="pd-score" x="202" y="338">1 (1)</text>
+</g>
+<g class="pd-win">
+<text class="pd-team" x="30" y="362">Croatia</text>
+<text class="pd-score" x="202" y="362">1 (3)</text>
+</g>
+<text class="pd-meta" x="20" y="488"><tspan class="pd-meta-id">R16-4</tspan> · Monday 05 December Stadium 974</text>
+<rect class="pd-box" x="20" y="426" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="20" y1="450" x2="210" y2="450"/>
+<g class="pd-win">
+<text class="pd-team" x="30" y="442">Brazil</text>
+<text class="pd-score" x="202" y="442">4</text>
+</g>
+<g class="">
+<text class="pd-team" x="30" y="466">South Korea</text>
+<text class="pd-score" x="202" y="466">1</text>
+</g>
+<text class="pd-meta" x="1510" y="108" text-anchor="end"><tspan class="pd-meta-id">R16-5</tspan> · Tuesday 06 December Education City Stadium</text>
+<rect class="pd-box" x="1320" y="114" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="1320" y1="138" x2="1510" y2="138"/>
+<g class="pd-win">
+<text class="pd-team" x="1330" y="130">Morocco</text>
+<text class="pd-score" x="1502" y="130">0 (3)</text>
+</g>
+<g class="">
+<text class="pd-team" x="1330" y="154">Spain</text>
+<text class="pd-score" x="1502" y="154">0 (0)</text>
+</g>
+<text class="pd-meta" x="1510" y="280" text-anchor="end"><tspan class="pd-meta-id">R16-6</tspan> · Tuesday 06 December Lusail Stadium</text>
+<rect class="pd-box" x="1320" y="218" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="1320" y1="242" x2="1510" y2="242"/>
+<g class="pd-win">
+<text class="pd-team" x="1330" y="234">Portugal</text>
+<text class="pd-score" x="1502" y="234">6</text>
+</g>
+<g class="">
+<text class="pd-team" x="1330" y="258">Switzerland</text>
+<text class="pd-score" x="1502" y="258">1</text>
+</g>
+<text class="pd-meta" x="1510" y="316" text-anchor="end"><tspan class="pd-meta-id">R16-7</tspan> · Sunday 04 December Al Bayt Stadium</text>
+<rect class="pd-box" x="1320" y="322" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="1320" y1="346" x2="1510" y2="346"/>
+<g class="pd-win">
+<text class="pd-team" x="1330" y="338">England</text>
+<text class="pd-score" x="1502" y="338">3</text>
+</g>
+<g class="">
+<text class="pd-team" x="1330" y="362">Senegal</text>
+<text class="pd-score" x="1502" y="362">0</text>
+</g>
+<text class="pd-meta" x="1510" y="488" text-anchor="end"><tspan class="pd-meta-id">R16-8</tspan> · Sunday 04 December Al Thumama Stadium</text>
+<rect class="pd-box" x="1320" y="426" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="1320" y1="450" x2="1510" y2="450"/>
+<g class="pd-win">
+<text class="pd-team" x="1330" y="442">France</text>
+<text class="pd-score" x="1502" y="442">3</text>
+</g>
+<g class="">
+<text class="pd-team" x="1330" y="466">Poland</text>
+<text class="pd-score" x="1502" y="466">1</text>
+</g>
+<text class="pd-meta" x="280" y="160"><tspan class="pd-meta-id">QF1</tspan> · Friday 09 December Lusail Stadium</text>
+<rect class="pd-box" x="280" y="166" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="280" y1="190" x2="470" y2="190"/>
+<g class="">
+<text class="pd-team" x="290" y="182">Netherlands</text>
+<text class="pd-score" x="462" y="182">2 (3)</text>
+</g>
+<g class="pd-win">
+<text class="pd-team" x="290" y="206">Argentina</text>
+<text class="pd-score" x="462" y="206">2 (4)</text>
+</g>
+<text class="pd-meta" x="280" y="436"><tspan class="pd-meta-id">QF2</tspan> · Friday 09 December Education City Stadium</text>
+<rect class="pd-box" x="280" y="374" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="280" y1="398" x2="470" y2="398"/>
+<g class="pd-win">
+<text class="pd-team" x="290" y="390">Croatia</text>
+<text class="pd-score" x="462" y="390">1 (4)</text>
+</g>
+<g class="">
+<text class="pd-team" x="290" y="414">Brazil</text>
+<text class="pd-score" x="462" y="414">1 (2)</text>
+</g>
+<text class="pd-meta" x="1250" y="160" text-anchor="end"><tspan class="pd-meta-id">QF3</tspan> · Saturday 10 December Al Thumama Stadium</text>
+<rect class="pd-box" x="1060" y="166" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="1060" y1="190" x2="1250" y2="190"/>
+<g class="pd-win">
+<text class="pd-team" x="1070" y="182">Morocco</text>
+<text class="pd-score" x="1242" y="182">1</text>
+</g>
+<g class="">
+<text class="pd-team" x="1070" y="206">Portugal</text>
+<text class="pd-score" x="1242" y="206">0</text>
+</g>
+<text class="pd-meta" x="1250" y="436" text-anchor="end"><tspan class="pd-meta-id">QF4</tspan> · Saturday 10 December Al Bayt Stadium</text>
+<rect class="pd-box" x="1060" y="374" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="1060" y1="398" x2="1250" y2="398"/>
+<g class="">
+<text class="pd-team" x="1070" y="390">England</text>
+<text class="pd-score" x="1242" y="390">1</text>
+</g>
+<g class="pd-win">
+<text class="pd-team" x="1070" y="414">France</text>
+<text class="pd-score" x="1242" y="414">2</text>
+</g>
+<text class="pd-meta" x="540" y="332"><tspan x="540"><tspan class="pd-meta-id">SF1</tspan> · Tuesday 13 December</tspan><tspan x="540" dy="13">Lusail Stadium</tspan></text>
+<rect class="pd-box" x="540" y="270" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="540" y1="294" x2="730" y2="294"/>
+<g class="pd-win">
+<text class="pd-team" x="550" y="286">Argentina</text>
+<text class="pd-score" x="722" y="286">3</text>
+</g>
+<g class="">
+<text class="pd-team" x="550" y="310">Croatia</text>
+<text class="pd-score" x="722" y="310">0</text>
+</g>
+<text class="pd-meta" x="800" y="332"><tspan x="800"><tspan class="pd-meta-id">SF2</tspan> · Wednesday 14 December</tspan><tspan x="800" dy="13">Al Bayt Stadium</tspan></text>
+<rect class="pd-box" x="800" y="270" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="800" y1="294" x2="990" y2="294"/>
+<g class="">
+<text class="pd-team" x="810" y="286">Morocco</text>
+<text class="pd-score" x="982" y="286">0</text>
+</g>
+<g class="pd-win">
+<text class="pd-team" x="810" y="310">France</text>
+<text class="pd-score" x="982" y="310">2</text>
+</g>
+<text class="pd-meta" x="670" y="146">Sunday 18 December Lusail Stadium</text>
+<rect class="pd-box" x="670" y="152" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="670" y1="176" x2="860" y2="176"/>
+<g class="pd-win">
+<text class="pd-team" x="680" y="168">Argentina</text>
+<text class="pd-score" x="852" y="168">3 (4)</text>
+</g>
+<g class="">
+<text class="pd-team" x="680" y="192">France</text>
+<text class="pd-score" x="852" y="192">3 (2)</text>
+</g>
+<text class="pd-meta" x="670" y="430">Saturday 17 December Khalifa International Stadium</text>
+<rect class="pd-box" x="670" y="436" width="190" height="48" rx="3"/>
+<line class="pd-divider" x1="670" y1="460" x2="860" y2="460"/>
+<g class="pd-win">
+<text class="pd-team" x="680" y="452">Croatia</text>
+<text class="pd-score" x="852" y="452">2</text>
+</g>
+<g class="">
+<text class="pd-team" x="680" y="476">Morocco</text>
+<text class="pd-score" x="852" y="476">1</text>
+</g>
+</svg>

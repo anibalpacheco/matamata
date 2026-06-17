@@ -1,7 +1,7 @@
 {
   "tournament": "World Cup",
   "season": "2026",
-  "render": { "dt_format": "EEEE dd MMMM, HH:mm" },
+  "render": { "dt_format": "EEEE dd MMMM, HH:mm", "layout": "linear" },
   "rounds": [
     {
       "name": "Semifinals",

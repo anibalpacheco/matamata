@@ -6,11 +6,11 @@ through ``winner_of``); first-round matches are stacked with a fixed gap. A thir
 match (fed by ``loser_of``) is off the tree: it hangs below the whole bracket with no
 connector. No external layout engine is involved.
 
-Two arrangements (``render.layout``): ``"linear"`` (default) flows the columns left to
-right with the final in the last column; ``"symmetric"`` is the FIFA-style mirrored
+Two arrangements (``render.layout``): ``"symmetric"`` (default) is the FIFA-style mirrored
 bracket — every round before the final split by document order so its two halves expand
 outward, the semifinals meeting in the centre, with the final lifted above them and a
-third-place round dropped below (see ``_place_symmetric``).
+third-place round dropped below (see ``_place_symmetric``); ``"linear"`` flows the columns
+left to right with the final in the last column.
 """
 
 from __future__ import annotations
@@ -48,7 +48,7 @@ class SideView:
 
 
 @dataclass
-class PlacedMatch:
+class PlacedMatch:  # pylint: disable=too-many-instance-attributes
     match: Match
     x: float  # top-left
     y: float
@@ -61,6 +61,11 @@ class PlacedMatch:
     # Wrap the metadata to the box width instead of letting it run past. Set for the
     # symmetric centre semis, whose two same-height lines would otherwise collide.
     meta_wrap: bool = False
+    # Anchor the metadata at the box's right edge (flowing left) instead of its left edge.
+    # Set for the symmetric right half so a long line overflows inward (toward the centre
+    # gap) like the left half, rather than running off the right margin. Ignored when
+    # meta_wrap is set (the wrapped semis stay within the box width either way).
+    meta_end: bool = False
 
     @property
     def cy(self) -> float:
@@ -217,7 +222,13 @@ def compute_layout(
         # lowest box (meta_below is only set later, in _connectors).
         if below_rounds:
             below_x = MARGIN_X + max(n_cols - 1, 0) * column_pitch
-            cursor = max((pm.y + BOX_H for pm in placed), default=TOP) + meta_h + V_GAP
+            # Hang third place just below the final, in its own (last) column — not below
+            # the whole bracket, whose lowest first-round box sits far lower and would leave
+            # a big empty gap. The final is the only box in that column.
+            final_bottom = max(
+                (pm.y + BOX_H for pm in placed if pm.x == below_x), default=TOP
+            )
+            cursor = final_bottom + meta_h + V_GAP
             place_below(below_rounds, below_x, cursor)
         connect = placed  # every placed match's incoming connector is drawn
 
@@ -229,13 +240,17 @@ def compute_layout(
     # clip. Estimate each line's width by character count and widen the canvas to fit it.
     if stage.render.show_metadata:
         fmt = stage.render.dt_format
-        rightmost = max(
-            (
+
+        def _meta_right(pm: PlacedMatch) -> float:
+            # A meta_end box anchors at its right edge and flows left, so its rightmost
+            # point is the box edge; a normal box flows right from its left edge.
+            if pm.meta_end:
+                return pm.x + bw
+            return (
                 pm.x + len(meta_text(pm.match, fmt, timezone, language)) * META_CHAR_W
-                for pm in placed
-            ),
-            default=0.0,
-        )
+            )
+
+        rightmost = max((_meta_right(pm) for pm in placed), default=0.0)
         width = max(width, rightmost + MARGIN_X)
     # A box whose metadata sits below it extends META_H further down.
     height = (
@@ -294,6 +309,7 @@ def _place_symmetric(  # noqa: PLR0913 — geometry helper, threads compute_layo
             place(match, x_left, stack_cy(match, i))
         for i, match in enumerate(rnd.matches[split:]):
             place(match, x_right, stack_cy(match, i))
+            by_placed[match.id].meta_end = True  # right half: metadata flows inward
         connect.extend(by_placed[mt.id] for mt in rnd.matches)
         if r_index < m - 1:  # outer rounds: header in the top band over each column
             headers.append(Header(name=rnd.name, cx=x_left + bw / 2))

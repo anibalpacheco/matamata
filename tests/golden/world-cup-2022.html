@@ -1,0 +1,278 @@
+<div class="pd-stage pd-flags">
+<style>
+  .pd-stage { font-family: sans-serif; color: #1f2937; background: #ffffff; }
+  .pd-title { font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 12px; }
+  .pd-season { font-size: 13px; font-weight: 400; color: #6b7280; margin-left: 8px; }
+  .pd-header { font-size: 15px; font-weight: 600; color: #374151; margin: 26px 0 8px; }
+  /* The first round sits tight under the title; later rounds get the full gap (matching
+     the flat layout's separation between a box and the next round head). */
+  .pd-round:first-child .pd-header { margin-top: 14px; }
+  .pd-meta { font-size: 11px; color: #6b7280; margin: 0 0 3px; }
+  .pd-meta-id { font-weight: 700; }
+  .pd-match { border-collapse: separate; border-spacing: 0; width: 100%;
+              max-width: 24em; border: 1px solid #d1d5db; border-radius: 3px;
+              overflow: hidden; margin: 0 0 15px; }
+  .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
+  .pd-team { font-size: 13px; padding: 5px 10px; }
+  .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
+  .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
+              white-space: nowrap; }
+  .pd-win td { font-weight: 700; color: #065f46; }
+  .pd-grid { border-collapse: separate; border-spacing: 0; margin: 0 0 4px; }
+  .pd-grid td { font-size: 13px; padding: 4px 6px; vertical-align: middle;
+                white-space: nowrap; }
+  .pd-team1, .pd-score1, .pd-crest1 { text-align: right; }
+  .pd-team2, .pd-score2, .pd-crest2 { text-align: left; }
+  .pd-crest1, .pd-crest2 { padding: 0; }
+  .pd-crest1 .pd-crest { margin: 0 0 0 6px; }
+  .pd-crest2 .pd-crest { margin: 0 6px 0 0; }
+  .pd-vs { color: #9ca3af; padding: 4px 8px; }
+  /* Box each leg's score row, so a match reads as a unit like the SVG/stacked
+     boxes; the metadata line stays above the box (as in the stacked layout). */
+  .pd-grid .pd-match-row td { border-top: 1px solid #d1d5db;
+                              border-bottom: 1px solid #d1d5db; }
+  .pd-grid .pd-match-row td:first-child { border-left: 1px solid #d1d5db;
+      border-top-left-radius: 3px; border-bottom-left-radius: 3px; }
+  .pd-grid .pd-match-row td:last-child { border-right: 1px solid #d1d5db;
+      border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
+  .pd-grid .pd-round-head { font-size: 15px; font-weight: 600; color: #374151;
+                            text-align: left; padding: 26px 6px 6px 0; }
+  .pd-grid tr:first-child .pd-round-head { padding-top: 10px; }
+  .pd-grid .pd-meta { font-size: 11px; color: #6b7280; text-align: left;
+                      padding: 14px 6px 2px 0; }
+  /* The first match's metadata in a round sits right under the round head, which already
+     supplies the gap (matching the stacked layout); only later matches need the full top. */
+  .pd-grid .pd-round-row + .pd-meta-row .pd-meta { padding-top: 2px; }
+  .pd-grid .pd-win { font-weight: 700; color: #065f46; }
+  @media (prefers-color-scheme: dark) {
+    .pd-stage { color: #e5e7eb; background: #0f172a; }
+    .pd-title { color: #f8fafc; }
+    .pd-season { color: #94a3b8; }
+    .pd-header { color: #cbd5e1; }
+    .pd-meta, .pd-grid .pd-meta { color: #94a3b8; }
+    .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
+    .pd-match { background: #1e293b; border-color: #334155; }
+    .pd-grid .pd-match-row td { background: #1e293b; border-color: #334155; }
+    .pd-grid .pd-match-row td:first-child,
+    .pd-grid .pd-match-row td:last-child { border-color: #334155; }
+    .pd-side + .pd-side td { border-top-color: #334155; }
+    .pd-win td, .pd-grid .pd-win { color: #34d399; }
+    .pd-vs { color: #64748b; }
+    .pd-grid .pd-round-head { color: #cbd5e1; }
+  }</style>
+<h2 class="pd-title">World Cup <span class="pd-season">Qatar 2022</span></h2>
+<table class="pd-grid">
+<tbody>
+<tr class="pd-round-row">
+<td class="pd-round-head" colspan="7">Round of 16</td>
+</tr>
+<tr class="pd-meta-row">
+<td class="pd-meta" colspan="7"><span class="pd-meta-id">R16-1</span> · Saturday 03 December Khalifa International Stadium</td>
+</tr>
+<tr class="pd-match-row">
+<td class="pd-team pd-team1 pd-win">Netherlands</td>
+<td class="pd-crest1 pd-win"></td>
+<td class="pd-score pd-score1 pd-win">3</td>
+<td class="pd-vs">x</td>
+<td class="pd-score pd-score2">1</td>
+<td class="pd-crest2"></td>
+<td class="pd-team pd-team2">USA</td>
+</tr>
+<tr class="pd-meta-row">
+<td class="pd-meta" colspan="7"><span class="pd-meta-id">R16-2</span> · Saturday 03 December Ahmad bin Ali Stadium</td>
+</tr>
+<tr class="pd-match-row">
+<td class="pd-team pd-team1 pd-win">Argentina</td>
+<td class="pd-crest1 pd-win"></td>
+<td class="pd-score pd-score1 pd-win">2</td>
+<td class="pd-vs">x</td>
+<td class="pd-score pd-score2">1</td>
+<td class="pd-crest2"></td>
+<td class="pd-team pd-team2">Australia</td>
+</tr>
+<tr class="pd-meta-row">
+<td class="pd-meta" colspan="7"><span class="pd-meta-id">R16-3</span> · Monday 05 December Al Janoub Stadium</td>
+</tr>
+<tr class="pd-match-row">
+<td class="pd-team pd-team1">Japan</td>
+<td class="pd-crest1"></td>
+<td class="pd-score pd-score1">1 (1)</td>
+<td class="pd-vs">x</td>
+<td class="pd-score pd-score2 pd-win">1 (3)</td>
+<td class="pd-crest2 pd-win"></td>
+<td class="pd-team pd-team2 pd-win">Croatia</td>
+</tr>
+<tr class="pd-meta-row">
+<td class="pd-meta" colspan="7"><span class="pd-meta-id">R16-4</span> · Monday 05 December Stadium 974</td>
+</tr>
+<tr class="pd-match-row">
+<td class="pd-team pd-team1 pd-win">Brazil</td>
+<td class="pd-crest1 pd-win"></td>
+<td class="pd-score pd-score1 pd-win">4</td>
+<td class="pd-vs">x</td>
+<td class="pd-score pd-score2">1</td>
+<td class="pd-crest2"></td>
+<td class="pd-team pd-team2">South Korea</td>
+</tr>
+<tr class="pd-meta-row">
+<td class="pd-meta" colspan="7"><span class="pd-meta-id">R16-5</span> · Tuesday 06 December Education City Stadium</td>
+</tr>
+<tr class="pd-match-row">
+<td class="pd-team pd-team1 pd-win">Morocco</td>
+<td class="pd-crest1 pd-win"></td>
+<td class="pd-score pd-score1 pd-win">0 (3)</td>
+<td class="pd-vs">x</td>
+<td class="pd-score pd-score2">0 (0)</td>
+<td class="pd-crest2"></td>
+<td class="pd-team pd-team2">Spain</td>
+</tr>
+<tr class="pd-meta-row">
+<td class="pd-meta" colspan="7"><span class="pd-meta-id">R16-6</span> · Tuesday 06 December Lusail Stadium</td>
+</tr>
+<tr class="pd-match-row">
+<td class="pd-team pd-team1 pd-win">Portugal</td>
+<td class="pd-crest1 pd-win"></td>
+<td class="pd-score pd-score1 pd-win">6</td>
+<td class="pd-vs">x</td>
+<td class="pd-score pd-score2">1</td>
+<td class="pd-crest2"></td>
+<td class="pd-team pd-team2">Switzerland</td>
+</tr>
+<tr class="pd-meta-row">
+<td class="pd-meta" colspan="7"><span class="pd-meta-id">R16-7</span> · Sunday 04 December Al Bayt Stadium</td>
+</tr>
+<tr class="pd-match-row">
+<td class="pd-team pd-team1 pd-win">England</td>
+<td class="pd-crest1 pd-win"></td>
+<td class="pd-score pd-score1 pd-win">3</td>
+<td class="pd-vs">x</td>
+<td class="pd-score pd-score2">0</td>
+<td class="pd-crest2"></td>
+<td class="pd-team pd-team2">Senegal</td>
+</tr>
+<tr class="pd-meta-row">
+<td class="pd-meta" colspan="7"><span class="pd-meta-id">R16-8</span> · Sunday 04 December Al Thumama Stadium</td>
+</tr>
+<tr class="pd-match-row">
+<td class="pd-team pd-team1 pd-win">France</td>
+<td class="pd-crest1 pd-win"></td>
+<td class="pd-score pd-score1 pd-win">3</td>
+<td class="pd-vs">x</td>
+<td class="pd-score pd-score2">1</td>
+<td class="pd-crest2"></td>
+<td class="pd-team pd-team2">Poland</td>
+</tr>
+<tr class="pd-round-row">
+<td class="pd-round-head" colspan="7">Quarterfinals</td>
+</tr>
+<tr class="pd-meta-row">
+<td class="pd-meta" colspan="7"><span class="pd-meta-id">QF1</span> · Friday 09 December Lusail Stadium</td>
+</tr>
+<tr class="pd-match-row">
+<td class="pd-team pd-team1">Netherlands</td>
+<td class="pd-crest1"></td>
+<td class="pd-score pd-score1">2 (3)</td>
+<td class="pd-vs">x</td>
+<td class="pd-score pd-score2 pd-win">2 (4)</td>
+<td class="pd-crest2 pd-win"></td>
+<td class="pd-team pd-team2 pd-win">Argentina</td>
+</tr>
+<tr class="pd-meta-row">
+<td class="pd-meta" colspan="7"><span class="pd-meta-id">QF2</span> · Friday 09 December Education City Stadium</td>
+</tr>
+<tr class="pd-match-row">
+<td class="pd-team pd-team1 pd-win">Croatia</td>
+<td class="pd-crest1 pd-win"></td>
+<td class="pd-score pd-score1 pd-win">1 (4)</td>
+<td class="pd-vs">x</td>
+<td class="pd-score pd-score2">1 (2)</td>
+<td class="pd-crest2"></td>
+<td class="pd-team pd-team2">Brazil</td>
+</tr>
+<tr class="pd-meta-row">
+<td class="pd-meta" colspan="7"><span class="pd-meta-id">QF3</span> · Saturday 10 December Al Thumama Stadium</td>
+</tr>
+<tr class="pd-match-row">
+<td class="pd-team pd-team1 pd-win">Morocco</td>
+<td class="pd-crest1 pd-win"></td>
+<td class="pd-score pd-score1 pd-win">1</td>
+<td class="pd-vs">x</td>
+<td class="pd-score pd-score2">0</td>
+<td class="pd-crest2"></td>
+<td class="pd-team pd-team2">Portugal</td>
+</tr>
+<tr class="pd-meta-row">
+<td class="pd-meta" colspan="7"><span class="pd-meta-id">QF4</span> · Saturday 10 December Al Bayt Stadium</td>
+</tr>
+<tr class="pd-match-row">
+<td class="pd-team pd-team1">England</td>
+<td class="pd-crest1"></td>
+<td class="pd-score pd-score1">1</td>
+<td class="pd-vs">x</td>
+<td class="pd-score pd-score2 pd-win">2</td>
+<td class="pd-crest2 pd-win"></td>
+<td class="pd-team pd-team2 pd-win">France</td>
+</tr>
+<tr class="pd-round-row">
+<td class="pd-round-head" colspan="7">Semifinals</td>
+</tr>
+<tr class="pd-meta-row">
+<td class="pd-meta" colspan="7"><span class="pd-meta-id">SF1</span> · Tuesday 13 December Lusail Stadium</td>
+</tr>
+<tr class="pd-match-row">
+<td class="pd-team pd-team1 pd-win">Argentina</td>
+<td class="pd-crest1 pd-win"></td>
+<td class="pd-score pd-score1 pd-win">3</td>
+<td class="pd-vs">x</td>
+<td class="pd-score pd-score2">0</td>
+<td class="pd-crest2"></td>
+<td class="pd-team pd-team2">Croatia</td>
+</tr>
+<tr class="pd-meta-row">
+<td class="pd-meta" colspan="7"><span class="pd-meta-id">SF2</span> · Wednesday 14 December Al Bayt Stadium</td>
+</tr>
+<tr class="pd-match-row">
+<td class="pd-team pd-team1">Morocco</td>
+<td class="pd-crest1"></td>
+<td class="pd-score pd-score1">0</td>
+<td class="pd-vs">x</td>
+<td class="pd-score pd-score2 pd-win">2</td>
+<td class="pd-crest2 pd-win"></td>
+<td class="pd-team pd-team2 pd-win">France</td>
+</tr>
+<tr class="pd-round-row">
+<td class="pd-round-head" colspan="7">Final</td>
+</tr>
+<tr class="pd-meta-row">
+<td class="pd-meta" colspan="7">Sunday 18 December Lusail Stadium</td>
+</tr>
+<tr class="pd-match-row">
+<td class="pd-team pd-team1 pd-win">Argentina</td>
+<td class="pd-crest1 pd-win"></td>
+<td class="pd-score pd-score1 pd-win">3 (4)</td>
+<td class="pd-vs">x</td>
+<td class="pd-score pd-score2">3 (2)</td>
+<td class="pd-crest2"></td>
+<td class="pd-team pd-team2">France</td>
+</tr>
+<tr class="pd-round-row">
+<td class="pd-round-head" colspan="7">Third place</td>
+</tr>
+<tr class="pd-meta-row">
+<td class="pd-meta" colspan="7">Saturday 17 December Khalifa International Stadium</td>
+</tr>
+<tr class="pd-match-row">
+<td class="pd-team pd-team1 pd-win">Croatia</td>
+<td class="pd-crest1 pd-win"></td>
+<td class="pd-score pd-score1 pd-win">2</td>
+<td class="pd-vs">x</td>
+<td class="pd-score pd-score2">1</td>
+<td class="pd-crest2"></td>
+<td class="pd-team pd-team2">Morocco</td>
+</tr>
+</tbody>
+</table>
+</div>

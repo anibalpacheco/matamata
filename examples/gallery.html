@@ -67,8 +67,1034 @@
 </header>
 
 <section class="example">
+<h2>world-cup-2022.json</h2>
+<p class="note">2022 FIFA World Cup — the finished Qatar knockout from the Round of 16 to the final plus third place, with national flags (world_cup_2022_host, by name) and the default symmetric layout. The strongest single example of what the library draws.</p>
+<details class="src" open><summary>source JSON</summary><pre>{
+  "tournament": "World Cup",
+  "season": "Qatar 2022",
+  "render": { "crest_shape": "flag", "dt_format": "EEEE dd MMMM" },
+  "rounds": [
+    {
+      "name": "Round of 16",
+      "matches": [
+        {
+          "id": "r16-1",
+          "legs": [
+            { "team1": "Netherlands", "goals1": 3, "team2": "USA", "goals2": 1, "dt": "2022-12-03 12:00", "venue": "Khalifa International Stadium" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "r16-2",
+          "legs": [
+            { "team1": "Argentina", "goals1": 2, "team2": "Australia", "goals2": 1, "dt": "2022-12-03 12:00", "venue": "Ahmad bin Ali Stadium" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "r16-3",
+          "legs": [
+            { "team1": "Japan", "goals1": 1, "team2": "Croatia", "goals2": 1, "pen1": 1, "pen2": 3, "dt": "2022-12-05 12:00", "venue": "Al Janoub Stadium" }
+          ],
+          "winner": 2
+        },
+        {
+          "id": "r16-4",
+          "legs": [
+            { "team1": "Brazil", "goals1": 4, "team2": "South Korea", "goals2": 1, "dt": "2022-12-05 12:00", "venue": "Stadium 974" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "r16-5",
+          "legs": [
+            { "team1": "Morocco", "goals1": 0, "team2": "Spain", "goals2": 0, "pen1": 3, "pen2": 0, "dt": "2022-12-06 12:00", "venue": "Education City Stadium" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "r16-6",
+          "legs": [
+            { "team1": "Portugal", "goals1": 6, "team2": "Switzerland", "goals2": 1, "dt": "2022-12-06 12:00", "venue": "Lusail Stadium" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "r16-7",
+          "legs": [
+            { "team1": "England", "goals1": 3, "team2": "Senegal", "goals2": 0, "dt": "2022-12-04 12:00", "venue": "Al Bayt Stadium" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "r16-8",
+          "legs": [
+            { "team1": "France", "goals1": 3, "team2": "Poland", "goals2": 1, "dt": "2022-12-04 12:00", "venue": "Al Thumama Stadium" }
+          ],
+          "winner": 1
+        }
+      ]
+    },
+    {
+      "name": "Quarterfinals",
+      "matches": [
+        {
+          "id": "qf1",
+          "winnerof1": "r16-1",
+          "winnerof2": "r16-2",
+          "legs": [
+            { "team1": "Netherlands", "goals1": 2, "team2": "Argentina", "goals2": 2, "pen1": 3, "pen2": 4, "dt": "2022-12-09 12:00", "venue": "Lusail Stadium" }
+          ],
+          "winner": 2
+        },
+        {
+          "id": "qf2",
+          "winnerof1": "r16-3",
+          "winnerof2": "r16-4",
+          "legs": [
+            { "team1": "Croatia", "goals1": 1, "team2": "Brazil", "goals2": 1, "pen1": 4, "pen2": 2, "dt": "2022-12-09 12:00", "venue": "Education City Stadium" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "qf3",
+          "winnerof1": "r16-5",
+          "winnerof2": "r16-6",
+          "legs": [
+            { "team1": "Morocco", "goals1": 1, "team2": "Portugal", "goals2": 0, "dt": "2022-12-10 12:00", "venue": "Al Thumama Stadium" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "qf4",
+          "winnerof1": "r16-7",
+          "winnerof2": "r16-8",
+          "legs": [
+            { "team1": "England", "goals1": 1, "team2": "France", "goals2": 2, "dt": "2022-12-10 12:00", "venue": "Al Bayt Stadium" }
+          ],
+          "winner": 2
+        }
+      ]
+    },
+    {
+      "name": "Semifinals",
+      "matches": [
+        {
+          "id": "sf1",
+          "winnerof1": "qf1",
+          "winnerof2": "qf2",
+          "legs": [
+            { "team1": "Argentina", "goals1": 3, "team2": "Croatia", "goals2": 0, "dt": "2022-12-13 12:00", "venue": "Lusail Stadium" }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "sf2",
+          "winnerof1": "qf3",
+          "winnerof2": "qf4",
+          "legs": [
+            { "team1": "Morocco", "goals1": 0, "team2": "France", "goals2": 2, "dt": "2022-12-14 12:00", "venue": "Al Bayt Stadium" }
+          ],
+          "winner": 2
+        }
+      ]
+    },
+    {
+      "name": "Final",
+      "matches": [
+        {
+          "winnerof1": "sf1",
+          "winnerof2": "sf2",
+          "legs": [
+            { "team1": "Argentina", "goals1": 3, "team2": "France", "goals2": 3, "pen1": 4, "pen2": 2, "dt": "2022-12-18 12:00", "venue": "Lusail Stadium" }
+          ],
+          "winner": 1
+        }
+      ]
+    },
+    {
+      "name": "Third place",
+      "matches": [
+        {
+          "loserof1": "sf1",
+          "loserof2": "sf2",
+          "legs": [
+            { "team1": "Croatia", "goals1": 2, "team2": "Morocco", "goals2": 1, "dt": "2022-12-17 12:00", "venue": "Khalifa International Stadium" }
+          ],
+          "winner": 1
+        }
+      ]
+    }
+  ]
+}
+</pre></details>
+<div class="panes">
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 1530 532&quot; width=&quot;1530&quot; height=&quot;532&quot; font-family=&quot;sans-serif&quot;&gt;
+&lt;style&gt;
+  .pd-bg { fill: #ffffff; }
+  .pd-title { font: 600 18px sans-serif; fill: #111827; }
+  .pd-season { font: 400 13px sans-serif; fill: #6b7280; }
+  .pd-header { font: 600 15px sans-serif; fill: #374151; text-anchor: middle; }
+  .pd-meta { font: 400 11px sans-serif; fill: #6b7280; }
+  .pd-meta-id { font-weight: 700; }
+  .pd-box { fill: #ffffff; stroke: #d1d5db; stroke-width: 1; }
+  .pd-divider { stroke: #e5e7eb; stroke-width: 1; }
+  .pd-team { font: 400 13px sans-serif; fill: #1f2937; }
+  .pd-score { font: 400 13px sans-serif; fill: #1f2937; text-anchor: end; }
+  .pd-win .pd-team, .pd-win .pd-score { font-weight: 700; fill: #065f46; }
+  .pd-crest-frame { fill: none; stroke: #d1d5db; stroke-width: 1; }
+  .pd-link { fill: none; stroke: #cbd5e1; stroke-width: 1.5; }
+  @media (prefers-color-scheme: dark) {
+    .pd-bg { fill: #0f172a; }
+    .pd-title { fill: #f8fafc; }
+    .pd-season { fill: #94a3b8; }
+    .pd-header { fill: #cbd5e1; }
+    .pd-meta { fill: #94a3b8; }
+    .pd-box { fill: #1e293b; stroke: #334155; }
+    .pd-divider { stroke: #334155; }
+    .pd-team { fill: #e5e7eb; }
+    .pd-score { fill: #e5e7eb; }
+    .pd-win .pd-team, .pd-win .pd-score { fill: #34d399; }
+    .pd-crest-frame { stroke: #334155; }
+    .pd-link { stroke: #475569; }
+  }&lt;/style&gt;
+&lt;rect class=&quot;pd-bg&quot; width=&quot;1530&quot; height=&quot;532&quot;/&gt;
+&lt;text class=&quot;pd-title&quot; x=&quot;20&quot; y=&quot;28&quot;&gt;World Cup&lt;/text&gt;
+&lt;text class=&quot;pd-season&quot; x=&quot;128&quot; y=&quot;28&quot;&gt;Qatar 2022&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;115&quot; y=&quot;68&quot;&gt;Round of 16&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;1415&quot; y=&quot;68&quot;&gt;Round of 16&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;68&quot;&gt;Quarterfinals&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;1155&quot; y=&quot;68&quot;&gt;Quarterfinals&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;635&quot; y=&quot;254&quot;&gt;Semifinals&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;895&quot; y=&quot;254&quot;&gt;Semifinals&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;765&quot; y=&quot;116&quot;&gt;Final&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;765&quot; y=&quot;404&quot;&gt;Third place&lt;/text&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 210 138 L 245 138 L 245 178 L 280 178&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 210 242 L 245 242 L 245 202 L 280 202&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 210 346 L 245 346 L 245 386 L 280 386&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 210 450 L 245 450 L 245 410 L 280 410&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1320 138 L 1285 138 L 1285 178 L 1250 178&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1320 242 L 1285 242 L 1285 202 L 1250 202&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1320 346 L 1285 346 L 1285 386 L 1250 386&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1320 450 L 1285 450 L 1285 410 L 1250 410&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 470 190 L 505 190 L 505 282 L 540 282&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 470 398 L 505 398 L 505 306 L 540 306&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1060 190 L 1025 190 L 1025 282 L 990 282&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 1060 398 L 1025 398 L 1025 306 L 990 306&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;108&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;R16-1&lt;/tspan&gt; · Saturday 03 December Khalifa International Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;114&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;138&quot; x2=&quot;210&quot; y2=&quot;138&quot;/&gt;
+&lt;g class=&quot;pd-win&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/netherlands.svg&quot; x=&quot;30&quot; y=&quot;118&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;118&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;130&quot;&gt;Netherlands&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;130&quot;&gt;3&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/usa.svg&quot; x=&quot;30&quot; y=&quot;142&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;142&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;154&quot;&gt;USA&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;154&quot;&gt;1&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;280&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;R16-2&lt;/tspan&gt; · Saturday 03 December Ahmad bin Ali Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;218&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;242&quot; x2=&quot;210&quot; y2=&quot;242&quot;/&gt;
+&lt;g class=&quot;pd-win&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/argentina.svg&quot; x=&quot;30&quot; y=&quot;222&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;222&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;234&quot;&gt;Argentina&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;234&quot;&gt;2&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/australia.svg&quot; x=&quot;30&quot; y=&quot;246&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;246&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;258&quot;&gt;Australia&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;258&quot;&gt;1&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;316&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;R16-3&lt;/tspan&gt; · Monday 05 December Al Janoub Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;322&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;346&quot; x2=&quot;210&quot; y2=&quot;346&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/japan.svg&quot; x=&quot;30&quot; y=&quot;326&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;326&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;338&quot;&gt;Japan&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;338&quot;&gt;1 (1)&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;pd-win&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/croatia.svg&quot; x=&quot;30&quot; y=&quot;350&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;350&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;362&quot;&gt;Croatia&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;362&quot;&gt;1 (3)&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;488&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;R16-4&lt;/tspan&gt; · Monday 05 December Stadium 974&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;426&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;450&quot; x2=&quot;210&quot; y2=&quot;450&quot;/&gt;
+&lt;g class=&quot;pd-win&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/brazil.svg&quot; x=&quot;30&quot; y=&quot;430&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;430&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;442&quot;&gt;Brazil&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;442&quot;&gt;4&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/south_korea.svg&quot; x=&quot;30&quot; y=&quot;454&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;454&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;466&quot;&gt;South Korea&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;466&quot;&gt;1&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1510&quot; y=&quot;108&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;R16-5&lt;/tspan&gt; · Tuesday 06 December Education City Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1320&quot; y=&quot;114&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1320&quot; y1=&quot;138&quot; x2=&quot;1510&quot; y2=&quot;138&quot;/&gt;
+&lt;g class=&quot;pd-win&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/morocco.svg&quot; x=&quot;1330&quot; y=&quot;118&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;1330&quot; y=&quot;118&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1360&quot; y=&quot;130&quot;&gt;Morocco&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;1502&quot; y=&quot;130&quot;&gt;0 (3)&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/spain.svg&quot; x=&quot;1330&quot; y=&quot;142&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;1330&quot; y=&quot;142&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1360&quot; y=&quot;154&quot;&gt;Spain&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;1502&quot; y=&quot;154&quot;&gt;0 (0)&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1510&quot; y=&quot;280&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;R16-6&lt;/tspan&gt; · Tuesday 06 December Lusail Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1320&quot; y=&quot;218&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1320&quot; y1=&quot;242&quot; x2=&quot;1510&quot; y2=&quot;242&quot;/&gt;
+&lt;g class=&quot;pd-win&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/portugal.svg&quot; x=&quot;1330&quot; y=&quot;222&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;1330&quot; y=&quot;222&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1360&quot; y=&quot;234&quot;&gt;Portugal&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;1502&quot; y=&quot;234&quot;&gt;6&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/switzerland.svg&quot; x=&quot;1330&quot; y=&quot;246&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;1330&quot; y=&quot;246&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1360&quot; y=&quot;258&quot;&gt;Switzerland&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;1502&quot; y=&quot;258&quot;&gt;1&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1510&quot; y=&quot;316&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;R16-7&lt;/tspan&gt; · Sunday 04 December Al Bayt Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1320&quot; y=&quot;322&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1320&quot; y1=&quot;346&quot; x2=&quot;1510&quot; y2=&quot;346&quot;/&gt;
+&lt;g class=&quot;pd-win&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/england.svg&quot; x=&quot;1330&quot; y=&quot;326&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;1330&quot; y=&quot;326&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1360&quot; y=&quot;338&quot;&gt;England&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;1502&quot; y=&quot;338&quot;&gt;3&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/senegal.svg&quot; x=&quot;1330&quot; y=&quot;350&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;1330&quot; y=&quot;350&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1360&quot; y=&quot;362&quot;&gt;Senegal&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;1502&quot; y=&quot;362&quot;&gt;0&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1510&quot; y=&quot;488&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;R16-8&lt;/tspan&gt; · Sunday 04 December Al Thumama Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1320&quot; y=&quot;426&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1320&quot; y1=&quot;450&quot; x2=&quot;1510&quot; y2=&quot;450&quot;/&gt;
+&lt;g class=&quot;pd-win&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/france.svg&quot; x=&quot;1330&quot; y=&quot;430&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;1330&quot; y=&quot;430&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1360&quot; y=&quot;442&quot;&gt;France&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;1502&quot; y=&quot;442&quot;&gt;3&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/poland.svg&quot; x=&quot;1330&quot; y=&quot;454&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;1330&quot; y=&quot;454&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1360&quot; y=&quot;466&quot;&gt;Poland&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;1502&quot; y=&quot;466&quot;&gt;1&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;160&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF1&lt;/tspan&gt; · Friday 09 December Lusail Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;166&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;190&quot; x2=&quot;470&quot; y2=&quot;190&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/netherlands.svg&quot; x=&quot;290&quot; y=&quot;170&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;290&quot; y=&quot;170&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;320&quot; y=&quot;182&quot;&gt;Netherlands&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;462&quot; y=&quot;182&quot;&gt;2 (3)&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;pd-win&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/argentina.svg&quot; x=&quot;290&quot; y=&quot;194&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;290&quot; y=&quot;194&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;320&quot; y=&quot;206&quot;&gt;Argentina&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;462&quot; y=&quot;206&quot;&gt;2 (4)&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;436&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF2&lt;/tspan&gt; · Friday 09 December Education City Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;374&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;398&quot; x2=&quot;470&quot; y2=&quot;398&quot;/&gt;
+&lt;g class=&quot;pd-win&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/croatia.svg&quot; x=&quot;290&quot; y=&quot;378&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;290&quot; y=&quot;378&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;320&quot; y=&quot;390&quot;&gt;Croatia&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;462&quot; y=&quot;390&quot;&gt;1 (4)&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/brazil.svg&quot; x=&quot;290&quot; y=&quot;402&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;290&quot; y=&quot;402&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;320&quot; y=&quot;414&quot;&gt;Brazil&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;462&quot; y=&quot;414&quot;&gt;1 (2)&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1250&quot; y=&quot;160&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF3&lt;/tspan&gt; · Saturday 10 December Al Thumama Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1060&quot; y=&quot;166&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1060&quot; y1=&quot;190&quot; x2=&quot;1250&quot; y2=&quot;190&quot;/&gt;
+&lt;g class=&quot;pd-win&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/morocco.svg&quot; x=&quot;1070&quot; y=&quot;170&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;1070&quot; y=&quot;170&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1100&quot; y=&quot;182&quot;&gt;Morocco&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;1242&quot; y=&quot;182&quot;&gt;1&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/portugal.svg&quot; x=&quot;1070&quot; y=&quot;194&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;1070&quot; y=&quot;194&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1100&quot; y=&quot;206&quot;&gt;Portugal&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;1242&quot; y=&quot;206&quot;&gt;0&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1250&quot; y=&quot;436&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF4&lt;/tspan&gt; · Saturday 10 December Al Bayt Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;1060&quot; y=&quot;374&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;1060&quot; y1=&quot;398&quot; x2=&quot;1250&quot; y2=&quot;398&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/england.svg&quot; x=&quot;1070&quot; y=&quot;378&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;1070&quot; y=&quot;378&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1100&quot; y=&quot;390&quot;&gt;England&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;1242&quot; y=&quot;390&quot;&gt;1&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;pd-win&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/france.svg&quot; x=&quot;1070&quot; y=&quot;402&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;1070&quot; y=&quot;402&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;1100&quot; y=&quot;414&quot;&gt;France&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;1242&quot; y=&quot;414&quot;&gt;2&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;540&quot; y=&quot;332&quot;&gt;&lt;tspan x=&quot;540&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF1&lt;/tspan&gt; · Tuesday 13 December&lt;/tspan&gt;&lt;tspan x=&quot;540&quot; dy=&quot;13&quot;&gt;Lusail Stadium&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;540&quot; y=&quot;270&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;540&quot; y1=&quot;294&quot; x2=&quot;730&quot; y2=&quot;294&quot;/&gt;
+&lt;g class=&quot;pd-win&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/argentina.svg&quot; x=&quot;550&quot; y=&quot;274&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;550&quot; y=&quot;274&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;580&quot; y=&quot;286&quot;&gt;Argentina&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;722&quot; y=&quot;286&quot;&gt;3&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/croatia.svg&quot; x=&quot;550&quot; y=&quot;298&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;550&quot; y=&quot;298&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;580&quot; y=&quot;310&quot;&gt;Croatia&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;722&quot; y=&quot;310&quot;&gt;0&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;800&quot; y=&quot;332&quot;&gt;&lt;tspan x=&quot;800&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF2&lt;/tspan&gt; · Wednesday 14 December&lt;/tspan&gt;&lt;tspan x=&quot;800&quot; dy=&quot;13&quot;&gt;Al Bayt Stadium&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;800&quot; y=&quot;270&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;800&quot; y1=&quot;294&quot; x2=&quot;990&quot; y2=&quot;294&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/morocco.svg&quot; x=&quot;810&quot; y=&quot;274&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;810&quot; y=&quot;274&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;840&quot; y=&quot;286&quot;&gt;Morocco&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;982&quot; y=&quot;286&quot;&gt;0&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;pd-win&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/france.svg&quot; x=&quot;810&quot; y=&quot;298&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;810&quot; y=&quot;298&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;840&quot; y=&quot;310&quot;&gt;France&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;982&quot; y=&quot;310&quot;&gt;2&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;670&quot; y=&quot;146&quot;&gt;Sunday 18 December Lusail Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;670&quot; y=&quot;152&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;670&quot; y1=&quot;176&quot; x2=&quot;860&quot; y2=&quot;176&quot;/&gt;
+&lt;g class=&quot;pd-win&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/argentina.svg&quot; x=&quot;680&quot; y=&quot;156&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;680&quot; y=&quot;156&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;710&quot; y=&quot;168&quot;&gt;Argentina&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;852&quot; y=&quot;168&quot;&gt;3 (4)&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/france.svg&quot; x=&quot;680&quot; y=&quot;180&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;680&quot; y=&quot;180&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;710&quot; y=&quot;192&quot;&gt;France&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;852&quot; y=&quot;192&quot;&gt;3 (2)&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;670&quot; y=&quot;430&quot;&gt;Saturday 17 December Khalifa International Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;670&quot; y=&quot;436&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;670&quot; y1=&quot;460&quot; x2=&quot;860&quot; y2=&quot;460&quot;/&gt;
+&lt;g class=&quot;pd-win&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/croatia.svg&quot; x=&quot;680&quot; y=&quot;440&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;680&quot; y=&quot;440&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;710&quot; y=&quot;452&quot;&gt;Croatia&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;852&quot; y=&quot;452&quot;&gt;2&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;flags/morocco.svg&quot; x=&quot;680&quot; y=&quot;464&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
+&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;680&quot; y=&quot;464&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;710&quot; y=&quot;476&quot;&gt;Morocco&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;852&quot; y=&quot;476&quot;&gt;1&lt;/text&gt;
+&lt;/g&gt;
+&lt;/svg&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
+<div class="pane pane-table"><h3>HTML table — flat</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage pd-flags&quot;&gt;
+&lt;style&gt;
+  .pd-stage { font-family: sans-serif; color: #1f2937; background: #ffffff; }
+  .pd-title { font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 12px; }
+  .pd-season { font-size: 13px; font-weight: 400; color: #6b7280; margin-left: 8px; }
+  .pd-header { font-size: 15px; font-weight: 600; color: #374151; margin: 26px 0 8px; }
+  /* The first round sits tight under the title; later rounds get the full gap (matching
+     the flat layout's separation between a box and the next round head). */
+  .pd-round:first-child .pd-header { margin-top: 14px; }
+  .pd-meta { font-size: 11px; color: #6b7280; margin: 0 0 3px; }
+  .pd-meta-id { font-weight: 700; }
+  .pd-match { border-collapse: separate; border-spacing: 0; width: 100%;
+              max-width: 24em; border: 1px solid #d1d5db; border-radius: 3px;
+              overflow: hidden; margin: 0 0 15px; }
+  .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
+  .pd-team { font-size: 13px; padding: 5px 10px; }
+  .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
+  .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
+              white-space: nowrap; }
+  .pd-win td { font-weight: 700; color: #065f46; }
+  .pd-grid { border-collapse: separate; border-spacing: 0; margin: 0 0 4px; }
+  .pd-grid td { font-size: 13px; padding: 4px 6px; vertical-align: middle;
+                white-space: nowrap; }
+  .pd-team1, .pd-score1, .pd-crest1 { text-align: right; }
+  .pd-team2, .pd-score2, .pd-crest2 { text-align: left; }
+  .pd-crest1, .pd-crest2 { padding: 0; }
+  .pd-crest1 .pd-crest { margin: 0 0 0 6px; }
+  .pd-crest2 .pd-crest { margin: 0 6px 0 0; }
+  .pd-vs { color: #9ca3af; padding: 4px 8px; }
+  /* Box each leg's score row, so a match reads as a unit like the SVG/stacked
+     boxes; the metadata line stays above the box (as in the stacked layout). */
+  .pd-grid .pd-match-row td { border-top: 1px solid #d1d5db;
+                              border-bottom: 1px solid #d1d5db; }
+  .pd-grid .pd-match-row td:first-child { border-left: 1px solid #d1d5db;
+      border-top-left-radius: 3px; border-bottom-left-radius: 3px; }
+  .pd-grid .pd-match-row td:last-child { border-right: 1px solid #d1d5db;
+      border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
+  .pd-grid .pd-round-head { font-size: 15px; font-weight: 600; color: #374151;
+                            text-align: left; padding: 26px 6px 6px 0; }
+  .pd-grid tr:first-child .pd-round-head { padding-top: 10px; }
+  .pd-grid .pd-meta { font-size: 11px; color: #6b7280; text-align: left;
+                      padding: 14px 6px 2px 0; }
+  /* The first match's metadata in a round sits right under the round head, which already
+     supplies the gap (matching the stacked layout); only later matches need the full top. */
+  .pd-grid .pd-round-row + .pd-meta-row .pd-meta { padding-top: 2px; }
+  .pd-grid .pd-win { font-weight: 700; color: #065f46; }
+  @media (prefers-color-scheme: dark) {
+    .pd-stage { color: #e5e7eb; background: #0f172a; }
+    .pd-title { color: #f8fafc; }
+    .pd-season { color: #94a3b8; }
+    .pd-header { color: #cbd5e1; }
+    .pd-meta, .pd-grid .pd-meta { color: #94a3b8; }
+    .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
+    .pd-match { background: #1e293b; border-color: #334155; }
+    .pd-grid .pd-match-row td { background: #1e293b; border-color: #334155; }
+    .pd-grid .pd-match-row td:first-child,
+    .pd-grid .pd-match-row td:last-child { border-color: #334155; }
+    .pd-side + .pd-side td { border-top-color: #334155; }
+    .pd-win td, .pd-grid .pd-win { color: #34d399; }
+    .pd-vs { color: #64748b; }
+    .pd-grid .pd-round-head { color: #cbd5e1; }
+  }&lt;/style&gt;
+&lt;h2 class=&quot;pd-title&quot;&gt;World Cup &lt;span class=&quot;pd-season&quot;&gt;Qatar 2022&lt;/span&gt;&lt;/h2&gt;
+&lt;table class=&quot;pd-grid&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-round-row&quot;&gt;
+&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Round of 16&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;R16-1&lt;/span&gt; · Saturday 03 December Khalifa International Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1 pd-win&quot;&gt;Netherlands&lt;/td&gt;
+&lt;td class=&quot;pd-crest1 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/netherlands.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1 pd-win&quot;&gt;3&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;1&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/usa.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;USA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;R16-2&lt;/span&gt; · Saturday 03 December Ahmad bin Ali Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1 pd-win&quot;&gt;Argentina&lt;/td&gt;
+&lt;td class=&quot;pd-crest1 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/argentina.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1 pd-win&quot;&gt;2&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;1&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/australia.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Australia&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;R16-3&lt;/span&gt; · Monday 05 December Al Janoub Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Japan&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/japan.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;1 (1)&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2 pd-win&quot;&gt;1 (3)&lt;/td&gt;
+&lt;td class=&quot;pd-crest2 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/croatia.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2 pd-win&quot;&gt;Croatia&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;R16-4&lt;/span&gt; · Monday 05 December Stadium 974&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1 pd-win&quot;&gt;Brazil&lt;/td&gt;
+&lt;td class=&quot;pd-crest1 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/brazil.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1 pd-win&quot;&gt;4&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;1&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/south_korea.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;South Korea&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;R16-5&lt;/span&gt; · Tuesday 06 December Education City Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1 pd-win&quot;&gt;Morocco&lt;/td&gt;
+&lt;td class=&quot;pd-crest1 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/morocco.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1 pd-win&quot;&gt;0 (3)&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;0 (0)&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/spain.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Spain&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;R16-6&lt;/span&gt; · Tuesday 06 December Lusail Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1 pd-win&quot;&gt;Portugal&lt;/td&gt;
+&lt;td class=&quot;pd-crest1 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/portugal.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1 pd-win&quot;&gt;6&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;1&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/switzerland.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Switzerland&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;R16-7&lt;/span&gt; · Sunday 04 December Al Bayt Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1 pd-win&quot;&gt;England&lt;/td&gt;
+&lt;td class=&quot;pd-crest1 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/england.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1 pd-win&quot;&gt;3&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;0&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/senegal.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Senegal&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;R16-8&lt;/span&gt; · Sunday 04 December Al Thumama Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1 pd-win&quot;&gt;France&lt;/td&gt;
+&lt;td class=&quot;pd-crest1 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/france.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1 pd-win&quot;&gt;3&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;1&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/poland.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Poland&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-round-row&quot;&gt;
+&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Quarterfinals&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;QF1&lt;/span&gt; · Friday 09 December Lusail Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Netherlands&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/netherlands.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;2 (3)&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2 pd-win&quot;&gt;2 (4)&lt;/td&gt;
+&lt;td class=&quot;pd-crest2 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/argentina.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2 pd-win&quot;&gt;Argentina&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;QF2&lt;/span&gt; · Friday 09 December Education City Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1 pd-win&quot;&gt;Croatia&lt;/td&gt;
+&lt;td class=&quot;pd-crest1 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/croatia.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1 pd-win&quot;&gt;1 (4)&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;1 (2)&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/brazil.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Brazil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;QF3&lt;/span&gt; · Saturday 10 December Al Thumama Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1 pd-win&quot;&gt;Morocco&lt;/td&gt;
+&lt;td class=&quot;pd-crest1 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/morocco.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1 pd-win&quot;&gt;1&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;0&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/portugal.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Portugal&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;QF4&lt;/span&gt; · Saturday 10 December Al Bayt Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;England&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/england.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;1&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2 pd-win&quot;&gt;2&lt;/td&gt;
+&lt;td class=&quot;pd-crest2 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/france.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2 pd-win&quot;&gt;France&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-round-row&quot;&gt;
+&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Semifinals&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;SF1&lt;/span&gt; · Tuesday 13 December Lusail Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1 pd-win&quot;&gt;Argentina&lt;/td&gt;
+&lt;td class=&quot;pd-crest1 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/argentina.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1 pd-win&quot;&gt;3&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;0&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/croatia.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Croatia&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;SF2&lt;/span&gt; · Wednesday 14 December Al Bayt Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1&quot;&gt;Morocco&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/morocco.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1&quot;&gt;0&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2 pd-win&quot;&gt;2&lt;/td&gt;
+&lt;td class=&quot;pd-crest2 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/france.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2 pd-win&quot;&gt;France&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-round-row&quot;&gt;
+&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Final&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;Sunday 18 December Lusail Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1 pd-win&quot;&gt;Argentina&lt;/td&gt;
+&lt;td class=&quot;pd-crest1 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/argentina.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1 pd-win&quot;&gt;3 (4)&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;3 (2)&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/france.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;France&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-round-row&quot;&gt;
+&lt;td class=&quot;pd-round-head&quot; colspan=&quot;7&quot;&gt;Third place&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-meta-row&quot;&gt;
+&lt;td class=&quot;pd-meta&quot; colspan=&quot;7&quot;&gt;Saturday 17 December Khalifa International Stadium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-match-row&quot;&gt;
+&lt;td class=&quot;pd-team pd-team1 pd-win&quot;&gt;Croatia&lt;/td&gt;
+&lt;td class=&quot;pd-crest1 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/croatia.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score1 pd-win&quot;&gt;2&lt;/td&gt;
+&lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
+&lt;td class=&quot;pd-score pd-score2&quot;&gt;1&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/morocco.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-team pd-team2&quot;&gt;Morocco&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
+<div class="pane pane-table"><h3>HTML table — stacked</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage pd-flags&quot;&gt;
+&lt;style&gt;
+  .pd-stage { font-family: sans-serif; color: #1f2937; background: #ffffff; }
+  .pd-title { font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 12px; }
+  .pd-season { font-size: 13px; font-weight: 400; color: #6b7280; margin-left: 8px; }
+  .pd-header { font-size: 15px; font-weight: 600; color: #374151; margin: 26px 0 8px; }
+  /* The first round sits tight under the title; later rounds get the full gap (matching
+     the flat layout's separation between a box and the next round head). */
+  .pd-round:first-child .pd-header { margin-top: 14px; }
+  .pd-meta { font-size: 11px; color: #6b7280; margin: 0 0 3px; }
+  .pd-meta-id { font-weight: 700; }
+  .pd-match { border-collapse: separate; border-spacing: 0; width: 100%;
+              max-width: 24em; border: 1px solid #d1d5db; border-radius: 3px;
+              overflow: hidden; margin: 0 0 15px; }
+  .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
+  .pd-team { font-size: 13px; padding: 5px 10px; }
+  .pd-crest { width: 16px; height: 16px; vertical-align: middle; margin-right: 6px; }
+  .pd-flags .pd-crest { width: 24px; height: 16px; object-fit: cover;
+                        box-sizing: border-box; border: 1px solid #d1d5db; }
+  .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
+              white-space: nowrap; }
+  .pd-win td { font-weight: 700; color: #065f46; }
+  .pd-grid { border-collapse: separate; border-spacing: 0; margin: 0 0 4px; }
+  .pd-grid td { font-size: 13px; padding: 4px 6px; vertical-align: middle;
+                white-space: nowrap; }
+  .pd-team1, .pd-score1, .pd-crest1 { text-align: right; }
+  .pd-team2, .pd-score2, .pd-crest2 { text-align: left; }
+  .pd-crest1, .pd-crest2 { padding: 0; }
+  .pd-crest1 .pd-crest { margin: 0 0 0 6px; }
+  .pd-crest2 .pd-crest { margin: 0 6px 0 0; }
+  .pd-vs { color: #9ca3af; padding: 4px 8px; }
+  /* Box each leg's score row, so a match reads as a unit like the SVG/stacked
+     boxes; the metadata line stays above the box (as in the stacked layout). */
+  .pd-grid .pd-match-row td { border-top: 1px solid #d1d5db;
+                              border-bottom: 1px solid #d1d5db; }
+  .pd-grid .pd-match-row td:first-child { border-left: 1px solid #d1d5db;
+      border-top-left-radius: 3px; border-bottom-left-radius: 3px; }
+  .pd-grid .pd-match-row td:last-child { border-right: 1px solid #d1d5db;
+      border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
+  .pd-grid .pd-round-head { font-size: 15px; font-weight: 600; color: #374151;
+                            text-align: left; padding: 26px 6px 6px 0; }
+  .pd-grid tr:first-child .pd-round-head { padding-top: 10px; }
+  .pd-grid .pd-meta { font-size: 11px; color: #6b7280; text-align: left;
+                      padding: 14px 6px 2px 0; }
+  /* The first match's metadata in a round sits right under the round head, which already
+     supplies the gap (matching the stacked layout); only later matches need the full top. */
+  .pd-grid .pd-round-row + .pd-meta-row .pd-meta { padding-top: 2px; }
+  .pd-grid .pd-win { font-weight: 700; color: #065f46; }
+  @media (prefers-color-scheme: dark) {
+    .pd-stage { color: #e5e7eb; background: #0f172a; }
+    .pd-title { color: #f8fafc; }
+    .pd-season { color: #94a3b8; }
+    .pd-header { color: #cbd5e1; }
+    .pd-meta, .pd-grid .pd-meta { color: #94a3b8; }
+    .pd-team, .pd-score, .pd-grid td { color: #e5e7eb; }
+    .pd-flags .pd-crest { border-color: #334155; }
+    .pd-match { background: #1e293b; border-color: #334155; }
+    .pd-grid .pd-match-row td { background: #1e293b; border-color: #334155; }
+    .pd-grid .pd-match-row td:first-child,
+    .pd-grid .pd-match-row td:last-child { border-color: #334155; }
+    .pd-side + .pd-side td { border-top-color: #334155; }
+    .pd-win td, .pd-grid .pd-win { color: #34d399; }
+    .pd-vs { color: #64748b; }
+    .pd-grid .pd-round-head { color: #cbd5e1; }
+  }&lt;/style&gt;
+&lt;h2 class=&quot;pd-title&quot;&gt;World Cup &lt;span class=&quot;pd-season&quot;&gt;Qatar 2022&lt;/span&gt;&lt;/h2&gt;
+&lt;div class=&quot;pd-round&quot;&gt;
+&lt;h3 class=&quot;pd-header&quot;&gt;Round of 16&lt;/h3&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;R16-1&lt;/span&gt; · Saturday 03 December Khalifa International Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side pd-win&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/netherlands.svg&quot; alt=&quot;&quot;/&gt;Netherlands&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/usa.svg&quot; alt=&quot;&quot;/&gt;USA&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;R16-2&lt;/span&gt; · Saturday 03 December Ahmad bin Ali Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side pd-win&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/argentina.svg&quot; alt=&quot;&quot;/&gt;Argentina&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/australia.svg&quot; alt=&quot;&quot;/&gt;Australia&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;R16-3&lt;/span&gt; · Monday 05 December Al Janoub Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/japan.svg&quot; alt=&quot;&quot;/&gt;Japan&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;1 (1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side pd-win&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/croatia.svg&quot; alt=&quot;&quot;/&gt;Croatia&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;1 (3)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;R16-4&lt;/span&gt; · Monday 05 December Stadium 974&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side pd-win&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/brazil.svg&quot; alt=&quot;&quot;/&gt;Brazil&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/south_korea.svg&quot; alt=&quot;&quot;/&gt;South Korea&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;R16-5&lt;/span&gt; · Tuesday 06 December Education City Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side pd-win&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/morocco.svg&quot; alt=&quot;&quot;/&gt;Morocco&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;0 (3)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/spain.svg&quot; alt=&quot;&quot;/&gt;Spain&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;0 (0)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;R16-6&lt;/span&gt; · Tuesday 06 December Lusail Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side pd-win&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/portugal.svg&quot; alt=&quot;&quot;/&gt;Portugal&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/switzerland.svg&quot; alt=&quot;&quot;/&gt;Switzerland&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;R16-7&lt;/span&gt; · Sunday 04 December Al Bayt Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side pd-win&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/england.svg&quot; alt=&quot;&quot;/&gt;England&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/senegal.svg&quot; alt=&quot;&quot;/&gt;Senegal&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;R16-8&lt;/span&gt; · Sunday 04 December Al Thumama Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side pd-win&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/france.svg&quot; alt=&quot;&quot;/&gt;France&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/poland.svg&quot; alt=&quot;&quot;/&gt;Poland&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;pd-round&quot;&gt;
+&lt;h3 class=&quot;pd-header&quot;&gt;Quarterfinals&lt;/h3&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;QF1&lt;/span&gt; · Friday 09 December Lusail Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/netherlands.svg&quot; alt=&quot;&quot;/&gt;Netherlands&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;2 (3)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side pd-win&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/argentina.svg&quot; alt=&quot;&quot;/&gt;Argentina&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;2 (4)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;QF2&lt;/span&gt; · Friday 09 December Education City Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side pd-win&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/croatia.svg&quot; alt=&quot;&quot;/&gt;Croatia&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;1 (4)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/brazil.svg&quot; alt=&quot;&quot;/&gt;Brazil&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;1 (2)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;QF3&lt;/span&gt; · Saturday 10 December Al Thumama Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side pd-win&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/morocco.svg&quot; alt=&quot;&quot;/&gt;Morocco&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/portugal.svg&quot; alt=&quot;&quot;/&gt;Portugal&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;QF4&lt;/span&gt; · Saturday 10 December Al Bayt Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/england.svg&quot; alt=&quot;&quot;/&gt;England&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side pd-win&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/france.svg&quot; alt=&quot;&quot;/&gt;France&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;pd-round&quot;&gt;
+&lt;h3 class=&quot;pd-header&quot;&gt;Semifinals&lt;/h3&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;SF1&lt;/span&gt; · Tuesday 13 December Lusail Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side pd-win&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/argentina.svg&quot; alt=&quot;&quot;/&gt;Argentina&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/croatia.svg&quot; alt=&quot;&quot;/&gt;Croatia&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;&lt;span class=&quot;pd-meta-id&quot;&gt;SF2&lt;/span&gt; · Wednesday 14 December Al Bayt Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/morocco.svg&quot; alt=&quot;&quot;/&gt;Morocco&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side pd-win&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/france.svg&quot; alt=&quot;&quot;/&gt;France&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;pd-round&quot;&gt;
+&lt;h3 class=&quot;pd-header&quot;&gt;Final&lt;/h3&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;Sunday 18 December Lusail Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side pd-win&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/argentina.svg&quot; alt=&quot;&quot;/&gt;Argentina&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;3 (4)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/france.svg&quot; alt=&quot;&quot;/&gt;France&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;3 (2)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class=&quot;pd-round&quot;&gt;
+&lt;h3 class=&quot;pd-header&quot;&gt;Third place&lt;/h3&gt;
+&lt;div class=&quot;pd-meta&quot;&gt;Saturday 17 December Khalifa International Stadium&lt;/div&gt;
+&lt;table class=&quot;pd-match&quot;&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;pd-side pd-win&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/croatia.svg&quot; alt=&quot;&quot;/&gt;Croatia&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;pd-side&quot;&gt;
+&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/morocco.svg&quot; alt=&quot;&quot;/&gt;Morocco&lt;/td&gt;
+&lt;td class=&quot;pd-score&quot;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
+</div>
+</section>
+<section class="example">
 <h2>knockout-8.json</h2>
-<p class="note">World Cup round of 8 — host-resolved flags by name (world_cup_flags_host).</p>
+<p class="note">World Cup round of 8 — an in-progress bracket: only the quarterfinals are played, so the semifinals and final fall back to 'Winner SF1/SF2' placeholders (the winnerof links drawn as connectors). Single matches, shootouts in parentheses. Base loader.</p>
 <details class="src" open><summary>source JSON</summary><pre>{
   "tournament": "World Cup",
   "season": "2026",
@@ -167,7 +1193,7 @@
 }
 </pre></details>
 <div class="panes">
-<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 782 518&quot; width=&quot;782&quot; height=&quot;518&quot; font-family=&quot;sans-serif&quot;&gt;
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 1010 390&quot; width=&quot;1010&quot; height=&quot;390&quot; font-family=&quot;sans-serif&quot;&gt;
 &lt;style&gt;
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -196,108 +1222,86 @@
     .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }&lt;/style&gt;
-&lt;rect class=&quot;pd-bg&quot; width=&quot;782&quot; height=&quot;518&quot;/&gt;
+&lt;rect class=&quot;pd-bg&quot; width=&quot;1010&quot; height=&quot;390&quot;/&gt;
 &lt;text class=&quot;pd-title&quot; x=&quot;20&quot; y=&quot;28&quot;&gt;World Cup&lt;/text&gt;
 &lt;text class=&quot;pd-season&quot; x=&quot;128&quot; y=&quot;28&quot;&gt;2026&lt;/text&gt;
 &lt;text class=&quot;pd-header&quot; x=&quot;115&quot; y=&quot;68&quot;&gt;Quarterfinals&lt;/text&gt;
-&lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;68&quot;&gt;Semifinals&lt;/text&gt;
-&lt;text class=&quot;pd-header&quot; x=&quot;635&quot; y=&quot;68&quot;&gt;Final&lt;/text&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 210 124 L 245 124 L 245 164 L 280 164&quot;/&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 210 228 L 245 228 L 245 188 L 280 188&quot;/&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 210 332 L 245 332 L 245 372 L 280 372&quot;/&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 210 436 L 245 436 L 245 396 L 280 396&quot;/&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 470 176 L 505 176 L 505 268 L 540 268&quot;/&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 470 384 L 505 384 L 505 292 L 540 292&quot;/&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;94&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF1&lt;/tspan&gt; · Thursday 09 July, 19:00 Gillette Stadium&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;100&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;124&quot; x2=&quot;210&quot; y2=&quot;124&quot;/&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;895&quot; y=&quot;68&quot;&gt;Quarterfinals&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;216&quot;&gt;Semifinals&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;635&quot; y=&quot;216&quot;&gt;Semifinals&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;505&quot; y=&quot;78&quot;&gt;Final&lt;/text&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 210 204 L 245 204 L 245 244 L 280 244&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 210 308 L 245 308 L 245 268 L 280 268&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 800 204 L 765 204 L 765 244 L 730 244&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 800 308 L 765 308 L 765 268 L 730 268&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;174&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF1&lt;/tspan&gt; · Thursday 09 July, 19:00 Gillette Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;180&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;204&quot; x2=&quot;210&quot; y2=&quot;204&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/france.svg&quot; x=&quot;30&quot; y=&quot;104&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
-&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;104&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;116&quot;&gt;France&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;116&quot;&gt;3&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;196&quot;&gt;France&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;196&quot;&gt;3&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/portugal.svg&quot; x=&quot;30&quot; y=&quot;128&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
-&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;128&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;140&quot;&gt;Portugal&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;140&quot;&gt;0&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;220&quot;&gt;Portugal&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;220&quot;&gt;0&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;266&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF2&lt;/tspan&gt; · Friday 10 July, 23:00 SoFi Stadium&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;204&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;228&quot; x2=&quot;210&quot; y2=&quot;228&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;346&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF2&lt;/tspan&gt; · Friday 10 July, 23:00 SoFi Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;284&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;308&quot; x2=&quot;210&quot; y2=&quot;308&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/germany.svg&quot; x=&quot;30&quot; y=&quot;208&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
-&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;208&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;220&quot;&gt;Germany&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;220&quot;&gt;1&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;300&quot;&gt;Germany&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;300&quot;&gt;1&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/spain.svg&quot; x=&quot;30&quot; y=&quot;232&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
-&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;232&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;244&quot;&gt;Spain&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;244&quot;&gt;2&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;324&quot;&gt;Spain&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;324&quot;&gt;2&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;302&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF3&lt;/tspan&gt; · Saturday 11 July, 19:00 Arrowhead Stadium&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;308&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;332&quot; x2=&quot;210&quot; y2=&quot;332&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;990&quot; y=&quot;174&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF3&lt;/tspan&gt; · Saturday 11 July, 19:00 Arrowhead Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;800&quot; y=&quot;180&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;800&quot; y1=&quot;204&quot; x2=&quot;990&quot; y2=&quot;204&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/argentina.svg&quot; x=&quot;30&quot; y=&quot;312&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
-&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;312&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;324&quot;&gt;Argentina&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;324&quot;&gt;0 (5)&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;810&quot; y=&quot;196&quot;&gt;Argentina&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;982&quot; y=&quot;196&quot;&gt;0 (5)&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/netherlands.svg&quot; x=&quot;30&quot; y=&quot;336&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
-&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;336&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;348&quot;&gt;Netherlands&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;348&quot;&gt;0 (4)&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;810&quot; y=&quot;220&quot;&gt;Netherlands&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;982&quot; y=&quot;220&quot;&gt;0 (4)&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;474&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF4&lt;/tspan&gt; · Saturday 11 July, 23:00 Hard Rock Stadium&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;412&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;436&quot; x2=&quot;210&quot; y2=&quot;436&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;990&quot; y=&quot;346&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF4&lt;/tspan&gt; · Saturday 11 July, 23:00 Hard Rock Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;800&quot; y=&quot;284&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;800&quot; y1=&quot;308&quot; x2=&quot;990&quot; y2=&quot;308&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/brazil.svg&quot; x=&quot;30&quot; y=&quot;416&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
-&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;416&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;428&quot;&gt;Brazil&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;810&quot; y=&quot;300&quot;&gt;Brazil&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/england.svg&quot; x=&quot;30&quot; y=&quot;440&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
-&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;30&quot; y=&quot;440&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;60&quot; y=&quot;452&quot;&gt;England&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;810&quot; y=&quot;324&quot;&gt;England&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;146&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF1&lt;/tspan&gt; · Tuesday 14 July, 23:00 AT&amp;amp;T Stadium&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;152&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;176&quot; x2=&quot;470&quot; y2=&quot;176&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;294&quot;&gt;&lt;tspan x=&quot;280&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF1&lt;/tspan&gt; · Tuesday 14 July, 23:00&lt;/tspan&gt;&lt;tspan x=&quot;280&quot; dy=&quot;13&quot;&gt;AT&amp;amp;T Stadium&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;232&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;256&quot; x2=&quot;470&quot; y2=&quot;256&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/france.svg&quot; x=&quot;290&quot; y=&quot;156&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
-&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;290&quot; y=&quot;156&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;320&quot; y=&quot;168&quot;&gt;France&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;248&quot;&gt;France&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/spain.svg&quot; x=&quot;290&quot; y=&quot;180&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
-&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;290&quot; y=&quot;180&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;320&quot; y=&quot;192&quot;&gt;Spain&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;272&quot;&gt;Spain&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;422&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF2&lt;/tspan&gt; · Wednesday 15 July, 23:00 Mercedes-Benz Stadium&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;360&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;384&quot; x2=&quot;470&quot; y2=&quot;384&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;540&quot; y=&quot;294&quot;&gt;&lt;tspan x=&quot;540&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF2&lt;/tspan&gt; · Wednesday 15 July,&lt;/tspan&gt;&lt;tspan x=&quot;540&quot; dy=&quot;13&quot;&gt;23:00 Mercedes-Benz Stadium&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;540&quot; y=&quot;232&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;540&quot; y1=&quot;256&quot; x2=&quot;730&quot; y2=&quot;256&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;flags/argentina.svg&quot; x=&quot;290&quot; y=&quot;364&quot; width=&quot;24&quot; height=&quot;16&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;/&gt;
-&lt;rect class=&quot;pd-crest-frame&quot; x=&quot;290&quot; y=&quot;364&quot; width=&quot;24&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;320&quot; y=&quot;376&quot;&gt;Argentina&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;248&quot;&gt;Argentina&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;400&quot;&gt;Winner QF4&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;272&quot;&gt;Winner QF4&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;540&quot; y=&quot;250&quot;&gt;Sunday 19 July, 19:00 MetLife Stadium&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;540&quot; y=&quot;256&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;540&quot; y1=&quot;280&quot; x2=&quot;730&quot; y2=&quot;280&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;410&quot; y=&quot;108&quot;&gt;Sunday 19 July, 19:00 MetLife Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;410&quot; y=&quot;114&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;410&quot; y1=&quot;138&quot; x2=&quot;600&quot; y2=&quot;138&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;272&quot;&gt;Winner SF1&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;420&quot; y=&quot;130&quot;&gt;Winner SF1&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;296&quot;&gt;Winner SF2&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;420&quot; y=&quot;154&quot;&gt;Winner SF2&lt;/text&gt;
 &lt;/g&gt;
 &lt;/svg&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
 <div class="pane pane-table"><h3>HTML table — flat</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage pd-flags&quot;&gt;
@@ -376,11 +1380,11 @@
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-match-row&quot;&gt;
 &lt;td class=&quot;pd-team pd-team1 pd-win&quot;&gt;France&lt;/td&gt;
-&lt;td class=&quot;pd-crest1 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/france.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest1 pd-win&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score1 pd-win&quot;&gt;3&lt;/td&gt;
 &lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score2&quot;&gt;0&lt;/td&gt;
-&lt;td class=&quot;pd-crest2&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/portugal.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-team pd-team2&quot;&gt;Portugal&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-meta-row&quot;&gt;
@@ -388,11 +1392,11 @@
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-match-row&quot;&gt;
 &lt;td class=&quot;pd-team pd-team1&quot;&gt;Germany&lt;/td&gt;
-&lt;td class=&quot;pd-crest1&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/germany.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score1&quot;&gt;1&lt;/td&gt;
 &lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score2 pd-win&quot;&gt;2&lt;/td&gt;
-&lt;td class=&quot;pd-crest2 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/spain.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2 pd-win&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-team pd-team2 pd-win&quot;&gt;Spain&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-meta-row&quot;&gt;
@@ -400,11 +1404,11 @@
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-match-row&quot;&gt;
 &lt;td class=&quot;pd-team pd-team1 pd-win&quot;&gt;Argentina&lt;/td&gt;
-&lt;td class=&quot;pd-crest1 pd-win&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/argentina.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest1 pd-win&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score1 pd-win&quot;&gt;0 (5)&lt;/td&gt;
 &lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score2&quot;&gt;0 (4)&lt;/td&gt;
-&lt;td class=&quot;pd-crest2&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/netherlands.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-team pd-team2&quot;&gt;Netherlands&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-meta-row&quot;&gt;
@@ -412,11 +1416,11 @@
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-match-row&quot;&gt;
 &lt;td class=&quot;pd-team pd-team1&quot;&gt;Brazil&lt;/td&gt;
-&lt;td class=&quot;pd-crest1&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/brazil.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
-&lt;td class=&quot;pd-crest2&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/england.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-team pd-team2&quot;&gt;England&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-round-row&quot;&gt;
@@ -427,11 +1431,11 @@
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-match-row&quot;&gt;
 &lt;td class=&quot;pd-team pd-team1&quot;&gt;France&lt;/td&gt;
-&lt;td class=&quot;pd-crest1&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/france.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
-&lt;td class=&quot;pd-crest2&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/spain.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest2&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-team pd-team2&quot;&gt;Spain&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-meta-row&quot;&gt;
@@ -439,7 +1443,7 @@
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-match-row&quot;&gt;
 &lt;td class=&quot;pd-team pd-team1&quot;&gt;Argentina&lt;/td&gt;
-&lt;td class=&quot;pd-crest1&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/argentina.svg&quot; alt=&quot;&quot;/&gt;&lt;/td&gt;
+&lt;td class=&quot;pd-crest1&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score1&quot;&gt;&lt;/td&gt;
 &lt;td class=&quot;pd-vs&quot;&gt;x&lt;/td&gt;
 &lt;td class=&quot;pd-score pd-score2&quot;&gt;&lt;/td&gt;
@@ -536,11 +1540,11 @@
 &lt;table class=&quot;pd-match&quot;&gt;
 &lt;tbody&gt;
 &lt;tr class=&quot;pd-side pd-win&quot;&gt;
-&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/france.svg&quot; alt=&quot;&quot;/&gt;France&lt;/td&gt;
+&lt;td class=&quot;pd-team&quot;&gt;France&lt;/td&gt;
 &lt;td class=&quot;pd-score&quot;&gt;3&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-side&quot;&gt;
-&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/portugal.svg&quot; alt=&quot;&quot;/&gt;Portugal&lt;/td&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Portugal&lt;/td&gt;
 &lt;td class=&quot;pd-score&quot;&gt;0&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -549,11 +1553,11 @@
 &lt;table class=&quot;pd-match&quot;&gt;
 &lt;tbody&gt;
 &lt;tr class=&quot;pd-side&quot;&gt;
-&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/germany.svg&quot; alt=&quot;&quot;/&gt;Germany&lt;/td&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Germany&lt;/td&gt;
 &lt;td class=&quot;pd-score&quot;&gt;1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-side pd-win&quot;&gt;
-&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/spain.svg&quot; alt=&quot;&quot;/&gt;Spain&lt;/td&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Spain&lt;/td&gt;
 &lt;td class=&quot;pd-score&quot;&gt;2&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -562,11 +1566,11 @@
 &lt;table class=&quot;pd-match&quot;&gt;
 &lt;tbody&gt;
 &lt;tr class=&quot;pd-side pd-win&quot;&gt;
-&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/argentina.svg&quot; alt=&quot;&quot;/&gt;Argentina&lt;/td&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Argentina&lt;/td&gt;
 &lt;td class=&quot;pd-score&quot;&gt;0 (5)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-side&quot;&gt;
-&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/netherlands.svg&quot; alt=&quot;&quot;/&gt;Netherlands&lt;/td&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Netherlands&lt;/td&gt;
 &lt;td class=&quot;pd-score&quot;&gt;0 (4)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -575,11 +1579,11 @@
 &lt;table class=&quot;pd-match&quot;&gt;
 &lt;tbody&gt;
 &lt;tr class=&quot;pd-side&quot;&gt;
-&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/brazil.svg&quot; alt=&quot;&quot;/&gt;Brazil&lt;/td&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Brazil&lt;/td&gt;
 &lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-side&quot;&gt;
-&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/england.svg&quot; alt=&quot;&quot;/&gt;England&lt;/td&gt;
+&lt;td class=&quot;pd-team&quot;&gt;England&lt;/td&gt;
 &lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -591,11 +1595,11 @@
 &lt;table class=&quot;pd-match&quot;&gt;
 &lt;tbody&gt;
 &lt;tr class=&quot;pd-side&quot;&gt;
-&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/france.svg&quot; alt=&quot;&quot;/&gt;France&lt;/td&gt;
+&lt;td class=&quot;pd-team&quot;&gt;France&lt;/td&gt;
 &lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-side&quot;&gt;
-&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/spain.svg&quot; alt=&quot;&quot;/&gt;Spain&lt;/td&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Spain&lt;/td&gt;
 &lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -604,7 +1608,7 @@
 &lt;table class=&quot;pd-match&quot;&gt;
 &lt;tbody&gt;
 &lt;tr class=&quot;pd-side&quot;&gt;
-&lt;td class=&quot;pd-team&quot;&gt;&lt;img class=&quot;pd-crest&quot; src=&quot;flags/argentina.svg&quot; alt=&quot;&quot;/&gt;Argentina&lt;/td&gt;
+&lt;td class=&quot;pd-team&quot;&gt;Argentina&lt;/td&gt;
 &lt;td class=&quot;pd-score&quot;&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;pd-side&quot;&gt;
@@ -706,7 +1710,7 @@
 }
 </pre></details>
 <div class="panes">
-<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 602 310&quot; width=&quot;602&quot; height=&quot;310&quot; font-family=&quot;sans-serif&quot;&gt;
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 530 338&quot; width=&quot;530&quot; height=&quot;338&quot; font-family=&quot;sans-serif&quot;&gt;
 &lt;style&gt;
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -735,51 +1739,50 @@
     .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }&lt;/style&gt;
-&lt;rect class=&quot;pd-bg&quot; width=&quot;602&quot; height=&quot;310&quot;/&gt;
+&lt;rect class=&quot;pd-bg&quot; width=&quot;530&quot; height=&quot;338&quot;/&gt;
 &lt;text class=&quot;pd-title&quot; x=&quot;20&quot; y=&quot;28&quot;&gt;Copa Río de la Plata&lt;/text&gt;
 &lt;text class=&quot;pd-season&quot; x=&quot;244&quot; y=&quot;28&quot;&gt;2026&lt;/text&gt;
-&lt;text class=&quot;pd-header&quot; x=&quot;125&quot; y=&quot;68&quot;&gt;Semifinales&lt;/text&gt;
-&lt;text class=&quot;pd-header&quot; x=&quot;405&quot; y=&quot;68&quot;&gt;Final&lt;/text&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 230 124 L 265 124 L 265 164 L 300 164&quot;/&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 230 228 L 265 228 L 265 188 L 300 188&quot;/&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;94&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF1&lt;/tspan&gt; · miércoles 16 septiembre, 22:00 Estadio UNO&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;100&quot; width=&quot;210&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;124&quot; x2=&quot;230&quot; y2=&quot;124&quot;/&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;125&quot; y=&quot;216&quot;&gt;Semifinales&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;405&quot; y=&quot;216&quot;&gt;Semifinales&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;265&quot; y=&quot;78&quot;&gt;Final&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;294&quot;&gt;&lt;tspan x=&quot;20&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF1&lt;/tspan&gt; · miércoles 16 septiembre,&lt;/tspan&gt;&lt;tspan x=&quot;20&quot; dy=&quot;13&quot;&gt;22:00 Estadio UNO&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;232&quot; width=&quot;210&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;256&quot; x2=&quot;230&quot; y2=&quot;256&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;crests/estudiantes.svg&quot; x=&quot;30&quot; y=&quot;104&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;52&quot; y=&quot;116&quot;&gt;Estudiantes&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;222&quot; y=&quot;116&quot;&gt;2&lt;/text&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;crests/estudiantes.svg&quot; x=&quot;30&quot; y=&quot;236&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;52&quot; y=&quot;248&quot;&gt;Estudiantes&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;222&quot; y=&quot;248&quot;&gt;2&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;crests/athletic.png&quot; x=&quot;30&quot; y=&quot;128&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;52&quot; y=&quot;140&quot;&gt;Athletic Club&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;222&quot; y=&quot;140&quot;&gt;1&lt;/text&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;crests/athletic.png&quot; x=&quot;30&quot; y=&quot;260&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;52&quot; y=&quot;272&quot;&gt;Athletic Club&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;222&quot; y=&quot;272&quot;&gt;1&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;266&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF2&lt;/tspan&gt; · jueves 17 septiembre, 22:00 Estadio Ciudad de Vicente López&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;204&quot; width=&quot;210&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;228&quot; x2=&quot;230&quot; y2=&quot;228&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;300&quot; y=&quot;294&quot;&gt;&lt;tspan x=&quot;300&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF2&lt;/tspan&gt; · jueves 17 septiembre,&lt;/tspan&gt;&lt;tspan x=&quot;300&quot; dy=&quot;13&quot;&gt;22:00 Estadio Ciudad de Vicente…&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;300&quot; y=&quot;232&quot; width=&quot;210&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;300&quot; y1=&quot;256&quot; x2=&quot;510&quot; y2=&quot;256&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;crests/platense.svg&quot; x=&quot;30&quot; y=&quot;208&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;52&quot; y=&quot;220&quot;&gt;Platense&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;222&quot; y=&quot;220&quot;&gt;1&lt;/text&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;crests/platense.svg&quot; x=&quot;310&quot; y=&quot;236&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;332&quot; y=&quot;248&quot;&gt;Platense&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;502&quot; y=&quot;248&quot;&gt;1&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;crests/internacional.svg&quot; x=&quot;30&quot; y=&quot;232&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;52&quot; y=&quot;244&quot;&gt;Internacional&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;222&quot; y=&quot;244&quot;&gt;0&lt;/text&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;crests/internacional.svg&quot; x=&quot;310&quot; y=&quot;260&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;332&quot; y=&quot;272&quot;&gt;Internacional&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;502&quot; y=&quot;272&quot;&gt;0&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;300&quot; y=&quot;146&quot;&gt;jueves 01 octubre, 22:00 Estadio Más Monumental&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;300&quot; y=&quot;152&quot; width=&quot;210&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;300&quot; y1=&quot;176&quot; x2=&quot;510&quot; y2=&quot;176&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;160&quot; y=&quot;108&quot;&gt;jueves 01 octubre, 22:00 Estadio Más Monumental&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;160&quot; y=&quot;114&quot; width=&quot;210&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;160&quot; y1=&quot;138&quot; x2=&quot;370&quot; y2=&quot;138&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;crests/estudiantes.svg&quot; x=&quot;310&quot; y=&quot;156&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;332&quot; y=&quot;168&quot;&gt;Estudiantes&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;502&quot; y=&quot;168&quot;&gt;1 (4)&lt;/text&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;crests/estudiantes.svg&quot; x=&quot;170&quot; y=&quot;118&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;192&quot; y=&quot;130&quot;&gt;Estudiantes&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;362&quot; y=&quot;130&quot;&gt;1 (4)&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;image class=&quot;pd-crest&quot; href=&quot;crests/platense.svg&quot; x=&quot;310&quot; y=&quot;180&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;332&quot; y=&quot;192&quot;&gt;Platense&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;502&quot; y=&quot;192&quot;&gt;1 (3)&lt;/text&gt;
+&lt;image class=&quot;pd-crest&quot; href=&quot;crests/platense.svg&quot; x=&quot;170&quot; y=&quot;142&quot; width=&quot;16&quot; height=&quot;16&quot;/&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;192&quot; y=&quot;154&quot;&gt;Platense&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;362&quot; y=&quot;154&quot;&gt;1 (3)&lt;/text&gt;
 &lt;/g&gt;
 &lt;/svg&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
 <div class="pane pane-table"><h3>HTML table — flat</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage&quot;&gt;
@@ -1172,7 +2175,7 @@
 }
 </pre></details>
 <div class="panes">
-<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 900 518&quot; width=&quot;900&quot; height=&quot;518&quot; font-family=&quot;sans-serif&quot;&gt;
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 1210 390&quot; width=&quot;1210&quot; height=&quot;390&quot; font-family=&quot;sans-serif&quot;&gt;
 &lt;style&gt;
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -1201,94 +2204,94 @@
     .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }&lt;/style&gt;
-&lt;rect class=&quot;pd-bg&quot; width=&quot;900&quot; height=&quot;518&quot;/&gt;
+&lt;rect class=&quot;pd-bg&quot; width=&quot;1210&quot; height=&quot;390&quot;/&gt;
 &lt;text class=&quot;pd-title&quot; x=&quot;20&quot; y=&quot;28&quot;&gt;Copa Libertadores&lt;/text&gt;
 &lt;text class=&quot;pd-season&quot; x=&quot;212&quot; y=&quot;28&quot;&gt;2026&lt;/text&gt;
 &lt;text class=&quot;pd-header&quot; x=&quot;140&quot; y=&quot;68&quot;&gt;Cuartos de final&lt;/text&gt;
-&lt;text class=&quot;pd-header&quot; x=&quot;450&quot; y=&quot;68&quot;&gt;Semifinales&lt;/text&gt;
-&lt;text class=&quot;pd-header&quot; x=&quot;760&quot; y=&quot;68&quot;&gt;Final&lt;/text&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 260 124 L 295 124 L 295 164 L 330 164&quot;/&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 260 228 L 295 228 L 295 188 L 330 188&quot;/&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 260 332 L 295 332 L 295 372 L 330 372&quot;/&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 260 436 L 295 436 L 295 396 L 330 396&quot;/&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 570 176 L 605 176 L 605 268 L 640 268&quot;/&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 570 384 L 605 384 L 605 292 L 640 292&quot;/&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;94&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF1&lt;/tspan&gt; · 11/08 20:00 Maracanã / 18/08 20:00 La Bombonera&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;100&quot; width=&quot;240&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;124&quot; x2=&quot;260&quot; y2=&quot;124&quot;/&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;1070&quot; y=&quot;68&quot;&gt;Cuartos de final&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;450&quot; y=&quot;216&quot;&gt;Semifinales&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;760&quot; y=&quot;216&quot;&gt;Semifinales&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;605&quot; y=&quot;78&quot;&gt;Final&lt;/text&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 260 204 L 295 204 L 295 244 L 330 244&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 260 308 L 295 308 L 295 268 L 330 268&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 950 204 L 915 204 L 915 244 L 880 244&quot;/&gt;
+&lt;path class=&quot;pd-link&quot; d=&quot;M 950 308 L 915 308 L 915 268 L 880 268&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;174&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF1&lt;/tspan&gt; · 11/08 20:00 Maracanã / 18/08 20:00 La Bombonera&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;180&quot; width=&quot;240&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;204&quot; x2=&quot;260&quot; y2=&quot;204&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;116&quot;&gt;Flamengo&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;252&quot; y=&quot;116&quot;&gt;2 0&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;196&quot;&gt;Flamengo&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;252&quot; y=&quot;196&quot;&gt;2 0&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;140&quot;&gt;Boca Juniors&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;252&quot; y=&quot;140&quot;&gt;1 0&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;220&quot;&gt;Boca Juniors&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;252&quot; y=&quot;220&quot;&gt;1 0&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;266&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF2&lt;/tspan&gt; · 12/08 20:30 Estadio Monumental / 19/08 20:30 Allianz Parque&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;204&quot; width=&quot;240&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;228&quot; x2=&quot;260&quot; y2=&quot;228&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;346&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF2&lt;/tspan&gt; · 12/08 20:30 Estadio Monumental / 19/08 20:30 Allianz Parque&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;284&quot; width=&quot;240&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;308&quot; x2=&quot;260&quot; y2=&quot;308&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;220&quot;&gt;River Plate&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;252&quot; y=&quot;220&quot;&gt;1 0 (4)&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;300&quot;&gt;River Plate&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;252&quot; y=&quot;300&quot;&gt;1 0 (4)&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;244&quot;&gt;Palmeiras&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;252&quot; y=&quot;244&quot;&gt;1 0 (2)&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;324&quot;&gt;Palmeiras&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;252&quot; y=&quot;324&quot;&gt;1 0 (2)&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;302&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF3&lt;/tspan&gt; · 13/08 20:00 Parque Viera / 20/08 20:00 Arena MRV&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;308&quot; width=&quot;240&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;332&quot; x2=&quot;260&quot; y2=&quot;332&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1190&quot; y=&quot;174&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF3&lt;/tspan&gt; · 13/08 20:00 Parque Viera / 20/08 20:00 Arena MRV&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;950&quot; y=&quot;180&quot; width=&quot;240&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;950&quot; y1=&quot;204&quot; x2=&quot;1190&quot; y2=&quot;204&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;324&quot;&gt;Montevideo City Torque&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;252&quot; y=&quot;324&quot;&gt;1 1&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;960&quot; y=&quot;196&quot;&gt;Montevideo City Torque&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;1182&quot; y=&quot;196&quot;&gt;1 1&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;348&quot;&gt;Atletico Mineiro&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;252&quot; y=&quot;348&quot;&gt;0 1&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;960&quot; y=&quot;220&quot;&gt;Atletico Mineiro&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;1182&quot; y=&quot;220&quot;&gt;0 1&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;474&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF4&lt;/tspan&gt; · 12/08 18:00 Neo Química Arena / 19/08 18:00 Beira-Rio&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;412&quot; width=&quot;240&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;436&quot; x2=&quot;260&quot; y2=&quot;436&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1190&quot; y=&quot;346&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF4&lt;/tspan&gt; · 12/08 18:00 Neo Química Arena / 19/08 18:00 Beira-Rio&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;950&quot; y=&quot;284&quot; width=&quot;240&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;950&quot; y1=&quot;308&quot; x2=&quot;1190&quot; y2=&quot;308&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;428&quot;&gt;Corinthians&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;252&quot; y=&quot;428&quot;&gt;3 1&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;960&quot; y=&quot;300&quot;&gt;Corinthians&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;1182&quot; y=&quot;300&quot;&gt;3 1&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;452&quot;&gt;Internacional&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;252&quot; y=&quot;452&quot;&gt;0 1&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;960&quot; y=&quot;324&quot;&gt;Internacional&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;1182&quot; y=&quot;324&quot;&gt;0 1&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;330&quot; y=&quot;146&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF1&lt;/tspan&gt; · 23/09 20:30 Maracanã / 30/09 20:30 Estadio Monumental&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;330&quot; y=&quot;152&quot; width=&quot;240&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;330&quot; y1=&quot;176&quot; x2=&quot;570&quot; y2=&quot;176&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;330&quot; y=&quot;294&quot;&gt;&lt;tspan x=&quot;330&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF1&lt;/tspan&gt; · 23/09 20:30 Maracanã / 30/09&lt;/tspan&gt;&lt;tspan x=&quot;330&quot; dy=&quot;13&quot;&gt;20:30 Estadio Monumental&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;330&quot; y=&quot;232&quot; width=&quot;240&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;330&quot; y1=&quot;256&quot; x2=&quot;570&quot; y2=&quot;256&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;340&quot; y=&quot;168&quot;&gt;Flamengo&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;562&quot; y=&quot;168&quot;&gt;0 2&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;340&quot; y=&quot;248&quot;&gt;Flamengo&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;562&quot; y=&quot;248&quot;&gt;0 2&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;340&quot; y=&quot;192&quot;&gt;River Plate&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;562&quot; y=&quot;192&quot;&gt;0 1&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;340&quot; y=&quot;272&quot;&gt;River Plate&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;562&quot; y=&quot;272&quot;&gt;0 1&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;330&quot; y=&quot;422&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF2&lt;/tspan&gt; · 24/09 20:30 Parque Viera / 01/10 20:30 Neo Química Arena&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;330&quot; y=&quot;360&quot; width=&quot;240&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;330&quot; y1=&quot;384&quot; x2=&quot;570&quot; y2=&quot;384&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;640&quot; y=&quot;294&quot;&gt;&lt;tspan x=&quot;640&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF2&lt;/tspan&gt; · 24/09 20:30 Parque Viera /&lt;/tspan&gt;&lt;tspan x=&quot;640&quot; dy=&quot;13&quot;&gt;01/10 20:30 Neo Química Arena&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;640&quot; y=&quot;232&quot; width=&quot;240&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;640&quot; y1=&quot;256&quot; x2=&quot;880&quot; y2=&quot;256&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;340&quot; y=&quot;376&quot;&gt;Montevideo City Torque&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;562&quot; y=&quot;376&quot;&gt;1 2&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;650&quot; y=&quot;248&quot;&gt;Montevideo City Torque&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;872&quot; y=&quot;248&quot;&gt;1 2&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;340&quot; y=&quot;400&quot;&gt;Corinthians&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;562&quot; y=&quot;400&quot;&gt;1 0&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;650&quot; y=&quot;272&quot;&gt;Corinthians&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;872&quot; y=&quot;272&quot;&gt;1 0&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;640&quot; y=&quot;250&quot;&gt;21/11 17:00 Estadio Centenario&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;640&quot; y=&quot;256&quot; width=&quot;240&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;640&quot; y1=&quot;280&quot; x2=&quot;880&quot; y2=&quot;280&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;485&quot; y=&quot;108&quot;&gt;21/11 17:00 Estadio Centenario&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;485&quot; y=&quot;114&quot; width=&quot;240&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;485&quot; y1=&quot;138&quot; x2=&quot;725&quot; y2=&quot;138&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;650&quot; y=&quot;272&quot;&gt;Flamengo&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;872&quot; y=&quot;272&quot;&gt;2&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;495&quot; y=&quot;130&quot;&gt;Flamengo&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;717&quot; y=&quot;130&quot;&gt;2&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;650&quot; y=&quot;296&quot;&gt;Montevideo City Torque&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;872&quot; y=&quot;296&quot;&gt;1&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;495&quot; y=&quot;154&quot;&gt;Montevideo City Torque&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;717&quot; y=&quot;154&quot;&gt;1&lt;/text&gt;
 &lt;/g&gt;
 &lt;/svg&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
 <div class="pane pane-table"><h3>HTML table — flat</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage&quot;&gt;
@@ -1753,7 +2756,7 @@
 }
 </pre></details>
 <div class="panes">
-<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 750 484&quot; width=&quot;750&quot; height=&quot;484&quot; font-family=&quot;sans-serif&quot;&gt;
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 1010 408&quot; width=&quot;1010&quot; height=&quot;408&quot; font-family=&quot;sans-serif&quot;&gt;
 &lt;style&gt;
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -1782,81 +2785,81 @@
     .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }&lt;/style&gt;
-&lt;rect class=&quot;pd-bg&quot; width=&quot;750&quot; height=&quot;484&quot;/&gt;
+&lt;rect class=&quot;pd-bg&quot; width=&quot;1010&quot; height=&quot;408&quot;/&gt;
 &lt;text class=&quot;pd-title&quot; x=&quot;20&quot; y=&quot;28&quot;&gt;FA Cup&lt;/text&gt;
 &lt;text class=&quot;pd-season&quot; x=&quot;97&quot; y=&quot;28&quot;&gt;2025-26&lt;/text&gt;
 &lt;text class=&quot;pd-header&quot; x=&quot;115&quot; y=&quot;68&quot;&gt;Cuartos de final&lt;/text&gt;
-&lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;68&quot;&gt;Semifinales&lt;/text&gt;
-&lt;text class=&quot;pd-header&quot; x=&quot;635&quot; y=&quot;68&quot;&gt;Final&lt;/text&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 470 124 L 505 124 L 505 164 L 540 164&quot;/&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 470 228 L 505 228 L 505 188 L 540 188&quot;/&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;94&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF1&lt;/tspan&gt;&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;100&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;124&quot; x2=&quot;210&quot; y2=&quot;124&quot;/&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;895&quot; y=&quot;68&quot;&gt;Cuartos de final&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;216&quot;&gt;Semifinales&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;635&quot; y=&quot;216&quot;&gt;Semifinales&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;505&quot; y=&quot;78&quot;&gt;Final&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;226&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF1&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;232&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;256&quot; x2=&quot;210&quot; y2=&quot;256&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;116&quot;&gt;Manchester City&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;116&quot;&gt;2&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;248&quot;&gt;Manchester City&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;248&quot;&gt;2&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;140&quot;&gt;Newcastle&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;140&quot;&gt;1&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;272&quot;&gt;Newcastle&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;272&quot;&gt;1&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;198&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF2&lt;/tspan&gt;&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;204&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;228&quot; x2=&quot;210&quot; y2=&quot;228&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;330&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF2&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;336&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;360&quot; x2=&quot;210&quot; y2=&quot;360&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;220&quot;&gt;Chelsea&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;220&quot;&gt;1 (3)&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;352&quot;&gt;Chelsea&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;352&quot;&gt;1 (3)&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;244&quot;&gt;Arsenal&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;244&quot;&gt;1 (4)&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;376&quot;&gt;Arsenal&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;376&quot;&gt;1 (4)&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;302&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF3&lt;/tspan&gt;&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;308&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;332&quot; x2=&quot;210&quot; y2=&quot;332&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;990&quot; y=&quot;226&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF3&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;800&quot; y=&quot;232&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;800&quot; y1=&quot;256&quot; x2=&quot;990&quot; y2=&quot;256&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;324&quot;&gt;Liverpool&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;324&quot;&gt;3&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;810&quot; y=&quot;248&quot;&gt;Liverpool&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;982&quot; y=&quot;248&quot;&gt;3&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;348&quot;&gt;Aston Villa&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;348&quot;&gt;0&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;810&quot; y=&quot;272&quot;&gt;Aston Villa&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;982&quot; y=&quot;272&quot;&gt;0&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;406&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF4&lt;/tspan&gt;&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;412&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;436&quot; x2=&quot;210&quot; y2=&quot;436&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;990&quot; y=&quot;330&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF4&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;800&quot; y=&quot;336&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;800&quot; y1=&quot;360&quot; x2=&quot;990&quot; y2=&quot;360&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;428&quot;&gt;Manchester United&lt;/text&gt;
-&lt;/g&gt;
-&lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;452&quot;&gt;Tottenham&lt;/text&gt;
-&lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;94&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF1&lt;/tspan&gt;&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;100&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;124&quot; x2=&quot;470&quot; y2=&quot;124&quot;/&gt;
-&lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;116&quot;&gt;A definir&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;810&quot; y=&quot;352&quot;&gt;Manchester United&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;140&quot;&gt;A definir&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;810&quot; y=&quot;376&quot;&gt;Tottenham&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;266&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF2&lt;/tspan&gt;&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;204&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;228&quot; x2=&quot;470&quot; y2=&quot;228&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;294&quot;&gt;&lt;tspan x=&quot;280&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF1&lt;/tspan&gt;&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;232&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;256&quot; x2=&quot;470&quot; y2=&quot;256&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;220&quot;&gt;A definir&lt;/text&gt;
-&lt;/g&gt;
-&lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;244&quot;&gt;A definir&lt;/text&gt;
-&lt;/g&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;540&quot; y=&quot;152&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;540&quot; y1=&quot;176&quot; x2=&quot;730&quot; y2=&quot;176&quot;/&gt;
-&lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;168&quot;&gt;Ganador SF1&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;248&quot;&gt;A definir&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;192&quot;&gt;Ganador SF2&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;272&quot;&gt;A definir&lt;/text&gt;
+&lt;/g&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;540&quot; y=&quot;294&quot;&gt;&lt;tspan x=&quot;540&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF2&lt;/tspan&gt;&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;540&quot; y=&quot;232&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;540&quot; y1=&quot;256&quot; x2=&quot;730&quot; y2=&quot;256&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;248&quot;&gt;A definir&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;272&quot;&gt;A definir&lt;/text&gt;
+&lt;/g&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;410&quot; y=&quot;114&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;410&quot; y1=&quot;138&quot; x2=&quot;600&quot; y2=&quot;138&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;420&quot; y=&quot;130&quot;&gt;Ganador SF1&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;420&quot; y=&quot;154&quot;&gt;Ganador SF2&lt;/text&gt;
 &lt;/g&gt;
 &lt;/svg&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
 <div class="pane pane-table"><h3>HTML table — flat</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage&quot;&gt;
@@ -2258,7 +3261,7 @@
 }
 </pre></details>
 <div class="panes">
-<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 750 484&quot; width=&quot;750&quot; height=&quot;484&quot; font-family=&quot;sans-serif&quot;&gt;
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 1010 408&quot; width=&quot;1010&quot; height=&quot;408&quot; font-family=&quot;sans-serif&quot;&gt;
 &lt;style&gt;
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -2287,83 +3290,83 @@
     .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }&lt;/style&gt;
-&lt;rect class=&quot;pd-bg&quot; width=&quot;750&quot; height=&quot;484&quot;/&gt;
+&lt;rect class=&quot;pd-bg&quot; width=&quot;1010&quot; height=&quot;408&quot;/&gt;
 &lt;text class=&quot;pd-title&quot; x=&quot;20&quot; y=&quot;28&quot;&gt;FA Cup&lt;/text&gt;
 &lt;text class=&quot;pd-season&quot; x=&quot;97&quot; y=&quot;28&quot;&gt;2025-26&lt;/text&gt;
 &lt;text class=&quot;pd-header&quot; x=&quot;115&quot; y=&quot;68&quot;&gt;Quarterfinals&lt;/text&gt;
-&lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;68&quot;&gt;Semifinals&lt;/text&gt;
-&lt;text class=&quot;pd-header&quot; x=&quot;635&quot; y=&quot;68&quot;&gt;Final&lt;/text&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 470 124 L 505 124 L 505 164 L 540 164&quot;/&gt;
-&lt;path class=&quot;pd-link&quot; d=&quot;M 470 228 L 505 228 L 505 188 L 540 188&quot;/&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;94&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF1&lt;/tspan&gt;&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;100&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;124&quot; x2=&quot;210&quot; y2=&quot;124&quot;/&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;895&quot; y=&quot;68&quot;&gt;Quarterfinals&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;216&quot;&gt;Semifinals&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;635&quot; y=&quot;216&quot;&gt;Semifinals&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;505&quot; y=&quot;78&quot;&gt;Final&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;226&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF1&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;232&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;256&quot; x2=&quot;210&quot; y2=&quot;256&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;116&quot;&gt;Manchester City&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;116&quot;&gt;2&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;248&quot;&gt;Manchester City&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;248&quot;&gt;2&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;140&quot;&gt;Newcastle&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;140&quot;&gt;1&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;272&quot;&gt;Newcastle&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;272&quot;&gt;1&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;198&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF2&lt;/tspan&gt;&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;204&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;228&quot; x2=&quot;210&quot; y2=&quot;228&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;330&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF2&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;336&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;360&quot; x2=&quot;210&quot; y2=&quot;360&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;220&quot;&gt;Chelsea&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;220&quot;&gt;1 (3)&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;352&quot;&gt;Chelsea&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;352&quot;&gt;1 (3)&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;244&quot;&gt;Arsenal&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;244&quot;&gt;1 (4)&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;376&quot;&gt;Arsenal&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;376&quot;&gt;1 (4)&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;302&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF3&lt;/tspan&gt;&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;308&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;332&quot; x2=&quot;210&quot; y2=&quot;332&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;990&quot; y=&quot;226&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF3&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;800&quot; y=&quot;232&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;800&quot; y1=&quot;256&quot; x2=&quot;990&quot; y2=&quot;256&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;324&quot;&gt;Liverpool&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;324&quot;&gt;3&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;810&quot; y=&quot;248&quot;&gt;Liverpool&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;982&quot; y=&quot;248&quot;&gt;3&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;348&quot;&gt;Aston Villa&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;348&quot;&gt;0&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;810&quot; y=&quot;272&quot;&gt;Aston Villa&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;982&quot; y=&quot;272&quot;&gt;0&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;406&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF4&lt;/tspan&gt;&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;20&quot; y=&quot;412&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;20&quot; y1=&quot;436&quot; x2=&quot;210&quot; y2=&quot;436&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;990&quot; y=&quot;330&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF4&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;800&quot; y=&quot;336&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;800&quot; y1=&quot;360&quot; x2=&quot;990&quot; y2=&quot;360&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;428&quot;&gt;Manchester United&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;428&quot;&gt;2&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;810&quot; y=&quot;352&quot;&gt;Manchester United&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;982&quot; y=&quot;352&quot;&gt;2&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;452&quot;&gt;Tottenham&lt;/text&gt;
-&lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;452&quot;&gt;1&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;810&quot; y=&quot;376&quot;&gt;Tottenham&lt;/text&gt;
+&lt;text class=&quot;pd-score&quot; x=&quot;982&quot; y=&quot;376&quot;&gt;1&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;94&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF1&lt;/tspan&gt;&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;100&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;124&quot; x2=&quot;470&quot; y2=&quot;124&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;294&quot;&gt;&lt;tspan x=&quot;280&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF1&lt;/tspan&gt;&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;232&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;256&quot; x2=&quot;470&quot; y2=&quot;256&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;116&quot;&gt;Arsenal&lt;/text&gt;
-&lt;/g&gt;
-&lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;140&quot;&gt;Manchester United&lt;/text&gt;
-&lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;266&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF2&lt;/tspan&gt;&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;204&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;228&quot; x2=&quot;470&quot; y2=&quot;228&quot;/&gt;
-&lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;220&quot;&gt;Manchester City&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;248&quot;&gt;Arsenal&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;244&quot;&gt;Liverpool&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;272&quot;&gt;Manchester United&lt;/text&gt;
 &lt;/g&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;540&quot; y=&quot;152&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;540&quot; y1=&quot;176&quot; x2=&quot;730&quot; y2=&quot;176&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;540&quot; y=&quot;294&quot;&gt;&lt;tspan x=&quot;540&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF2&lt;/tspan&gt;&lt;/tspan&gt;&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;540&quot; y=&quot;232&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;540&quot; y1=&quot;256&quot; x2=&quot;730&quot; y2=&quot;256&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;168&quot;&gt;Winner SF1&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;248&quot;&gt;Manchester City&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;192&quot;&gt;Winner SF2&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;272&quot;&gt;Liverpool&lt;/text&gt;
+&lt;/g&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;410&quot; y=&quot;114&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;410&quot; y1=&quot;138&quot; x2=&quot;600&quot; y2=&quot;138&quot;/&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;420&quot; y=&quot;130&quot;&gt;Winner SF1&lt;/text&gt;
+&lt;/g&gt;
+&lt;g class=&quot;&quot;&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;420&quot; y=&quot;154&quot;&gt;Winner SF2&lt;/text&gt;
 &lt;/g&gt;
 &lt;/svg&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
 <div class="pane pane-table"><h3>HTML table — flat</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage&quot;&gt;
@@ -2847,7 +3850,7 @@
 }
 </pre></details>
 <div class="panes">
-<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 1018 470&quot; width=&quot;1018&quot; height=&quot;470&quot; font-family=&quot;sans-serif&quot;&gt;
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 1010 470&quot; width=&quot;1010&quot; height=&quot;470&quot; font-family=&quot;sans-serif&quot;&gt;
 &lt;style&gt;
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -2876,7 +3879,7 @@
     .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }&lt;/style&gt;
-&lt;rect class=&quot;pd-bg&quot; width=&quot;1018&quot; height=&quot;470&quot;/&gt;
+&lt;rect class=&quot;pd-bg&quot; width=&quot;1010&quot; height=&quot;470&quot;/&gt;
 &lt;text class=&quot;pd-title&quot; x=&quot;20&quot; y=&quot;28&quot;&gt;League Cup&lt;/text&gt;
 &lt;text class=&quot;pd-season&quot; x=&quot;139&quot; y=&quot;28&quot;&gt;2026&lt;/text&gt;
 &lt;text class=&quot;pd-header&quot; x=&quot;115&quot; y=&quot;68&quot;&gt;Quarterfinals&lt;/text&gt;
@@ -2911,7 +3914,7 @@
 &lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;324&quot;&gt;Aston Villa&lt;/text&gt;
 &lt;text class=&quot;pd-score&quot; x=&quot;202&quot; y=&quot;324&quot;&gt;2&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;800&quot; y=&quot;174&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF3&lt;/tspan&gt; · 25/02 19:45 Anfield&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;990&quot; y=&quot;174&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF3&lt;/tspan&gt; · 25/02 19:45 Anfield&lt;/text&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;800&quot; y=&quot;180&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;800&quot; y1=&quot;204&quot; x2=&quot;990&quot; y2=&quot;204&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
@@ -2922,7 +3925,7 @@
 &lt;text class=&quot;pd-team&quot; x=&quot;810&quot; y=&quot;220&quot;&gt;Tottenham&lt;/text&gt;
 &lt;text class=&quot;pd-score&quot; x=&quot;982&quot; y=&quot;220&quot;&gt;1&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;800&quot; y=&quot;346&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF4&lt;/tspan&gt; · 25/02 19:45 Stamford Bridge&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;990&quot; y=&quot;346&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;QF4&lt;/tspan&gt; · 25/02 19:45 Stamford Bridge&lt;/text&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;800&quot; y=&quot;284&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;800&quot; y1=&quot;308&quot; x2=&quot;990&quot; y2=&quot;308&quot;/&gt;
 &lt;g class=&quot;pd-win&quot;&gt;
@@ -3558,7 +4561,7 @@
 &lt;g class=&quot;&quot;&gt;
 &lt;text class=&quot;pd-team&quot; x=&quot;30&quot; y=&quot;882&quot;&gt;3AEHIJ&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;1840&quot; y=&quot;108&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P76&lt;/tspan&gt; · 29 Jun Houston&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;2030&quot; y=&quot;108&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P76&lt;/tspan&gt; · 29 Jun Houston&lt;/text&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;1840&quot; y=&quot;114&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;1840&quot; y1=&quot;138&quot; x2=&quot;2030&quot; y2=&quot;138&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
@@ -3567,7 +4570,7 @@
 &lt;g class=&quot;&quot;&gt;
 &lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;154&quot;&gt;2F&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;1840&quot; y=&quot;280&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P78&lt;/tspan&gt; · 30 Jun Arlington&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;2030&quot; y=&quot;280&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P78&lt;/tspan&gt; · 30 Jun Arlington&lt;/text&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;1840&quot; y=&quot;218&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;1840&quot; y1=&quot;242&quot; x2=&quot;2030&quot; y2=&quot;242&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
@@ -3576,7 +4579,7 @@
 &lt;g class=&quot;&quot;&gt;
 &lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;258&quot;&gt;2I&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;1840&quot; y=&quot;316&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P79&lt;/tspan&gt; · 30 Jun Mexico City&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;2030&quot; y=&quot;316&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P79&lt;/tspan&gt; · 30 Jun Mexico City&lt;/text&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;1840&quot; y=&quot;322&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;1840&quot; y1=&quot;346&quot; x2=&quot;2030&quot; y2=&quot;346&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
@@ -3585,7 +4588,7 @@
 &lt;g class=&quot;&quot;&gt;
 &lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;362&quot;&gt;3CEFHI&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;1840&quot; y=&quot;488&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P80&lt;/tspan&gt; · 01 Jul Atlanta&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;2030&quot; y=&quot;488&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P80&lt;/tspan&gt; · 01 Jul Atlanta&lt;/text&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;1840&quot; y=&quot;426&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;1840&quot; y1=&quot;450&quot; x2=&quot;2030&quot; y2=&quot;450&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
@@ -3594,7 +4597,7 @@
 &lt;g class=&quot;&quot;&gt;
 &lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;466&quot;&gt;3EHIJK&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;1840&quot; y=&quot;524&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P86&lt;/tspan&gt; · 03 Jul Miami Gardens&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;2030&quot; y=&quot;524&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P86&lt;/tspan&gt; · 03 Jul Miami Gardens&lt;/text&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;1840&quot; y=&quot;530&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;1840&quot; y1=&quot;554&quot; x2=&quot;2030&quot; y2=&quot;554&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
@@ -3603,7 +4606,7 @@
 &lt;g class=&quot;&quot;&gt;
 &lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;570&quot;&gt;2H&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;1840&quot; y=&quot;696&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P88&lt;/tspan&gt; · 03 Jul Arlington&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;2030&quot; y=&quot;696&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P88&lt;/tspan&gt; · 03 Jul Arlington&lt;/text&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;1840&quot; y=&quot;634&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;1840&quot; y1=&quot;658&quot; x2=&quot;2030&quot; y2=&quot;658&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
@@ -3612,7 +4615,7 @@
 &lt;g class=&quot;&quot;&gt;
 &lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;674&quot;&gt;2G&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;1840&quot; y=&quot;732&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P85&lt;/tspan&gt; · 02 Jul Vancouver&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;2030&quot; y=&quot;732&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P85&lt;/tspan&gt; · 02 Jul Vancouver&lt;/text&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;1840&quot; y=&quot;738&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;1840&quot; y1=&quot;762&quot; x2=&quot;2030&quot; y2=&quot;762&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
@@ -3621,7 +4624,7 @@
 &lt;g class=&quot;&quot;&gt;
 &lt;text class=&quot;pd-team&quot; x=&quot;1850&quot; y=&quot;778&quot;&gt;3EFGIJ&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;1840&quot; y=&quot;904&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P87&lt;/tspan&gt; · 03 Jul Kansas City&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;2030&quot; y=&quot;904&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P87&lt;/tspan&gt; · 03 Jul Kansas City&lt;/text&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;1840&quot; y=&quot;842&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;1840&quot; y1=&quot;866&quot; x2=&quot;2030&quot; y2=&quot;866&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
@@ -3666,7 +4669,7 @@
 &lt;g class=&quot;&quot;&gt;
 &lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;830&quot;&gt;Winner P82&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;1580&quot; y=&quot;160&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P91&lt;/tspan&gt; · 05 Jul East Rutherford&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1770&quot; y=&quot;160&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P91&lt;/tspan&gt; · 05 Jul East Rutherford&lt;/text&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;1580&quot; y=&quot;166&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;1580&quot; y1=&quot;190&quot; x2=&quot;1770&quot; y2=&quot;190&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
@@ -3675,7 +4678,7 @@
 &lt;g class=&quot;&quot;&gt;
 &lt;text class=&quot;pd-team&quot; x=&quot;1590&quot; y=&quot;206&quot;&gt;Winner P78&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;1580&quot; y=&quot;436&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P92&lt;/tspan&gt; · 05 Jul Mexico City&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1770&quot; y=&quot;436&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P92&lt;/tspan&gt; · 05 Jul Mexico City&lt;/text&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;1580&quot; y=&quot;374&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;1580&quot; y1=&quot;398&quot; x2=&quot;1770&quot; y2=&quot;398&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
@@ -3684,7 +4687,7 @@
 &lt;g class=&quot;&quot;&gt;
 &lt;text class=&quot;pd-team&quot; x=&quot;1590&quot; y=&quot;414&quot;&gt;Winner P80&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;1580&quot; y=&quot;576&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P95&lt;/tspan&gt; · 07 Jul Atlanta&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1770&quot; y=&quot;576&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P95&lt;/tspan&gt; · 07 Jul Atlanta&lt;/text&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;1580&quot; y=&quot;582&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;1580&quot; y1=&quot;606&quot; x2=&quot;1770&quot; y2=&quot;606&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
@@ -3693,7 +4696,7 @@
 &lt;g class=&quot;&quot;&gt;
 &lt;text class=&quot;pd-team&quot; x=&quot;1590&quot; y=&quot;622&quot;&gt;Winner P88&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;1580&quot; y=&quot;852&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P96&lt;/tspan&gt; · 07 Jul Vancouver&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1770&quot; y=&quot;852&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P96&lt;/tspan&gt; · 07 Jul Vancouver&lt;/text&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;1580&quot; y=&quot;790&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;1580&quot; y1=&quot;814&quot; x2=&quot;1770&quot; y2=&quot;814&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
@@ -3720,7 +4723,7 @@
 &lt;g class=&quot;&quot;&gt;
 &lt;text class=&quot;pd-team&quot; x=&quot;550&quot; y=&quot;726&quot;&gt;Winner P94&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;1320&quot; y=&quot;264&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P99&lt;/tspan&gt; · 11 Jul Miami Gardens&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1510&quot; y=&quot;264&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P99&lt;/tspan&gt; · 11 Jul Miami Gardens&lt;/text&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;1320&quot; y=&quot;270&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;1320&quot; y1=&quot;294&quot; x2=&quot;1510&quot; y2=&quot;294&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
@@ -3729,7 +4732,7 @@
 &lt;g class=&quot;&quot;&gt;
 &lt;text class=&quot;pd-team&quot; x=&quot;1330&quot; y=&quot;310&quot;&gt;Winner P92&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;1320&quot; y=&quot;748&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P100&lt;/tspan&gt; · 11 Jul Kansas City&lt;/text&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;1510&quot; y=&quot;748&quot; text-anchor=&quot;end&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;P100&lt;/tspan&gt; · 11 Jul Kansas City&lt;/text&gt;
 &lt;rect class=&quot;pd-box&quot; x=&quot;1320&quot; y=&quot;686&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
 &lt;line class=&quot;pd-divider&quot; x1=&quot;1320&quot; y1=&quot;710&quot; x2=&quot;1510&quot; y2=&quot;710&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
@@ -4757,7 +5760,7 @@
 <details class="src" open><summary>source JSON</summary><pre>{
   "tournament": "World Cup",
   "season": "2026",
-  "render": { "dt_format": "EEEE dd MMMM, HH:mm" },
+  "render": { "dt_format": "EEEE dd MMMM, HH:mm", "layout": "linear" },
   "rounds": [
     {
       "name": "Semifinals",
@@ -4804,7 +5807,7 @@
 }
 </pre></details>
 <div class="panes">
-<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 546 442&quot; width=&quot;546&quot; height=&quot;442&quot; font-family=&quot;sans-serif&quot;&gt;
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 546 390&quot; width=&quot;546&quot; height=&quot;390&quot; font-family=&quot;sans-serif&quot;&gt;
 &lt;style&gt;
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -4833,12 +5836,12 @@
     .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }&lt;/style&gt;
-&lt;rect class=&quot;pd-bg&quot; width=&quot;546&quot; height=&quot;442&quot;/&gt;
+&lt;rect class=&quot;pd-bg&quot; width=&quot;546&quot; height=&quot;390&quot;/&gt;
 &lt;text class=&quot;pd-title&quot; x=&quot;20&quot; y=&quot;28&quot;&gt;World Cup&lt;/text&gt;
 &lt;text class=&quot;pd-season&quot; x=&quot;128&quot; y=&quot;28&quot;&gt;2026&lt;/text&gt;
 &lt;text class=&quot;pd-header&quot; x=&quot;115&quot; y=&quot;68&quot;&gt;Semifinals&lt;/text&gt;
 &lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;68&quot;&gt;Final&lt;/text&gt;
-&lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;338&quot;&gt;Third place&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;286&quot;&gt;Third place&lt;/text&gt;
 &lt;path class=&quot;pd-link&quot; d=&quot;M 210 124 L 245 124 L 245 164 L 280 164&quot;/&gt;
 &lt;path class=&quot;pd-link&quot; d=&quot;M 210 228 L 245 228 L 245 188 L 280 188&quot;/&gt;
 &lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;94&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF1&lt;/tspan&gt; · Tuesday 14 July, 23:00 AT&amp;amp;T Stadium&lt;/text&gt;
@@ -4868,14 +5871,14 @@
 &lt;g class=&quot;&quot;&gt;
 &lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;192&quot;&gt;Winner SF2&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;364&quot;&gt;Saturday 18 July, 19:00 Hard Rock Stadium&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;370&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;394&quot; x2=&quot;470&quot; y2=&quot;394&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;312&quot;&gt;Saturday 18 July, 19:00 Hard Rock Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;318&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;342&quot; x2=&quot;470&quot; y2=&quot;342&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;386&quot;&gt;Loser SF1&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;334&quot;&gt;Loser SF1&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;410&quot;&gt;Loser SF2&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;358&quot;&gt;Loser SF2&lt;/text&gt;
 &lt;/g&gt;
 &lt;/svg&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
 <div class="pane pane-table"><h3>HTML table — flat</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage&quot;&gt;
@@ -5142,7 +6145,7 @@
 <details class="src" open><summary>source JSON</summary><pre>{
   "tournament": "World Cup",
   "season": "2026",
-  "render": { "dt_format": "EEEE dd MMMM, HH:mm" },
+  "render": { "dt_format": "EEEE dd MMMM, HH:mm", "layout": "linear" },
   "rounds": [
     {
       "name": "Semifinals",
@@ -5189,7 +6192,7 @@
 }
 </pre></details>
 <div class="panes">
-<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 552 442&quot; width=&quot;552&quot; height=&quot;442&quot; font-family=&quot;sans-serif&quot;&gt;
+<div class="pane pane-svg"><h3>SVG diagram<button class="open" type="button" onclick="openPane(this)">↗ open</button></h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 552 390&quot; width=&quot;552&quot; height=&quot;390&quot; font-family=&quot;sans-serif&quot;&gt;
 &lt;style&gt;
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -5218,12 +6221,12 @@
     .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }&lt;/style&gt;
-&lt;rect class=&quot;pd-bg&quot; width=&quot;552&quot; height=&quot;442&quot;/&gt;
+&lt;rect class=&quot;pd-bg&quot; width=&quot;552&quot; height=&quot;390&quot;/&gt;
 &lt;text class=&quot;pd-title&quot; x=&quot;20&quot; y=&quot;28&quot;&gt;World Cup&lt;/text&gt;
 &lt;text class=&quot;pd-season&quot; x=&quot;128&quot; y=&quot;28&quot;&gt;2026&lt;/text&gt;
 &lt;text class=&quot;pd-header&quot; x=&quot;115&quot; y=&quot;68&quot;&gt;Demi-finales&lt;/text&gt;
 &lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;68&quot;&gt;Finale&lt;/text&gt;
-&lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;338&quot;&gt;Petite finale&lt;/text&gt;
+&lt;text class=&quot;pd-header&quot; x=&quot;375&quot; y=&quot;286&quot;&gt;Petite finale&lt;/text&gt;
 &lt;path class=&quot;pd-link&quot; d=&quot;M 210 124 L 245 124 L 245 164 L 280 164&quot;/&gt;
 &lt;path class=&quot;pd-link&quot; d=&quot;M 210 228 L 245 228 L 245 188 L 280 188&quot;/&gt;
 &lt;text class=&quot;pd-meta&quot; x=&quot;20&quot; y=&quot;94&quot;&gt;&lt;tspan class=&quot;pd-meta-id&quot;&gt;SF1&lt;/tspan&gt; · mardi 14 juillet, 23:00 AT&amp;amp;T Stadium&lt;/text&gt;
@@ -5253,14 +6256,14 @@
 &lt;g class=&quot;&quot;&gt;
 &lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;192&quot;&gt;Vainqueur SF2&lt;/text&gt;
 &lt;/g&gt;
-&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;364&quot;&gt;samedi 18 juillet, 19:00 Hard Rock Stadium&lt;/text&gt;
-&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;370&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
-&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;394&quot; x2=&quot;470&quot; y2=&quot;394&quot;/&gt;
+&lt;text class=&quot;pd-meta&quot; x=&quot;280&quot; y=&quot;312&quot;&gt;samedi 18 juillet, 19:00 Hard Rock Stadium&lt;/text&gt;
+&lt;rect class=&quot;pd-box&quot; x=&quot;280&quot; y=&quot;318&quot; width=&quot;190&quot; height=&quot;48&quot; rx=&quot;3&quot;/&gt;
+&lt;line class=&quot;pd-divider&quot; x1=&quot;280&quot; y1=&quot;342&quot; x2=&quot;470&quot; y2=&quot;342&quot;/&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;386&quot;&gt;Perdant SF1&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;334&quot;&gt;Perdant SF1&lt;/text&gt;
 &lt;/g&gt;
 &lt;g class=&quot;&quot;&gt;
-&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;410&quot;&gt;Perdant SF2&lt;/text&gt;
+&lt;text class=&quot;pd-team&quot; x=&quot;290&quot; y=&quot;358&quot;&gt;Perdant SF2&lt;/text&gt;
 &lt;/g&gt;
 &lt;/svg&gt;&lt;/body&gt;&lt;/html&gt;"></iframe></div>
 <div class="pane pane-table"><h3>HTML table — flat</h3><iframe class="pane-frame" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:8px;background:#ffffff;color:#1f2937;}@media (prefers-color-scheme: dark){html,body{background:#0f172a;}}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pd-stage&quot;&gt;

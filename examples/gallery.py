@@ -45,7 +45,7 @@ from copa_rio_host import CopaRioDiagram
 from facup_host import FaCupDiagram
 from libertadores_host import LibertadoresDiagram
 from third_place_host import ThirdPlaceDiagram
-from world_cup_flags_host import WorldCupFlagsDiagram
+from world_cup_2022_host import WorldCup2022Diagram
 
 from matamata import KnockoutStage, load_stage, render_html, render_svg
 
@@ -90,9 +90,18 @@ def _host(
 
 SPECS: "list[tuple[str, str, Builder]]" = [
     (
+        "world-cup-2022.json",
+        "2022 FIFA World Cup — the finished Qatar knockout from the Round of 16 to the final "
+        "plus third place, with national flags (world_cup_2022_host, by name) and the "
+        "default symmetric layout. The strongest single example of what the library draws.",
+        _host(WorldCup2022Diagram),
+    ),
+    (
         "knockout-8.json",
-        "World Cup round of 8 — host-resolved flags by name (world_cup_flags_host).",
-        _host(WorldCupFlagsDiagram),
+        "World Cup round of 8 — an in-progress bracket: only the quarterfinals are played, so "
+        "the semifinals and final fall back to 'Winner SF1/SF2' placeholders (the winnerof "
+        "links drawn as connectors). Single matches, shootouts in parentheses. Base loader.",
+        _base("knockout-8.json"),
     ),
     (
         "copa-rio-de-la-plata-2026.json",
