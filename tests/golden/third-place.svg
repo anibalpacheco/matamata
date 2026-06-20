@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 276" width="540" height="276" font-family="sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 504 290" width="504" height="290" font-family="sans-serif">
 <style>
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -28,48 +28,48 @@
     .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }</style>
-<rect class="pd-bg" width="540" height="276"/>
+<rect class="pd-bg" width="504" height="290"/>
 <text class="pd-title" x="20" y="28">World Cup</text>
 <text class="pd-season" x="128" y="28">2026</text>
 <text class="pd-header" x="80" y="68">Semifinals</text>
-<text class="pd-header" x="270" y="68">Final</text>
-<text class="pd-header" x="460" y="68">Third place</text>
-<path class="pd-link" d="M 140 124 L 175 124 L 175 147 L 210 147"/>
-<path class="pd-link" d="M 140 194 L 175 194 L 175 171 L 210 171"/>
-<text class="pd-meta" x="20" y="81"><tspan x="20"><tspan class="pd-meta-id">SF1</tspan> · Tuesday 14 July,</tspan><tspan x="50" dy="13">23:00 AT&amp;T Stadium</tspan></text>
-<rect class="pd-box" x="20" y="100" width="120" height="48" rx="3"/>
-<line class="pd-divider" x1="20" y1="124" x2="140" y2="124"/>
+<text class="pd-header" x="252" y="68">Final</text>
+<text class="pd-header" x="424" y="68">Third place</text>
+<path class="pd-link" d="M 140 138 L 166 138 L 166 161 L 192 161"/>
+<path class="pd-link" d="M 140 208 L 166 208 L 166 185 L 192 185"/>
+<text class="pd-meta" x="20" y="95"><tspan x="20"><tspan class="pd-meta-id">SF1</tspan> · Tuesday 14 July,</tspan><tspan x="50" dy="13">23:00 AT&amp;T Stadium</tspan></text>
+<rect class="pd-box" x="20" y="114" width="120" height="48" rx="3"/>
+<line class="pd-divider" x1="20" y1="138" x2="140" y2="138"/>
 <g class="">
-<text class="pd-team" x="30" y="116">France</text>
+<text class="pd-team" x="30" y="130">France</text>
 </g>
 <g class="">
-<text class="pd-team" x="30" y="140">Spain</text>
+<text class="pd-team" x="30" y="154">Spain</text>
 </g>
-<text class="pd-meta" x="20" y="232"><tspan x="20"><tspan class="pd-meta-id">SF2</tspan> · Wednesday 15 July,</tspan><tspan x="50" dy="13">23:00 Mercedes-Be…</tspan></text>
-<rect class="pd-box" x="20" y="170" width="120" height="48" rx="3"/>
-<line class="pd-divider" x1="20" y1="194" x2="140" y2="194"/>
+<text class="pd-meta" x="20" y="246"><tspan x="20"><tspan class="pd-meta-id">SF2</tspan> · Wednesday 15 July,</tspan><tspan x="50" dy="13">23:00 Mercedes-Be…</tspan></text>
+<rect class="pd-box" x="20" y="184" width="120" height="48" rx="3"/>
+<line class="pd-divider" x1="20" y1="208" x2="140" y2="208"/>
 <g class="">
-<text class="pd-team" x="30" y="186">Argentina</text>
-</g>
-<g class="">
-<text class="pd-team" x="30" y="210">Brazil</text>
-</g>
-<text class="pd-meta" x="210" y="197"><tspan x="210">Sunday 19 July, 19:00</tspan><tspan x="210" dy="13">MetLife Stadium</tspan></text>
-<rect class="pd-box" x="210" y="135" width="120" height="48" rx="3"/>
-<line class="pd-divider" x1="210" y1="159" x2="330" y2="159"/>
-<g class="">
-<text class="pd-team" x="220" y="151">Winner SF1</text>
+<text class="pd-team" x="30" y="200">Argentina</text>
 </g>
 <g class="">
-<text class="pd-team" x="220" y="175">Winner SF2</text>
+<text class="pd-team" x="30" y="224">Brazil</text>
 </g>
-<text class="pd-meta" x="400" y="197"><tspan x="400">Saturday 18 July, 19:00</tspan><tspan x="400" dy="13">Hard Rock Stadium</tspan></text>
-<rect class="pd-box" x="400" y="135" width="120" height="48" rx="3"/>
-<line class="pd-divider" x1="400" y1="159" x2="520" y2="159"/>
+<text class="pd-meta" x="192" y="211"><tspan x="192">Sunday 19 July, 19:00</tspan><tspan x="192" dy="13">MetLife Stadium</tspan></text>
+<rect class="pd-box" x="192" y="149" width="120" height="48" rx="3"/>
+<line class="pd-divider" x1="192" y1="173" x2="312" y2="173"/>
 <g class="">
-<text class="pd-team" x="410" y="151">Loser SF1</text>
+<text class="pd-team" x="202" y="165">Winner SF1</text>
 </g>
 <g class="">
-<text class="pd-team" x="410" y="175">Loser SF2</text>
+<text class="pd-team" x="202" y="189">Winner SF2</text>
+</g>
+<text class="pd-meta" x="364" y="211"><tspan x="364">Saturday 18 July, 19:00</tspan><tspan x="364" dy="13">Hard Rock Stadium</tspan></text>
+<rect class="pd-box" x="364" y="149" width="120" height="48" rx="3"/>
+<line class="pd-divider" x1="364" y1="173" x2="484" y2="173"/>
+<g class="">
+<text class="pd-team" x="374" y="165">Loser SF1</text>
+</g>
+<g class="">
+<text class="pd-team" x="374" y="189">Loser SF2</text>
 </g>
 </svg>

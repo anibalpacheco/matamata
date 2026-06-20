@@ -24,14 +24,20 @@ from .model import Match, Resolver, Stage, score_text
 # Geometry constants (SVG user units).
 MARGIN_X = 20
 TOP = 70  # room for the title and round headers
+TOP_PAD = 14  # extra room above the first box, so a 2-line wrapped caption clears the
+# round title; kept identical in both layouts (it is also the symmetric top-offset target)
 BOX_W = 190  # default box width; overridable per document via render.box_width
 ROW_H = 24
 BOX_H = 2 * ROW_H
-H_GAP = 70
+H_GAP = (
+    52  # horizontal gap between round columns (also the gap between the centre semis)
+)
 V_GAP = 22
 MARGIN_BOTTOM = 24
 META_H = 34  # vertical room reserved between stacked boxes for their metadata lines
 META_TOP = 30  # room above the first box of a column for its single metadata caption
+TITLE_LIFT = 14  # extra lift for a travelling title (Final/third place) so a wrapped
+# (2-line) caption below it doesn't touch it
 # Box-internal horizontal metrics, mirroring how render.py draws a box — used only to size
 # an "auto" box_width to its widest content. GLYPH_W is a deliberately generous px-per-glyph
 # for the proportional 13px label/score font, so an auto box never clips its own text.
@@ -169,7 +175,7 @@ def _stack_group(
     it). A pair boundary gets extra room for the two metadata blocks that meet there. With
     metadata off (``meta_h == 0``) every gap collapses to the plain pitch.
     """
-    cy = TOP + meta_top + BOX_H / 2
+    cy = TOP + meta_top + TOP_PAD + BOX_H / 2
     cys = [cy]
     gap: float
     for prev, cur in zip(matches, matches[1:]):
@@ -247,7 +253,7 @@ def compute_layout(stage: Stage) -> Layout:
         ]
         if parents:
             return sum(parents) / len(parents)
-        return TOP + meta_top + BOX_H / 2 + index * row_pitch
+        return TOP + meta_top + TOP_PAD + BOX_H / 2 + index * row_pitch
 
     def place(match: Match, x: float, cy: float) -> None:
         centers[match.id] = cy
@@ -265,10 +271,11 @@ def compute_layout(stage: Stage) -> Layout:
         """Stack below-the-bracket rounds (third place) downward from ``cursor``, each with
         its own header and no connector — they hang off the winners' tree."""
         cx = below_x + bw / 2
+        lift = TITLE_LIFT if meta_top else 0  # clear a wrapped caption under the title
         for rnd in rnds:
             header_cy = cursor + HEADER_BAND
             headers.append(Header(name=rnd.name, cx=cx, cy=header_cy))
-            box_y = header_cy + header_to_box
+            box_y = header_cy + header_to_box + lift
             for match in rnd.matches:
                 cy = box_y + BOX_H / 2
                 place(match, below_x, cy)
@@ -422,11 +429,16 @@ def _place_symmetric(  # noqa: PLR0913 — geometry helper, threads compute_layo
     # The final, lifted into the gap above the semis, with its header above its box. No
     # connector down to the semis (the pairing is implied), so it is skipped in _connectors.
     final_cy = semi_top - CENTRE_GAP - BOX_H / 2
+    lift = TITLE_LIFT if meta_top else 0  # clear a wrapped caption under the title
     for match in final_round.matches:
         place(match, centre_x, final_cy)
         fp = by_placed[match.id]
         headers.append(
-            Header(name=final_round.name, cx=centre_x + bw / 2, cy=fp.y - meta_top - 6)
+            Header(
+                name=final_round.name,
+                cx=centre_x + bw / 2,
+                cy=fp.y - meta_top - 6 - lift,
+            )
         )
 
     # Third place dropped below the semis, straddling the centre.
@@ -511,7 +523,7 @@ def _apply_top_offset(
     high. (Connectors are wired afterwards, from the shifted boxes, so none need moving.)
     """
     top = min((p.y for p in placed), default=TOP)
-    offset = (TOP + meta_top + 14) - top
+    offset = (TOP + meta_top + TOP_PAD) - top
     if offset <= 0:
         return
     for p in placed:

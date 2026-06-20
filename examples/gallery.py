@@ -149,8 +149,8 @@ SPECS: "list[tuple[str, str, Builder]]" = [
     (
         "third-place.json",
         "Third place — a round fed by loserof ('Loser SF1/SF2'): off the winners' tree, so "
-        "it draws no connector and hangs below the bracket in the final's column, keeping "
-        "its own round header. Base loader.",
+        "it draws no connector. In this small bracket (linear layout) it sits beside the "
+        "final, level with it; a larger bracket hangs it below. Base loader.",
         _base("third-place.json"),
     ),
     (
@@ -203,17 +203,13 @@ _PAGE_HEAD = """<!doctype html>
                       border: 1px solid #e5e7eb; border-radius: 4px; padding: 10px 12px; }
   .panes { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
   .pane { flex: 1 1 360px; min-width: 0; }
-  /* The table columns are ~20% narrower so the diagram column gets the extra width and
-     wide SVG brackets fit without an iframe scrollbar on a wide screen. */
-  .pane-table { flex-basis: 288px; }
-  .pane-svg { flex-grow: 2; }
+  /* The table columns are fixed at a narrow width (they do NOT grow) so the diagram column
+     absorbs all the spare width and wide SVG brackets get more air. They still shrink/wrap
+     on a narrow screen. */
+  .pane-table { flex: 0 1 440px; }
+  .pane-svg { flex-grow: 1; }
   .pane > h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .05em;
                color: #6b7280; margin: 0 0 6px; }
-  /* Opens the pane's SVG standalone in a new tab (full size, no iframe scroll). */
-  .pane > h3 button.open { text-transform: none; letter-spacing: 0; color: #2563eb;
-                           background: none; border: 0; padding: 0; margin-left: 8px;
-                           font: inherit; font-weight: 600; cursor: pointer; }
-  .pane > h3 button.open:hover { text-decoration: underline; }
   iframe.pane-frame { width: 100%; border: 1px solid #e5e7eb; border-radius: 4px;
                       display: block; }
   @media (prefers-color-scheme: dark) {
@@ -221,7 +217,6 @@ _PAGE_HEAD = """<!doctype html>
     header p, header .regen, .pane > h3, .example > .note { color: #94a3b8; }
     header .regen code { background: #1e293b; color: #e5e7eb; }
     .example { border-top-color: #334155; }
-    .pane > h3 button.open { color: #60a5fa; }
     iframe.pane-frame { border-color: #334155; }
     details.src > summary { color: #94a3b8; }
     details.src > pre { background: #1e293b; color: #e5e7eb; border-color: #334155; }
@@ -253,22 +248,6 @@ _PAGE_TAIL = """
   for (const f of frames) f.addEventListener('load', () => fit(f));
   matchMedia('(prefers-color-scheme: dark)').addEventListener(
     'change', () => { for (const f of frames) fit(f); });
-
-  // Open a pane's SVG (already rendered in its iframe) standalone in a new tab, scaled to
-  // fit the window so a wide bracket needs no scroll. Reuses the iframe's SVG via a
-  // transient blob URL — nothing is duplicated into this page.
-  function openPane(btn) {
-    const svg = btn.closest('.pane').querySelector('iframe').contentDocument
-                   .querySelector('svg');
-    if (!svg) return;
-    const doc = "<!doctype html><meta charset='utf-8'><title>matamata SVG</title>"
-      + "<style>html,body{margin:0;background:#fff}"
-      + "@media(prefers-color-scheme:dark){html,body{background:#0f172a}}"
-      + "svg{display:block;max-width:100%;height:auto;margin:0 auto}</style>"
-      + svg.outerHTML;
-    const url = URL.createObjectURL(new Blob([doc], {type: 'text/html'}));
-    window.open(url, '_blank');
-  }
 </script>
 </body>
 </html>
@@ -278,14 +257,6 @@ _PAGE_TAIL = """
 def _frame(fragment: str) -> str:
     srcdoc = escape(_FRAME_DOC.format(fragment=fragment), {'"': "&quot;"})
     return f'<iframe class="pane-frame" srcdoc="{srcdoc}"></iframe>'
-
-
-# Opens the pane's SVG standalone in a new tab. It reads the SVG already living in the
-# sibling iframe (so nothing is duplicated into the page) and opens it scaled to fit, via a
-# transient blob URL — see the openPane() script in _PAGE_TAIL.
-_OPEN_BTN = (
-    '<button class="open" type="button" onclick="openPane(this)">↗ open</button>'
-)
 
 
 def _source_json(filename: str) -> str:
@@ -310,8 +281,7 @@ def build_page() -> str:
         parts.append(_source_json(filename))
         parts.append('<div class="panes">')
         parts.append(
-            '<div class="pane pane-svg"><h3>SVG diagram'
-            f"{_OPEN_BTN}</h3>{_frame(svg)}</div>"
+            '<div class="pane pane-svg"><h3>SVG diagram</h3>' f"{_frame(svg)}</div>"
         )
         parts.append(
             '<div class="pane pane-table"><h3>HTML table — flat</h3>'
