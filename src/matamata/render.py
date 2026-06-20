@@ -15,7 +15,7 @@ from .model import Stage, meta_parts
 _LABEL_PAD = 10
 _SCORE_PAD = 8
 _META_CHAR_W = (
-    6.0  # rough px per glyph of the 11px metadata font, for wrapping to box width
+    5.2  # avg px per glyph of the 11px metadata font, for wrapping to box width
 )
 _CREST_SIZE = 16  # square crest side, vertically centered in the 24-unit row
 _FLAG_W = 24  # flag box is 3:2 (24x16); the image is fitted inside without distortion
@@ -209,19 +209,32 @@ def _wrap_lines(text: str, max_chars: int, max_lines: int = 2) -> list[str]:
 
 
 def _meta_wrapped(x: float, label: str, detail: str, box_w: float) -> str:
-    """The metadata wrapped to the box width as stacked ``<tspan>`` lines (id bold on line 1)."""
-    full = f"{label} · {detail}" if label and detail else (label or detail)
-    max_chars = max(8, int((box_w - 2 * _SCORE_PAD) / _META_CHAR_W))
-    parts = []
-    for i, line in enumerate(_wrap_lines(full, max_chars)):
-        dy = ' dy="13"' if i else ""
-        if i == 0 and label and line.startswith(label):
-            inner = f'<tspan class="pd-meta-id">{escape(label)}</tspan>' + escape(
-                line[len(label) :]
-            )
-        else:
-            inner = escape(line)
-        parts.append(f'<tspan x="{x:.0f}"{dy}>{inner}</tspan>')
+    """The metadata wrapped to the box width as stacked ``<tspan>`` lines.
+
+    When an id is present it is bold on the first line and the wrapped detail *hangs
+    indented* under it — continuation lines start past the ``"<id> · "`` prefix, not back at
+    the box edge — so the detail reads as one block beside the id. Without an id the text
+    wraps plainly from the box edge.
+    """
+    # The metadata is anchored at the box's left edge and may spill a little past the right
+    # one (into the column gap), so it gets the full box width rather than being inset — this
+    # keeps borderline lines from wrapping needlessly.
+    avail = max(8, int(box_w / _META_CHAR_W))
+    if not label:
+        parts = []
+        for i, line in enumerate(_wrap_lines(detail, avail)):
+            dy = ' dy="13"' if i else ""
+            parts.append(f'<tspan x="{x:.0f}"{dy}>{escape(line)}</tspan>')
+        return "".join(parts)
+
+    prefix_chars = len(label) + 3  # "<id> · "
+    detail_lines = _wrap_lines(detail, max(4, avail - prefix_chars)) if detail else [""]
+    head = f'<tspan class="pd-meta-id">{escape(label)}</tspan>'
+    first = escape(" · " + detail_lines[0]) if detail else ""
+    parts = [f'<tspan x="{x:.0f}">{head}{first}</tspan>']
+    indent_x = x + prefix_chars * _META_CHAR_W  # align continuations under the detail
+    for line in detail_lines[1:]:
+        parts.append(f'<tspan x="{indent_x:.0f}" dy="13">{escape(line)}</tspan>')
     return "".join(parts)
 
 

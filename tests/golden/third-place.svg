@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 476 390" width="476" height="390" font-family="sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 310" width="540" height="310" font-family="sans-serif">
 <style>
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -28,12 +28,12 @@
     .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }</style>
-<rect class="pd-bg" width="476" height="390"/>
+<rect class="pd-bg" width="540" height="310"/>
 <text class="pd-title" x="20" y="28">World Cup</text>
 <text class="pd-season" x="128" y="28">2026</text>
 <text class="pd-header" x="80" y="68">Semifinals</text>
 <text class="pd-header" x="270" y="68">Final</text>
-<text class="pd-header" x="270" y="286">Third place</text>
+<text class="pd-header" x="460" y="68">Third place</text>
 <path class="pd-link" d="M 140 124 L 175 124 L 175 164 L 210 164"/>
 <path class="pd-link" d="M 140 228 L 175 228 L 175 188 L 210 188"/>
 <text class="pd-meta" x="20" y="94"><tspan class="pd-meta-id">SF1</tspan> · Tuesday 14 July, 23:00 AT&amp;T Stadium</text>
@@ -54,7 +54,7 @@
 <g class="">
 <text class="pd-team" x="30" y="244">Brazil</text>
 </g>
-<text class="pd-meta" x="210" y="146">Sunday 19 July, 19:00 MetLife Stadium</text>
+<text class="pd-meta" x="210" y="214"><tspan x="210">Sunday 19 July, 19:00</tspan><tspan x="210" dy="13">MetLife Stadium</tspan></text>
 <rect class="pd-box" x="210" y="152" width="120" height="48" rx="3"/>
 <line class="pd-divider" x1="210" y1="176" x2="330" y2="176"/>
 <g class="">
@@ -63,13 +63,13 @@
 <g class="">
 <text class="pd-team" x="220" y="192">Winner SF2</text>
 </g>
-<text class="pd-meta" x="210" y="312">Saturday 18 July, 19:00 Hard Rock Stadium</text>
-<rect class="pd-box" x="210" y="318" width="120" height="48" rx="3"/>
-<line class="pd-divider" x1="210" y1="342" x2="330" y2="342"/>
+<text class="pd-meta" x="400" y="214"><tspan x="400">Saturday 18 July, 19:00</tspan><tspan x="400" dy="13">Hard Rock Stadium</tspan></text>
+<rect class="pd-box" x="400" y="152" width="120" height="48" rx="3"/>
+<line class="pd-divider" x1="400" y1="176" x2="520" y2="176"/>
 <g class="">
-<text class="pd-team" x="220" y="334">Loser SF1</text>
+<text class="pd-team" x="410" y="168">Loser SF1</text>
 </g>
 <g class="">
-<text class="pd-team" x="220" y="358">Loser SF2</text>
+<text class="pd-team" x="410" y="192">Loser SF2</text>
 </g>
 </svg>

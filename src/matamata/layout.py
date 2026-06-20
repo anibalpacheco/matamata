@@ -239,6 +239,18 @@ def compute_layout(
                 box_y = cy + BOX_H / 2 + V_GAP + meta_top
             cursor = box_y
 
+    def place_beside(rnds, beside_x: float, cy: float) -> None:
+        """Place below-the-bracket rounds (third place) in column(s) to the *right* of the
+        final, level with it, each with a normal top-band header and no connector. Used for a
+        small bracket (a first round of <=2 matches), where hanging third place underneath
+        the final leaves a lopsided diagram; beside the final it reads as one more column.
+        """
+        for col, rnd in enumerate(rnds):
+            x = beside_x + col * column_pitch
+            headers.append(Header(name=rnd.name, cx=x + bw / 2))  # top-band header
+            for i, match in enumerate(rnd.matches):
+                place(match, x, cy + i * row_pitch)
+
     if stage.render.layout == "symmetric":
         n_cols, connect = _place_symmetric(
             bracket_rounds,
@@ -256,25 +268,20 @@ def compute_layout(
         # The lifted final can reach above the header band; nudge the diagram down to fit.
         _apply_top_offset(placed, headers, meta_top)
     else:
-        for r_index, rnd in enumerate(bracket_rounds):
-            x = MARGIN_X + r_index * column_pitch
-            headers.append(Header(name=rnd.name, cx=x + bw / 2))
-            for m_index, match in enumerate(rnd.matches):
-                place(match, x, stack_cy(match, m_index))
-        n_cols = len(bracket_rounds)
-        # Below the bracket, in the final's column: hang any third-place round under the
-        # lowest box (meta_below is only set later, in _connectors).
-        if below_rounds:
-            below_x = MARGIN_X + max(n_cols - 1, 0) * column_pitch
-            # Hang third place just below the final, in its own (last) column — not below
-            # the whole bracket, whose lowest first-round box sits far lower and would leave
-            # a big empty gap. The final is the only box in that column.
-            final_bottom = max(
-                (pm.y + BOX_H for pm in placed if pm.x == below_x), default=TOP
-            )
-            cursor = final_bottom + meta_h + V_GAP
-            place_below(below_rounds, below_x, cursor)
-        connect = placed  # every placed match's incoming connector is drawn
+        n_cols, connect = _place_linear(
+            bracket_rounds,
+            below_rounds,
+            bw,
+            column_pitch,
+            meta_h,
+            meta_top,
+            headers,
+            placed,
+            stack_cy,
+            place,
+            place_below,
+            place_beside,
+        )
 
     connectors = _connectors(connect, by_placed, bw)
 
@@ -286,9 +293,10 @@ def compute_layout(
         fmt = stage.render.dt_format
 
         def _meta_right(pm: PlacedMatch) -> float:
-            # A meta_end box anchors at its right edge and flows left, so its rightmost
-            # point is the box edge; a normal box flows right from its left edge.
-            if pm.meta_end:
+            # A meta_end box anchors at its right edge and flows left, and a meta_wrap box
+            # wraps within the box width, so both reach only the box edge; a normal box flows
+            # right (unwrapped) from its left edge.
+            if pm.meta_end or pm.meta_wrap:
                 return pm.x + bw
             return (
                 pm.x + len(meta_text(pm.match, fmt, timezone, language)) * META_CHAR_W
@@ -396,6 +404,58 @@ def _place_symmetric(  # noqa: PLR0913 — geometry helper, threads compute_layo
 
     n_cols = 2 * m if m else 1
     return n_cols, connect
+
+
+def _place_linear(  # noqa: PLR0913 — geometry helper, threads compute_layout's state
+    bracket_rounds,
+    below_rounds,
+    bw: float,
+    column_pitch: float,
+    meta_h: float,
+    meta_top: float,
+    headers: list[Header],
+    placed: list[PlacedMatch],
+    stack_cy,
+    place,
+    place_below,
+    place_beside,
+) -> "tuple[int, list[PlacedMatch]]":
+    """Place the left-to-right linear diagram; return its column count and matches to connect.
+
+    Rounds flow into columns with the final last. A third-place (below) round goes *beside*
+    the final, level with it, for a small bracket — a first round of <=2 matches — or hangs
+    under the final's column otherwise (placed beside a tall bracket it would float far out).
+    Every placed match's incoming connector is drawn (third place simply has none).
+    """
+    for r_index, rnd in enumerate(bracket_rounds):
+        x = MARGIN_X + r_index * column_pitch
+        headers.append(Header(name=rnd.name, cx=x + bw / 2))
+        for m_index, match in enumerate(rnd.matches):
+            place(match, x, stack_cy(match, m_index))
+    n_cols = len(bracket_rounds)
+    if below_rounds:
+        final_x = MARGIN_X + max(n_cols - 1, 0) * column_pitch
+        if bracket_rounds and len(bracket_rounds[0].matches) <= 2:
+            final_pm = next((pm for pm in placed if pm.x == final_x), None)
+            final_cy = final_pm.cy if final_pm else TOP + meta_top + BOX_H / 2
+            start = len(placed)
+            place_beside(below_rounds, final_x + column_pitch, final_cy)
+            n_cols += len(below_rounds)
+            # The final and third place sit side by side: wrap each one's metadata to its box
+            # width and drop it below the box, so the two long lines don't run into each other.
+            for pm in [final_pm, *placed[start:]]:
+                if pm is not None:
+                    pm.meta_below = True
+                    pm.meta_wrap = True
+        else:
+            # Hang third place just below the final, in its own (last) column — not below the
+            # whole bracket, whose lowest first-round box sits far lower and would leave a big
+            # empty gap. The final is the only box in that column.
+            final_bottom = max(
+                (pm.y + BOX_H for pm in placed if pm.x == final_x), default=TOP
+            )
+            place_below(below_rounds, final_x, final_bottom + meta_h + V_GAP)
+    return n_cols, placed
 
 
 def _apply_top_offset(

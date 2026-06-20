@@ -112,21 +112,11 @@ def test_pending_draw_side_renders_tbd_without_a_connector():
     assert final.home.label == "TBD"
 
 
-def test_third_place_round_hangs_below_the_bracket_with_no_connector():
-    # A round fed entirely by loser_of (third place) comes after the final: it draws no
-    # connector and is placed below the bracket, in the final's column, with its own header.
-    from matamata.layout import compute_layout
-
-    doc = {
+def _third_place_doc(first_round):
+    return {
         "render": {"layout": "linear"},
-        "rounds": [
-            {
-                "name": "SF",
-                "matches": [
-                    {"id": "sf1", "team1": "A", "team2": "B"},
-                    {"id": "sf2", "team1": "C", "team2": "D"},
-                ],
-            },
+        "rounds": first_round
+        + [
             {"name": "Final", "matches": [{"winnerof1": "sf1", "winnerof2": "sf2"}]},
             {
                 "name": "Third place",
@@ -134,15 +124,57 @@ def test_third_place_round_hangs_below_the_bracket_with_no_connector():
             },
         ],
     }
-    layout = compute_layout(parse_stage(doc))
+
+
+def test_third_place_round_sits_beside_the_final_in_a_small_bracket():
+    # A round fed entirely by loser_of (third place) draws no connector. In a small bracket
+    # (first round of <=2 matches) it is placed *beside* the final, level with it.
+    from matamata.layout import compute_layout
+
+    sf = [
+        {
+            "name": "SF",
+            "matches": [
+                {"id": "sf1", "team1": "A", "team2": "B"},
+                {"id": "sf2", "team1": "C", "team2": "D"},
+            ],
+        }
+    ]
+    layout = compute_layout(parse_stage(_third_place_doc(sf)))
     # The final's two connectors only; the third-place match adds none.
     assert len(layout.connectors) == 2
     final, third = layout.matches[-2], layout.matches[-1]
     assert (third.home.label, third.away.label) == ("Loser SF1", "Loser SF2")
-    # The third-place box sits below the final, in the same column.
+    # The third-place box sits to the right of the final, level with it.
+    assert third.x > final.x
+    assert third.y == final.y
+    # Its header rides in the top band like every other column.
+    third_header = next(h for h in layout.headers if h.name == "Third place")
+    assert third_header.cy == layout.headers[0].cy
+
+
+def test_third_place_round_hangs_below_the_bracket_in_a_larger_bracket():
+    # With a first round of more than 2 matches, third place hangs below the final (in its
+    # column) rather than beside it, so it does not float far to the right of a tall bracket.
+    from matamata.layout import compute_layout
+
+    qf = [
+        {
+            "name": "QF",
+            "matches": [
+                {"id": "sf1", "team1": "A", "team2": "B"},
+                {"id": "q2", "team1": "C", "team2": "D"},
+                {"id": "q3", "team1": "E", "team2": "F"},
+                {"id": "sf2", "team1": "G", "team2": "H"},
+            ],
+        }
+    ]
+    layout = compute_layout(parse_stage(_third_place_doc(qf)))
+    final, third = layout.matches[-2], layout.matches[-1]
+    # The third-place box sits below the final, in the same column, with its own header
+    # below the top column headers.
     assert third.x == final.x
     assert third.y > final.y
-    # Its round keeps its own header, below the top column headers.
     third_header = next(h for h in layout.headers if h.name == "Third place")
     assert third_header.cy > layout.headers[0].cy
 

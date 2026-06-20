@@ -183,7 +183,7 @@
 <text class="pd-team" x="878" y="414">France</text>
 <text class="pd-score" x="1002" y="414">2</text>
 </g>
-<text class="pd-meta" x="444" y="332"><tspan x="444"><tspan class="pd-meta-id">SF1</tspan> · Tuesday 13</tspan><tspan x="444" dy="13">December Lusail Stad…</tspan></text>
+<text class="pd-meta" x="444" y="332"><tspan x="444"><tspan class="pd-meta-id">SF1</tspan> · Tuesday 13 December</tspan><tspan x="475" dy="13">Lusail Stadium</tspan></text>
 <rect class="pd-box" x="444" y="270" width="142" height="48" rx="3"/>
 <line class="pd-divider" x1="444" y1="294" x2="586" y2="294"/>
 <g class="pd-win">
@@ -194,7 +194,7 @@
 <text class="pd-team" x="454" y="310">Croatia</text>
 <text class="pd-score" x="578" y="310">0</text>
 </g>
-<text class="pd-meta" x="656" y="332"><tspan x="656"><tspan class="pd-meta-id">SF2</tspan> · Wednesday 14</tspan><tspan x="656" dy="13">December Al Bayt Sta…</tspan></text>
+<text class="pd-meta" x="656" y="332"><tspan x="656"><tspan class="pd-meta-id">SF2</tspan> · Wednesday 14 December</tspan><tspan x="687" dy="13">Al Bayt Stadium</tspan></text>
 <rect class="pd-box" x="656" y="270" width="142" height="48" rx="3"/>
 <line class="pd-divider" x1="656" y1="294" x2="798" y2="294"/>
 <g class="">

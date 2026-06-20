@@ -84,7 +84,7 @@
 <text class="pd-team" x="960" y="324">Internacional</text>
 <text class="pd-score" x="1182" y="324">0<tspan dx="6">1</tspan></text>
 </g>
-<text class="pd-meta" x="330" y="294"><tspan x="330"><tspan class="pd-meta-id">SF1</tspan> · 23/09 20:30 Maracanã / 30/09</tspan><tspan x="330" dy="13">20:30 Estadio Monumental</tspan></text>
+<text class="pd-meta" x="330" y="294"><tspan x="330"><tspan class="pd-meta-id">SF1</tspan> · 23/09 20:30 Maracanã / 30/09 20:30</tspan><tspan x="361" dy="13">Estadio Monumental</tspan></text>
 <rect class="pd-box" x="330" y="232" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="330" y1="256" x2="570" y2="256"/>
 <g class="pd-win">
@@ -95,7 +95,7 @@
 <text class="pd-team" x="340" y="272">River Plate</text>
 <text class="pd-score" x="562" y="272">0<tspan dx="6">1</tspan></text>
 </g>
-<text class="pd-meta" x="640" y="294"><tspan x="640"><tspan class="pd-meta-id">SF2</tspan> · 24/09 20:30 Parque Viera /</tspan><tspan x="640" dy="13">01/10 20:30 Neo Química Arena</tspan></text>
+<text class="pd-meta" x="640" y="294"><tspan x="640"><tspan class="pd-meta-id">SF2</tspan> · 24/09 20:30 Parque Viera / 01/10 20:30</tspan><tspan x="671" dy="13">Neo Química Arena</tspan></text>
 <rect class="pd-box" x="640" y="232" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="640" y1="256" x2="880" y2="256"/>
 <g class="pd-win">

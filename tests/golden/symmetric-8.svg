@@ -85,7 +85,7 @@
 <text class="pd-team" x="792" y="324">Manchester United</text>
 <text class="pd-score" x="958" y="324">1 <tspan class="pd-pens" dy="-1.5">(2)</tspan></text>
 </g>
-<text class="pd-meta" x="274" y="294"><tspan x="274"><tspan class="pd-meta-id">SF1</tspan> · 04/03 20:00 Etihad</tspan><tspan x="274" dy="13">Stadium</tspan></text>
+<text class="pd-meta" x="274" y="294"><tspan x="274"><tspan class="pd-meta-id">SF1</tspan> · 04/03 20:00 Etihad Stadium</tspan></text>
 <rect class="pd-box" x="274" y="232" width="184" height="48" rx="3"/>
 <line class="pd-divider" x1="274" y1="256" x2="458" y2="256"/>
 <g class="pd-win">
