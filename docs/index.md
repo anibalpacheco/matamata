@@ -17,7 +17,7 @@ quickstart.
 
 ### Installation
 
-A standard pip-installable package, requiring Python ≥ 3.10 and no runtime
+A standard pip-installable package, requiring Python ≥ 3.12 and no runtime
 dependencies — install it into your project from PyPI:
 
 ```bash

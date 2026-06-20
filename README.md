@@ -23,7 +23,7 @@ each match's date and venue from the document and national flags supplied by a h
 
 ## Quickstart
 
-Requires Python ≥ 3.10. No runtime dependencies. Install from PyPI:
+Requires Python ≥ 3.12. No runtime dependencies. Install from PyPI:
 
 ```bash
 pip install matamata
