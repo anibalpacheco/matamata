@@ -41,7 +41,7 @@
 <path class="pd-link" d="M 204 308 L 239 308 L 239 268 L 274 268"/>
 <path class="pd-link" d="M 782 204 L 747 204 L 747 244 L 712 244"/>
 <path class="pd-link" d="M 782 308 L 747 308 L 747 268 L 712 268"/>
-<text class="pd-meta" x="20" y="174"><tspan class="pd-meta-id">QF1</tspan> · 24/02 19:45 Etihad Stadium</text>
+<text class="pd-meta" x="20" y="174"><tspan x="20"><tspan class="pd-meta-id">QF1</tspan> · 24/02 19:45 Etihad Stadium</tspan></text>
 <rect class="pd-box" x="20" y="180" width="184" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="204" x2="204" y2="204"/>
 <g class="pd-win">
@@ -52,7 +52,7 @@
 <text class="pd-team" x="30" y="220">Newcastle</text>
 <text class="pd-score" x="196" y="220">1</text>
 </g>
-<text class="pd-meta" x="20" y="346"><tspan class="pd-meta-id">QF2</tspan> · 24/02 19:45 Emirates Stadium</text>
+<text class="pd-meta" x="20" y="346"><tspan x="20"><tspan class="pd-meta-id">QF2</tspan> · 24/02 19:45 Emirates Stadium</tspan></text>
 <rect class="pd-box" x="20" y="284" width="184" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="308" x2="204" y2="308"/>
 <g class="">
@@ -63,7 +63,7 @@
 <text class="pd-team" x="30" y="324">Aston Villa</text>
 <text class="pd-score" x="196" y="324">2</text>
 </g>
-<text class="pd-meta" x="966" y="174" text-anchor="end"><tspan class="pd-meta-id">QF3</tspan> · 25/02 19:45 Anfield</text>
+<text class="pd-meta" x="782" y="174"><tspan x="782"><tspan class="pd-meta-id">QF3</tspan> · 25/02 19:45 Anfield</tspan></text>
 <rect class="pd-box" x="782" y="180" width="184" height="48" rx="3"/>
 <line class="pd-divider" x1="782" y1="204" x2="966" y2="204"/>
 <g class="pd-win">
@@ -74,7 +74,7 @@
 <text class="pd-team" x="792" y="220">Tottenham</text>
 <text class="pd-score" x="958" y="220">1</text>
 </g>
-<text class="pd-meta" x="966" y="346" text-anchor="end"><tspan class="pd-meta-id">QF4</tspan> · 25/02 19:45 Stamford Bridge</text>
+<text class="pd-meta" x="782" y="346"><tspan x="782"><tspan class="pd-meta-id">QF4</tspan> · 25/02 19:45 Stamford Bridge</tspan></text>
 <rect class="pd-box" x="782" y="284" width="184" height="48" rx="3"/>
 <line class="pd-divider" x1="782" y1="308" x2="966" y2="308"/>
 <g class="pd-win">
@@ -107,7 +107,7 @@
 <text class="pd-team" x="538" y="272">Chelsea</text>
 <text class="pd-score" x="704" y="272">2</text>
 </g>
-<text class="pd-meta" x="401" y="108">15/03 16:30 Wembley Stadium</text>
+<text class="pd-meta" x="401" y="108"><tspan x="401">15/03 16:30 Wembley Stadium</tspan></text>
 <rect class="pd-box" x="401" y="114" width="184" height="48" rx="3"/>
 <line class="pd-divider" x1="401" y1="138" x2="585" y2="138"/>
 <g class="pd-win">
@@ -118,7 +118,7 @@
 <text class="pd-team" x="411" y="154">Chelsea</text>
 <text class="pd-score" x="577" y="154">0</text>
 </g>
-<text class="pd-meta" x="401" y="392">14/03 15:00 Wembley Stadium</text>
+<text class="pd-meta" x="401" y="392"><tspan x="401">14/03 15:00 Wembley Stadium</tspan></text>
 <rect class="pd-box" x="401" y="398" width="184" height="48" rx="3"/>
 <line class="pd-divider" x1="401" y1="422" x2="585" y2="422"/>
 <g class="pd-win">

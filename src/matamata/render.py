@@ -15,8 +15,9 @@ from .model import Stage, meta_parts
 _LABEL_PAD = 10
 _SCORE_PAD = 8
 _META_CHAR_W = (
-    5.2  # avg px per glyph of the 11px metadata font, for wrapping to box width
+    5.0  # avg px per glyph of the 11px metadata font, for wrapping to box width
 )
+_META_LINE_H = 13  # baseline-to-baseline spacing of wrapped metadata lines
 _CREST_SIZE = 16  # square crest side, vertically centered in the 24-unit row
 _FLAG_W = 24  # flag box is 3:2 (24x16); the image is fitted inside without distortion
 _CREST_GAP = 6
@@ -143,21 +144,19 @@ def _match(
     detail: str = "",
 ) -> None:
     if label or detail:
-        # Below the box when its connector bends up (room above is taken), else above it.
-        meta_y = pm.y + BOX_H + 14 if pm.meta_below else pm.y - 6
-        if pm.meta_wrap:
-            inner = _meta_wrapped(pm.x, label, detail, box_w)
-            meta_x, anchor = pm.x, ""
-        elif pm.meta_end:
-            # Right half of the symmetric layout: anchor at the box's right edge so a long
-            # line overflows inward (toward the centre) instead of off the right margin.
-            inner = _meta_single(label, detail)
-            meta_x, anchor = pm.x + box_w, ' text-anchor="end"'
-        else:
-            inner = _meta_single(label, detail)
-            meta_x, anchor = pm.x, ""
+        # All metadata wraps to the box width (left-anchored at the box edge); it goes below
+        # the box when its connector bends up (the room above is taken), else above it.
+        inner, n_lines = _meta_wrapped(pm.x, label, detail, box_w)
+        # The wrapped block grows downward from its baseline: below the box it starts just
+        # under it; above the box it is raised so the *last* line hugs the box top and the
+        # earlier lines stack upward (instead of growing down into the box).
+        meta_y = (
+            pm.y + BOX_H + 14
+            if pm.meta_below
+            else pm.y - 6 - (n_lines - 1) * _META_LINE_H
+        )
         out.append(
-            f'<text class="pd-meta" x="{meta_x:.0f}" y="{meta_y:.0f}"{anchor}>{inner}</text>'
+            f'<text class="pd-meta" x="{pm.x:.0f}" y="{meta_y:.0f}">{inner}</text>'
         )
     out.append(
         f'<rect class="pd-box" x="{pm.x:.0f}" y="{pm.y:.0f}" '
@@ -170,16 +169,6 @@ def _match(
     )
     _row(out, pm, pm.home, pm.y, max_chars, box_w, flag)
     _row(out, pm, pm.away, mid, max_chars, box_w, flag)
-
-
-def _meta_single(label: str, detail: str) -> str:
-    """The metadata line's inner SVG markup on one line, the id wrapped in a bold tspan."""
-    if not label:
-        return escape(detail)
-    inner = f'<tspan class="pd-meta-id">{escape(label)}</tspan>'
-    if detail:
-        inner += escape(f" · {detail}")
-    return inner
 
 
 def _wrap_lines(text: str, max_chars: int, max_lines: int = 2) -> list[str]:
@@ -208,24 +197,27 @@ def _wrap_lines(text: str, max_chars: int, max_lines: int = 2) -> list[str]:
     return lines or [""]
 
 
-def _meta_wrapped(x: float, label: str, detail: str, box_w: float) -> str:
+def _meta_wrapped(x: float, label: str, detail: str, box_w: float) -> tuple[str, int]:
     """The metadata wrapped to the box width as stacked ``<tspan>`` lines.
 
-    When an id is present it is bold on the first line and the wrapped detail *hangs
-    indented* under it — continuation lines start past the ``"<id> · "`` prefix, not back at
-    the box edge — so the detail reads as one block beside the id. Without an id the text
-    wraps plainly from the box edge.
+    Returns the markup and its line count (the caller positions the block, which always grows
+    downward from the parent ``<text>`` baseline). When an id is present it is bold on the
+    first line and the wrapped detail *hangs indented* under it — continuation lines start
+    past the ``"<id> · "`` prefix, not back at the box edge — so the detail reads as one block
+    beside the id. Without an id the text wraps plainly from the box edge.
     """
     # The metadata is anchored at the box's left edge and may spill a little past the right
     # one (into the column gap), so it gets the full box width rather than being inset — this
     # keeps borderline lines from wrapping needlessly.
     avail = max(8, int(box_w / _META_CHAR_W))
     if not label:
-        parts = []
-        for i, line in enumerate(_wrap_lines(detail, avail)):
-            dy = ' dy="13"' if i else ""
-            parts.append(f'<tspan x="{x:.0f}"{dy}>{escape(line)}</tspan>')
-        return "".join(parts)
+        lines = _wrap_lines(detail, avail)
+        parts = [
+            f'<tspan x="{x:.0f}"{f" dy=\"{_META_LINE_H}\"" if i else ""}>'
+            f"{escape(line)}</tspan>"
+            for i, line in enumerate(lines)
+        ]
+        return "".join(parts), len(lines)
 
     prefix_chars = len(label) + 3  # "<id> · "
     detail_lines = _wrap_lines(detail, max(4, avail - prefix_chars)) if detail else [""]
@@ -234,8 +226,10 @@ def _meta_wrapped(x: float, label: str, detail: str, box_w: float) -> str:
     parts = [f'<tspan x="{x:.0f}">{head}{first}</tspan>']
     indent_x = x + prefix_chars * _META_CHAR_W  # align continuations under the detail
     for line in detail_lines[1:]:
-        parts.append(f'<tspan x="{indent_x:.0f}" dy="13">{escape(line)}</tspan>')
-    return "".join(parts)
+        parts.append(
+            f'<tspan x="{indent_x:.0f}" dy="{_META_LINE_H}">{escape(line)}</tspan>'
+        )
+    return "".join(parts), len(detail_lines)
 
 
 def render_layout(
@@ -303,6 +297,4 @@ def render_svg(
     ``None`` leaves them in English. It localizes only the dates here — the generated
     labels are translated upstream by ``KnockoutStage.translate`` at build time.
     """
-    return render_layout(
-        stage, compute_layout(stage, timezone, language), timezone, language
-    )
+    return render_layout(stage, compute_layout(stage), timezone, language)

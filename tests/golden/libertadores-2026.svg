@@ -40,7 +40,7 @@
 <path class="pd-link" d="M 260 308 L 295 308 L 295 268 L 330 268"/>
 <path class="pd-link" d="M 950 204 L 915 204 L 915 244 L 880 244"/>
 <path class="pd-link" d="M 950 308 L 915 308 L 915 268 L 880 268"/>
-<text class="pd-meta" x="20" y="174"><tspan class="pd-meta-id">QF1</tspan> · 11/08 20:00 Maracanã / 18/08 20:00 La Bombonera</text>
+<text class="pd-meta" x="20" y="161"><tspan x="20"><tspan class="pd-meta-id">QF1</tspan> · 11/08 20:00 Maracanã / 18/08 20:00 La</tspan><tspan x="50" dy="13">Bombonera</tspan></text>
 <rect class="pd-box" x="20" y="180" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="204" x2="260" y2="204"/>
 <g class="pd-win">
@@ -51,7 +51,7 @@
 <text class="pd-team" x="30" y="220">Boca Juniors</text>
 <text class="pd-score" x="252" y="220">1<tspan dx="6">0</tspan></text>
 </g>
-<text class="pd-meta" x="20" y="346"><tspan class="pd-meta-id">QF2</tspan> · 12/08 20:30 Estadio Monumental / 19/08 20:30 Allianz Parque</text>
+<text class="pd-meta" x="20" y="346"><tspan x="20"><tspan class="pd-meta-id">QF2</tspan> · 12/08 20:30 Estadio Monumental / 19/08</tspan><tspan x="50" dy="13">20:30 Allianz Parque</tspan></text>
 <rect class="pd-box" x="20" y="284" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="308" x2="260" y2="308"/>
 <g class="pd-win">
@@ -62,7 +62,7 @@
 <text class="pd-team" x="30" y="324">Palmeiras</text>
 <text class="pd-score" x="252" y="324">1<tspan dx="6">0</tspan> <tspan class="pd-pens" dy="-1.5">(2)</tspan></text>
 </g>
-<text class="pd-meta" x="1190" y="174" text-anchor="end"><tspan class="pd-meta-id">QF3</tspan> · 13/08 20:00 Parque Viera / 20/08 20:00 Arena MRV</text>
+<text class="pd-meta" x="950" y="161"><tspan x="950"><tspan class="pd-meta-id">QF3</tspan> · 13/08 20:00 Parque Viera / 20/08 20:00</tspan><tspan x="980" dy="13">Arena MRV</tspan></text>
 <rect class="pd-box" x="950" y="180" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="950" y1="204" x2="1190" y2="204"/>
 <g class="pd-win">
@@ -73,7 +73,7 @@
 <text class="pd-team" x="960" y="220">Atletico Mineiro</text>
 <text class="pd-score" x="1182" y="220">0<tspan dx="6">1</tspan></text>
 </g>
-<text class="pd-meta" x="1190" y="346" text-anchor="end"><tspan class="pd-meta-id">QF4</tspan> · 12/08 18:00 Neo Química Arena / 19/08 18:00 Beira-Rio</text>
+<text class="pd-meta" x="950" y="346"><tspan x="950"><tspan class="pd-meta-id">QF4</tspan> · 12/08 18:00 Neo Química Arena / 19/08</tspan><tspan x="980" dy="13">18:00 Beira-Rio</tspan></text>
 <rect class="pd-box" x="950" y="284" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="950" y1="308" x2="1190" y2="308"/>
 <g class="pd-win">
@@ -84,7 +84,7 @@
 <text class="pd-team" x="960" y="324">Internacional</text>
 <text class="pd-score" x="1182" y="324">0<tspan dx="6">1</tspan></text>
 </g>
-<text class="pd-meta" x="330" y="294"><tspan x="330"><tspan class="pd-meta-id">SF1</tspan> · 23/09 20:30 Maracanã / 30/09 20:30</tspan><tspan x="361" dy="13">Estadio Monumental</tspan></text>
+<text class="pd-meta" x="330" y="294"><tspan x="330"><tspan class="pd-meta-id">SF1</tspan> · 23/09 20:30 Maracanã / 30/09 20:30 Estadio</tspan><tspan x="360" dy="13">Monumental</tspan></text>
 <rect class="pd-box" x="330" y="232" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="330" y1="256" x2="570" y2="256"/>
 <g class="pd-win">
@@ -95,7 +95,7 @@
 <text class="pd-team" x="340" y="272">River Plate</text>
 <text class="pd-score" x="562" y="272">0<tspan dx="6">1</tspan></text>
 </g>
-<text class="pd-meta" x="640" y="294"><tspan x="640"><tspan class="pd-meta-id">SF2</tspan> · 24/09 20:30 Parque Viera / 01/10 20:30</tspan><tspan x="671" dy="13">Neo Química Arena</tspan></text>
+<text class="pd-meta" x="640" y="294"><tspan x="640"><tspan class="pd-meta-id">SF2</tspan> · 24/09 20:30 Parque Viera / 01/10 20:30 Neo</tspan><tspan x="670" dy="13">Química Arena</tspan></text>
 <rect class="pd-box" x="640" y="232" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="640" y1="256" x2="880" y2="256"/>
 <g class="pd-win">
@@ -106,7 +106,7 @@
 <text class="pd-team" x="650" y="272">Corinthians</text>
 <text class="pd-score" x="872" y="272">1<tspan dx="6">0</tspan></text>
 </g>
-<text class="pd-meta" x="485" y="108">21/11 17:00 Estadio Centenario</text>
+<text class="pd-meta" x="485" y="108"><tspan x="485">21/11 17:00 Estadio Centenario</tspan></text>
 <rect class="pd-box" x="485" y="114" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="485" y1="138" x2="725" y2="138"/>
 <g class="pd-win">

@@ -36,7 +36,7 @@
 <text class="pd-header" x="460" y="68">Third place</text>
 <path class="pd-link" d="M 140 124 L 175 124 L 175 164 L 210 164"/>
 <path class="pd-link" d="M 140 228 L 175 228 L 175 188 L 210 188"/>
-<text class="pd-meta" x="20" y="94"><tspan class="pd-meta-id">SF1</tspan> · Tuesday 14 July, 23:00 AT&amp;T Stadium</text>
+<text class="pd-meta" x="20" y="81"><tspan x="20"><tspan class="pd-meta-id">SF1</tspan> · Tuesday 14 July,</tspan><tspan x="50" dy="13">23:00 AT&amp;T Stadium</tspan></text>
 <rect class="pd-box" x="20" y="100" width="120" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="124" x2="140" y2="124"/>
 <g class="">
@@ -45,7 +45,7 @@
 <g class="">
 <text class="pd-team" x="30" y="140">Spain</text>
 </g>
-<text class="pd-meta" x="20" y="266"><tspan class="pd-meta-id">SF2</tspan> · Wednesday 15 July, 23:00 Mercedes-Benz Stadium</text>
+<text class="pd-meta" x="20" y="266"><tspan x="20"><tspan class="pd-meta-id">SF2</tspan> · Wednesday 15 July,</tspan><tspan x="50" dy="13">23:00 Mercedes-Be…</tspan></text>
 <rect class="pd-box" x="20" y="204" width="120" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="228" x2="140" y2="228"/>
 <g class="">

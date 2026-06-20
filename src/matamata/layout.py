@@ -18,7 +18,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional
 
-from .model import Match, Resolver, Stage, meta_text, score_text
+from .model import Match, Resolver, Stage, score_text
 
 # Geometry constants (SVG user units).
 MARGIN_X = 20
@@ -31,7 +31,6 @@ V_GAP = 22
 MARGIN_BOTTOM = 24
 META_H = 34  # vertical room reserved between stacked boxes for their metadata lines
 META_TOP = 30  # room above the first box of a column for its single metadata caption
-META_CHAR_W = 6.0  # rough px per glyph of the 11px metadata font, to size the canvas
 # Box-internal horizontal metrics, mirroring how render.py draws a box — used only to size
 # an "auto" box_width to its widest content. GLYPH_W is a deliberately generous px-per-glyph
 # for the proportional 13px label/score font, so an auto box never clips its own text.
@@ -59,24 +58,17 @@ class SideView:
 
 
 @dataclass
-class PlacedMatch:  # pylint: disable=too-many-instance-attributes
+class PlacedMatch:
     match: Match
     x: float  # top-left
     y: float
     home: SideView
     away: SideView
-    # Where the metadata line is drawn: below the box when its outgoing connector bends
+    # Where the metadata block is drawn: below the box when its outgoing connector bends
     # up (the room above is taken by the connector), above it otherwise — including when
-    # there is no outgoing connector. Set while wiring connectors.
+    # there is no outgoing connector. Set while wiring connectors. (The metadata always
+    # wraps to the box width, so it never runs into a neighbour regardless of side.)
     meta_below: bool = False
-    # Wrap the metadata to the box width instead of letting it run past. Set for the
-    # symmetric centre semis, whose two same-height lines would otherwise collide.
-    meta_wrap: bool = False
-    # Anchor the metadata at the box's right edge (flowing left) instead of its left edge.
-    # Set for the symmetric right half so a long line overflows inward (toward the centre
-    # gap) like the left half, rather than running off the right margin. Ignored when
-    # meta_wrap is set (the wrapped semis stay within the box width either way).
-    meta_end: bool = False
 
     @property
     def cy(self) -> float:
@@ -165,9 +157,7 @@ def _side_view(resolver: Resolver, match: Match, side: str) -> SideView:
     )
 
 
-def compute_layout(
-    stage: Stage, timezone: Optional[str] = None, language: Optional[str] = None
-) -> Layout:
+def compute_layout(stage: Stage) -> Layout:
     resolver = Resolver(stage)
     # "auto" sizes the box to its widest content; a number is used verbatim.
     bw = (
@@ -285,25 +275,9 @@ def compute_layout(
 
     connectors = _connectors(connect, by_placed, bw)
 
+    # The metadata wraps to its box width (it may spill a hair into the column gap or the
+    # right margin, absorbed by MARGIN_X), so the canvas is just the columns — no widening.
     width: float = MARGIN_X * 2 + n_cols * bw + max(n_cols - 1, 0) * H_GAP
-    # The metadata line is drawn left-anchored at its box's x and is not wrapped, so a long
-    # one (especially the rightmost column's, e.g. the final's) can run past the canvas and
-    # clip. Estimate each line's width by character count and widen the canvas to fit it.
-    if stage.render.show_metadata:
-        fmt = stage.render.dt_format
-
-        def _meta_right(pm: PlacedMatch) -> float:
-            # A meta_end box anchors at its right edge and flows left, and a meta_wrap box
-            # wraps within the box width, so both reach only the box edge; a normal box flows
-            # right (unwrapped) from its left edge.
-            if pm.meta_end or pm.meta_wrap:
-                return pm.x + bw
-            return (
-                pm.x + len(meta_text(pm.match, fmt, timezone, language)) * META_CHAR_W
-            )
-
-        rightmost = max((_meta_right(pm) for pm in placed), default=0.0)
-        width = max(width, rightmost + MARGIN_X)
     # A box whose metadata sits below it extends META_H further down.
     height = (
         max(
@@ -361,7 +335,6 @@ def _place_symmetric(  # noqa: PLR0913 — geometry helper, threads compute_layo
             place(match, x_left, stack_cy(match, i))
         for i, match in enumerate(rnd.matches[split:]):
             place(match, x_right, stack_cy(match, i))
-            by_placed[match.id].meta_end = True  # right half: metadata flows inward
         connect.extend(by_placed[mt.id] for mt in rnd.matches)
         if r_index < m - 1:  # outer rounds: header in the top band over each column
             headers.append(Header(name=rnd.name, cx=x_left + bw / 2))
@@ -374,12 +347,11 @@ def _place_symmetric(  # noqa: PLR0913 — geometry helper, threads compute_layo
         semis = [by_placed[mt.id] for mt in mirror_rounds[-1].matches]
         semi_top = min(s.y for s in semis)
         semi_bottom = max(s.y + BOX_H for s in semis)
-        # The semifinals' title hugs their boxes (in the gap the dropped final connector
-        # used to fill); their metadata goes below, leaving that gap free for it, and wraps
-        # to the box width so the two adjacent same-height lines can't collide.
+        # The semifinals' title hugs their boxes (in the gap the dropped final connector used
+        # to fill); their metadata goes below, leaving that gap free for it (it wraps to the
+        # box width like every box, so the two adjacent lines can't collide).
         for s in semis:
             s.meta_below = True
-            s.meta_wrap = True
             headers.append(
                 Header(name=mirror_rounds[-1].name, cx=s.x + bw / 2, cy=s.y - 16)
             )
@@ -441,12 +413,11 @@ def _place_linear(  # noqa: PLR0913 — geometry helper, threads compute_layout'
             start = len(placed)
             place_beside(below_rounds, final_x + column_pitch, final_cy)
             n_cols += len(below_rounds)
-            # The final and third place sit side by side: wrap each one's metadata to its box
-            # width and drop it below the box, so the two long lines don't run into each other.
+            # The final and third place sit side by side: drop each one's metadata below the
+            # box (it wraps to the box width like every box, so the two lines don't collide).
             for pm in [final_pm, *placed[start:]]:
                 if pm is not None:
                     pm.meta_below = True
-                    pm.meta_wrap = True
         else:
             # Hang third place just below the final, in its own (last) column — not below the
             # whole bracket, whose lowest first-round box sits far lower and would leave a big

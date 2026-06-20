@@ -204,11 +204,10 @@ def test_metadata_sits_below_a_box_whose_connector_bends_up():
     assert placed[None].meta_below is False  # the final has no outgoing connector
 
 
-def test_symmetric_is_the_default_and_mirrors_right_half_metadata():
+def test_symmetric_is_the_default_and_mirrors_the_bracket():
     # With no render.layout the diagram defaults to the symmetric (FIFA-style) bracket:
-    # each round splits by document order into a left and a mirrored right half, the final
-    # is centred between the two semifinal columns, and the right half's metadata is anchored
-    # at the box's right edge (meta_end) so a long line overflows inward, not off the margin.
+    # each round splits by document order into a left and a mirrored right half, and the
+    # final is centred between the two semifinal columns.
     from matamata.layout import compute_layout
 
     doc = {
@@ -230,9 +229,8 @@ def test_symmetric_is_the_default_and_mirrors_right_half_metadata():
         ]
     }
     placed = {pm.match.id: pm for pm in compute_layout(parse_stage(doc)).matches}
-    # First half of each round goes left (anchored left), the second half mirrors right.
-    assert placed["qf1"].meta_end is False
-    assert placed["qf3"].meta_end is True
+    # First half of each round goes left, the second half mirrors to the right.
+    assert placed["qf1"].x < placed["qf3"].x
     # The final is centred between the two semifinal columns, not in a far last column.
     assert placed["sf1"].x < placed[None].x < placed["sf2"].x
 

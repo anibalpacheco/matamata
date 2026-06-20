@@ -36,7 +36,7 @@
 <text class="pd-header" x="324" y="216">Semifinals</text>
 <text class="pd-header" x="550" y="216">Semifinals</text>
 <text class="pd-header" x="437" y="78">Final</text>
-<text class="pd-meta" x="20" y="226"><tspan class="pd-meta-id">QF1</tspan></text>
+<text class="pd-meta" x="20" y="226"><tspan x="20"><tspan class="pd-meta-id">QF1</tspan></tspan></text>
 <rect class="pd-box" x="20" y="232" width="156" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="256" x2="176" y2="256"/>
 <g class="pd-win">
@@ -47,7 +47,7 @@
 <text class="pd-team" x="30" y="272">Newcastle</text>
 <text class="pd-score" x="168" y="272">1</text>
 </g>
-<text class="pd-meta" x="20" y="330"><tspan class="pd-meta-id">QF2</tspan></text>
+<text class="pd-meta" x="20" y="330"><tspan x="20"><tspan class="pd-meta-id">QF2</tspan></tspan></text>
 <rect class="pd-box" x="20" y="336" width="156" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="360" x2="176" y2="360"/>
 <g class="">
@@ -58,7 +58,7 @@
 <text class="pd-team" x="30" y="376">Arsenal</text>
 <text class="pd-score" x="168" y="376">1 <tspan class="pd-pens" dy="-1.5">(4)</tspan></text>
 </g>
-<text class="pd-meta" x="854" y="226" text-anchor="end"><tspan class="pd-meta-id">QF3</tspan></text>
+<text class="pd-meta" x="698" y="226"><tspan x="698"><tspan class="pd-meta-id">QF3</tspan></tspan></text>
 <rect class="pd-box" x="698" y="232" width="156" height="48" rx="3"/>
 <line class="pd-divider" x1="698" y1="256" x2="854" y2="256"/>
 <g class="pd-win">
@@ -69,7 +69,7 @@
 <text class="pd-team" x="708" y="272">Aston Villa</text>
 <text class="pd-score" x="846" y="272">0</text>
 </g>
-<text class="pd-meta" x="854" y="330" text-anchor="end"><tspan class="pd-meta-id">QF4</tspan></text>
+<text class="pd-meta" x="698" y="330"><tspan x="698"><tspan class="pd-meta-id">QF4</tspan></tspan></text>
 <rect class="pd-box" x="698" y="336" width="156" height="48" rx="3"/>
 <line class="pd-divider" x1="698" y1="360" x2="854" y2="360"/>
 <g class="pd-win">

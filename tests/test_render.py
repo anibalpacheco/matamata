@@ -227,7 +227,7 @@ def test_metadata_line_is_rendered_in_svg_and_stacked():
     from matamata import parse_stage
 
     doc = {
-        "render": {"dt_format": "dd/MM HH:mm"},
+        "render": {"dt_format": "dd/MM HH:mm", "box_width": 300},
         "rounds": [
             {
                 "name": "Final",
