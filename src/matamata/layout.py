@@ -16,6 +16,7 @@ left to right with the final in the last column.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from functools import partial
 from typing import Optional
 
 from .model import Match, Resolver, Stage, score_text
@@ -147,6 +148,44 @@ def _auto_box_width(stage: Stage, resolver: Resolver) -> float:
     return widest
 
 
+def _children_by_parent(stage: Stage) -> "dict[str, Match]":
+    """Map each match id consumed by a later match (via ``winner_of``) to that consumer."""
+    child_of: dict[str, Match] = {}
+    for rnd in stage.rounds:
+        for match in rnd.matches:
+            for slot in (match.home, match.away):
+                if slot.winner_of is not None:
+                    child_of[slot.winner_of] = match
+    return child_of
+
+
+def _stack_group(
+    matches, child_of: "dict[str, Match]", meta_h: float, meta_top: float
+) -> list[float]:
+    """Vertical centres for a column of parentless (first-round) matches.
+
+    Two consecutive matches that feed the same next-round node are stacked tight — no
+    metadata sits between them (the top one's caption is above it, the bottom one's below
+    it). A pair boundary gets extra room for the two metadata blocks that meet there. With
+    metadata off (``meta_h == 0``) every gap collapses to the plain pitch.
+    """
+    cy = TOP + meta_top + BOX_H / 2
+    cys = [cy]
+    gap: float
+    for prev, cur in zip(matches, matches[1:]):
+        c_prev = child_of.get(prev.id) if prev.id else None
+        c_cur = child_of.get(cur.id) if cur.id else None
+        if c_prev is not None and c_prev is c_cur:
+            gap = ROW_PITCH  # same node: tight, nothing between
+        elif c_prev is not None and c_cur is not None:
+            gap = ROW_PITCH + 2 * meta_h  # pair boundary: two metadata blocks meet
+        else:
+            gap = ROW_PITCH + meta_h  # default (no connectors to the next round)
+        cy += gap
+        cys.append(cy)
+    return cys
+
+
 def _side_view(resolver: Resolver, match: Match, side: str) -> SideView:
     slot = match.home if side == "home" else match.away
     return SideView(
@@ -189,6 +228,13 @@ def compute_layout(stage: Stage) -> Layout:
     # its own, so the final needs no special-casing.
     bracket_rounds = [r for r in stage.rounds if not _is_below_round(r)]
     below_rounds = [r for r in stage.rounds if _is_below_round(r)]
+
+    # Each match id that a later match consumes (via winner_of) -> that consuming match, so
+    # first-round siblings feeding the same next-round node can be grouped together.
+    child_of = _children_by_parent(stage)
+    stack_group = partial(
+        _stack_group, child_of=child_of, meta_h=meta_h, meta_top=meta_top
+    )
 
     def stack_cy(match: Match, index: int) -> float:
         """Vertical centre of a match: between the matches it consumes (via ``winner_of``),
@@ -252,6 +298,7 @@ def compute_layout(stage: Stage) -> Layout:
             headers,
             by_placed,
             stack_cy,
+            stack_group,
             place,
             place_below,
         )
@@ -268,6 +315,7 @@ def compute_layout(stage: Stage) -> Layout:
             headers,
             placed,
             stack_cy,
+            stack_group,
             place,
             place_below,
             place_beside,
@@ -306,6 +354,7 @@ def _place_symmetric(  # noqa: PLR0913 — geometry helper, threads compute_layo
     headers: list[Header],
     by_placed: dict[Optional[str], PlacedMatch],
     stack_cy,
+    stack_group,
     place,
     place_below,
 ) -> "tuple[int, list[PlacedMatch]]":
@@ -327,14 +376,24 @@ def _place_symmetric(  # noqa: PLR0913 — geometry helper, threads compute_layo
     *mirror_rounds, final_round = bracket_rounds  # the last bracket round is the final
     m = len(mirror_rounds)
     connect: list[PlacedMatch] = []  # the matches whose incoming connectors are drawn
+
+    def place_half(matches, x, first):
+        # First round groups siblings feeding the same node (variable gaps); later rounds
+        # centre each match between its parents.
+        cys = (
+            stack_group(matches)
+            if first
+            else [stack_cy(mt, i) for i, mt in enumerate(matches)]
+        )
+        for mt, cy in zip(matches, cys):
+            place(mt, x, cy)
+
     for r_index, rnd in enumerate(mirror_rounds):
         x_left = MARGIN_X + r_index * column_pitch
         x_right = MARGIN_X + (2 * m - 1 - r_index) * column_pitch
         split = (len(rnd.matches) + 1) // 2  # odd round: the extra match goes left
-        for i, match in enumerate(rnd.matches[:split]):
-            place(match, x_left, stack_cy(match, i))
-        for i, match in enumerate(rnd.matches[split:]):
-            place(match, x_right, stack_cy(match, i))
+        place_half(rnd.matches[:split], x_left, r_index == 0)
+        place_half(rnd.matches[split:], x_right, r_index == 0)
         connect.extend(by_placed[mt.id] for mt in rnd.matches)
         if r_index < m - 1:  # outer rounds: header in the top band over each column
             headers.append(Header(name=rnd.name, cx=x_left + bw / 2))
@@ -388,6 +447,7 @@ def _place_linear(  # noqa: PLR0913 — geometry helper, threads compute_layout'
     headers: list[Header],
     placed: list[PlacedMatch],
     stack_cy,
+    stack_group,
     place,
     place_below,
     place_beside,
@@ -402,8 +462,14 @@ def _place_linear(  # noqa: PLR0913 — geometry helper, threads compute_layout'
     for r_index, rnd in enumerate(bracket_rounds):
         x = MARGIN_X + r_index * column_pitch
         headers.append(Header(name=rnd.name, cx=x + bw / 2))
-        for m_index, match in enumerate(rnd.matches):
-            place(match, x, stack_cy(match, m_index))
+        if (
+            r_index == 0
+        ):  # first round: group siblings feeding the same node (variable gaps)
+            for match, cy in zip(rnd.matches, stack_group(rnd.matches)):
+                place(match, x, cy)
+        else:
+            for m_index, match in enumerate(rnd.matches):
+                place(match, x, stack_cy(match, m_index))
     n_cols = len(bracket_rounds)
     if below_rounds:
         final_x = MARGIN_X + max(n_cols - 1, 0) * column_pitch

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 818 390" width="818" height="390" font-family="sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 818 373" width="818" height="373" font-family="sans-serif">
 <style>
   .pd-bg { fill: #ffffff; }
   .pd-title { font: 600 18px sans-serif; fill: #111827; }
@@ -28,7 +28,7 @@
     .pd-crest-frame { stroke: #334155; }
     .pd-link { stroke: #475569; }
   }</style>
-<rect class="pd-bg" width="818" height="390"/>
+<rect class="pd-bg" width="818" height="373"/>
 <text class="pd-title" x="20" y="28">World Cup</text>
 <text class="pd-season" x="128" y="28">2026</text>
 <text class="pd-header" x="91" y="68">Quarterfinals</text>
@@ -36,51 +36,51 @@
 <text class="pd-header" x="303" y="216">Semifinals</text>
 <text class="pd-header" x="515" y="216">Semifinals</text>
 <text class="pd-header" x="409" y="78">Final</text>
-<path class="pd-link" d="M 162 204 L 197 204 L 197 244 L 232 244"/>
-<path class="pd-link" d="M 162 308 L 197 308 L 197 268 L 232 268"/>
-<path class="pd-link" d="M 656 204 L 621 204 L 621 244 L 586 244"/>
-<path class="pd-link" d="M 656 308 L 621 308 L 621 268 L 586 268"/>
-<text class="pd-meta" x="20" y="161"><tspan x="20"><tspan class="pd-meta-id">QF1</tspan> · Thursday 09 July,</tspan><tspan x="50" dy="13">19:00 Gillette Stadium</tspan></text>
-<rect class="pd-box" x="20" y="180" width="142" height="48" rx="3"/>
-<line class="pd-divider" x1="20" y1="204" x2="162" y2="204"/>
+<path class="pd-link" d="M 162 221 L 197 221 L 197 244 L 232 244"/>
+<path class="pd-link" d="M 162 291 L 197 291 L 197 268 L 232 268"/>
+<path class="pd-link" d="M 656 221 L 621 221 L 621 244 L 586 244"/>
+<path class="pd-link" d="M 656 291 L 621 291 L 621 268 L 586 268"/>
+<text class="pd-meta" x="20" y="178"><tspan x="20"><tspan class="pd-meta-id">QF1</tspan> · Thursday 09 July,</tspan><tspan x="50" dy="13">19:00 Gillette Stadium</tspan></text>
+<rect class="pd-box" x="20" y="197" width="142" height="48" rx="3"/>
+<line class="pd-divider" x1="20" y1="221" x2="162" y2="221"/>
 <g class="pd-win">
-<text class="pd-team" x="30" y="196">France</text>
-<text class="pd-score" x="154" y="196">3</text>
+<text class="pd-team" x="30" y="213">France</text>
+<text class="pd-score" x="154" y="213">3</text>
 </g>
 <g class="">
-<text class="pd-team" x="30" y="220">Portugal</text>
-<text class="pd-score" x="154" y="220">0</text>
+<text class="pd-team" x="30" y="237">Portugal</text>
+<text class="pd-score" x="154" y="237">0</text>
 </g>
-<text class="pd-meta" x="20" y="346"><tspan x="20"><tspan class="pd-meta-id">QF2</tspan> · Friday 10 July, 23:00</tspan><tspan x="50" dy="13">SoFi Stadium</tspan></text>
-<rect class="pd-box" x="20" y="284" width="142" height="48" rx="3"/>
-<line class="pd-divider" x1="20" y1="308" x2="162" y2="308"/>
+<text class="pd-meta" x="20" y="329"><tspan x="20"><tspan class="pd-meta-id">QF2</tspan> · Friday 10 July, 23:00</tspan><tspan x="50" dy="13">SoFi Stadium</tspan></text>
+<rect class="pd-box" x="20" y="267" width="142" height="48" rx="3"/>
+<line class="pd-divider" x1="20" y1="291" x2="162" y2="291"/>
 <g class="">
-<text class="pd-team" x="30" y="300">Germany</text>
-<text class="pd-score" x="154" y="300">1</text>
+<text class="pd-team" x="30" y="283">Germany</text>
+<text class="pd-score" x="154" y="283">1</text>
 </g>
 <g class="pd-win">
-<text class="pd-team" x="30" y="324">Spain</text>
-<text class="pd-score" x="154" y="324">2</text>
+<text class="pd-team" x="30" y="307">Spain</text>
+<text class="pd-score" x="154" y="307">2</text>
 </g>
-<text class="pd-meta" x="656" y="161"><tspan x="656"><tspan class="pd-meta-id">QF3</tspan> · Saturday 11 July,</tspan><tspan x="686" dy="13">19:00 Arrowhead Stadi…</tspan></text>
-<rect class="pd-box" x="656" y="180" width="142" height="48" rx="3"/>
-<line class="pd-divider" x1="656" y1="204" x2="798" y2="204"/>
+<text class="pd-meta" x="656" y="178"><tspan x="656"><tspan class="pd-meta-id">QF3</tspan> · Saturday 11 July,</tspan><tspan x="686" dy="13">19:00 Arrowhead Stadi…</tspan></text>
+<rect class="pd-box" x="656" y="197" width="142" height="48" rx="3"/>
+<line class="pd-divider" x1="656" y1="221" x2="798" y2="221"/>
 <g class="pd-win">
-<text class="pd-team" x="666" y="196">Argentina</text>
-<text class="pd-score" x="790" y="196">0 <tspan class="pd-pens" dy="-1.5">(5)</tspan></text>
+<text class="pd-team" x="666" y="213">Argentina</text>
+<text class="pd-score" x="790" y="213">0 <tspan class="pd-pens" dy="-1.5">(5)</tspan></text>
 </g>
 <g class="">
-<text class="pd-team" x="666" y="220">Netherlands</text>
-<text class="pd-score" x="790" y="220">0 <tspan class="pd-pens" dy="-1.5">(4)</tspan></text>
+<text class="pd-team" x="666" y="237">Netherlands</text>
+<text class="pd-score" x="790" y="237">0 <tspan class="pd-pens" dy="-1.5">(4)</tspan></text>
 </g>
-<text class="pd-meta" x="656" y="346"><tspan x="656"><tspan class="pd-meta-id">QF4</tspan> · Saturday 11 July,</tspan><tspan x="686" dy="13">23:00 Hard Rock Stadi…</tspan></text>
-<rect class="pd-box" x="656" y="284" width="142" height="48" rx="3"/>
-<line class="pd-divider" x1="656" y1="308" x2="798" y2="308"/>
+<text class="pd-meta" x="656" y="329"><tspan x="656"><tspan class="pd-meta-id">QF4</tspan> · Saturday 11 July,</tspan><tspan x="686" dy="13">23:00 Hard Rock Stadi…</tspan></text>
+<rect class="pd-box" x="656" y="267" width="142" height="48" rx="3"/>
+<line class="pd-divider" x1="656" y1="291" x2="798" y2="291"/>
 <g class="">
-<text class="pd-team" x="666" y="300">Brazil</text>
+<text class="pd-team" x="666" y="283">Brazil</text>
 </g>
 <g class="">
-<text class="pd-team" x="666" y="324">England</text>
+<text class="pd-team" x="666" y="307">England</text>
 </g>
 <text class="pd-meta" x="232" y="294"><tspan x="232"><tspan class="pd-meta-id">SF1</tspan> · Tuesday 14 July, 23:00</tspan><tspan x="262" dy="13">AT&amp;T Stadium</tspan></text>
 <rect class="pd-box" x="232" y="232" width="142" height="48" rx="3"/>
