@@ -26,9 +26,12 @@
           "default": 22
         },
         "box_width": {
-          "type": "integer",
-          "minimum": 60,
-          "default": 190
+          "oneOf": [
+            { "type": "integer", "minimum": 60 },
+            { "const": "auto" }
+          ],
+          "default": "auto",
+          "comment": "SVG match-box width: a number in SVG units, or 'auto' (default) to size boxes to their widest content (label capped at max_label_chars, plus crest and score). SVG-only"
         },
         "crest_shape": {
           "type": "string",

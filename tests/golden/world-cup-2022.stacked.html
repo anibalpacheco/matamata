@@ -9,8 +9,10 @@
   .pd-round:first-child .pd-header { margin-top: 14px; }
   .pd-meta { font-size: 11px; color: #6b7280; margin: 0 0 3px; }
   .pd-meta-id { font-weight: 700; }
-  .pd-match { border-collapse: separate; border-spacing: 0; width: 100%;
-              max-width: 24em; border: 1px solid #d1d5db; border-radius: 3px;
+  /* Every box gets the same width (the widest match's content, set inline per stage), so
+     they line up like the SVG's "auto" boxes instead of each hugging its own content. */
+  .pd-match { border-collapse: separate; border-spacing: 0; width: auto;
+              border: 1px solid #d1d5db; border-radius: 3px;
               overflow: hidden; margin: 0 0 15px; }
   .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
   .pd-team { font-size: 13px; padding: 5px 10px; }
@@ -19,15 +21,26 @@
                         box-sizing: border-box; border: 1px solid #d1d5db; }
   .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
               white-space: nowrap; }
+  /* The penalty shootout (n): smaller than the goals and nudged up 1.5px to sit centred
+     with them (baseline would leave it low; `middle` overshoots since the goals are
+     cap-height digits). The 1.5px mirrors the SVG's dy so the two renderers match. */
+  .pd-pens { font-size: 11px; vertical-align: 1.5px; }
+  /* A two-legged tie's first-leg goals, set a touch further from the rest of the score
+     than a plain space, so the two legs read as two figures (stacked layout only — the
+     flat table gives each leg its own row). */
+  .pd-leg1 { margin-right: 6px; }
   .pd-win td { font-weight: 700; color: #065f46; }
   .pd-grid { border-collapse: separate; border-spacing: 0; margin: 0 0 4px; }
   .pd-grid td { font-size: 13px; padding: 4px 6px; vertical-align: middle;
                 white-space: nowrap; }
   .pd-team1, .pd-score1, .pd-crest1 { text-align: right; }
   .pd-team2, .pd-score2, .pd-crest2 { text-align: left; }
-  .pd-crest1, .pd-crest2 { padding: 0; }
-  .pd-crest1 .pd-crest { margin: 0 0 0 6px; }
-  .pd-crest2 .pd-crest { margin: 0 6px 0 0; }
+  /* The crest cell carries no padding of its own (the .pd-grid prefix is needed to beat
+     `.pd-grid td`), and the crest no margin, so the crest-to-name gap is just the team
+     cell's own 6px padding — matching the SVG and stacked layouts; the crest-to-score gap
+     is likewise the score cell's padding. */
+  .pd-grid .pd-crest1, .pd-grid .pd-crest2 { padding: 0; }
+  .pd-crest1 .pd-crest, .pd-crest2 .pd-crest { margin: 0; }
   .pd-vs { color: #9ca3af; padding: 4px 8px; }
   /* Box each leg's score row, so a match reads as a unit like the SVG/stacked
      boxes; the metadata line stays above the box (as in the stacked layout). */
@@ -67,7 +80,7 @@
 <div class="pd-round">
 <h3 class="pd-header">Round of 16</h3>
 <div class="pd-meta"><span class="pd-meta-id">R16-1</span> · Saturday 03 December Khalifa International Stadium</div>
-<table class="pd-match">
+<table class="pd-match" style="min-width:150px">
 <tbody>
 <tr class="pd-side pd-win">
 <td class="pd-team">Netherlands</td>
@@ -80,7 +93,7 @@
 </tbody>
 </table>
 <div class="pd-meta"><span class="pd-meta-id">R16-2</span> · Saturday 03 December Ahmad bin Ali Stadium</div>
-<table class="pd-match">
+<table class="pd-match" style="min-width:150px">
 <tbody>
 <tr class="pd-side pd-win">
 <td class="pd-team">Argentina</td>
@@ -93,20 +106,20 @@
 </tbody>
 </table>
 <div class="pd-meta"><span class="pd-meta-id">R16-3</span> · Monday 05 December Al Janoub Stadium</div>
-<table class="pd-match">
+<table class="pd-match" style="min-width:150px">
 <tbody>
 <tr class="pd-side">
 <td class="pd-team">Japan</td>
-<td class="pd-score">1 (1)</td>
+<td class="pd-score">1 <span class="pd-pens">(1)</span></td>
 </tr>
 <tr class="pd-side pd-win">
 <td class="pd-team">Croatia</td>
-<td class="pd-score">1 (3)</td>
+<td class="pd-score">1 <span class="pd-pens">(3)</span></td>
 </tr>
 </tbody>
 </table>
 <div class="pd-meta"><span class="pd-meta-id">R16-4</span> · Monday 05 December Stadium 974</div>
-<table class="pd-match">
+<table class="pd-match" style="min-width:150px">
 <tbody>
 <tr class="pd-side pd-win">
 <td class="pd-team">Brazil</td>
@@ -119,20 +132,20 @@
 </tbody>
 </table>
 <div class="pd-meta"><span class="pd-meta-id">R16-5</span> · Tuesday 06 December Education City Stadium</div>
-<table class="pd-match">
+<table class="pd-match" style="min-width:150px">
 <tbody>
 <tr class="pd-side pd-win">
 <td class="pd-team">Morocco</td>
-<td class="pd-score">0 (3)</td>
+<td class="pd-score">0 <span class="pd-pens">(3)</span></td>
 </tr>
 <tr class="pd-side">
 <td class="pd-team">Spain</td>
-<td class="pd-score">0 (0)</td>
+<td class="pd-score">0 <span class="pd-pens">(0)</span></td>
 </tr>
 </tbody>
 </table>
 <div class="pd-meta"><span class="pd-meta-id">R16-6</span> · Tuesday 06 December Lusail Stadium</div>
-<table class="pd-match">
+<table class="pd-match" style="min-width:150px">
 <tbody>
 <tr class="pd-side pd-win">
 <td class="pd-team">Portugal</td>
@@ -145,7 +158,7 @@
 </tbody>
 </table>
 <div class="pd-meta"><span class="pd-meta-id">R16-7</span> · Sunday 04 December Al Bayt Stadium</div>
-<table class="pd-match">
+<table class="pd-match" style="min-width:150px">
 <tbody>
 <tr class="pd-side pd-win">
 <td class="pd-team">England</td>
@@ -158,7 +171,7 @@
 </tbody>
 </table>
 <div class="pd-meta"><span class="pd-meta-id">R16-8</span> · Sunday 04 December Al Thumama Stadium</div>
-<table class="pd-match">
+<table class="pd-match" style="min-width:150px">
 <tbody>
 <tr class="pd-side pd-win">
 <td class="pd-team">France</td>
@@ -174,33 +187,33 @@
 <div class="pd-round">
 <h3 class="pd-header">Quarterfinals</h3>
 <div class="pd-meta"><span class="pd-meta-id">QF1</span> · Friday 09 December Lusail Stadium</div>
-<table class="pd-match">
+<table class="pd-match" style="min-width:150px">
 <tbody>
 <tr class="pd-side">
 <td class="pd-team">Netherlands</td>
-<td class="pd-score">2 (3)</td>
+<td class="pd-score">2 <span class="pd-pens">(3)</span></td>
 </tr>
 <tr class="pd-side pd-win">
 <td class="pd-team">Argentina</td>
-<td class="pd-score">2 (4)</td>
+<td class="pd-score">2 <span class="pd-pens">(4)</span></td>
 </tr>
 </tbody>
 </table>
 <div class="pd-meta"><span class="pd-meta-id">QF2</span> · Friday 09 December Education City Stadium</div>
-<table class="pd-match">
+<table class="pd-match" style="min-width:150px">
 <tbody>
 <tr class="pd-side pd-win">
 <td class="pd-team">Croatia</td>
-<td class="pd-score">1 (4)</td>
+<td class="pd-score">1 <span class="pd-pens">(4)</span></td>
 </tr>
 <tr class="pd-side">
 <td class="pd-team">Brazil</td>
-<td class="pd-score">1 (2)</td>
+<td class="pd-score">1 <span class="pd-pens">(2)</span></td>
 </tr>
 </tbody>
 </table>
 <div class="pd-meta"><span class="pd-meta-id">QF3</span> · Saturday 10 December Al Thumama Stadium</div>
-<table class="pd-match">
+<table class="pd-match" style="min-width:150px">
 <tbody>
 <tr class="pd-side pd-win">
 <td class="pd-team">Morocco</td>
@@ -213,7 +226,7 @@
 </tbody>
 </table>
 <div class="pd-meta"><span class="pd-meta-id">QF4</span> · Saturday 10 December Al Bayt Stadium</div>
-<table class="pd-match">
+<table class="pd-match" style="min-width:150px">
 <tbody>
 <tr class="pd-side">
 <td class="pd-team">England</td>
@@ -229,7 +242,7 @@
 <div class="pd-round">
 <h3 class="pd-header">Semifinals</h3>
 <div class="pd-meta"><span class="pd-meta-id">SF1</span> · Tuesday 13 December Lusail Stadium</div>
-<table class="pd-match">
+<table class="pd-match" style="min-width:150px">
 <tbody>
 <tr class="pd-side pd-win">
 <td class="pd-team">Argentina</td>
@@ -242,7 +255,7 @@
 </tbody>
 </table>
 <div class="pd-meta"><span class="pd-meta-id">SF2</span> · Wednesday 14 December Al Bayt Stadium</div>
-<table class="pd-match">
+<table class="pd-match" style="min-width:150px">
 <tbody>
 <tr class="pd-side">
 <td class="pd-team">Morocco</td>
@@ -258,15 +271,15 @@
 <div class="pd-round">
 <h3 class="pd-header">Final</h3>
 <div class="pd-meta">Sunday 18 December Lusail Stadium</div>
-<table class="pd-match">
+<table class="pd-match" style="min-width:150px">
 <tbody>
 <tr class="pd-side pd-win">
 <td class="pd-team">Argentina</td>
-<td class="pd-score">3 (4)</td>
+<td class="pd-score">3 <span class="pd-pens">(4)</span></td>
 </tr>
 <tr class="pd-side">
 <td class="pd-team">France</td>
-<td class="pd-score">3 (2)</td>
+<td class="pd-score">3 <span class="pd-pens">(2)</span></td>
 </tr>
 </tbody>
 </table>
@@ -274,7 +287,7 @@
 <div class="pd-round">
 <h3 class="pd-header">Third place</h3>
 <div class="pd-meta">Saturday 17 December Khalifa International Stadium</div>
-<table class="pd-match">
+<table class="pd-match" style="min-width:150px">
 <tbody>
 <tr class="pd-side pd-win">
 <td class="pd-team">Croatia</td>

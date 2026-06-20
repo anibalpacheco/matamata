@@ -42,6 +42,19 @@ from .model import (
 
 _ATTR = {'"': "&quot;"}  # extra escape for attribute values
 
+# Stacked boxes all share one width — the widest match's content — so they line up like the
+# SVG's "auto" boxes (CSS can't size a box to its widest sibling, so the width is computed
+# here and applied as a per-stage min-width). The estimate mirrors a box's two cells;
+# _GLYPH_W is generous for the 13px font so nothing clips, the cost being a little slack.
+_GLYPH_W = 7.0
+_TEAM_PAD = 20  # .pd-team left+right padding
+_SCORE_PAD = 16  # .pd-score left+right padding
+_CREST_W = 16  # square crest side
+_FLAG_W = 24  # 3:2 flag width
+_CREST_MARGIN = 6  # crest margin before the name
+_BORDER = 2  # the box's left+right border
+_STACKED_MIN_W = 140  # floor for a stage of very short names
+
 _STYLE = """
   .pd-stage { font-family: sans-serif; color: #1f2937; background: #ffffff; }
   .pd-title { font-size: 18px; font-weight: 600; color: #111827; margin: 0 0 12px; }
@@ -52,8 +65,10 @@ _STYLE = """
   .pd-round:first-child .pd-header { margin-top: 14px; }
   .pd-meta { font-size: 11px; color: #6b7280; margin: 0 0 3px; }
   .pd-meta-id { font-weight: 700; }
-  .pd-match { border-collapse: separate; border-spacing: 0; width: 100%;
-              max-width: 24em; border: 1px solid #d1d5db; border-radius: 3px;
+  /* Every box gets the same width (the widest match's content, set inline per stage), so
+     they line up like the SVG's "auto" boxes instead of each hugging its own content. */
+  .pd-match { border-collapse: separate; border-spacing: 0; width: auto;
+              border: 1px solid #d1d5db; border-radius: 3px;
               overflow: hidden; margin: 0 0 15px; }
   .pd-side + .pd-side td { border-top: 1px solid #e5e7eb; }
   .pd-team { font-size: 13px; padding: 5px 10px; }
@@ -62,15 +77,26 @@ _STYLE = """
                         box-sizing: border-box; border: 1px solid #d1d5db; }
   .pd-score { font-size: 13px; padding: 5px 8px; text-align: right;
               white-space: nowrap; }
+  /* The penalty shootout (n): smaller than the goals and nudged up 1.5px to sit centred
+     with them (baseline would leave it low; `middle` overshoots since the goals are
+     cap-height digits). The 1.5px mirrors the SVG's dy so the two renderers match. */
+  .pd-pens { font-size: 11px; vertical-align: 1.5px; }
+  /* A two-legged tie's first-leg goals, set a touch further from the rest of the score
+     than a plain space, so the two legs read as two figures (stacked layout only — the
+     flat table gives each leg its own row). */
+  .pd-leg1 { margin-right: 6px; }
   .pd-win td { font-weight: 700; color: #065f46; }
   .pd-grid { border-collapse: separate; border-spacing: 0; margin: 0 0 4px; }
   .pd-grid td { font-size: 13px; padding: 4px 6px; vertical-align: middle;
                 white-space: nowrap; }
   .pd-team1, .pd-score1, .pd-crest1 { text-align: right; }
   .pd-team2, .pd-score2, .pd-crest2 { text-align: left; }
-  .pd-crest1, .pd-crest2 { padding: 0; }
-  .pd-crest1 .pd-crest { margin: 0 0 0 6px; }
-  .pd-crest2 .pd-crest { margin: 0 6px 0 0; }
+  /* The crest cell carries no padding of its own (the .pd-grid prefix is needed to beat
+     `.pd-grid td`), and the crest no margin, so the crest-to-name gap is just the team
+     cell's own 6px padding — matching the SVG and stacked layouts; the crest-to-score gap
+     is likewise the score cell's padding. */
+  .pd-grid .pd-crest1, .pd-grid .pd-crest2 { padding: 0; }
+  .pd-crest1 .pd-crest, .pd-crest2 .pd-crest { margin: 0; }
   .pd-vs { color: #9ca3af; padding: 4px 8px; }
   /* Box each leg's score row, so a match reads as a unit like the SVG/stacked
      boxes; the metadata line stays above the box (as in the stacked layout). */
@@ -116,6 +142,30 @@ def _crest_img(slot) -> str:
     return f'<img class="pd-crest" src="{escape(slot.crest, _ATTR)}" alt=""/>'
 
 
+def _score_html(text: str) -> str:
+    """Render a score for the HTML renderers.
+
+    Wraps a penalty shootout ``(n)`` suffix in a smaller-font span, and — for a two-legged
+    tie, whose goals come space-joined as ``"1 0"`` — wraps the first leg in a ``.pd-leg1``
+    span so it sits a little further from the rest. (Only the stacked layout ever passes a
+    multi-leg string; the flat table renders each leg on its own row.)
+    """
+    cut = text.find(" (")
+    goals = text if cut == -1 else text[:cut]
+    pens = (
+        "" if cut == -1 else f' <span class="pd-pens">{escape(text[cut + 1 :])}</span>'
+    )
+    legs = goals.split(" ")
+    if len(legs) > 1:  # two-legged tie: set the first leg apart from the rest
+        goals_html = (
+            f'<span class="pd-leg1">{escape(legs[0])}</span>'
+            f'{escape(" ".join(legs[1:]))}'
+        )
+    else:
+        goals_html = escape(goals)
+    return goals_html + pens
+
+
 def _meta_html(match: Match, dt_format, tz, language) -> str:
     """The metadata line's inner HTML, with the id wrapped in a bold span. "" when empty."""
     label, detail = meta_parts(match, dt_format, tz, language)
@@ -135,7 +185,7 @@ def _side_row(out: list[str], match: Match, side: str, resolver: Resolver) -> No
     out.append(
         f'<td class="pd-team">{_crest_img(slot)}{escape(resolver.label(slot))}</td>'
     )
-    out.append(f'<td class="pd-score">{escape(score_text(match, side))}</td>')
+    out.append(f'<td class="pd-score">{_score_html(score_text(match, side))}</td>')
     out.append("</tr>")
 
 
@@ -199,15 +249,40 @@ def _flat_rows(
             f"{escape(resolver.label(left_slot))}</td>"
         )
         out.append(f'<td class="pd-crest1{left_win}">{_crest_img(left_slot)}</td>')
-        out.append(f'<td class="pd-score pd-score1{left_win}">{escape(score1)}</td>')
+        out.append(
+            f'<td class="pd-score pd-score1{left_win}">{_score_html(score1)}</td>'
+        )
         out.append('<td class="pd-vs">x</td>')
-        out.append(f'<td class="pd-score pd-score2{right_win}">{escape(score2)}</td>')
+        out.append(
+            f'<td class="pd-score pd-score2{right_win}">{_score_html(score2)}</td>'
+        )
         out.append(f'<td class="pd-crest2{right_win}">{_crest_img(right_slot)}</td>')
         out.append(
             f'<td class="pd-team pd-team2{right_win}">'
             f"{escape(resolver.label(right_slot))}</td>"
         )
         out.append("</tr>")
+
+
+def _stacked_box_width(rounds, resolver: Resolver, flag: bool) -> int:
+    """The width every stacked box is given so they line up: the widest match's content.
+
+    Estimates each side's natural width from its cells (the team cell's padding plus an
+    optional crest and the name, the score cell's padding plus the score) and returns the
+    maximum, floored at ``_STACKED_MIN_W``. The glyph width is generous, so the box never
+    clips its text; the boxes share this one width like the SVG's ``auto`` boxes.
+    """
+    crest_w = _FLAG_W if flag else _CREST_W
+    widest = float(_STACKED_MIN_W)
+    for rnd in rounds:
+        for match in rnd.matches:
+            for side in ("home", "away"):
+                slot = match.home if side == "home" else match.away
+                crest_part = crest_w + _CREST_MARGIN if slot.crest else 0
+                team = _TEAM_PAD + crest_part + len(resolver.label(slot)) * _GLYPH_W
+                score = _SCORE_PAD + len(score_text(match, side)) * _GLYPH_W
+                widest = max(widest, team + score + _BORDER)
+    return round(widest)
 
 
 def _render_stacked(
@@ -218,8 +293,10 @@ def _render_stacked(
     dt_format: Optional[str],
     tz: Optional[str],
     language: Optional[str],
+    flag: bool = False,
 ) -> None:
     """Each round as a labeled block of two-row match boxes, each with a metadata line."""
+    box_w = _stacked_box_width(rounds, resolver, flag)
     for rnd in rounds:
         out.append('<div class="pd-round">')
         out.append(f'<h3 class="pd-header">{escape(rnd.name)}</h3>')
@@ -227,7 +304,7 @@ def _render_stacked(
             meta = _meta_html(match, dt_format, tz, language) if show_meta else ""
             if meta:
                 out.append(f'<div class="pd-meta">{meta}</div>')
-            out.append('<table class="pd-match">')
+            out.append(f'<table class="pd-match" style="min-width:{box_w}px">')
             out.append("<tbody>")
             _side_row(out, match, "home", resolver)
             _side_row(out, match, "away", resolver)
@@ -299,7 +376,14 @@ def render_html(
         )
     else:
         _render_stacked(
-            out, stage.rounds, resolver, show_meta, dt_format, timezone, language
+            out,
+            stage.rounds,
+            resolver,
+            show_meta,
+            dt_format,
+            timezone,
+            language,
+            stage.render.crest_shape == "flag",
         )
     out.append("</div>")
     return "\n".join(out)

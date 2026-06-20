@@ -359,7 +359,7 @@ def test_render_option_defaults():
         }
     )
     assert stage.render.max_label_chars == 22
-    assert stage.render.box_width == 190
+    assert stage.render.box_width == "auto"
 
 
 def test_box_width_widens_the_layout():
@@ -378,6 +378,41 @@ def test_box_width_widens_the_layout():
     wide = compute_layout(parse_stage(doc))
     assert wide.box_width == 300
     assert wide.width > narrow.width
+
+
+def test_auto_box_width_sizes_to_the_widest_content():
+    from matamata.layout import AUTO_MIN_BOX_W, compute_layout
+
+    # "auto" is the default; short names floor at AUTO_MIN_BOX_W, a long name widens it.
+    short = compute_layout(
+        parse_stage(
+            {
+                "rounds": [
+                    {"name": "F", "matches": [{"id": "f", "team1": "A", "team2": "B"}]}
+                ]
+            }
+        )
+    )
+    assert short.box_width == AUTO_MIN_BOX_W
+    long = compute_layout(
+        parse_stage(
+            {
+                "rounds": [
+                    {
+                        "name": "F",
+                        "matches": [
+                            {
+                                "id": "f",
+                                "team1": "A team with a very long name indeed",
+                                "team2": "B",
+                            }
+                        ],
+                    }
+                ]
+            }
+        )
+    )
+    assert long.box_width > short.box_width
 
 
 def test_max_label_chars_truncates():

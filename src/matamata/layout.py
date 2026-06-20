@@ -32,6 +32,17 @@ MARGIN_BOTTOM = 24
 META_H = 34  # vertical room reserved between stacked boxes for their metadata lines
 META_TOP = 30  # room above the first box of a column for its single metadata caption
 META_CHAR_W = 6.0  # rough px per glyph of the 11px metadata font, to size the canvas
+# Box-internal horizontal metrics, mirroring how render.py draws a box — used only to size
+# an "auto" box_width to its widest content. GLYPH_W is a deliberately generous px-per-glyph
+# for the proportional 13px label/score font, so an auto box never clips its own text.
+GLYPH_W = 7.0
+LABEL_PAD = 10  # left inset of the label (render._LABEL_PAD)
+SCORE_PAD = 8  # right inset of the score / the box's right margin (render._SCORE_PAD)
+CREST_GAP = 6  # gap between a crest and the label (render._CREST_GAP)
+CREST_SIZE = 16  # square crest side (render._CREST_SIZE)
+FLAG_W = 24  # flag box width, 3:2 (render._FLAG_W)
+MIN_INNER_GAP = 12  # least space kept between a label and the score column
+AUTO_MIN_BOX_W = 120  # floor for an auto box, so all-short-name stages are not too thin
 HEADER_Y = 68  # baseline of a column header at the top of the bracket
 HEADER_BAND = 30  # vertical room a below-the-bracket round header takes (third place)
 CENTRE_GAP = BOX_H + V_GAP  # gap above the semis the centred final is lifted into
@@ -116,6 +127,34 @@ def _is_below_round(rnd) -> bool:
     return bool(rnd.matches) and all(_is_satellite(m) for m in rnd.matches)
 
 
+def _auto_box_width(stage: Stage, resolver: Resolver) -> float:
+    """Width of the widest match box's content, for ``render.box_width == "auto"``.
+
+    Sizes every box to fit its longest drawn side — the label (already capped at
+    ``max_label_chars``, so the cap still bounds the width), an optional crest, the score
+    column and the box paddings — and returns the maximum, floored at ``AUTO_MIN_BOX_W``.
+    The glyph width is estimated high (the 13px label/score font is proportional), so the
+    box never clips; a touch of slack is the only cost.
+    """
+    max_chars = stage.render.max_label_chars
+    crest_w = FLAG_W if stage.render.crest_shape == "flag" else CREST_SIZE
+    widest = float(AUTO_MIN_BOX_W)
+    for rnd in stage.rounds:
+        for match in rnd.matches:
+            for side in ("home", "away"):
+                slot = match.home if side == "home" else match.away
+                lead = LABEL_PAD + (crest_w + CREST_GAP if slot.crest else 0)
+                label_w = min(len(resolver.label(slot)), max_chars) * GLYPH_W
+                score_chars = len(score_text(match, side))
+                # The score is right-anchored; reserve its column plus a gap only when there
+                # is one, otherwise just the right margin.
+                right = SCORE_PAD + (
+                    MIN_INNER_GAP + score_chars * GLYPH_W if score_chars else 0
+                )
+                widest = max(widest, lead + label_w + right)
+    return widest
+
+
 def _side_view(resolver: Resolver, match: Match, side: str) -> SideView:
     slot = match.home if side == "home" else match.away
     return SideView(
@@ -130,7 +169,12 @@ def compute_layout(
     stage: Stage, timezone: Optional[str] = None, language: Optional[str] = None
 ) -> Layout:
     resolver = Resolver(stage)
-    bw = stage.render.box_width
+    # "auto" sizes the box to its widest content; a number is used verbatim.
+    bw = (
+        _auto_box_width(stage, resolver)
+        if stage.render.box_width == "auto"
+        else stage.render.box_width
+    )
     column_pitch = bw + H_GAP
     # The metadata line sits above each box. META_H is the room reserved *between* stacked
     # boxes (so a box's below-metadata and the next box's above-caption never collide);

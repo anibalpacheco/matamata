@@ -10,6 +10,7 @@
   .pd-divider { stroke: #e5e7eb; stroke-width: 1; }
   .pd-team { font: 400 13px sans-serif; fill: #1f2937; }
   .pd-score { font: 400 13px sans-serif; fill: #1f2937; text-anchor: end; }
+  .pd-pens { font-size: 11px; }
   .pd-win .pd-team, .pd-win .pd-score { font-weight: 700; fill: #065f46; }
   .pd-crest-frame { fill: none; stroke: #d1d5db; stroke-width: 1; }
   .pd-link { fill: none; stroke: #cbd5e1; stroke-width: 1.5; }
@@ -44,66 +45,66 @@
 <line class="pd-divider" x1="20" y1="204" x2="260" y2="204"/>
 <g class="pd-win">
 <text class="pd-team" x="30" y="196">Flamengo</text>
-<text class="pd-score" x="252" y="196">2 0</text>
+<text class="pd-score" x="252" y="196">2<tspan dx="6">0</tspan></text>
 </g>
 <g class="">
 <text class="pd-team" x="30" y="220">Boca Juniors</text>
-<text class="pd-score" x="252" y="220">1 0</text>
+<text class="pd-score" x="252" y="220">1<tspan dx="6">0</tspan></text>
 </g>
 <text class="pd-meta" x="20" y="346"><tspan class="pd-meta-id">QF2</tspan> · 12/08 20:30 Estadio Monumental / 19/08 20:30 Allianz Parque</text>
 <rect class="pd-box" x="20" y="284" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="20" y1="308" x2="260" y2="308"/>
 <g class="pd-win">
 <text class="pd-team" x="30" y="300">River Plate</text>
-<text class="pd-score" x="252" y="300">1 0 (4)</text>
+<text class="pd-score" x="252" y="300">1<tspan dx="6">0</tspan> <tspan class="pd-pens" dy="-1.5">(4)</tspan></text>
 </g>
 <g class="">
 <text class="pd-team" x="30" y="324">Palmeiras</text>
-<text class="pd-score" x="252" y="324">1 0 (2)</text>
+<text class="pd-score" x="252" y="324">1<tspan dx="6">0</tspan> <tspan class="pd-pens" dy="-1.5">(2)</tspan></text>
 </g>
 <text class="pd-meta" x="1190" y="174" text-anchor="end"><tspan class="pd-meta-id">QF3</tspan> · 13/08 20:00 Parque Viera / 20/08 20:00 Arena MRV</text>
 <rect class="pd-box" x="950" y="180" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="950" y1="204" x2="1190" y2="204"/>
 <g class="pd-win">
 <text class="pd-team" x="960" y="196">Montevideo City Torque</text>
-<text class="pd-score" x="1182" y="196">1 1</text>
+<text class="pd-score" x="1182" y="196">1<tspan dx="6">1</tspan></text>
 </g>
 <g class="">
 <text class="pd-team" x="960" y="220">Atletico Mineiro</text>
-<text class="pd-score" x="1182" y="220">0 1</text>
+<text class="pd-score" x="1182" y="220">0<tspan dx="6">1</tspan></text>
 </g>
 <text class="pd-meta" x="1190" y="346" text-anchor="end"><tspan class="pd-meta-id">QF4</tspan> · 12/08 18:00 Neo Química Arena / 19/08 18:00 Beira-Rio</text>
 <rect class="pd-box" x="950" y="284" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="950" y1="308" x2="1190" y2="308"/>
 <g class="pd-win">
 <text class="pd-team" x="960" y="300">Corinthians</text>
-<text class="pd-score" x="1182" y="300">3 1</text>
+<text class="pd-score" x="1182" y="300">3<tspan dx="6">1</tspan></text>
 </g>
 <g class="">
 <text class="pd-team" x="960" y="324">Internacional</text>
-<text class="pd-score" x="1182" y="324">0 1</text>
+<text class="pd-score" x="1182" y="324">0<tspan dx="6">1</tspan></text>
 </g>
 <text class="pd-meta" x="330" y="294"><tspan x="330"><tspan class="pd-meta-id">SF1</tspan> · 23/09 20:30 Maracanã / 30/09</tspan><tspan x="330" dy="13">20:30 Estadio Monumental</tspan></text>
 <rect class="pd-box" x="330" y="232" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="330" y1="256" x2="570" y2="256"/>
 <g class="pd-win">
 <text class="pd-team" x="340" y="248">Flamengo</text>
-<text class="pd-score" x="562" y="248">0 2</text>
+<text class="pd-score" x="562" y="248">0<tspan dx="6">2</tspan></text>
 </g>
 <g class="">
 <text class="pd-team" x="340" y="272">River Plate</text>
-<text class="pd-score" x="562" y="272">0 1</text>
+<text class="pd-score" x="562" y="272">0<tspan dx="6">1</tspan></text>
 </g>
 <text class="pd-meta" x="640" y="294"><tspan x="640"><tspan class="pd-meta-id">SF2</tspan> · 24/09 20:30 Parque Viera /</tspan><tspan x="640" dy="13">01/10 20:30 Neo Química Arena</tspan></text>
 <rect class="pd-box" x="640" y="232" width="240" height="48" rx="3"/>
 <line class="pd-divider" x1="640" y1="256" x2="880" y2="256"/>
 <g class="pd-win">
 <text class="pd-team" x="650" y="248">Montevideo City Torque</text>
-<text class="pd-score" x="872" y="248">1 2</text>
+<text class="pd-score" x="872" y="248">1<tspan dx="6">2</tspan></text>
 </g>
 <g class="">
 <text class="pd-team" x="650" y="272">Corinthians</text>
-<text class="pd-score" x="872" y="272">1 0</text>
+<text class="pd-score" x="872" y="272">1<tspan dx="6">0</tspan></text>
 </g>
 <text class="pd-meta" x="485" y="108">21/11 17:00 Estadio Centenario</text>
 <rect class="pd-box" x="485" y="114" width="240" height="48" rx="3"/>

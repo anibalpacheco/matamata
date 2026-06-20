@@ -20,6 +20,9 @@ _META_CHAR_W = (
 _CREST_SIZE = 16  # square crest side, vertically centered in the 24-unit row
 _FLAG_W = 24  # flag box is 3:2 (24x16); the image is fitted inside without distortion
 _CREST_GAP = 6
+_LEG_GAP = (
+    6  # extra px between a two-legged tie's two leg scores (matches HTML .pd-leg1)
+)
 _ATTR = {'"': "&quot;"}  # extra escape for attribute values
 
 _STYLE = """
@@ -33,6 +36,7 @@ _STYLE = """
   .pd-divider { stroke: #e5e7eb; stroke-width: 1; }
   .pd-team { font: 400 13px sans-serif; fill: #1f2937; }
   .pd-score { font: 400 13px sans-serif; fill: #1f2937; text-anchor: end; }
+  .pd-pens { font-size: 11px; }
   .pd-win .pd-team, .pd-win .pd-score { font-weight: 700; fill: #065f46; }
   .pd-crest-frame { fill: none; stroke: #d1d5db; stroke-width: 1; }
   .pd-link { fill: none; stroke: #cbd5e1; stroke-width: 1.5; }
@@ -96,9 +100,37 @@ def _row(
     if side.score:
         out.append(
             f'<text class="pd-score" x="{pm.x + box_w - _SCORE_PAD:.0f}" '
-            f'y="{text_y:.0f}">{escape(side.score)}</text>'
+            f'y="{text_y:.0f}">{_score_svg(side.score)}</text>'
         )
     out.append("</g>")
+
+
+def _score_svg(score: str) -> str:
+    """Score markup for one side.
+
+    Wraps a penalty shootout ``(n)`` suffix in a smaller-font tspan, and — for a two-legged
+    tie, whose goals come space-joined as ``"1 0"`` — puts a ``_LEG_GAP`` ``dx`` between the
+    first leg and the rest so the two figures read apart (mirroring the HTML ``.pd-leg1``;
+    the score is right-anchored, so the gap pushes the leading legs left, not off the edge).
+    """
+    cut = score.find(" (")
+    goals = score if cut == -1 else score[:cut]
+    # dy raises the smaller pens to sit centred with the goals (tspans ignore the CSS
+    # vertical-align the HTML renderer uses); it is the last tspan, so nothing needs resetting.
+    pens = (
+        ""
+        if cut == -1
+        else f' <tspan class="pd-pens" dy="-1.5">{escape(score[cut + 1 :])}</tspan>'
+    )
+    legs = goals.split(" ")
+    if len(legs) > 1:  # two-legged tie: set the first leg apart from the rest
+        goals_svg = (
+            f"{escape(legs[0])}"
+            f'<tspan dx="{_LEG_GAP}">{escape(" ".join(legs[1:]))}</tspan>'
+        )
+    else:
+        goals_svg = escape(goals)
+    return goals_svg + pens
 
 
 def _match(

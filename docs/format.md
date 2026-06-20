@@ -34,7 +34,7 @@ changes.
 ```jsonc
 {
   "max_label_chars": 22,        // optional, longest team label before it is truncated
-  "box_width": 190,             // optional, width of every match box in SVG units
+  "box_width": "auto",          // optional, "auto" (default) or a width in SVG units
   "crest_shape": "square",      // optional, "square" (default) or "flag"
   "show_metadata": true,        // optional, draw the per-match metadata line (default true)
   "dt_format": "EEEE dd MMMM, HH:mm",  // optional, Babel/LDML pattern for each leg's dt
@@ -45,8 +45,11 @@ changes.
 - `"max_label_chars"` (default `22`) — the maximum team-label width, in characters.
   Longer labels are truncated with an ellipsis. Cups with long team names can raise it;
   a host's `get_match` can also read it and return shorter names.
-- `"box_width"` (default `190`) — the width of every match box. Widen it (instead of, or
-  together with, lowering `max_label_chars`) to fit long names without truncation.
+- `"box_width"` (default `"auto"`) — the width of every match box in the **SVG** diagram.
+  `"auto"` sizes the boxes to fit their widest content (the longest drawn label — still
+  capped at `max_label_chars` — plus any crest and the score). Give a number instead to fix
+  the width; widen it (or raise `max_label_chars`) to fit long names without truncation. The
+  HTML table sizes its columns from content regardless, so this only affects the SVG.
 - `"crest_shape"` (default `"square"`) — the shape of each side's crest/flag image.
   `"square"` suits club crests; `"flag"` renders a rectangular (3:2) box with the image
   fitted inside without distortion and a thin border, so national flags look like flags

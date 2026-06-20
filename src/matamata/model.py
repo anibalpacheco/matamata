@@ -15,7 +15,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Optional, Union
+from typing import Literal, Optional, Union
 from zoneinfo import ZoneInfo
 
 from babel.dates import format_datetime
@@ -141,8 +141,11 @@ class RenderOptions:
     ellipsis. It is the maximum label *width*, in characters, so longer-named cups can
     raise it (or a host's ``get_match`` can read it and return shorter names).
 
-    ``box_width``: the width of every match box, in SVG units. Widen it (instead of, or
-    together with, raising ``max_label_chars``) to fit long names without truncation.
+    ``box_width``: the width of every match box, in SVG units, or ``"auto"`` (the default)
+    to size the boxes to fit their widest content (the longest drawn label — still capped at
+    ``max_label_chars`` — plus any crest and the score). Give a number to fix the width
+    instead; widen it (or raise ``max_label_chars``) to fit long names without truncation.
+    SVG-only — the HTML table sizes its columns from content regardless.
 
     ``crest_shape``: how each side's crest/flag image is shaped. ``"square"`` (the
     default) renders a square emblem, right for club crests; ``"flag"`` renders a
@@ -169,7 +172,7 @@ class RenderOptions:
     """
 
     max_label_chars: int = 22
-    box_width: int = 190
+    box_width: Union[int, Literal["auto"]] = "auto"
     crest_shape: str = "square"
     show_metadata: bool = True
     dt_format: str = DEFAULT_DT_FORMAT

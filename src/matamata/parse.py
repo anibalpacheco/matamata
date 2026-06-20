@@ -140,7 +140,7 @@ def render_options(data: dict) -> RenderOptions:
     r = data.get("render") or {}
     return RenderOptions(
         max_label_chars=r.get("max_label_chars", 22),
-        box_width=r.get("box_width", 190),
+        box_width=r.get("box_width", "auto"),
         crest_shape=r.get("crest_shape", "square"),
         show_metadata=r.get("show_metadata", True),
         dt_format=r.get("dt_format", DEFAULT_DT_FORMAT),
