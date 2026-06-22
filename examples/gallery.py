@@ -44,6 +44,7 @@ from xml.sax.saxutils import escape
 from copa_rio_host import CopaRioDiagram
 from facup_host import FaCupDiagram
 from libertadores_host import LibertadoresDiagram
+from styled_host import StyledDiagram
 from third_place_host import ThirdPlaceDiagram
 from world_cup_2022_host import WorldCup2022Diagram
 
@@ -160,6 +161,14 @@ SPECS: "list[tuple[str, str, Builder]]" = [
         "'Perdant SF1') with the round names ('Petite finale'), and the same language drives "
         "Babel so the dates read in French ('mardi 14 juillet').",
         _host(ThirdPlaceDiagram, language="fr"),
+    ),
+    (
+        "knockout-8.json",
+        "Custom styling (styled_host) — the same round of 8, themed via the get_style hook: "
+        "a fixed midnight palette of CSS appended after the defaults (so it cascades over "
+        "them, light or dark). Per-format — the SVG colours via fill, the table via color. "
+        "Host-only: there is no JSON or CLI surface for styling.",
+        _host(StyledDiagram),
     ),
 ]
 

@@ -165,6 +165,65 @@ def test_crest_shape_flag_renders_rectangular_framed_images():
     assert 'width="16"' in square_svg
 
 
+_STYLE_DOC = {
+    "rounds": [
+        {
+            "name": "Final",
+            "matches": [
+                {
+                    "legs": [{"team1": "A", "goals1": 1, "team2": "B", "goals2": 0}],
+                    "winner": 1,
+                }
+            ],
+        }
+    ],
+}
+
+
+def test_get_style_appends_host_css_after_the_defaults_per_format():
+    from matamata import KnockoutStage
+
+    class Styled(KnockoutStage):
+        def get_style(self, fmt):
+            return (
+                ".pd-box { fill: red; }" if fmt == "svg" else ".pd-team { color: red; }"
+            )
+
+    svg = Styled(_STYLE_DOC).render("svg")
+    html = Styled(_STYLE_DOC).render("html")
+
+    # The host CSS lands inside the <style> block, after the built-in defaults, so it
+    # cascades over them (the default .pd-box / @media block come first).
+    assert ".pd-box { fill: red; }" in svg
+    assert svg.index(".pd-box { fill: red; }") > svg.index("@media")
+    assert ".pd-team { color: red; }" in html
+    assert html.index(".pd-team { color: red; }") > html.index("@media")
+    # Per-format: the SVG rule is not leaked into the HTML render and vice versa.
+    assert ".pd-team { color: red; }" not in svg
+    assert ".pd-box { fill: red; }" not in html
+
+
+def test_get_style_is_host_only_and_defaults_to_none():
+    from matamata import KnockoutStage
+
+    # The base hook returns None, so the KnockoutStage render equals the class-less one
+    # (CLI / render_svg path) — styling has no JSON or CLI surface.
+    stage = load_stage(os.path.join(EXAMPLES, "knockout-8.json"))
+    assert KnockoutStage(stage_doc("knockout-8.json")).render("svg") == render_svg(
+        stage
+    )
+    assert KnockoutStage(stage_doc("knockout-8.json")).render("html") == render_html(
+        stage
+    )
+
+
+def stage_doc(filename):
+    import json
+
+    with open(os.path.join(EXAMPLES, filename), encoding="utf-8") as fh:
+        return json.load(fh)
+
+
 # Language and timezone are the caller's choice; the demo renders in Spanish and
 # Montevideo time, and the goldens capture that, matching the docs preview.
 _ES = {"language": "es", "timezone": "America/Montevideo"}

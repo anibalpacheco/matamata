@@ -340,6 +340,7 @@ def render_html(
     layout: str = "flat",
     timezone: Optional[str] = None,
     language: Optional[str] = None,
+    extra_css: Optional[str] = None,
 ) -> str:
     """Render the knockout stage to a self-contained HTML table fragment string.
 
@@ -349,7 +350,10 @@ def render_html(
     datetimes (assumed GMT) are converted to before rendering. ``language`` is the locale
     Babel formats those datetimes in (e.g. ``"es"`` -> Spanish weekday/month names);
     ``None`` leaves them in English. It localizes only the dates — the generated labels
-    are translated upstream by ``KnockoutStage.translate`` at build time.
+    are translated upstream by ``KnockoutStage.translate`` at build time. ``extra_css`` is
+    host-supplied CSS appended after the built-in styles (so its rules cascade over the
+    defaults); it carries ``KnockoutStage.get_style`` and is ``None`` for class-less
+    rendering (CLI, ``render_html``).
     """
     if layout not in ("flat", "stacked"):
         raise ValueError(f"unknown layout {layout!r}")
@@ -360,7 +364,9 @@ def render_html(
         "pd-stage pd-flags" if stage.render.crest_shape == "flag" else "pd-stage"
     )
     out.append(f'<div class="{stage_cls}">')
-    out.append(f"<style>{_STYLE}</style>")
+    # Host-supplied CSS is appended after the defaults so its rules cascade over them.
+    style = _STYLE if extra_css is None else f"{_STYLE}\n{extra_css}"
+    out.append(f"<style>{style}</style>")
     if stage.tournament:
         title = escape(stage.tournament)
         season = (

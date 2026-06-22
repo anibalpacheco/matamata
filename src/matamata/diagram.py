@@ -117,6 +117,24 @@ class KnockoutStage:
         """
         return None
 
+    def get_style(self, fmt: str) -> Optional[str]:  # pylint: disable=unused-argument
+        """Return extra CSS to theme this render, or ``None`` to keep the defaults.
+
+        Called once per :meth:`render`. ``fmt`` is the format being rendered — ``"svg"``
+        or ``"html"`` — because the two need different CSS (the SVG colours via ``fill``,
+        the HTML table via ``color``); return the rules for the format you are styling, or
+        ``None`` to leave it untouched. The CSS is appended **after** the renderer's
+        built-in styles, so its rules cascade over the defaults: target the ``pd-*`` classes
+        (e.g. ``.pd-box { fill: #...; }`` for svg) and, at equal specificity, the later
+        (yours) wins. This is the place to force a fixed colour scheme too — restate the
+        ``pd-*`` colours unconditionally to override the default ``@media`` dark block.
+
+        Styling has no JSON surface and no CLI flag: it is host-only, so class-less
+        rendering (CLI, ``render_svg``/``render_html``) is unaffected. The base returns
+        ``None``.
+        """
+        return None
+
     def get_tournament(self) -> Optional[str]:
         """Return the tournament name. Defaults to the document's ``tournament``."""
         return self._doc.get("tournament")
@@ -208,16 +226,25 @@ class KnockoutStage:
         to :meth:`translate` to localize the generated labels and round names (``None`` or
         ``"en"`` leaves them as is). ``timezone`` is a zone name (e.g.
         ``"America/Montevideo"``) the metadata datetimes (assumed GMT) are converted to
-        before rendering.
+        before rendering. :meth:`get_style` is consulted once for ``fmt`` to theme the
+        output (appended CSS).
         """
         if fmt not in ("svg", "html"):
             raise StageError(f"unknown render format {fmt!r}")
         stage = self.build(language)
+        # get_style is an overridable hook; the base returns None (keep the defaults).
+        extra_css = self.get_style(fmt)  # pylint: disable=assignment-from-none
         if fmt == "html":
             return render_html(
-                stage, layout=layout, timezone=timezone, language=language
+                stage,
+                layout=layout,
+                timezone=timezone,
+                language=language,
+                extra_css=extra_css,
             )
-        return render_svg(stage, timezone=timezone, language=language)
+        return render_svg(
+            stage, timezone=timezone, language=language, extra_css=extra_css
+        )
 
     # --------------------------------------------------------------- results
     def apply_results(

@@ -237,6 +237,7 @@ def render_layout(
     layout: Layout,
     timezone: Optional[str] = None,
     language: Optional[str] = None,
+    extra_css: Optional[str] = None,
 ) -> str:
     out: list[str] = []
     out.append(
@@ -245,7 +246,9 @@ def render_layout(
         f'width="{layout.width:.0f}" height="{layout.height:.0f}" '
         f'font-family="sans-serif">'
     )
-    out.append(f"<style>{_STYLE}</style>")
+    # Host-supplied CSS is appended after the defaults so its rules cascade over them.
+    style = _STYLE if extra_css is None else f"{_STYLE}\n{extra_css}"
+    out.append(f"<style>{style}</style>")
     out.append(
         f'<rect class="pd-bg" width="{layout.width:.0f}" '
         f'height="{layout.height:.0f}"/>'
@@ -287,7 +290,10 @@ def render_layout(
 
 
 def render_svg(
-    stage: Stage, timezone: Optional[str] = None, language: Optional[str] = None
+    stage: Stage,
+    timezone: Optional[str] = None,
+    language: Optional[str] = None,
+    extra_css: Optional[str] = None,
 ) -> str:
     """Render the knockout stage to a self-contained SVG document string.
 
@@ -296,5 +302,8 @@ def render_svg(
     Babel formats those datetimes in (e.g. ``"es"`` -> Spanish weekday/month names);
     ``None`` leaves them in English. It localizes only the dates here — the generated
     labels are translated upstream by ``KnockoutStage.translate`` at build time.
+    ``extra_css`` is host-supplied CSS appended after the built-in styles (so its rules
+    cascade over the defaults); it carries ``KnockoutStage.get_style`` and is ``None``
+    for class-less rendering (CLI, ``render_svg``).
     """
-    return render_layout(stage, compute_layout(stage), timezone, language)
+    return render_layout(stage, compute_layout(stage), timezone, language, extra_css)

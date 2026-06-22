@@ -367,6 +367,33 @@ names (via `translate`) and Spanish dates (via Babel); the standalone `render_sv
 language="es")` localizes just the dates. The Copa Río de la Plata example renders in
 Spanish (`jueves 17 septiembre`) against the World Cup's English (`Thursday 09 July`).
 
+### Custom styling
+
+Both renderers drive their appearance through CSS classes (`pd-box`, `pd-team`,
+`pd-win`, …) with sensible defaults embedded in a `<style>` block. To restyle the output —
+your own palette, a forced colour scheme, different fonts — override `get_style`:
+
+```python
+class MyDiagram(KnockoutStage):
+    def get_style(self, fmt):
+        if fmt == "svg":
+            return ".pd-box { fill: #161e3a; stroke: #2a3566; } .pd-team { fill: #e6e9f5; }"
+        return ".pd-match { background: #161e3a; } .pd-team, .pd-score { color: #e6e9f5; }"
+```
+
+The string you return is appended **after** the built-in styles, so its rules cascade
+over the defaults — target the `pd-*` classes and, at equal specificity, the later rules
+(yours) win. Because they sit after the default `@media (prefers-color-scheme: dark)`
+block, restating the `pd-*` colours unconditionally also lets you **force a fixed colour
+scheme** (handy for static rasterizers, which ignore the media query).
+
+The CSS is **per-format**: the SVG colours its shapes with `fill`/`stroke`, the HTML table
+with `color`/`background` — so `fmt` is `"svg"` or `"html"` and you return the block for the
+format being rendered (or `None` to keep the defaults). Like crests and labels, styling is a
+host-only hook with no JSON or CLI surface; documents rendered without the class (the CLI,
+`render_svg`/`render_html`) keep the defaults. The `examples/styled_host.py` example does
+this with a fixed "midnight" palette.
+
 ### The `apply_results` method
 
 When a game finishes (or while it is being played), write its result onto the document
