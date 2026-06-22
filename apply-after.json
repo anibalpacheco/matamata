@@ -1,0 +1,57 @@
+{
+  "tournament": "Champions League",
+  "season": "2025/26",
+  "rounds": [
+    {
+      "name": "Semifinals",
+      "matches": [
+        {
+          "id": "sf1",
+          "team1": "Real Madrid",
+          "team2": "Barcelona",
+          "legs": [
+            {
+              "goals1": 1,
+              "goals2": 0
+            },
+            {
+              "goals1": 0,
+              "goals2": 1,
+              "pen1": 4,
+              "pen2": 2
+            }
+          ],
+          "winner": 1
+        },
+        {
+          "id": "sf2",
+          "team1": "Bayern München",
+          "team2": "Manchester City",
+          "winner": 2,
+          "legs": [
+            {
+              "goals1": 0,
+              "goals2": 2
+            },
+            {
+              "goals1": 1,
+              "goals2": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Final",
+      "matches": [
+        {
+          "id": "f",
+          "winnerof1": "sf1",
+          "winnerof2": "sf2",
+          "team2": "Manchester City",
+          "team1": "Real Madrid"
+        }
+      ]
+    }
+  ]
+}

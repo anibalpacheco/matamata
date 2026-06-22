@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="Model tournament knockout stages in JSON format and render the schedule in SVG or html table format" /><link rel="canonical" href="https://anibalpacheco.github.io/matamata/" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>matamata</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Documentation";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = "/matamata/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> matamata
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Documentation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rendering-from-the-command-line">Rendering from the command line</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rendering-from-python">Rendering from Python</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-symmetric-svg-layout">The symmetric SVG layout</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-html-table-layout">The HTML table layout</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#match-metadata">Match metadata</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#light-and-dark-mode">Light and dark mode</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-knockoutstage-class">The KnockoutStage class</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#dynamic-and-live-data-integration">Dynamic and live data integration</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#team-crests-and-flags">Team crests and flags</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#translating-the-generated-labels">Translating the generated labels</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#custom-styling">Custom styling</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-apply_results-method">The apply_results method</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#before-and-after-end-to-end">Before and after, end to end</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#modeling-special-tie-features">Modeling special tie features</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-pairing-pending-a-draw">A pairing pending a draw</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-third-place-match">A third-place match</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="format/">Format specification</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">matamata</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Documentation</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/anibalpacheco/matamata/blob/main/docs/index.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="documentation">Documentation</h1>
+<p><strong>matamata</strong> is a tool in three parts: the definition of a small JSON language
+for describing a tournament knockout stage (written down in <a href="format/">the spec</a>, with
+a machine-checkable <a href="schema.json">JSON Schema</a>); a Python package that renders a
+document in that language into the schedule — SVG or HTML table format —
+deterministically and with no dependencies; and
+the <code>KnockoutStage</code> class, which models the knockout stage itself — the object everything
+else is done through.</p>
+<p>This manual covers how to put it to work, from a one-off render to a host application
+that keeps its knockout stages up to date, and how to run the test suite. Worked examples
+live in the repository's <code>examples/</code> directory; for a first taste, the README's
+quickstart.</p>
+<h2 id="usage">Usage</h2>
+<h3 id="installation">Installation</h3>
+<p>A standard pip-installable package, requiring Python ≥ 3.12 and no runtime
+dependencies — install it into your project from PyPI:</p>
+<pre><code class="language-bash">pip install matamata
+</code></pre>
+<p>For the latest unreleased commit, install straight from GitHub instead:</p>
+<pre><code class="language-bash">pip install git+https://github.com/anibalpacheco/matamata.git
+</code></pre>
+<p>To follow along with the worked examples below, use a source checkout instead:</p>
+<pre><code class="language-bash">git clone https://github.com/anibalpacheco/matamata.git
+cd matamata
+python -m venv .venv &amp;&amp; source .venv/bin/activate
+pip install -e .
+</code></pre>
+<h3 id="rendering-from-the-command-line">Rendering from the command line</h3>
+<p>The package installs a <code>matamata</code> command (also runnable as
+<code>python -m matamata</code>). Point it at a <a href="format/">knockout stage document</a> to render
+the schedule, to a file with <code>-o</code> or to stdout. The format is <code>-f svg</code> (the default,
+the diagram) or <code>-f html</code> (the <a href="#the-html-table-layout">table layout</a>); an <code>-o</code> ending
+in <code>.html</code>/<code>.htm</code> implies <code>-f html</code>. For example, to render one of the repository's
+worked examples, each way:</p>
+<pre><code class="language-bash"># via the installed command
+matamata examples/knockout-8.json -o knockout.svg
+
+# or via the module, writing to stdout
+python -m matamata examples/knockout-8.json &gt; knockout.svg
+
+# the HTML table layout (inferred from the extension)
+matamata examples/knockout-8.json -o knockout.html
+</code></pre>
+<p>Open the resulting file in a browser to view the schedule.</p>
+<h3 id="rendering-from-python">Rendering from Python</h3>
+<pre><code class="language-python">from matamata import load_stage, render_html, render_svg
+
+svg = render_svg(load_stage(&quot;examples/knockout-8.json&quot;))
+html = render_html(load_stage(&quot;examples/knockout-8.json&quot;))
+</code></pre>
+<p><code>parse_stage</code> does the same from an already-loaded dict. In a web app the SVG is the
+response body — e.g. a Django view:</p>
+<pre><code class="language-python">from django.http import HttpResponse
+from matamata import parse_stage, render_svg
+
+def knockout_stage_svg(request, championship):
+    svg = render_svg(parse_stage(championship.knockout_stage_json))
+    return HttpResponse(svg, content_type=&quot;image/svg+xml&quot;)
+</code></pre>
+<h3 id="the-symmetric-svg-layout">The symmetric SVG layout</h3>
+<p>By default the SVG diagram draws the classic FIFA-style mirrored bracket
+(<code>"layout": "symmetric"</code>): every round before the final is split by document order so its
+two halves expand outward to the left and right, the semifinals meeting in the two central
+columns, with the final lifted into the gap <strong>above</strong> them and any third-place round
+dropped <strong>below</strong>. Setting <code>"layout": "linear"</code> in the document's <code>render</code> object flows the
+diagram left to right instead, one column per round, with the final in the last column.</p>
+<p><img alt="League Cup knockout stage in the symmetric layout" src="symmetric-8.png" /></p>
+<p>The split is <strong>automatic by document order</strong> — the first half of each round's matches goes
+left, the second half is mirrored right; there is no per-match <code>side</code> field. No connector
+is drawn between the final and the semifinals: the pairing is implied by position. This is
+a property of the document (it lives in the <code>render</code> object, not a render parameter), and
+it is <strong>SVG-only</strong> — the HTML table is a vertical list and renders the same either way.</p>
+<pre><code class="language-python">svg = render_svg(load_stage(&quot;examples/symmetric-8.json&quot;))  # render.layout == &quot;symmetric&quot;
+</code></pre>
+<h3 id="the-html-table-layout">The HTML table layout</h3>
+<p>On a phone the wide, tree-shaped SVG diagram needs panning; the HTML table layout is
+the alternative for small screens. Rounds stack vertically and advancement is read
+top-down — no connector lines. Everything shown follows the same rules as the SVG:
+explicit <code>winner</code> emphasis, per-leg scores with the shootout in parentheses,
+placeholders for unresolved sides.</p>
+<p>There are two layouts, selected with the <code>layout</code> argument:</p>
+<ul>
+<li><strong><code>"flat"</code></strong> (the default) — the whole stage is one table, each round name a full-width
+  header row. A single match is one boxed row (<code>name1 score1 x score2 name2</code>); a
+  two-legged tie is <strong>two boxed rows</strong>, one per leg with that leg's single score, each
+  preceded by a <a href="#match-metadata">metadata</a> line (the id and that leg's own date/venue).
+  Each leg's score row is drawn in its own bordered box (like the SVG and stacked match
+  boxes), with the metadata line above it. Each leg row honors its <strong>localía</strong> — the local
+  side (the leg's <code>team1</code>) goes on the left — so the second leg flips relative to the
+  first. The names are aligned outward and any crests/flags hug the central <code>x</code>. The <code>x</code>
+  is always shown, reading as "vs" before a result exists.</li>
+<li><strong><code>"stacked"</code></strong> — each match is its own little box of two rows (top side, then bottom
+  side), like the SVG's match boxes, with the metadata line above it.</li>
+</ul>
+<p><img alt="World Cup knockout stage as an HTML table" src="knockout-8-table.png" /></p>
+<p>Choose the layout from Python (<code>render_html(stage, layout="stacked")</code>), on the command
+line (<code>--layout stacked</code>), or through the host class (<code>diagram.render("html",
+layout="stacked")</code>); it defaults to <code>flat</code> everywhere.</p>
+<p>The output is a self-contained <code>&lt;div&gt;</code> fragment, ready to drop into a page. Styling
+is driven by <code>pd-*</code> CSS classes with embedded defaults, so the host page can theme it.
+The document's <code>render</code> options are SVG geometry knobs (<code>box_width</code>,
+<code>max_label_chars</code>) and are ignored here — HTML handles long names natively.</p>
+<h3 id="match-metadata">Match metadata</h3>
+<p>Next to each match (in the SVG and the stacked table; as a row above each leg in the flat
+table) the renderer draws a metadata line. It always starts with the match <strong>id</strong> — so a
+match with no game yet still shows its id (e.g. <code>QF4</code>) — followed by each leg's date and
+venue when present: <code>ID · dt venue</code> for one leg, <code>ID · dt venue / dt venue</code> for two. In
+the SVG the line sits above the box, or below it when that box's connector bends up, so it
+never overlaps the connector. The flat table, which already gives each leg its own row,
+draws the line as a full-width row above each leg with that leg's own date/venue, so a
+two-legged tie's two schedules sit over their respective rows instead of sharing a line.
+Put <code>dt</code>/<code>venue</code> on each leg (or, when a match has no legs, at match level); a host's
+<code>get_match</code> can supply them too.</p>
+<pre><code class="language-json">{ &quot;id&quot;: &quot;sf1&quot;, &quot;legs&quot;: [
+  { &quot;team1&quot;: &quot;Flamengo&quot;, &quot;goals1&quot;: 0, &quot;team2&quot;: &quot;River Plate&quot;, &quot;goals2&quot;: 0,
+    &quot;dt&quot;: &quot;2026-09-23 23:30&quot;, &quot;venue&quot;: &quot;Maracanã&quot; },
+  { &quot;team1&quot;: &quot;River Plate&quot;, &quot;goals1&quot;: 1, &quot;team2&quot;: &quot;Flamengo&quot;, &quot;goals2&quot;: 2,
+    &quot;dt&quot;: &quot;2026-09-30 23:30&quot;, &quot;venue&quot;: &quot;Estadio Monumental&quot; } ] }
+</code></pre>
+<p><code>dt</code> is assumed to be <strong>GMT</strong> in <code>%Y-%m-%d %H:%M</code>. <code>render.dt_format</code> is a
+<a href="https://babel.pocoo.org/en/latest/dates.html#date-fields">Babel/LDML</a> pattern
+(<code>EEEE</code> = weekday, <code>MMMM</code> = month, <code>dd</code> = day, <code>HH:mm</code> = time); it defaults to
+<code>dd/MM HH:mm</code> (e.g. <code>09/07 19:00</code>), so you only set it for a fuller form like
+<code>EEEE dd MMMM, HH:mm</code>. Pass a <code>timezone</code> to the render call
+(<code>render_svg</code>/<code>render_html</code>/<code>KnockoutStage.render</code>, or the CLI's <code>--timezone</code>) to convert
+the GMT value first, and a <code>language</code> to localize the weekday/month names (Babel) — see
+<a href="#translating-the-generated-labels">i18n</a>. A value that does not parse is shown verbatim.
+Suppress the whole line with <code>render.show_metadata: false</code>. The Copa Libertadores example
+shows this conversion: its <code>dt</code>s are GMT and its demo renders with
+<code>timezone="America/Montevideo"</code> (its venues are all at GMT-3), so the times you see are
+three hours behind the document's.</p>
+<h3 id="light-and-dark-mode">Light and dark mode</h3>
+<p>Both outputs adapt to the reader's color scheme automatically. The embedded default
+styles carry a <code>@media (prefers-color-scheme: dark)</code> block, so the same SVG diagram and
+HTML table switch to a dark palette wherever the renderer follows the OS/browser setting
+— no flag, no API, nothing to pass:</p>
+<p><img alt="The HTML table in dark mode" src="knockout-8-table-dark.png" /></p>
+<p>There is nothing to opt into: dark colors apply when the viewing context is dark and the
+light palette otherwise (the <a href="#the-html-table-layout">HTML table</a> above is the same
+schedule in light mode). The switch happens in a browser rendering context; a static
+rasterizer such as <code>rsvg-convert</code> — which produces the other PNG previews in this manual
+— ignores the media query and always renders light, so force-rendering a fixed scheme
+for static output may come later, alongside full style overrides.</p>
+<h2 id="the-knockoutstage-class">The <code>KnockoutStage</code> class</h2>
+<p>The operation helpers live on one class, <code>KnockoutStage</code>: subclass it to resolve
+match references against your own data, and call its <code>apply_results</code> to write incoming
+results onto the stored document.</p>
+<h3 id="dynamic-and-live-data-integration">Dynamic and live data integration</h3>
+<p>The renderer never computes results: the winner of a match is its explicit <code>winner</code>
+field, and an advancing team is whatever <code>team1</code>/<code>team2</code> the document records on a match.
+To feed live data from your own database instead of (or on top of) the JSON, subclass
+<code>KnockoutStage</code>. Whenever a leg carries a <code>ref</code>, <code>get_match(ref)</code> is called with it; you
+return that one game as a flat dict, local first (<code>team1</code>/<code>goals1</code>, <code>team2</code>/<code>goals2</code>). The
+tournament name and season can also be supplied dynamically:</p>
+<pre><code class="language-python">from matamata import KnockoutStage
+
+class ChampionshipDiagram(KnockoutStage):
+    def __init__(self, championship):
+        super().__init__(championship.knockout_stage_json)
+        self._championship = championship
+
+    def get_match(self, ref):
+        g = Match.objects.get(pk=ref)            # your own model
+        return {
+            &quot;team1&quot;: g.home.name, &quot;goals1&quot;: g.home_goals, &quot;pen1&quot;: g.home_pens,
+            &quot;team2&quot;: g.away.name, &quot;goals2&quot;: g.away_goals, &quot;pen2&quot;: g.away_pens,
+            &quot;dt&quot;: g.kickoff_gmt, &quot;venue&quot;: g.venue,   # optional metadata
+        }
+
+    def get_tournament(self):
+        return self._championship.name
+
+    def get_season(self):
+        return str(self._championship.year)
+
+def knockout_stage_svg(request, championship):
+    svg = ChampionshipDiagram(championship).render()
+    return HttpResponse(svg, content_type=&quot;image/svg+xml&quot;)
+</code></pre>
+<p><code>render()</code> returns the SVG diagram; <code>render("html")</code> the
+<a href="#the-html-table-layout">HTML table layout</a>, hydrated from the same hooks.</p>
+<p><code>get_match</code> returns only what it has — any of <code>team1</code>/<code>goals1</code>/<code>pen1</code> and their <code>2</code>
+counterparts, plus the leg's <code>dt</code>/<code>venue</code> <a href="#match-metadata">metadata</a>; a returned <code>None</code>
+leaves that leg as the document defines it. Where a side has no team yet, the resolved
+name is filled in from the live game while the advancement connector
+(<code>winnerof1</code>/<code>winnerof2</code>) is kept.</p>
+<p>The document's display preferences are available to the hooks as <code>self.render_config</code>,
+so <code>get_match</code> can, for instance, read <code>self.render_config.max_label_chars</code> and return
+already-shortened names. Long-named cups can raise that limit (it defaults to <code>22</code>) in
+the document's <code>render</code> object.</p>
+<p>For a runnable example of this integration, see <code>examples/libertadores_host.py</code> —
+it resolves the refs of the Copa Libertadores example against a JSON lookup table,
+and includes the instructions to run it and watch it work.</p>
+<h3 id="team-crests-and-flags">Team crests and flags</h3>
+<p>A schedule is easier to scan when each side shows the team's crest (clubs) or flag
+(national teams) next to its name. Crests exist <strong>only through the <code>KnockoutStage</code>
+class — the JSON document has no crest surface</strong>: team names repeat through the
+rounds as teams advance, a cost paid for quick human editing of the JSON, and image
+URLs would add nothing to that editability and a lot of noise against it. So it is
+the class that resolves the image from each side's identity, the same way
+<code>get_match</code> resolves results:</p>
+<pre><code class="language-python">class ChampionshipDiagram(KnockoutStage):
+    def get_crest(self, team_id, team_name):
+        if team_id is None:
+            return None
+        return Team.objects.get(pk=team_id).crest_url
+</code></pre>
+<p><code>get_crest</code> is called once per side that has an identity — <code>team_id</code> is the side's
+<code>id{n}</code> when the document (or <code>get_match</code>) supplies one, <code>team_name</code> its team name.
+Return a URL, a path or a data URI, or <code>None</code> for no image (the base implementation
+always returns <code>None</code>, so nothing changes for existing hosts). The image appears before
+the team name in both outputs — an <code>&lt;image&gt;</code> element in the SVG diagram, an <code>&lt;img&gt;</code> in
+the <a href="#the-html-table-layout">HTML table layout</a> — and the renderer never fetches or
+processes it; rows without one (the unresolved placeholders) keep their layout.</p>
+<p>Crests are square by default — right for club badges. National flags are rectangular, so
+forcing them into a square squashes them; set <code>"crest_shape": "flag"</code> in the document's
+<a href="format/#render-options"><code>render</code> object</a> to draw each image in a framed 3:2 box,
+fitted without distortion. It is a display preference (only the <em>shape</em>; the image is
+still the host's), honored by both the diagram and the table.</p>
+<p>The World Cup example does exactly that, resolving each national team's flag and setting
+<code>"crest_shape": "flag"</code> in its <code>render</code> object (it also carries per-match dates and venues
+— see <a href="#match-metadata">Match metadata</a>):</p>
+<p><img alt="A schedule with flags" src="world-cup-2022.png" /></p>
+<p><small>Flags: public-domain national flags from <a href="https://commons.wikimedia.org/">Wikimedia
+Commons</a>, referenced by relative path under
+<code>examples/flags/</code>.</small></p>
+<p>The runnable host behind it is <code>examples/world_cup_2022_host.py</code>: a <code>KnockoutStage</code> whose
+<code>get_crest</code> looks each side's <code>team_name</code> up in a sibling <code>world_cup_2022_flags.json</code> (a
+name → flag-file table). <code>world-cup-2022.json</code> carries no ids, so this one resolves by name.
+The same <code>"crest_shape": "flag"</code> is honored by the HTML table too, as the club-crest example
+below shows.</p>
+<p>Club crests work exactly the same — here a short invitational, where each side instead
+carries an integer <code>id{n}</code> that <code>get_crest</code> turns into a crest image:</p>
+<p><img alt="A schedule with club crests" src="copa-rio-de-la-plata.png" /></p>
+<p><img alt="The same schedule as an HTML table, with crests" src="copa-rio-de-la-plata-table.png" /></p>
+<p><small>Crests: public-domain club logos (simple text/shapes) from <a href="https://commons.wikimedia.org/">Wikimedia
+Commons</a>, referenced by relative path under
+<code>examples/crests/</code>.</small></p>
+<p>Its host is <code>examples/copa_rio_host.py</code>, looking each side's <code>id{n}</code> up in a sibling
+<code>crest_data.json</code> (a team-id → crest-file table), the same way <code>libertadores_host.py</code>
+resolves a leg's <code>ref</code> through <code>get_match</code>. In a real deployment that lookup is a
+database query and the value a URL. Resolving by <code>team_id</code> rather than the display name
+is deliberate: names in the document may differ from the source's titling (accents,
+short forms), so an id is the stable key — which is why the id-less flags example above
+has to fall back to the name.</p>
+<p>Documents rendered without the class (the CLI, <code>render_svg</code>) simply show no crests.</p>
+<h3 id="translating-the-generated-labels">Translating the generated labels</h3>
+<p>Team names and the tournament come straight from the document, so translating those is
+just a matter of storing them already translated. Two other kinds of text are localized
+through a hook instead: the renderer-<em>generated</em> placeholders for sides with no team yet
+— <code>Winner SF1</code> (an unresolved <code>winnerof</code> link) and <code>TBD</code> (a side with neither a team nor
+a link) — and the <strong>round names</strong> (the document keeps a canonical name like
+<code>Quarterfinals</code>, and the host translates it per language).</p>
+<p>Like crests, it is a hook with no JSON surface: override <code>translate</code>. <strong>English is the
+source language</strong>, so the renderer calls <code>translate</code> only when a target language other
+than <code>"en"</code> was requested, and only for the values it marks translatable. The hook gets
+<code>(path, value, language)</code> and returns the localized string, or <code>None</code> to keep the default:</p>
+<pre><code class="language-python">from matamata import KnockoutStage
+
+# Placeholders are a defined vocabulary, so they get their own table; the second one is
+# generic — any text translated by its value, here the round names.
+PLACEHOLDERS = {&quot;es&quot;: {&quot;winner&quot;: &quot;Ganador&quot;, &quot;tbd&quot;: &quot;A definir&quot;}}
+TEXT = {&quot;es&quot;: {&quot;Quarterfinals&quot;: &quot;Cuartos de final&quot;, &quot;Semifinals&quot;: &quot;Semifinales&quot;}}
+
+class ChampionshipDiagram(KnockoutStage):
+    def translate(self, path, value, language):
+        table = PLACEHOLDERS if path == &quot;_placeholder&quot; else TEXT
+        return table.get(language, {}).get(value)
+
+svg = ChampionshipDiagram(document).render(language=&quot;es&quot;)
+</code></pre>
+<p><code>path</code> tells you <em>what</em> is being translated. For <code>"_placeholder"</code>, <code>value</code> is the
+placeholder's stable key (<code>"winner"</code>, <code>"tbd"</code>) and you return the bare <strong>word</strong> —
+<code>"Ganador"</code>, not <code>"Ganador SF1"</code> — because the renderer composes the id. For <code>"round.name"</code>,
+<code>value</code> is the round's own name and you return its translation. Returning <code>None</code> (or leaving
+a key out of your tables) keeps the English / document default; requesting <code>"en"</code> or no
+language skips translation entirely. The language is the <em>caller's</em> to pass — the host
+supplies the translations, not the choice of which one. The Copa Libertadores example host
+(<code>examples/libertadores_host.py</code>) does exactly this; its demo renders the stage in Spanish
+(<code>Cuartos de final</code>, <code>Semifinales</code>, <code>Final</code>).</p>
+<p>The host owns the translations, so you can resolve them however suits your app — literal
+dicts as above, your existing message catalogs, or <code>gettext</code>. Documents rendered without
+the class (the CLI, <code>render_svg</code>) show the English labels.</p>
+<p>The <strong>same <code>language</code></strong> also localizes the metadata <strong>dates</strong>, but by a separate path:
+<code>render_svg</code>/<code>render_html</code> (and <code>KnockoutStage.render</code>) pass it to <strong>Babel</strong>, which renders
+the <code>EEEE</code>/<code>MMMM</code> weekday and month names in that locale — no <code>translate</code> involved, nothing
+for the host to provide. So <code>render(language="es")</code> gives both Spanish placeholders/round
+names (via <code>translate</code>) and Spanish dates (via Babel); the standalone <code>render_svg(stage,
+language="es")</code> localizes just the dates. The Copa Río de la Plata example renders in
+Spanish (<code>jueves 17 septiembre</code>) against the World Cup's English (<code>Thursday 09 July</code>).</p>
+<h3 id="custom-styling">Custom styling</h3>
+<p>Both renderers drive their appearance through CSS classes (<code>pd-box</code>, <code>pd-team</code>,
+<code>pd-win</code>, …) with sensible defaults embedded in a <code>&lt;style&gt;</code> block. To restyle the output —
+your own palette, a forced colour scheme, different fonts — override <code>get_style</code>:</p>
+<pre><code class="language-python">class MyDiagram(KnockoutStage):
+    def get_style(self, fmt):
+        if fmt == &quot;svg&quot;:
+            return &quot;.pd-box { fill: #161e3a; stroke: #2a3566; } .pd-team { fill: #e6e9f5; }&quot;
+        return &quot;.pd-match { background: #161e3a; } .pd-team, .pd-score { color: #e6e9f5; }&quot;
+</code></pre>
+<p>The string you return is appended <strong>after</strong> the built-in styles, so its rules cascade
+over the defaults — target the <code>pd-*</code> classes and, at equal specificity, the later rules
+(yours) win. Because they sit after the default <code>@media (prefers-color-scheme: dark)</code>
+block, restating the <code>pd-*</code> colours unconditionally also lets you <strong>force a fixed colour
+scheme</strong> (handy for static rasterizers, which ignore the media query).</p>
+<p>The CSS is <strong>per-format</strong>: the SVG colours its shapes with <code>fill</code>/<code>stroke</code>, the HTML table
+with <code>color</code>/<code>background</code> — so <code>fmt</code> is <code>"svg"</code> or <code>"html"</code> and you return the block for the
+format being rendered (or <code>None</code> to keep the defaults). Like crests and labels, styling is a
+host-only hook with no JSON or CLI surface; documents rendered without the class (the CLI,
+<code>render_svg</code>/<code>render_html</code>) keep the defaults. The <code>examples/styled_host.py</code> example does
+this with a fixed "midnight" palette.</p>
+<h3 id="the-apply_results-method">The <code>apply_results</code> method</h3>
+<p>When a game finishes (or while it is being played), write its result onto the document
+with <code>apply_results</code> and persist what it returns — the structure of the knockout stage never
+changes, only the JSON field does:</p>
+<pre><code class="language-python">diagram = KnockoutStage(championship.knockout_stage_json)
+championship.knockout_stage_json = diagram.apply_results(
+    {&quot;id&quot;: &quot;sf1&quot;, &quot;leg&quot;: 2, &quot;goals1&quot;: 0, &quot;goals2&quot;: 3}
+)
+championship.save()
+</code></pre>
+<p>Each result addresses one leg, either by <code>ref</code> (the leg pointing at that real game) or
+by match <code>id</code> plus an optional 1-based <code>leg</code> number (default 1; missing legs are
+created). Scores are tie-oriented — <code>goals1</code> belongs to the match's top side — and the
+present keys simply overwrite the leg, so a live game can be re-applied as it goes. A
+list applies several results at once.</p>
+<p>By default every touched match is then <em>settled</em>: its <code>winner</code> is recomputed from the
+aggregate (penalties break a tied one), removed when undecided, and the advancing team
+is pushed into the match that consumes it via <code>winnerof</code>. Pass <code>settle=False</code> to skip
+that, or put <code>"settle": false</code> on a match to keep it out permanently — the renderer
+itself still never computes anything.</p>
+<h4 id="before-and-after-end-to-end">Before and after, end to end</h4>
+<p>One call, walked through. The two documents below are real assets, kept in sync by the
+library itself: <a href="apply-before.json"><code>apply-before.json</code></a> is hand-written, and
+<a href="apply-after.json"><code>apply-after.json</code></a> is exactly what <code>apply_results</code> returns for it,
+generated by the library — never edited by hand.</p>
+<h5 id="before">Before</h5>
+<p>A semifinal stage mid-series. <code>sf1</code> has its first leg played (1–0) and the second one
+scheduled (<code>{}</code>); <code>sf2</code> is already settled, so the final knows its bottom side while the
+top one still shows the "Winner SF1" placeholder:</p>
+<pre><code class="language-json">{
+  &quot;tournament&quot;: &quot;Champions League&quot;,
+  &quot;season&quot;: &quot;2025/26&quot;,
+  &quot;rounds&quot;: [
+    {
+      &quot;name&quot;: &quot;Semifinals&quot;,
+      &quot;matches&quot;: [
+        {
+          &quot;id&quot;: &quot;sf1&quot;,
+          &quot;team1&quot;: &quot;Real Madrid&quot;,
+          &quot;team2&quot;: &quot;Barcelona&quot;,
+          &quot;legs&quot;: [
+            { &quot;goals1&quot;: 1, &quot;goals2&quot;: 0 },
+            {}
+          ]
+        },
+        {
+          &quot;id&quot;: &quot;sf2&quot;,
+          &quot;team1&quot;: &quot;Bayern München&quot;,
+          &quot;team2&quot;: &quot;Manchester City&quot;,
+          &quot;winner&quot;: 2,
+          &quot;legs&quot;: [
+            { &quot;goals1&quot;: 0, &quot;goals2&quot;: 2 },
+            { &quot;goals1&quot;: 1, &quot;goals2&quot;: 1 }
+          ]
+        }
+      ]
+    },
+    {
+      &quot;name&quot;: &quot;Final&quot;,
+      &quot;matches&quot;: [
+        {
+          &quot;id&quot;: &quot;f&quot;,
+          &quot;winnerof1&quot;: &quot;sf1&quot;,
+          &quot;winnerof2&quot;: &quot;sf2&quot;,
+          &quot;team2&quot;: &quot;Manchester City&quot;
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<p><img alt="before" src="apply-before.png" /></p>
+<h5 id="the-call">The call</h5>
+<p>The second leg finishes 1–0 for Barcelona, taking the tie to penalties, which Real Madrid
+wins 4–2. That is one result dict — scores are tie-oriented, so <code>goals1</code>/<code>pen1</code> belong
+to the match's top side (Real Madrid) no matter where the game was played:</p>
+<pre><code class="language-python">from matamata import KnockoutStage
+
+diagram = KnockoutStage(document)
+updated = diagram.apply_results(
+    {&quot;id&quot;: &quot;sf1&quot;, &quot;leg&quot;: 2, &quot;goals1&quot;: 0, &quot;goals2&quot;: 1, &quot;pen1&quot;: 4, &quot;pen2&quot;: 2}
+)
+</code></pre>
+<h5 id="after">After</h5>
+<p>Three things changed in the document, all from that single call:</p>
+<ol>
+<li>the second leg of <code>sf1</code> now carries the result and the shootout;</li>
+<li><code>sf1</code> was <em>settled</em>: the aggregate is 1–1, the shootout breaks it, so
+   <code>"winner": 1</code> was written;</li>
+<li>the winner advanced: the final's side 1 got <code>"team1": "Real Madrid"</code>.</li>
+</ol>
+<pre><code class="language-json">{
+  &quot;tournament&quot;: &quot;Champions League&quot;,
+  &quot;season&quot;: &quot;2025/26&quot;,
+  &quot;rounds&quot;: [
+    {
+      &quot;name&quot;: &quot;Semifinals&quot;,
+      &quot;matches&quot;: [
+        {
+          &quot;id&quot;: &quot;sf1&quot;,
+          &quot;team1&quot;: &quot;Real Madrid&quot;,
+          &quot;team2&quot;: &quot;Barcelona&quot;,
+          &quot;legs&quot;: [
+            { &quot;goals1&quot;: 1, &quot;goals2&quot;: 0 },
+            { &quot;goals1&quot;: 0, &quot;goals2&quot;: 1, &quot;pen1&quot;: 4, &quot;pen2&quot;: 2 }
+          ],
+          &quot;winner&quot;: 1
+        },
+        {
+          &quot;id&quot;: &quot;sf2&quot;,
+          &quot;team1&quot;: &quot;Bayern München&quot;,
+          &quot;team2&quot;: &quot;Manchester City&quot;,
+          &quot;winner&quot;: 2,
+          &quot;legs&quot;: [
+            { &quot;goals1&quot;: 0, &quot;goals2&quot;: 2 },
+            { &quot;goals1&quot;: 1, &quot;goals2&quot;: 1 }
+          ]
+        }
+      ]
+    },
+    {
+      &quot;name&quot;: &quot;Final&quot;,
+      &quot;matches&quot;: [
+        {
+          &quot;id&quot;: &quot;f&quot;,
+          &quot;winnerof1&quot;: &quot;sf1&quot;,
+          &quot;winnerof2&quot;: &quot;sf2&quot;,
+          &quot;team2&quot;: &quot;Manchester City&quot;,
+          &quot;team1&quot;: &quot;Real Madrid&quot;
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<p><img alt="after" src="apply-after.png" /></p>
+<p>The host can now persist the new version of the document — the value of <code>updated</code> —
+and every render from then on shows the new state.</p>
+<h2 id="modeling-special-tie-features">Modeling special tie features</h2>
+<h3 id="a-pairing-pending-a-draw">A pairing pending a draw</h3>
+<p>In some cups the next round is not wired beforehand: it is redrawn from the winners
+(the FA Cup does this after every round). Until the draw happens there is no
+advancement path to declare, and the document models that by simply omitting
+<code>winnerof{n}</code>: the side renders "TBD" and no connector is drawn.</p>
+<p>In <code>examples/facup-pending-draw.json</code> the quarterfinals are under way but the
+semifinal draw is still pending — both semifinals carry only their <code>id</code>:</p>
+<pre><code class="language-json">{ &quot;name&quot;: &quot;Semifinals&quot;, &quot;matches&quot;: [{ &quot;id&quot;: &quot;sf1&quot; }, { &quot;id&quot;: &quot;sf2&quot; }] }
+</code></pre>
+<p>The final is wired normally (<code>"winnerof1": "sf1"</code>, <code>"winnerof2": "sf2"</code>), because the
+final's pairing is never redrawn:</p>
+<p><img alt="FA Cup, semifinal draw pending" src="facup-pending-draw.png" /></p>
+<p>Once the draw is made, whoever maintains the document writes the drawn pairings as
+plain <code>team{n}</code> names — <strong>not</strong> as <code>winnerof{n}</code> links. A link declares a
+preestablished advancement path and draws its connector; a redrawn round has no such
+path, and connectors following a draw could cross each other arbitrarily.
+<code>examples/facup-drawn.json</code> is the same stage right after the draw:</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Semifinals&quot;,
+  &quot;matches&quot;: [
+    {
+      &quot;id&quot;: &quot;sf1&quot;,
+      &quot;team1&quot;: &quot;Arsenal&quot;,
+      &quot;team2&quot;: &quot;Manchester United&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sf2&quot;,
+      &quot;team1&quot;: &quot;Manchester City&quot;,
+      &quot;team2&quot;: &quot;Liverpool&quot;
+    }
+  ]
+}
+</code></pre>
+<p>The semifinals now name their teams but stay unconnected to the quarterfinals, which
+is exactly what happened — the draw, not the schedule, decided the pairings:</p>
+<p><img alt="FA Cup, semifinals drawn" src="facup-drawn.png" /></p>
+<h3 id="a-third-place-match">A third-place match</h3>
+<p>A third-place match pairs the two beaten semifinalists, so its sides are the <strong>losers</strong>
+of the semifinals. That is the mirror of <code>winnerof{n}</code>: use <code>loserof1</code>/<code>loserof2</code>. Until
+the semifinals are decided, the sides show a placeholder ("Loser SF1"), and once they are
+— or when whoever maintains the document settles them — the beaten teams are written in,
+exactly as the winners flow to the final.</p>
+<p>Because it consumes losers, a third-place match is <strong>off the winners' tree</strong>: it draws no
+connector. Put it in its own round, <em>after</em> the final, so that round keeps its own header;
+the renderer lays it out below the bracket, in the final's column. In
+<code>examples/third-place.json</code>:</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Third place&quot;,
+  &quot;matches&quot;: [{ &quot;loserof1&quot;: &quot;sf1&quot;, &quot;loserof2&quot;: &quot;sf2&quot; }]
+}
+</code></pre>
+<p>Like the final, the match references nothing, so it omits <code>id</code> (its round title already
+names it):</p>
+<p><img alt="World Cup, third-place match below the bracket" src="third-place.png" /></p>
+<h2 id="testing">Testing</h2>
+<p>Install the development extras and run the suite:</p>
+<pre><code class="language-bash">pip install -e &quot;.[dev]&quot;
+pytest
+</code></pre>
+<p>The suite includes golden (snapshot) SVG tests: each example document is rendered and
+compared against a versioned reference SVG under <code>tests/golden/</code>. This catches visual
+regressions without a browser.</p>
+<p>To eyeball the renders yourself, the repo ships a small dev tool, <code>examples/gallery.py</code>,
+that renders <strong>every example</strong> — the SVG diagram and the HTML table in both layouts,
+including the host-resolved ones with crests and flags — into a single self-contained <code>file://</code> page,
+<code>examples/gallery.html</code> (committed, so you can just open it). Its header shows the command
+to regenerate it.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="format/" class="btn btn-neutral float-right" title="Format specification">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/anibalpacheco/matamata" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+      <span><a href="format/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2026-06-22 07:51:10.603345+00:00
+-->

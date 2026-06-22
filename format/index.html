@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://anibalpacheco.github.io/matamata/format/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Format specification - matamata</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Format specification";
+        var mkdocs_page_input_path = "format.md";
+        var mkdocs_page_url = "/matamata/format/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> matamata
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Documentation</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Format specification</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#top-level-document">Top-level document</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#render-options">Render options</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#round">Round</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#match">Match</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#leg">Leg</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#determining-the-winner">Determining the winner</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#host-integration-non-normative">Host integration (non-normative)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#applying-results-non-normative">Applying results (non-normative)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#rendering-notes-non-normative">Rendering notes (non-normative)</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">matamata</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Format specification</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/anibalpacheco/matamata/blob/main/docs/format.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="knockout-stage-source-format">Knockout stage source format</h1>
+<p>This document specifies the JSON "language" used to describe a tournament knockout
+stage. A document of this format is the single source of truth from which the
+schedule is rendered (in SVG or HTML table format).</p>
+<p>The canonical, machine-checkable definition is <a href="../schema.json"><code>schema.json</code></a>. This
+prose document explains intent and the rules a renderer must implement.</p>
+<h2 id="top-level-document">Top-level document</h2>
+<pre><code class="language-jsonc">{
+  &quot;tournament&quot;: &quot;Copa Libertadores&quot;, // optional, string (may be supplied dynamically)
+  &quot;season&quot;: &quot;2026&quot;,                  // optional, string (may be supplied dynamically)
+  &quot;render&quot;: { &quot;box_width&quot;: 240 },    // optional, display preferences (see below)
+  &quot;rounds&quot;: [ /* Round, ... */ ]      // required, ordered first round -&gt; final
+}
+</code></pre>
+<p><code>rounds</code> are ordered from the earliest round to the final. The order is significant:
+it determines the columns of the schedule, left to right.</p>
+<p><code>tournament</code> and <code>season</code> are optional in the document because a host system may want
+to supply them dynamically at render time (e.g. from the championship entity) rather
+than store them in the JSON. See "Host integration" below.</p>
+<h2 id="render-options">Render options</h2>
+<p>The optional top-level <code>render</code> object lets the document declare how it should be
+displayed, so the same renderer serves different presentation choices without code
+changes.</p>
+<pre><code class="language-jsonc">{
+  &quot;max_label_chars&quot;: 22,        // optional, longest team label before it is truncated
+  &quot;box_width&quot;: &quot;auto&quot;,          // optional, &quot;auto&quot; (default) or a width in SVG units
+  &quot;crest_shape&quot;: &quot;square&quot;,      // optional, &quot;square&quot; (default) or &quot;flag&quot;
+  &quot;show_metadata&quot;: true,        // optional, draw the per-match metadata line (default true)
+  &quot;dt_format&quot;: &quot;EEEE dd MMMM, HH:mm&quot;,  // optional, Babel/LDML pattern for each leg's dt
+  &quot;layout&quot;: &quot;symmetric&quot;         // optional, SVG arrangement: &quot;symmetric&quot; (default) or &quot;linear&quot;
+}
+</code></pre>
+<ul>
+<li><code>"max_label_chars"</code> (default <code>22</code>) — the maximum team-label width, in characters.
+  Longer labels are truncated with an ellipsis. Cups with long team names can raise it;
+  a host's <code>get_match</code> can also read it and return shorter names.</li>
+<li><code>"box_width"</code> (default <code>"auto"</code>) — the width of every match box in the <strong>SVG</strong> diagram.
+  <code>"auto"</code> sizes the boxes to fit their widest content (the longest drawn label — still
+  capped at <code>max_label_chars</code> — plus any crest and the score). Give a number instead to fix
+  the width; widen it (or raise <code>max_label_chars</code>) to fit long names without truncation. The
+  HTML table sizes its columns from content regardless, so this only affects the SVG.</li>
+<li><code>"crest_shape"</code> (default <code>"square"</code>) — the shape of each side's crest/flag image.
+  <code>"square"</code> suits club crests; <code>"flag"</code> renders a rectangular (3:2) box with the image
+  fitted inside without distortion and a thin border, so national flags look like flags
+  instead of squashed squares. Only the <em>shape</em> is declared here — the image itself is
+  still supplied by the host's <code>get_crest</code>, never by the document.</li>
+<li><code>"show_metadata"</code> (default <code>true</code>) — whether the per-match metadata line (the id, then
+  each leg's date and venue) is drawn. Set it <code>false</code> to suppress the line entirely.</li>
+<li><code>"dt_format"</code> (default <code>"dd/MM HH:mm"</code>) — a <a href="https://babel.pocoo.org/en/latest/dates.html#date-fields">Babel/LDML</a>
+  pattern applied to each leg's <code>dt</code> (<code>EEEE</code> weekday, <code>MMMM</code> month, <code>dd</code> day, <code>HH:mm</code>
+  time). <code>dt</code> is parsed as <strong>GMT</strong> in <code>%Y-%m-%d %H:%M</code>, converted to the render's timezone
+  if one is given (see "Host integration"), and formatted by Babel in the render's language
+  so weekday/month names follow the locale. The default omits the year (usually already in
+  the title); a value that does not parse is shown unchanged.</li>
+<li><code>"layout"</code> (default <code>"symmetric"</code>) — how the <strong>SVG</strong> diagram arranges the rounds.
+  <code>"symmetric"</code> draws the FIFA-style mirrored bracket — every round before the final is
+  split by document order so its two halves expand outward to the left and right (rounds
+  flow inward toward the middle), the semifinals meeting in the centre, with the final
+  lifted above them and any third-place round dropped below; <code>"linear"</code> flows the columns
+  left to right with the final in the last column. This is an SVG-only concern: the HTML
+  table is a vertical list and renders the same either way.</li>
+</ul>
+<p>Each side always shows the goals of every played leg in order, e.g. <code>2 0</code> for a tie or
+<code>2</code> for a single match; a shootout is appended in parentheses on the relevant side, e.g.
+<code>0 0 (4)</code>. The winning side is emphasized when the <code>winner</code> field says so.</p>
+<h2 id="round">Round</h2>
+<pre><code class="language-jsonc">{
+  &quot;name&quot;: &quot;Quarterfinals&quot;,   // required, display label
+  &quot;matches&quot;: [ /* Match, ... */ ]  // required
+}
+</code></pre>
+<h2 id="match">Match</h2>
+<p>A match is one node in the knockout stage: two sides plus an optional result. The two sides are
+numbered — <strong><code>1</code> is the top side, <code>2</code> the bottom</strong> — and every side field follows that
+numbering. There are no <code>home</code>/<code>away</code> objects.</p>
+<pre><code class="language-jsonc">{
+  &quot;id&quot;: &quot;sf1&quot;,            // optional, unique within the document (omit it on the final)
+  &quot;winnerof1&quot;: &quot;qf1&quot;,     // optional, side 1 is the winner of another match (advancement link)
+  &quot;winnerof2&quot;: &quot;qf2&quot;,     // optional, same for side 2
+  &quot;loserof1&quot;: &quot;sf1&quot;,      // optional, side 1 is the loser of another match (third-place link)
+  &quot;loserof2&quot;: &quot;sf2&quot;,      // optional, same for side 2
+  &quot;team1&quot;: &quot;Flamengo&quot;,    // optional, a known/advancing team on side 1 (with id1)
+  &quot;team2&quot;: &quot;River Plate&quot;, // optional, same for side 2
+  &quot;legs&quot;: [ /* Leg, ... */ ], // optional; absent =&gt; not played yet
+  &quot;winner&quot;: 1,            // optional; 1 (top) | 2 (bottom)
+  &quot;settle&quot;: false         // optional; only false is admitted (see &quot;Applying results&quot;)
+}
+</code></pre>
+<ul>
+<li><code>id</code> — identifier referenced by <code>winnerof1</code>/<code>winnerof2</code>, and shown (uppercased) as the
+  first part of the match's <a href="#rendering-notes-non-normative">metadata line</a>. It is
+  <strong>optional</strong>: a match that nothing references — typically the final, whose round title
+  already names it — may omit it, and then shows no metadata id.</li>
+<li><code>winnerof1</code>/<code>winnerof2</code> — explicit advancement links: each must reference the <code>id</code> of
+  another match. References must not form a cycle. They draw the connector and, while
+  unresolved, show a placeholder ("Winner QF1"). They declare a <strong>preestablished</strong>
+  advancement path: in a round that is redrawn from the winners no such path exists,
+  so omit the links — the sides render "TBD" with no connector — and, once the draw
+  is made, write the drawn pairings as plain <code>team{n}</code> names, keeping the links (and
+  their connectors, which could cross arbitrarily) out.</li>
+<li><code>loserof1</code>/<code>loserof2</code> — the third-place mirror of <code>winnerof{n}</code>: the side is the
+  <strong>loser</strong> of the referenced match, shown as a placeholder ("Loser SF1") until resolved.
+  A match fed by <code>loserof</code> is off the winners' tree, so it draws <strong>no connector</strong> and is
+  laid out below the bracket; put it in its own round (e.g. <code>"Third place"</code>) <strong>after</strong> the
+  final so that round keeps its own name. See "Rendering notes".</li>
+<li><code>team1</code>/<code>team2</code> (optional <code>id1</code>/<code>id2</code>) — a side's known team: an entrant, or the team
+  that advanced (written here by whatever maintains the JSON; the renderer never works
+  it out). Legs may also name teams: they fill in whatever the match level leaves
+  unset, and where both name a side the match-level name wins.</li>
+<li>A side with no <code>team{n}</code>, <code>winnerof{n}</code> nor <code>loserof{n}</code> renders as "TBD".</li>
+<li><code>winner</code> — which side won, <code>1</code> or <code>2</code>. This is the <strong>only</strong> source of the winner: the
+  renderer never computes it from the scores. Absent means undecided.</li>
+<li><code>settle</code> — when present it must be <code>false</code>: it opts this match out of having its
+  <code>winner</code> written by the result-application helper (see "Applying results" below).
+  Display is unaffected.</li>
+</ul>
+<h2 id="leg">Leg</h2>
+<p>A single game within a match. Two-legged ties have two legs (and nothing caps the
+count, so longer series are expressible). When a leg names its teams, they are numbered
+like a match's sides but <strong>game-locally</strong>: <strong><code>1</code> = the game's local/home, <code>2</code> = the
+visitor</strong> — so the second leg of a tie, played at the other venue, lists the teams in
+the opposite order.</p>
+<pre><code class="language-jsonc">// self-contained: the game lives in the document
+{
+  &quot;team1&quot;: &quot;River Plate&quot;, &quot;goals1&quot;: 1,  // local team and its goals (id via id1)
+  &quot;team2&quot;: &quot;Palmeiras&quot;,   &quot;goals2&quot;: 1,  // visiting team and its goals
+  &quot;pen1&quot;: 4, &quot;pen2&quot;: 2                  // optional, penalty shootout result
+}
+
+// host-resolved: a pointer to the real game, optionally with a baked result
+{
+  &quot;ref&quot;: 84021                          // id of the real game in the host system
+}
+
+// result-only: no team names, so 1/2 are the *match's* sides (tie-oriented)
+{
+  &quot;goals1&quot;: 2, &quot;goals2&quot;: 0
+}
+</code></pre>
+<ul>
+<li>Every field is optional. An empty leg <code>{}</code> is scheduled but not played yet.</li>
+<li>A leg <strong>without team names</strong> has nothing to match against the tie, so its <code>1</code>/<code>2</code> are
+  read as the match's sides: <code>goals1</code> belongs to the top side. This is the shape the
+  result-application helper writes (see "Applying results").</li>
+<li><code>ref</code> is a pointer to the real game in the host system's database: the leg's teams and
+  scores are filled in dynamically at render time — see "Host integration". A <code>ref</code> may
+  coexist with an inline result (a baked snapshot); when the host supplies live data it
+  wins over the baked values.</li>
+<li><code>dt</code> and <code>venue</code> are optional scheduling metadata for the leg, shown on the match's
+  metadata line (see "Match metadata"). <code>dt</code> is a datetime string (assumed GMT, formatted
+  per <code>render.dt_format</code>); <code>venue</code> is free text. Unlike the score/team fields they are not
+  game-oriented — they describe the leg itself, so they are never flipped. A host's
+  <code>get_match</code> may also supply them, and present values win over baked ones. When a match
+  has <strong>no legs</strong>, a <code>dt</code>/<code>venue</code> written at <em>match</em> level is used as a fallback.</li>
+<li>The renderer reads the first named leg to place the two sides (its <code>team1</code> → the tie's
+  top, <code>team2</code> → the tie's bottom) and orients later legs by matching team names.</li>
+<li>A match with no legs is "not played yet".</li>
+</ul>
+<h2 id="determining-the-winner">Determining the winner</h2>
+<p>The winner of a match is exactly its <code>winner</code> field (<code>1</code> / <code>2</code>), or undecided if absent.
+<strong>The renderer computes no winner</strong> — not from the aggregate, not from penalties, and
+the away-goals rule does not exist here. Advancing teams and decided series are written
+into the document by whatever updates it — by hand, by the host, or through the
+result-application helper below.</p>
+<h2 id="host-integration-non-normative">Host integration (non-normative)</h2>
+<p>A leg's <code>ref</code> lets a host system inject live data. When using the Python renderer's
+<code>KnockoutStage</code> class, override <code>get_match(ref)</code> to return that one game as a flat dict
+in the same shape as a self-contained leg — <code>team1</code>/<code>goals1</code>/<code>team2</code>/<code>goals2</code> (local
+first), with optional <code>pen1</code>/<code>pen2</code>, <code>id1</code>/<code>id2</code> and the leg's <code>dt</code>/<code>venue</code>. Return only
+what you have; the renderer fills the leg's scores, metadata and, where a side has no team
+yet, its name — keeping any <code>winnerof</code> link, and letting present values win over baked
+ones. <code>get_tournament()</code> and <code>get_season()</code> can likewise be supplied dynamically, and
+<code>get_crest(team_id, team_name)</code> can resolve each side's crest/flag image from the side's
+identity. The document itself never carries images: crests have no JSON surface, by
+design.</p>
+<p>The metadata datetimes are assumed to be <strong>GMT</strong>. The render entry points
+(<code>render_svg</code>, <code>render_html</code>, <code>KnockoutStage.render</code>, and the CLI's <code>--timezone</code>) take an
+optional <code>timezone</code> (a zone name like <code>"America/Montevideo"</code>) the datetimes are converted
+to before being formatted with <code>render.dt_format</code>. They also take a <code>language</code> that Babel
+uses to localize the weekday/month names in that pattern (e.g. <code>"es"</code> → <code>jueves</code>,
+<code>septiembre</code>); the same <code>language</code> drives the generated-label translation hook
+(<code>KnockoutStage.translate</code>), but the two are independent — only the argument is shared.</p>
+<h2 id="applying-results-non-normative">Applying results (non-normative)</h2>
+<p><code>KnockoutStage.apply_results(results, settle=True)</code> is the document-maintenance
+helper: it writes played results onto the JSON in place, so a host updates the stored
+document without touching its structure. <code>results</code> is one dict or a list of dicts, each
+carrying the scores of one leg — <code>goals1</code>/<code>goals2</code>, optional <code>pen1</code>/<code>pen2</code>,
+<strong>tie-oriented</strong> (<code>1</code> = the match's top side) — plus exactly one way to find that leg:</p>
+<pre><code class="language-jsonc">{ &quot;ref&quot;: 84021, &quot;goals1&quot;: 1, &quot;goals2&quot;: 1, &quot;pen1&quot;: 4, &quot;pen2&quot;: 2 }  // the leg with this ref
+{ &quot;id&quot;: &quot;sf1&quot;, &quot;goals1&quot;: 2, &quot;goals2&quot;: 0 }                          // match sf1, leg 1
+{ &quot;id&quot;: &quot;sf1&quot;, &quot;leg&quot;: 2, &quot;goals1&quot;: 0, &quot;goals2&quot;: 3 }                // match sf1, leg 2
+</code></pre>
+<p><code>ref</code> and <code>id</code> are mutually exclusive and one is required; <code>leg</code> (1-based, default 1)
+only combines with <code>id</code>, and missing legs are created on the way. Present keys overwrite
+whatever the leg holds — there is no notion of "already played", so a live game can be
+re-applied as it goes.</p>
+<p>With <code>settle</code> (the default), every match a result touched is then <em>settled</em>: its winner
+is recomputed from the data a render would show (aggregate over the played legs, then a
+shootout on a tied aggregate), written as <code>winner</code>, removed when undecided, and the
+advancing team's name/id is pushed into the match that consumes it via <code>winnerof</code> (and
+the <strong>loser</strong> into any match that consumes it via <code>loserof</code>, for third place). A match
+carrying <code>"settle": false</code> is never settled, whatever the call says.</p>
+<h2 id="rendering-notes-non-normative">Rendering notes (non-normative)</h2>
+<ul>
+<li>Layout is deterministic: rounds map to columns left-to-right; within the tree,
+  a match in round <em>n+1</em> is drawn vertically centered between the two matches it
+  consumes (resolved via <code>winnerof1</code>/<code>winnerof2</code>). Connectors exist only where a
+  <code>winnerof</code> link does; a match with no links (a pairing pending a draw) is stacked
+  from the top of its column like a first-round match.</li>
+<li>A round fed entirely by <code>loserof</code> (a third-place match) is off the winners' tree: it
+  draws no connector and is laid out <strong>below</strong> the bracket, in the final's column, keeping
+  its own round header.</li>
+<li>An unresolved side displays the team that advanced when known, otherwise the
+  placeholder label (e.g. "Winner QF1" for <code>winnerof</code>, "Loser SF1" for <code>loserof</code>), or
+  "TBD".</li>
+<li>The winning side of a match is emphasized only when the <code>winner</code> field says so.</li>
+<li><strong>Match metadata.</strong> Next to each match the renderer draws a line that starts with the
+  match <strong>id</strong> (uppercased; a match with no scheduling data still shows its id, while a
+  match with no <code>id</code> at all — e.g. the final — shows none) followed by each leg's <code>dt</code> and
+  <code>venue</code> when present: <code>ID · dt venue</code> for one leg, <code>ID · dt venue / dt venue</code> for two.
+  In the SVG it sits above the box, or below it when the box's outgoing connector bends up
+  (so the line stays clear of the connector). Suppress the whole line with
+  <code>render.show_metadata: false</code>. (SVG and the stacked HTML table draw the whole line; the
+  flat table, having one row per leg, draws a full-width metadata row above each leg with
+  the id and <em>that leg's</em> own <code>dt</code>/<code>venue</code> — see below.)</li>
+<li>Besides the SVG diagram there is an HTML table rendering for small screens: rounds
+  stack vertically and no connectors are drawn — advancement is read top-down. The
+  <strong>stacked</strong> layout draws each match as a two-row box (aggregate scores); the <strong>flat</strong>
+  layout is one grid where a two-legged tie becomes <strong>two rows</strong>, one per leg, each
+  carrying that leg's single score in its own bordered box (like the SVG/stacked boxes)
+  and preceded by a full-width metadata row (the id plus that leg's date/venue). Each flat
+  row honors that leg's
+  <strong>localía</strong>: the leg's local side (its <code>team1</code>) sits in the home (left) column, so the
+  second leg's row is flipped relative to the first. Both renderings show the same
+  resolved data.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Documentation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/anibalpacheco/matamata" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
